@@ -25,7 +25,6 @@ exports.paths = {
  */
  
 exports.wiredep = {
-
   exclude: [/jquery/, /\/bootstrap\.css/],
   directory: 'bower_components'
 };
