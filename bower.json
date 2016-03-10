@@ -2,7 +2,10 @@
   "name": "mllRfpClient",
   "version": "0.0.0",
   "dependencies": {
+<<<<<<< HEAD
     "jquery": "~2.1.4",
+=======
+>>>>>>> 966f10e68f0d1ae1b556c373374c26c8bf50c4e9
     "angular-ui-router": "~0.2.15",
     "bootstrap-sass": "~3.3.5",
     "malarkey": "yuanqing/malarkey#~1.3.1",
@@ -28,7 +31,10 @@
     }
   },
   "resolutions": {
+<<<<<<< HEAD
     "jquery": "~2.1.4",
+=======
+>>>>>>> 966f10e68f0d1ae1b556c373374c26c8bf50c4e9
     "angular": "~1.4.2"
   }
 }
