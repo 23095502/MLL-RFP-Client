@@ -1,7 +1,45 @@
 export class RFPDetailsController {
   constructor () {
     'ngInject';
-    console.log('RFPDetailsController init');
     
+    
+    this.routes = [{
+    	fromCity : 'Kalwa', 
+    	fromState : 'Maharashtra', 
+    	toCity : 'Delhi', 
+    	toState : 'Kalwa',
+    	oneWay : 'One way',
+    	serviceType : 'LTL',
+    	vehicleType : '16Mt Tauras',
+    	transitTime : '12 Days',
+    	productDescription : 'Lorem',
+    	packagingType : 'Corrugated Boxes',
+    	stack : 'Lon'
+    },
+    {fromCity : 'Kalwa', 
+    	fromState : 'Maharashtra', 
+    	toCity : 'Delhi', 
+    	toState : 'Kalwa',
+    	oneWay : 'One way',
+    	serviceType : 'LTL',
+    	vehicleType : '16Mt Tauras',
+    	transitTime : '12 Days',
+    	productDescription : 'Lorem',
+    	packagingType : 'Corrugated Boxes',
+    	stack : 'Lon'},
+    	{
+    		fromCity : 'Kalwa', 
+    	fromState : 'Maharashtra', 
+    	toCity : 'Delhi', 
+    	toState : 'Kalwa',
+    	oneWay : 'One way',
+    	serviceType : 'LTL',
+    	vehicleType : '16Mt Tauras',
+    	transitTime : '12 Days',
+    	productDescription : 'Lorem',
+    	packagingType : 'Corrugated Boxes',
+    	stack : 'Lon'
+    	}]
   }
+
 }
