@@ -1,2 +1,227 @@
+<div class="container">
+	<form>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="name">Name</label>
+				    <input type="text" class="form-control" id="name" placeholder="Name">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="contact">Contact details</label>
+				    <input type="text" class="form-control" id="contact" placeholder="Contact">
+				</div>
+			</div>
+		</div>
 
-hi
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="contactperson">Contact person</label>
+				    <input type="text" class="form-control" id="contactperson" placeholder="Contact person">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="address">Address</label>
+				    <input type="text" class="form-control" id="address" placeholder="Address">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="totallogistics">Total logistics spend(In Lakhs)</label>
+				    <input type="text" class="form-control" id="totallogistics" placeholder="Total logistics spend(In Lakhs)">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="cashaccountid">CASSH account id</label>
+				    <input type="text" class="form-control" id="cashaccountid" placeholder="CASSH account id">
+				</div>
+			</div>
+		</div>
+<fieldset>
+	<legend>RIP DETAILS</legend>
+</fieldset>
+<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="description">Description</label>
+				    <input type="text" class="form-control" id="description" placeholder="Description">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="rfpvalue">RFP value(In Lakhs)</label>
+				    <input type="text" class="form-control" id="rfpvalue" placeholder="RFP value(In Lakhs)">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="recivedate">Receive date</label>
+				    <input type="date" class="form-control" id="recivedate" placeholder="Receive date">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="duedate">Due date</label>
+				    <input type="date" class="form-control" id="duedate" placeholder="Due date">
+				</div>
+			</div>
+		</div>
+
+
+        <div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="casshopportunityid">CASSH Opportunity ID</label>
+				    <input type="text" class="form-control" id="casshopportunityid" placeholder="CASSH Opportunity ID">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="productdescription">Product description</label>
+				    <input type="text" class="form-control" id="productdescription" placeholder="Product description">
+				</div>
+			</div>
+		</div>
+
+<fieldset>
+	<legend>OPERATION DESCRIPTION</legend>
+</fieldset>
+
+<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="inboundoutbound">Inbound / outbound</label>
+				    <input type="text" class="form-control" id="inboundoutbound" placeholder="Inbound / outbound">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					 <label for="movmenttype">Movment Type</label>
+						<select class="form-control" id="movmenttype">
+						  <option value="primary">Primary</option>
+						  <option value="secondary">Secondary</option>
+						</select> 
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					 <label for="multipointpickupdrop">Multi-point pickup / drop</label>
+						<select class="form-control" id="multipointpickupdrop">
+						  <option value="yes">Yes</option>
+						  <option value="no">No</option>
+						</select> 
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="warehousingrequirment">Warehousing requirment</label>
+				   <select class="form-control" id="warehousingrequirment">
+						  <option value="yes">Yes</option>
+						  <option value="no">No</option>
+				</select> 
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="cargotype">Cargo Type</label>
+				   <select class="form-control" id="cargotype">
+						  <option value="yes">Yes</option>
+						  <option value="no">No</option>
+				</select> 
+				</div>
+			</div>
+		</div>
+
+<fieldset>
+	<legend>CLEANSHEET ASSUMPTIONS</legend>
+</fieldset>
+
+<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="diselrate">Disel rate</label>
+				    <input type="text" class="form-control" id="diselrate" placeholder=" " ng-model="rfpdetails.overall.DIESELRATE">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					 <label for="ageofvehicles">Age of vehicles</label>
+						<select class="form-control" id="ageofvehicles">
+						  <option value="four">4</option>
+						  <option value="three">3</option>
+						  <option value="two">2</option>
+						  <option value="one">1</option>
+						</select> 
+				</div>
+			</div>
+		</div>
+
+<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="paymentterms">Payment teerms</label>
+				    <input type="text" class="form-control" id="paymentterms" placeholder="Yes">
+				</div>
+			</div>
+		</div>
+
+<fieldset>
+	<legend>COMMERCIAL DETAILS</legend>
+</fieldset>
+
+<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+					 <label for="unitofrate">Unit of rate</label>
+						<select class="form-control" id="unitofrate">
+						  <option value="Volvo">Volvo</option>
+						  <option value="Saab">Saab</option>
+						  <option value="Mercedes">Mercedes</option>
+						  <option value="Audi">Audi</option>
+						</select> 
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="penalties">Penalties</label>
+				    <input type="text" class="form-control" id="penalties" placeholder="">
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="detention">Detention</label>
+				    <input type="text" class="form-control" id="detention" placeholder=" ">
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+				    <label for="loadingunloadingtime">Loading unloading time</label>
+				    <input type="text" class="form-control" id="loadingunloadingtime" placeholder="">
+				</div>
+			</div>
+		</div>
+
+	</form>	
+</div>
