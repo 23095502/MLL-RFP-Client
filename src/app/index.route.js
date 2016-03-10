@@ -1,4 +1,4 @@
-export function routerConfig ($stateProvider, $urlRouterProvider) {
+export function routerConfig($stateProvider, $urlRouterProvider) {
   'ngInject';
   $stateProvider
     .state('home', {
@@ -12,12 +12,12 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       templateUrl: 'app/rfpoverall/rfpoverall.html',
       controller: 'RFPOverallController',
       controllerAs: 'rfpdetails'
-  }).state('rfpdetails', {
+    }).state('rfpdetails', {
       url: '/rfpdetails',
       templateUrl: 'app/rfpdetails/rfpdetails.html',
       controller: 'RFPDetailsController',
       controllerAs: 'rfp'
     });
-    
+
   $urlRouterProvider.otherwise('/');
 }
