@@ -1,40 +1,93 @@
-<div class="container-fluid">
-  <div class="form">
-    <button class="btn" data-toggle="modal" data-target="#myModal">Add route </button>
+<div class="container-fluid">  
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add Route</h4>
-      </div>
-      <div class="modal-body">
-          <form>
-            <div class="fieldset" class="form-group">
-              <div class="container-fluid">
-                <div class="col-sm-6">
-                  <div class="fieldset" class="form-group">
-                    <label for="fromCity">From City</label>
-                    <input type="text" id="fromCity" class="form-control" placeholder="Enter from city"></input>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Add Route</h4>
+          </div>
+          <div class="modal-body">
+              <form>
+                <div class="fieldset" class="form-group">
+                  <div class="container-fluid">
+                    <div class="col-sm-6">
+                      <div class="fieldset" class="form-group">
+                        <label for="fromCity">From City</label>
+                        <input type="text" id="fromCity" class="form-control" placeholder="Enter from city"></input>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="fieldset" class="form-group">
+                        <label for="fromCity">To City</label>
+                        <input type="text" id="toCity" class="form-control" placeholder="Enter to city"></input>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="col-sm-6">
-                  <div class="fieldset" class="form-group">
-                    <label for="fromCity">To City</label>
-                    <input type="text" id="toCity" class="form-control" placeholder="Enter to city"></input>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  
+	<div class="row">
+		<div class="col-md-4"><h1><abbr title="Request for praposal">RFP</abbr> details</h1></div>
+		<div class="col-md-4 text-center">
+			<div class="btn-group">
+				<button class="btn btn-default">Overall Details</button>
+				<button class="btn btn-default">Lane Details</button>
+			</div>
+		</div>
+		<div class="col-md-4 text-right">
+			<button class="btn btn-default" data-toggle="modal" data-target="#myModal" >Add Route</button>
+			<button class="btn btn-default">Import Routes</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>From City</th>
+			<th>From State</th>
+			<th>To City</th>
+			<th>To State</th>
+			<th>One way/Round trip</th>
+			<th>Service Type</th>
+			<th>Vehicle Type</th>
+			<th>Transit Time</th>
+			<th>Product Description</th>
+			<th>Packaging Type</th>
+			<th>Stack</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="route in rfp.routes"> 
+			<td>{{route.fromCity}}</td>
+			<td>{{route.fromState}}</td>
+			<td>{{route.toCity}}</td>
+			<td>{{route.toState}}</td>
+			<td>{{route.oneWay}}</td>
+			<td>{{route.serviceType}}</td>
+			<td>{{route.vehicleType}}</td>
+			<td>{{route.transitTime}}</td>
+			<td>{{route.productDescription}}</td>
+			<td>{{route.packagingType}}</td>
+			<td>{{route.stack}}</td>			
+		</tr>
+	</tbody>
+</table>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-right">
+			<button class="btn btn-default">Save</button>
+		</div>
+	</div>
 </div>
-      
-  </div>
-</div>
+
