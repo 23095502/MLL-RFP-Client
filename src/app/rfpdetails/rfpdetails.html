@@ -1,4 +1,39 @@
-<div class="container-fluid">
+<div class="container-fluid">  
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Add Route</h4>
+          </div>
+          <div class="modal-body">
+              <form>
+                <div class="fieldset" class="form-group">
+                  <div class="container-fluid">
+                    <div class="col-sm-6">
+                      <div class="fieldset" class="form-group">
+                        <label for="fromCity">From City</label>
+                        <input type="text" id="fromCity" class="form-control" placeholder="Enter from city"></input>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="fieldset" class="form-group">
+                        <label for="fromCity">To City</label>
+                        <input type="text" id="toCity" class="form-control" placeholder="Enter to city"></input>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
 	<div class="row">
 		<div class="col-md-4"><h1><abbr title="Request for praposal">RFP</abbr> details</h1></div>
 		<div class="col-md-4 text-center">
@@ -8,7 +43,7 @@
 			</div>
 		</div>
 		<div class="col-md-4 text-right">
-			<button class="btn btn-default">Add Route</button>
+			<button class="btn btn-default" data-toggle="modal" data-target="#myModal" >Add Route</button>
 			<button class="btn btn-default">Import Routes</button>
 		</div>
 	</div>
@@ -55,3 +90,4 @@
 		</div>
 	</div>
 </div>
+
