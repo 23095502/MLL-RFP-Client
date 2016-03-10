@@ -12,7 +12,12 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       templateUrl: 'app/rfpoverall/rfpoverall.html',
       controller: 'RFPOverallController',
       controllerAs: 'RFPOverallController'
+  }).state('rfpdetails', {
+      url: '/rfpdetails',
+      templateUrl: 'app/rfpdetails/rfpdetails.html',
+      controller: 'RFPDetailsController',
+      controllerAs: 'rfp'
     });
-
+    
   $urlRouterProvider.otherwise('/');
 }
