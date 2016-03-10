@@ -23,12 +23,10 @@ exports.paths = {
  *  Mainly used to inject script tags in the index.html but also used
  *  to inject css preprocessor deps and js files in karma
  */
+ 
 exports.wiredep = {
-<<<<<<< HEAD
-  exclude: [/\/bootstrap\.css/],
-=======
+
   exclude: [/jquery/, /\/bootstrap\.css/],
->>>>>>> 966f10e68f0d1ae1b556c373374c26c8bf50c4e9
   directory: 'bower_components'
 };
 
