@@ -9,7 +9,7 @@ export class RFPOverallController {
         console.error(err);
       });
 
-      this.$http = $http;
+    this.$http = $http;
 
 
 
@@ -29,45 +29,32 @@ export class RFPOverallController {
       "TOTALSPEND": 0.00
     };
 
-    this.AGEOFTRUCK_option = [{
-      name: "5",
-      val: "5"
-    }, {
-      name: "5",
-      val: "6"
-    }];
+    this.AGEOFTRUCK_option = _.times(10, (i) => ({
+      name: i,
+      val: i
+    }));
 
-    this.ISMULTIDROP_option = [{
-      name: "N",
-      val: "N"
-    }, {
-      name: "Y",
-      val: "Y"
-    }];
+    this.ISMULTIDROP_option = _.map(['Primary', 'Secondary', 'Distribution'], (i) => ({
+      name: i,
+      val: i
+    }));
 
-    this.ISHUBORWHREQ_option = [{
-      name: "6",
-      val: "6"
-    }, {
-      name: "7",
-      val: "7"
-    }];
+    this.ISHUBORWHREQ_option = _.map(['Yes', 'No'], (i) => ({
+      name: i,
+      val: i
+    }));
 
-    this.RATEUOM_option = [{
-      name: "9",
-      val: "9"
-    }, {
-      name: "19",
-      val: "19"
-    }];
+    this.RATEUOM_option = _.map(['PTPK', 'Per trip', 'Per Kg', 'Per Km', 'Per month'], (i) => ({
+      name: i,
+      val: i
+    }));
 
-    this.CARGOTYPE_option = [{
-      name: "23",
-      val: "23"
-    }, {
-      name: "29",
-      val: "29"
-    }];
+    this.CARGOTYPE_option = _.map(['Volumetric', 'Dense'], (i) => ({
+      name: i,
+      val: i
+    }));
+
+
 
     this.overall = {
       "RFPID": null,
@@ -88,7 +75,7 @@ export class RFPOverallController {
       "OPPRDOMAIN": null,
       "DISTRIBUTIONTYPE": null,
       "ISMULTIDROP": null,
-      "ISHUBORWHREQ": null,
+      "ISHUBORWHREQ": this.ISHUBORWHREQ_option[1].val,
       "CARGOTYPE": null,
       "SEARCH1": null,
       "SEARCH2": null,
@@ -106,12 +93,13 @@ export class RFPOverallController {
   }
 
   getRFP() {
-    console.log(this.customer.CUSTOMERID)
 
     this.$http.get(`http://59.160.18.222/RFPRest/RFPRestService.svc/getrfpbycustomerid/${this.customer.CUSTOMERID}`)
       .then((res) => {
         console.log(res);
-        this.overall = res.data[0];
+        this.overall = res.data.getrfpbycustomeridResult[0];
+        this.overall.STARTDATE = new Date(this.overall.STARTDATE);
+        this.overall.DUEDATE = new Date(this.overall.DUEDATE);
       }, (err) => {
         console.error(err);
       });
