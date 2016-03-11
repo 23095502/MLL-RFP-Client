@@ -14,28 +14,41 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="fieldset" class="form-group">
+                      <div class="form-group">
                       <label for="fromCity">From City</label>
-                      <input type="text" id="fromCity" class="form-control" ng-model="rfplanes.route.FROMLOCATIONNAME" placeholder="Enter From City"></input>
+                        <select class="form-control" id="fromCity" ng-model="rfplanes.route.FROMLOCATION" ng-change="rfplanes.updateLocationName('FROM')" ng-options="location.LOCATIONID as location.LOCATIONNAME for location in rfplanes.locationname_option">
+                        </select>
+
+                     </div>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="fieldset" class="form-group">
+                      <div class="form-group">
                       <label for="fromState">From State</label>
-                      <input type="text" id="fromState" class="form-control" ng-model="rfplanes.route.FROMSTATE" placeholder="Enter From State"></input>
+                        <select class="form-control" id="fromState" ng-change="rfplanes.updateStateName('FROM')" ng-model="rfplanes.route.FROMSTATE"  ng-options="state.STATEID as state.STATENAME for state in rfplanes.statename_option">
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="fieldset" class="form-group">
-                      <label for="toCity">From City</label>
-                      <input type="text" id="toCity" class="form-control" ng-model="rfplanes.route.TOLOCATIONNAME" placeholder="Enter To City"></input>
+                     <div class="form-group">
+                     <label for="toCity">To City</label>
+                        <select class="form-control" id="toCity" ng-change="rfplanes.updateLocationName('TO')"  ng-model="rfplanes.route.TOLOCATION" ng-options="location.LOCATIONID as location.LOCATIONNAME for location in rfplanes.locationname_option">
+                        </select>
+                     </div>
                     </div>
                   </div>
                   <div class="col-sm-6">
                     <div class="fieldset" class="form-group">
-                      <label for="fromCity">To State</label>
-                      <input type="text" id="toState" class="form-control" ng-model="rfplanes.route.TOSTATE"  placeholder="Enter To State"></input>
+                     <div class="form-group">
+                     <label for="toState">To State</label>
+                        <select class="form-control" id="toState" ng-change="rfplanes.updateStateName('TO')" ng-model="rfplanes.route.TOSTATE" ng-options="state.STATEID as state.STATENAME for state in rfplanes.statename_option">
+                        </select>
+                     </div>
                     </div>
                   </div>
                 </div>
@@ -150,12 +163,13 @@
       		</tr>
       	</thead>
       	<tbody>
-      		<tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes"> 
+      		<!--<tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">-->
+          <tr ng-repeat="route in rfplanes.routes">
             <td>{{route.DIRTY}}</td>
       			<td>{{route.FROMLOCATIONNAME}}</td>
-      			<td>{{route.FROMSTATE}</td>
+      			<td>{{route.FROMSTATE}}</td>
       			<td>{{route.TOLOCATIONNAME}}</td>
-      			<td>{{route.TOSTATE}</td>
+      			<td>{{route.TOSTATE}}</td>
       			<td>{{route.ISROUNDTRIP}}</td>
       			<td>{{route.SERVICETYPE}}</td>
       			<td>{{route.VEHICLETYPENAME}}</td>
@@ -171,7 +185,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12 text-right">
-			<button class="btn btn-default" ng-click="saveDirtyRoutes()">Save</button>
+			<button class="btn btn-default" ng-click="rfplanes.submitData()">Save</button>
 		</div>
 	</div>
 </div>
