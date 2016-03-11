@@ -48,16 +48,166 @@ export class RFPDetailsController {
     }
 
 
-        $http(req).then((response) => {
-          this.routes = response.data.getrfprouteResult;
-        }, function(response) {
-          console.log(error);
-        });
+    $http(req).then((response) => {
+      this.routes = response.data.getrfprouteResult;
+    }, function(response) {
+      console.log(error);
+    });
 
 
-    /*$http(req).then(function() {
-      console.log('Hi')
-    }, function() {});*/
+
+    this.routes = []
+    this.route = {
+      "ACTIVE": "A",
+      "APPROVEDAMOUNT": 5,
+      "AVERAGELOAD": "NA",
+      "BACKHAUL": 5,
+      "CUSTTARGETRATE": "100000.00",
+      "DISTANCE": 5,
+      "FREQUENCY": "NA",
+      "FROMLOCATION": 1,
+      "FROMLOCATIONNAME": "MUMBAI",
+      "FROMSTATE": null,
+      "FROMSTATEID": 0,
+      "ISLOADUNLOADCHARG": "N",
+      "ISROUNDTRIP": "N",
+      "LOADINGUNLOADINGTIME": 5,
+      "LOCATIONNAME": null,
+      "MHEREQUIREMENT": "NA",
+      "NOOFTRIPS": 3,
+      "OTHERREQUIREMENT": "NA",
+      "PACKAGETYPEID": 5,
+      "PACKDIMENSION": "NA",
+      "RFPDURATION": 5,
+      "RFPID": 10,
+      "RFPVOLUME": 5,
+      "SERVICETYPE": "EXP",
+      "STACKINGNORMS": "NA",
+      "TOLOCATION": 1,
+      "TOLOCATIONNAME": "MUMBAI",
+      "TOSTATE": null,
+      "TOSTATEID": 0,
+      "VEHICLETYPEID": 1,
+      "VEHICLETYPENAME": "INDICA",
+      "DIRTY": false
+    }
   }
-
+  add() {
+    this.route.DIRTY = true;
+    this.routes.push(angular.copy(this.route));
+    /*
+    this.route = {
+      "RFPID": null,
+      "FROMLOCATION": null,
+      "TOLOCATION": null,
+      "FROMSTATEID": null,
+      "TOSTATEID": null,
+      "VEHICLETYPEID": null,
+      "SERVICETYPE": null,
+      "APPROVEDAMOUNT": null,
+      "ACTIVE": null,
+      "RFPVOLUME": null,
+      "RFPDURATION": null,
+      "LOADINGUNLOADINGTIME": null,
+      "DISTANCE": null,
+      "BACKHAUL": null,
+      "PACKAGETYPEID": null,
+      "PACKDIMENSION": null,
+      "STACKINGNORMS": null,
+      "CUSTTARGETRATE": null,
+      "ISLOADUNLOADCHARG": null,
+      "AVERAGELOAD": null,
+      "FREQUENCY": null,
+      "MHEREQUIREMENT": null,
+      "OTHERREQUIREMENT": null,
+      "NOOFTRIPS": null,
+      "ISROUNDTRIP": null,
+      "SEARCH1": null,
+      "SEARCH2": null,
+      "SEARCH3": null,
+      "CREATEDBY": null,
+      "CREATEDON": null,
+      "DIRTY": false
+    }
+    */
+    this.route = {
+      "ACTIVE": "A",
+      "APPROVEDAMOUNT": 5,
+      "AVERAGELOAD": "NA",
+      "BACKHAUL": 5,
+      "CUSTTARGETRATE": "100000.00",
+      "DISTANCE": 5,
+      "FREQUENCY": "NA",
+      "FROMLOCATION": 1,
+      "FROMLOCATIONNAME": "MUMBAI",
+      "FROMSTATE": null,
+      "FROMSTATEID": 0,
+      "ISLOADUNLOADCHARG": "N",
+      "ISROUNDTRIP": "N",
+      "LOADINGUNLOADINGTIME": 5,
+      "LOCATIONNAME": null,
+      "MHEREQUIREMENT": "NA",
+      "NOOFTRIPS": 3,
+      "OTHERREQUIREMENT": "NA",
+      "PACKAGETYPEID": 5,
+      "PACKDIMENSION": "NA",
+      "RFPDURATION": 5,
+      "RFPID": 10,
+      "RFPVOLUME": 5,
+      "SERVICETYPE": "EXP",
+      "STACKINGNORMS": "NA",
+      "TOLOCATION": 1,
+      "TOLOCATIONNAME": "MUMBAI",
+      "TOSTATE": null,
+      "TOSTATEID": 0,
+      "VEHICLETYPEID": 1,
+      "VEHICLETYPENAME": "INDICA",
+      "DIRTY": false
+    }
+    this.editingIndex = null;
+  }
+  edit(route, index) {
+    this.route = angular.copy(route);
+    this.route.DIRTY = true;
+    this.editingIndex = index;
+    $('#myModal').modal();
+  }
+  save() {
+    this.routes[this.editingIndex] = this.route;
+    this.editingIndex = null;
+    this.route = {
+      "ACTIVE": "A",
+      "APPROVEDAMOUNT": 5,
+      "AVERAGELOAD": "NA",
+      "BACKHAUL": 5,
+      "CUSTTARGETRATE": "100000.00",
+      "DISTANCE": 5,
+      "FREQUENCY": "NA",
+      "FROMLOCATION": 1,
+      "FROMLOCATIONNAME": "MUMBAI",
+      "FROMSTATE": null,
+      "FROMSTATEID": 0,
+      "ISLOADUNLOADCHARG": "N",
+      "ISROUNDTRIP": "N",
+      "LOADINGUNLOADINGTIME": 5,
+      "LOCATIONNAME": null,
+      "MHEREQUIREMENT": "NA",
+      "NOOFTRIPS": 3,
+      "OTHERREQUIREMENT": "NA",
+      "PACKAGETYPEID": 5,
+      "PACKDIMENSION": "NA",
+      "RFPDURATION": 5,
+      "RFPID": 10,
+      "RFPVOLUME": 5,
+      "SERVICETYPE": "EXP",
+      "STACKINGNORMS": "NA",
+      "TOLOCATION": 1,
+      "TOLOCATIONNAME": "MUMBAI",
+      "TOSTATE": null,
+      "TOSTATEID": 0,
+      "VEHICLETYPEID": 1,
+      "VEHICLETYPENAME": "INDICA",
+      "DIRTY": false
+    }
+  }
 }
