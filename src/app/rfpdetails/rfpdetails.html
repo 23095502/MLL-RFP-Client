@@ -1,4 +1,4 @@
-<div class="container-fluid">  
+<div class="container-fluid">
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-  
+
 	<div class="row">
 		<div class="col-md-4"><h1><abbr title="Request for praposal">RFP</abbr> details</h1></div>
 		<div class="col-md-4 text-center">
@@ -63,25 +63,28 @@
 			<th>Product Description</th>
 			<th>Packaging Type</th>
 			<th>Stack</th>
+      <th>Customer Target Rate</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="route in rfp.routes"> 
-			<td>{{route.fromCity}}</td>
-			<td>{{route.fromState}}</td>
-			<td>{{route.toCity}}</td>
-			<td>{{route.toState}}</td>
-			<td>{{route.oneWay}}</td>
-			<td>{{route.serviceType}}</td>
-			<td>{{route.vehicleType}}</td>
-			<td>{{route.transitTime}}</td>
-			<td>{{route.productDescription}}</td>
-			<td>{{route.packagingType}}</td>
-			<td>{{route.stack}}</td>			
+		<tr ng-repeat="route in rfp.routes">
+			<td></td>
+			<td>{{route.FROMLOCATIONNAME}}</td>
+			<td>{{route.FROMSTATE}}</td>
+			<td>{{route.TOLOCATIONNAME}}</td>
+      <td>{{route.TOSTATE}}</td>
+			<td>{{route.ISROUNDTRIP}}</td>
+			<td>{{route.SERVICETYPE}}</td>
+			<td>{{route.VEHICLETYPENAME}}</td>
+			<td>{{route.RFPDURATION}}</td>
+			<td></td>
+			<td>{{route.PACKAGETYPEID}}</td>
+			<td>{{route.STACKINGNORMS}}</td>
+      <td>{{route.CUSTTARGETRATE}}</td>
 		</tr>
 	</tbody>
 </table>
-
+{{rfp.routes | json}}
 		</div>
 	</div>
 	<div class="row">
