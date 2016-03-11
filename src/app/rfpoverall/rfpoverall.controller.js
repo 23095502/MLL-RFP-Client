@@ -103,9 +103,60 @@ export class RFPOverallController {
       }, (err) => {
         console.error(err);
       });
+  }
 
+  addRfpHeader() {
+    console.log("Hello");
+    var req = {
+      method: 'POST',
+      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/rfp/0/INSERT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        "rfpupdt": {
+          "RFPID": 0,
+          "RFPCODE": this.overall.RFPCODE,
+          "RFPDATE": "2016-01-01 00:00:00",
+          "CUSTOMERID": this.customer.CUSTOMERID,
+          "INDUSTRYTYPEID": this.overall.INDUSTRYTYPEID,
+          "RFPAMOUNT": this.overall.RFPAMOUNT,
+          "STARTDATE": "2016-01-01 00:00:00",
+          "RFPOWNER": this.overall.RFPOWNER,
+          "CURRENTSTAGINGOWNER": this.overall.CURRENTSTAGINGOWNER,
+          "DIESELRATE": this.overall.DIESELRATE,
+          "AGEOFTRUCK": this.overall.AGEOFTRUCK,
+          "RFPDESC": this.overall.RFPDESC,
+          "DUEDATE": "2016-01-01 00:00:00",
+          "PRODUCTDESC": this.overall.PRODUCTDESC,
+          "CASHOPPID": this.overall.CASHOPPID,
+          "OPPRDOMAIN": this.overall.OPPRDOMAIN,
+          "DISTRIBUTIONTYPE": this.overall.DISTRIBUTIONTYPE,
+          "ISMULTIDROP": this.overall.ISMULTIDROP,
+          "ISHUBORWHREQ": 'N',
+          "CARGOTYPE": this.overall.CARGOTYPE,
+          "SEARCH1": "6",
+          "SEARCH2": "6",
+          "SEARCH3": "6",
+          "PAYMENTTERM": this.overall.PAYMENTTERM,
+          "RATEUOM": this.overall.RATEUOM,
+          "PENALITIES": this.overall.PENALITIES,
+          "DETENTION": this.overall.DETENTION,
+          "ESCCLAUSE": "6",
+          "ACTIVE": "A",
+          "CREATEDBY": "1",
+          "CREATEDON": "2016-01-01 00:00:00"
+        }
+    }
 
   }
 
+  this.$http(req).then(function(response) {
+    console.log(response)
+  }, function(response) {
+    console.log(error)
+  });
+
+}
 
 }
