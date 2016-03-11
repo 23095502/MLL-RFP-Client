@@ -12,6 +12,7 @@ export class RFPDetailsController {
 
       data: {
         "rfproute": {
+
           "RFPID": 1,
           "FROMLOCATION": "1",
           "TOLOCATION": "1",
