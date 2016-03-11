@@ -237,7 +237,7 @@ export class RFPDetailsController {
 
   selectCity() {
     //this.route.FROMLOCATION = this.location.LOCATIONID;
-    console.log(this.location.LOCATIONID);
+    //console.log(this.location.LOCATIONID);
 
   }
 
