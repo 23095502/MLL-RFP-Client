@@ -1,5 +1,5 @@
 export class RFPDetailsController {
-  constructor() {
+  constructor($http) {
     'ngInject';
 
     var req = {
@@ -9,46 +9,44 @@ export class RFPDetailsController {
         'Content-Type': 'application/json'
       },
       data: {
-        {
-          "rfproute": {
-            "RFPID": 3,
-            "FROMLOCATION": "1",
-            "TOLOCATION": "1",
-            "FROMSTATEID": "1",
-            "TOSTATEID": "1",
-            "VEHICLETYPEID": "1",
-            "SERVICETYPE": "EXP",
-            "APPROVEDAMOUNT": 5,
-            "ACTIVE": "A",
-            "RFPVOLUME": 5,
-            "RFPDURATION": 5,
-            "LOADINGUNLOADINGTIME": 5,
-            "DISTANCE": 5,
-            "BACKHAUL": 5,
-            "PACKAGETYPEID": 5,
-            "PACKDIMENSION": "NA",
-            "STACKINGNORMS": "NA",
-            "CUSTTARGETRATE": 1000,
-            "ISLOADUNLOADCHARG": "N",
-            "AVERAGELOAD": "NA",
-            "FREQUENCY": 1,
-            "MHEREQUIREMENT": "NA",
-            "OTHERREQUIREMENT": "N",
-            "NOOFTRIPS": 3,
-            "ISROUNDTRIP": "N",
-            "SEARCH1": "6",
-            "SEARCH2": "6",
-            "SEARCH3": "6",
-            "CREATEDBY": "1",
-            "CREATEDON": "2016-01-01 00:00:00"
-          }
+        "rfproute": {
+          "RFPID": 3,
+          "FROMLOCATION": "1",
+          "TOLOCATION": "1",
+          "FROMSTATEID": "1",
+          "TOSTATEID": "1",
+          "VEHICLETYPEID": "1",
+          "SERVICETYPE": "EXP",
+          "APPROVEDAMOUNT": 5,
+          "ACTIVE": "A",
+          "RFPVOLUME": 5,
+          "RFPDURATION": 5,
+          "LOADINGUNLOADINGTIME": 5,
+          "DISTANCE": 5,
+          "BACKHAUL": 5,
+          "PACKAGETYPEID": 5,
+          "PACKDIMENSION": "NA",
+          "STACKINGNORMS": "NA",
+          "CUSTTARGETRATE": 1000,
+          "ISLOADUNLOADCHARG": "N",
+          "AVERAGELOAD": "NA",
+          "FREQUENCY": 1,
+          "MHEREQUIREMENT": "NA",
+          "OTHERREQUIREMENT": "N",
+          "NOOFTRIPS": 3,
+          "ISROUNDTRIP": "N",
+          "SEARCH1": "6",
+          "SEARCH2": "6",
+          "SEARCH3": "6",
+          "CREATEDBY": "1",
+          "CREATEDON": "2016-01-01 00:00:00"
         }
       }
-    }
+    };
 
-    $http(req).then(function(response) {
-      console.log(response)
-    }, function(response) {
+    $http(req).then((response) => {
+      this.routes = response.data.getrfprouteResult;
+    }, (response) => {
       console.log(error)
     });
 
@@ -92,41 +90,6 @@ export class RFPDetailsController {
   add() {
     this.route.DIRTY = true;
     this.routes.push(angular.copy(this.route));
-    /*
-    this.route = {
-      "RFPID": null,
-      "FROMLOCATION": null,
-      "TOLOCATION": null,
-      "FROMSTATEID": null,
-      "TOSTATEID": null,
-      "VEHICLETYPEID": null,
-      "SERVICETYPE": null,
-      "APPROVEDAMOUNT": null,
-      "ACTIVE": null,
-      "RFPVOLUME": null,
-      "RFPDURATION": null,
-      "LOADINGUNLOADINGTIME": null,
-      "DISTANCE": null,
-      "BACKHAUL": null,
-      "PACKAGETYPEID": null,
-      "PACKDIMENSION": null,
-      "STACKINGNORMS": null,
-      "CUSTTARGETRATE": null,
-      "ISLOADUNLOADCHARG": null,
-      "AVERAGELOAD": null,
-      "FREQUENCY": null,
-      "MHEREQUIREMENT": null,
-      "OTHERREQUIREMENT": null,
-      "NOOFTRIPS": null,
-      "ISROUNDTRIP": null,
-      "SEARCH1": null,
-      "SEARCH2": null,
-      "SEARCH3": null,
-      "CREATEDBY": null,
-      "CREATEDON": null,
-      "DIRTY": false
-    }
-    */
     this.route = {
       "ACTIVE": "A",
       "APPROVEDAMOUNT": 5,
