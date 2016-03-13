@@ -9,6 +9,7 @@ import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service'
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
 import { RFPOverallController } from './rfpoverall/rfpoverall.controller';
+import { RFPCustomerController } from './rfpcustomer/rfpcustomer.controller';
 import { RFPDetailsController } from './rfpdetails/rfpdetails.controller';
 
 angular.module('mllRfpClient', ['ui.router', 'toastr'])
@@ -21,6 +22,7 @@ angular.module('mllRfpClient', ['ui.router', 'toastr'])
   .service('webDevTec', WebDevTecService)
   .controller('MainController', MainController)
   .controller('RFPOverallController', RFPOverallController)
+  .controller('RFPCustomerController', RFPCustomerController)
   .directive('acmeNavbar', NavbarDirective)
   .directive('acmeMalarkey', MalarkeyDirective)
   .controller('RFPDetailsController', RFPDetailsController);

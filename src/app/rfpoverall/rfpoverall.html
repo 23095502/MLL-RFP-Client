@@ -1,7 +1,7 @@
 <form action="/">
   <div class="container">
     <div class="row">
-      <div class="col-md-4"><h1><abbr title="Request for praposal">RFP</abbr> details</h1></div>
+      <div class="col-md-4"><h1><abbr title="Request for praposal">RFP</abbr> Overall</h1></div>
       <div class="col-md-4 text-center">
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primary active">
@@ -12,6 +12,8 @@
           </label>
         </div>
       </div>
+    </div>
+
     </div>
     <div class="row">
       <div class="col-md-12">
@@ -149,8 +151,8 @@
                 <div class="form-group">
                   <label for="multipointpickupdrop">Multi-point pickup / drop</label>
                   <select class="form-control" id="multipointpickupdrop">
-                      <option value="yes">Yes</option>
-                      <option value="no" selected>No</option>
+                      <option value="Y">Yes</option>
+                      <option value="N" selected>No</option>
                     </select>
                 </div>
               </div>
@@ -244,7 +246,7 @@
     </div>
     <div class="row">
       <div class="col-md-12 text-right">
-         <button type="submit" class="btn btn-default">Next</button>
+         <button type="button" class="btn btn-default" ng-click=rfpdetails.addRfpHeader()>Next</button>
       </div>
     </div>
   </div>
