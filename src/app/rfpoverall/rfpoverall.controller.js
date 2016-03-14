@@ -2,7 +2,11 @@ export class RFPOverallController {
   constructor($http) {
     'ngInject';
 
+<<<<<<< HEAD
+    $http.get('http://172.32.0.101/RFPRest/RFPRestService.svc/GetCustomers?customerid=0&customercode=&customername=&address=&email=&contactperson=&contactno=&cashaccountid=&totalspend=0&active=A&createdby=1&createdon=2016-03-01&mode=GETALL')
+=======
     $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/customer/0')
+>>>>>>> develop
       .then((res) => {
         this.CUSTOMERNAME_option = res.data;
         console.log(res.data);
@@ -90,7 +94,7 @@ export class RFPOverallController {
 
   getRFP() {
 
-    this.$http.get(`http://59.160.18.222/RFPRest/RFPRestService.svc/getrfpbycustomerid/${this.customer.CUSTOMERID}`)
+    this.$http.get(`http://172.32.0.101/RFPRest/RFPRestService.svc/getrfpbycustomerid/${this.customer.CUSTOMERID}`)
       .then((res) => {
         this.overall = res.data[0];
         this.overall.STARTDATE = new Date(this.overall.STARTDATE);
