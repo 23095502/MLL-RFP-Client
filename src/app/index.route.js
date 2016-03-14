@@ -22,6 +22,13 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
       controllerAs: 'rfpcustomermaster'
     })
 
+    .state('rfpdashboard', {
+      url: '/rfpdashboard',
+      templateUrl: 'app/rfpdashboard/rfpdashboard.html',
+      controller: 'RFPDashboard',
+      controllerAs: 'rfpdashboardcontroller'
+    })
+
     .state('rfpdetails', {
       url: '/rfpdetails',
       templateUrl: 'app/rfpdetails/rfpdetails.html',
