@@ -4,26 +4,24 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>Customer code</th>
-            <th>Customer name</th>
-            <th>Address</th>
-            <th>Email</th>
-            <th>Contact person</th>
-            <th>Contact no</th>
+            <th>Date</th>
+            <th>RFP Id</th>
+            <th>Client Name</th>
+            <th>Operating Income</th>
+            <th>Engagement Starts</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody>
           <!--<tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">-->
-          <tr ng-repeat="customer in rfpcustomermaster.customer">
+          <tr ng-repeat="dashboarddata in rfpdash.dashboarddata">
 
-            <td>{{customer.CUSTOMERCODE}}</td>
-            <td>{{customer.CUSTOMERNAME}}</td>
-            <td>{{customer.ADDRESS}}</td>
-            <td>{{customer.EMAIL}}</td>
-            <td>{{customer.CONTACTPERSON}}</td>
-            <td>{{customer.CONTACTNO}}</td>
-            <td>{{customer.ACTIVE}}</td>
+           <td>{{dashboarddata.STARTDATE}}</td>
+          <td>{{dashboarddata.RFPID}}</td>
+           <td>{{dashboarddata.CUSTOMERNAME}}</td>
+             <td>{{dashboarddata.ACTIVE}}</td>
+              <td>{{dashboarddata.ACTIVE}}</td>
+            <td>{{dashboarddata.ACTIVE}}</td>
           </tr>
 
         </tbody>
