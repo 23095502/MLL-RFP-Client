@@ -150,6 +150,7 @@
       			<th>Packaging Type</th>
       			<th>Stack</th>
             <th>Customer Target Rate</th>
+            <th>Action</th>
       		</tr>
       	</thead>
       	<tbody>
@@ -168,6 +169,7 @@
       			<td>{{route.PACKAGETYPEID}}</td>
       			<td>{{route.STACKINGNORMS}}</td>
             <td>{{route.CUSTTARGETRATE}}</td>
+            <td><input type="button" value="Remove" class="btn btn-primary" ng-click="rfplanes.removeRow($index)"/></td>
       		</tr>
       	</tbody>
       </table>
