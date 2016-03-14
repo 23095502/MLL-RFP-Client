@@ -2,7 +2,7 @@ export class RFPCustomerController {
   constructor($http) {
     'ngInject';
 
-    $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/GetCustomers?customerid=0&customercode=&customername=&address=&email=&contactperson=&contactno=cashaccountid=CASH201600100&totalspend=0&active=A&createdby=1&createdon=2016-03-01&mode=GETALL')
+    $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/customer/0')
       .then((res) => {
         this.customer = res.data;
       }, (err) => {
