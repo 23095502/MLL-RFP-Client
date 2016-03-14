@@ -1,0 +1,102 @@
+ <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                   <div>
+                        {{rfpoutput.nameoutputdata.CUSTOMERNAME}}
+                   </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="address">Address</label>
+                  <div>
+                        {{rfpoutput.nameoutputdata.ADDRESS}}
+                   </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="contactdetails">Contact details</label>
+                   <div>
+                        {{rfpoutput.nameoutputdata.CONTACTNO}}
+                   </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="contactperson">Contact person</label>
+                   <div>
+                      {{rfpoutput.nameoutputdata.CONTACTPERSON}}
+                   </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="totallogisticsspend">Total logistics spend(In Lakhs)</label>
+                   <div>
+                       {{rfpoutput.nameoutputdata.TOTALSPEND}}
+                   </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="casshaccountid">CASSH account id</label>
+                   <div>
+                       {{rfpoutput.nameoutputdata.CASHACCOUNTID}}
+                   </div>
+                </div>
+              </div>
+            </div>
+            </div>
+<div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>From</th>
+            <th>To</th>
+            <th>Truck Type</th>
+            <th>Cleansheet Rate</th>
+            <th>Contract Rate</th>
+            <th>ShipEx Rate</th>
+            <th>PreviousRFP Rate</th>
+            <th>Market Rate</th>
+            <th>BA Qute</th>
+            <th>Backhaul Available</th>
+            <th>Cleansheet Backhaul %</th>
+            <th>Approved Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--<tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">-->
+          <tr ng-repeat="outputdata in rfpoutput.outputdata" ng-click="rfpoutput.click()">
+
+           <td>{{outputdata.FROMLOCATIONNAME}}</td>
+           <td>{{outputdata.TOLOCATIONNAME}}</td>
+           <td>{{outputdata.VEHICLETYPENAME}}</td>
+           <td>{{outputdata.CLEANSHEETRATE}}</td>
+           <td>{{outputdata.CONTRACTRATE}}</td>
+           <td>{{outputdata.SHIPXRATE}}</td>
+           <td>{{outputdata.PVSRFPRATE}}</td>
+           <td>{{outputdata.MARKETRATE}}</td>
+           <td>{{outputdata.BAQUOTE}}</td>
+           <td>{{outputdata.BACKHAULAVL}}</td>
+           <td>{{outputdata.BACKHAULPERCENT}}</td>
+           <td>{{outputdata.APPROVEDAMOUNT}}</td>
+
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
