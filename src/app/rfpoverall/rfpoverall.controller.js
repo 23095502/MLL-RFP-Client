@@ -2,19 +2,17 @@ export class RFPOverallController {
   constructor($http) {
     'ngInject';
 
-    $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/GetCustomers?customerid=0&customercode=&customername=&address=&email=&contactperson=&contactno=&cashaccountid=&totalspend=0&active=A&createdby=1&createdon=2016-03-01&mode=GETALL')
+    $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/customer/0')
       .then((res) => {
         this.CUSTOMERNAME_option = res.data;
+        console.log(res.data);
       }, (err) => {
         console.error(err);
       });
 
     this.$http = $http;
 
-
-
     this.CUSTOMERNAME_option = [];
-
 
     this.customer = {
       "ACTIVE": null,
@@ -53,8 +51,6 @@ export class RFPOverallController {
       name: i,
       val: i
     }));
-
-
 
     this.overall = {
       "RFPID": null,
@@ -96,8 +92,7 @@ export class RFPOverallController {
 
     this.$http.get(`http://59.160.18.222/RFPRest/RFPRestService.svc/getrfpbycustomerid/${this.customer.CUSTOMERID}`)
       .then((res) => {
-        console.log(res);
-        this.overall = res.data.getrfpbycustomeridResult[0];
+        this.overall = res.data[0];
         this.overall.STARTDATE = new Date(this.overall.STARTDATE);
         this.overall.DUEDATE = new Date(this.overall.DUEDATE);
       }, (err) => {
@@ -147,16 +142,14 @@ export class RFPOverallController {
           "CREATEDBY": "1",
           "CREATEDON": "2016-01-01 00:00:00"
         }
-    }
+      }
+    };
+    this.$http(req).then(function(response) {
+      // console.log(response)
+    }, function(response) {
+      // console.log(error)
+    });
 
   }
-
-  this.$http(req).then(function(response) {
-    console.log(response)
-  }, function(response) {
-    console.log(error)
-  });
-
-}
 
 }
