@@ -13,8 +13,6 @@
         </div>
       </div>
     </div>
-
-    </div>
     <div class="row">
       <div class="col-md-12">
         <fieldset>
@@ -25,11 +23,10 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-
                   <label for="name">Name</label>
+                  <button class="btn btn-default" data-toggle="modal" data-target="#myModal" >Add Customer</button>
                   <select class="form-control" id="name" ng-model="rfpdetails.customer" ng-change="rfpdetails.getRFP()" ng-options="CUSTOMER as CUSTOMER.CUSTOMERNAME for CUSTOMER in rfpdetails.CUSTOMERNAME_option">
-                </select>
-
+                  </select>
                 </div>
               </div>
               <div class="col-md-6">
@@ -39,7 +36,6 @@
                 </div>
               </div>
             </div>
-
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
@@ -50,11 +46,10 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="address">Address</label>
-                  <textarea class="form-control" rows="3" id="address" placeholder="Address" ng-model="rfpdetails.customer.ADDRESS" ng-disabled="true"> </textarea>
+                  <input type="text" class="form-control" id="address" placeholder="Address" ng-model="rfpdetails.customer.ADDRESS" ng-disabled="true">
                 </div>
               </div>
             </div>
-
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
@@ -63,7 +58,6 @@
                 </div>
               </div>
             </div>
-
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
@@ -74,7 +68,6 @@
             </div>
           </div>
         </fieldset>
-
         <fieldset>
           <legend>RFP DETAILS</legend>
           <div class="container">
@@ -92,7 +85,6 @@
                 </div>
               </div>
             </div>
-
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
@@ -107,7 +99,6 @@
                 </div>
               </div>
             </div>
-
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
@@ -118,13 +109,12 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="productdescription">Product description</label>
-                  <textarea class="form-control" rows="3" id="productdescription" placeholder="Product description" ng-model="rfpdetails.overall.PRODUCTDESC"></textarea>
+                  <input type="text" class="form-control" id="productdescription" placeholder="Product description" ng-model="rfpdetails.overall.PRODUCTDESC">
                 </div>
               </div>
             </div>
           </div>
         </fieldset>
-
         <fieldset>
           <legend>OPERATION DESCRIPTION</legend>
           <div class="container">
@@ -135,47 +125,41 @@
                   <input type="text" class="form-control" id="inboundoutbound" placeholder="Inbound / outbound" ng-model="rfpdetails.overall.OPPRDOMAIN">
                 </div>
               </div>
-
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="movmenttype">Movment Type</label>
-                  <select class="form-control" id="movmenttype" ng-model="rfpdetails.overall.ISMULTIDROP" ng-options="movmenttype.name as movmenttype.val for movmenttype in rfpdetails.ISMULTIDROP_option">
-                    </select>
+                  <select class="form-control" id="movmenttype" ng-model="rfpdetails.overall.DISTRIBUTIONTYPE" ng-options="movmenttype.name as movmenttype.val for movmenttype in rfpdetails.DISTRIBUTIONTYPE_option">
+                  </select>
                 </div>
               </div>
             </div>
-
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="multipointpickupdrop">Multi-point pickup / drop</label>
-                  <select class="form-control" id="multipointpickupdrop">
-                      <option value="Y">Yes</option>
-                      <option value="N" selected>No</option>
-                    </select>
+                  <select class="form-control" id="multipointpickupdrop"ng-model="rfpdetails.overall.ISMULTIDROP" ng-options="ISMULTI.val as ISMULTI.name for ISMULTI in rfpdetails.ISMULTIDROP_option">
+                  </select>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="warehousingrequirment">Warehousing requirment</label>
-                  <select class="form-control" id="warehousingrequirment" ng-required="true" ng-model="rfpdetails.overall.ISHUBORWHREQ" ng-options="ISHUB.name as ISHUB.val for ISHUB in rfpdetails.ISHUBORWHREQ_option">
-                </select>
+                  <select class="form-control" id="warehousingrequirment" ng-required="true" ng-model="rfpdetails.overall.ISHUBORWHREQ" ng-options="ISHUB.val as ISHUB.name for ISHUB in rfpdetails.ISHUBORWHREQ_option">
+                  </select>
                 </div>
               </div>
             </div>
-
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="cargotype">Cargo Type </label>
                   <select class="form-control" id="cargotype" ng-required="true" ng-model="rfpdetails.overall.CARGOTYPE" ng-options="CARGO.name as CARGO.val for CARGO in rfpdetails.CARGOTYPE_option">
-                </select>
+                  </select>
                 </div>
               </div>
             </div>
           </div>
         </fieldset>
-
         <fieldset>
           <legend>CLEANSHEET ASSUMPTIONS</legend>
           <div class="container">
@@ -189,22 +173,25 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="ageofvehicles">Age of vehicles</label>
-                  <select class="form-control" id="ageofvehicles" ng-model="rfpdetails.overall.AGEOFTRUCK" ng-options="age.name as age.val for age in rfpdetails.AGEOFTRUCK_option"></select>
-                </div>
+                <select class="form-control" id="ageofvehicles" ng-model="rfpdetails.overall.AGEOFTRUCK" ng-options="age.name as age.val for age in rfpdetails.AGEOFTRUCK_option"></select>
               </div>
             </div>
-
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="paymentterms">Payment terms</label>
-                  <input type="number" class="form-control" id="paymentterms" placeholder="Payment terms" ng-model="rfpdetails.overall.PAYMENTTERM">
-                </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="paymentterms">Payment terms</label>
+                <input type="number" class="form-control" id="paymentterms" placeholder="Payment terms" ng-model="rfpdetails.overall.PAYMENTTERM">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="distance">Distance</label>
+                <input type="number" class="form-control" id="distance" placeholder="Distance" ng-model="rfpdetails.overall.DISTANCE">
               </div>
             </div>
           </div>
         </fieldset>
-
         <fieldset>
           <legend>COMMERCIAL DETAILS</legend>
           <div class="container">
@@ -213,7 +200,7 @@
                 <div class="form-group">
                   <label for="unitofrate">Unit of rate</label>
                   <select class="form-control" id="unitofrate" ng-required="true" ng-model="rfpdetails.overall.RATEUOM" ng-options="UOM.name as UOM.val for UOM in rfpdetails.RATEUOM_option">
-                    </select>
+                  </select>
                 </div>
               </div>
               <div class="col-md-6">
@@ -223,7 +210,6 @@
                 </div>
               </div>
             </div>
-
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
@@ -240,14 +226,92 @@
             </div>
           </div>
         </fieldset>
-
       </div>
     </div>
     <div class="row">
       <div class="col-md-12 text-right">
-         <button type="button" class="btn btn-default" ng-click=rfpdetails.addRfpHeader()>Next</button>
+        <button type="button" class="btn btn-default" ng-click=rfpdetails.addRfpHeader()>Next</button>
       </div>
     </div>
   </div>
-
+  <!-- Add Cusomer -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Add Customer master</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="fieldset" class="form-group">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="customercode">Customer code</label>
+                      <input type="text" class="form-control" id="customercode" placeholder="Customer code" ng-model="rfpdetails.newCustomer.CUSTOMERCODE" >
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="customername">Customer name</label>
+                      <input type="text" class="form-control" id="customername" placeholder="Customer name" ng-model="rfpdetails.newCustomer.CUSTOMERNAME">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="address">Address</label>
+                      <textarea type="text" class="form-control" id="address" placeholder="Address" ng-model="rfpdetails.newCustomer.ADDRESS" />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control" id="email" placeholder="Email" ng-model="rfpdetails.newCustomer.EMAIL">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="contactperson">Contact person</label>
+                      <input type="text" class="form-control" id="contactperson" placeholder="Contact person" ng-model="rfpdetails.newCustomer.CONTACTPERSON">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="contactno">Contact no</label>
+                      <input type="number" class="form-control" id="contactno" placeholder="Contact no" ng-model="rfpdetails.newCustomer.CONTACTNO">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="contactperson">CA$$H Account ID</label>
+                      <input type="text" class="form-control" id="casshaccountid" placeholder="CA$$H Account ID" ng-model="rfpdetails.newCustomer.CASHACCOUNTID">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="contactno">Total Spend</label>
+                      <input type="number" class="form-control" id="totalspend" placeholder="Total Spend" ng-model="rfpdetails.newCustomer.TOTALSPEND">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" ng-if="rfpdetails.editingIndex==null" class="btn btn-primary" data-dismiss="modal" ng-click="rfpdetails.addCustomer()">Add</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add Cusomer -->
 </form>
