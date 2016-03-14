@@ -5,7 +5,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Add Customer master</h4>
+          <h4 class="modal-title" id="myModalLabel">Customer Master</h4>
         </div>
         <div class="modal-body">
           <form>
@@ -16,28 +16,13 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="customercode">Customer code</label>
-                  <input type="text" class="form-control" id="customercode" ng-change="rfpcustomermaster.customer('CUSTOMERCODE')" placeholder="Customer code" ng-model="rfpcustomermaster.customer.CUSTOMERCODE" >
+                  <input type="text" class="form-control" id="customercode"  placeholder="Customer code" ng-model="rfpcustomermaster.customer.CUSTOMERCODE" >
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="customername">Customer name</label>
                   <input type="text" class="form-control" id="customername" placeholder="Customer name" ng-model="rfpcustomermaster.customer.CUSTOMERNAME">
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="address">Address</label>
-                  <input type="text" class="form-control" id="address" placeholder="Address" ng-model="rfpcustomermaster.customer.ADDRESS">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="Email" ng-model="rfpcustomermaster.customer.EMAIL">
                 </div>
               </div>
             </div>
@@ -59,6 +44,21 @@
 
             <div class="row">
               <div class="col-md-6">
+                <div class="form-group">
+                  <label for="address">Address</label>
+                  <textarea  class="form-control" rows="3" id="address" placeholder="Address" ng-model="rfpcustomermaster.customer.ADDRESS"></textarea>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Email" ng-model="rfpcustomermaster.customer.EMAIL">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6" text-right>
                 <div class="form-group">
                   <label for="status">Status</label>
                    <select class="form-control" id="status">
@@ -84,7 +84,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-4"><h1><abbr title="Request for praposal">RFP</abbr> Customer</h1></div>
+    <div class="col-md-4"><h1><abbr title="Request for praposal">Customer</abbr> List</h1></div>
     <div class="col-md-4 text-center">
       <div class="btn-group" data-toggle="buttons">
       </div>
@@ -124,11 +124,11 @@
       </table>
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-12 text-right">
       <button class="btn btn-default" ng-click="rfpcustomermaster.submitcustomerdata()">Save</button>
     </div>
-  </div>
+  </div> -->
 
 
 </div>
