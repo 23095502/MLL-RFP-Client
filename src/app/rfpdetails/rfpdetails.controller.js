@@ -7,8 +7,8 @@ export class RFPDetailsController {
 
     $http({
       method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/1'
-      //url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/getrfproutebyid/1'
+      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/1'
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/getrfproutebyid/1'
     }).then((res) => {
       this.routes = res.data;
       //console.log(res.data);
@@ -41,8 +41,8 @@ export class RFPDetailsController {
     this.statename_option = [];
     $http({
       method: 'GET',
-      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/GetState?stateid=0&statecode=HYD&statename=HYDERABAD&active=A&createdby=1&createdon=2016-03-01&mode=GETALL'
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/state/0'
+      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/state/0'
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/state/0'
     }).then((res) => {
       this.statename_option = res.data;
     }, (err) => {
@@ -54,6 +54,24 @@ export class RFPDetailsController {
       "STATENAME": null
     };
     //GET STATES
+
+    //GET VEHICLETYPE
+    this.vehicletypename_option = [];
+    $http({
+      method: 'GET',
+      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/vehicletypes/0'
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/location/0'
+    }).then((res) => {
+      this.vehicletypename_option = res.data;
+    }, (err) => {
+      console.error(err);
+    });
+
+    this.vehicletype = {
+      "VEHICLETYPEID": null,
+      "VEHICLETYPENAME": null
+    };
+    //GET VEHICLETYPE
 
     //GET SERVICETYPE
     this.isSERVICETYPE_option = _.map(['PTL', 'FTL', 'PTL Conventional'], (i) => ({
@@ -121,7 +139,7 @@ export class RFPDetailsController {
     this.route.ISLOADUNLOADCHARG = 'N';
     this.route.LOCATIONNAME = '';
     this.route.MHEREQUIREMENT = 'NA';
-    this.route.OTHERREQUIREMENT = 'NA';
+    this.route.oTHERREQUIREMENT = 'NA';
     this.route.PACKDIMENSION = 'NA';
     this.route.RFPID = 0;
     this.route.RFPVOLUME = 0;
