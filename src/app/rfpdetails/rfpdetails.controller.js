@@ -8,7 +8,7 @@ export class RFPDetailsController {
     $http({
       method: 'GET',
       url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/1'
-        //url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/getrfproutebyid/1'
+      //url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/getrfproutebyid/1'
     }).then((res) => {
       this.routes = res.data;
       //console.log(res.data);
@@ -202,8 +202,31 @@ export class RFPDetailsController {
     this.route[`${direction}STATE`] = _.filter(this.statename_option, (st) => (this.route[`${direction}STATEID`] === st.STATEID))[0].STATENAME;
   }
 
-  removeRow(rowindex){
-    console.log(rowindex);
+  removeRow(route, rowindex){
+
+    this.route = angular.copy(route);
+    this.route.DIRTY = true;
+    this.route.SEARCH1 = '';
+    this.route.SEARCH2 = '';
+    this.route.SEARCH3 = '';
+    this.route.MODE = 'INSERT';
+    this.route.CREATEDBY = 1;
+    this.route.CREATEDON = '2016-03-01';
+    this.editingIndex = rowindex;
+
+    delete route.$$hashKey;
+    delete route.DIRTY;
+    delete route.FROMLOCATIONNAME;
+    delete route.LOCATIONNAME;
+    delete route.PACKAGETYPENAME;
+    delete route.RESULT;
+    delete route.TOLOCATIONNAME;
+    delete route.FROMSTATE;
+    delete route.TOSTATE;
+    delete route.VEHICLETYPENAME;
+      //return route;
+    console.log(this.route);
+
   }
 
 
