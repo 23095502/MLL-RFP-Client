@@ -9,8 +9,7 @@ export class RFPDetailsController {
         'Content-Type': 'application/json'
       },
       data: {
-        {
-          "rfproute": {
+
             "RFPID": 3,
             "FROMLOCATION": "1",
             "TOLOCATION": "1",
@@ -41,8 +40,7 @@ export class RFPDetailsController {
             "SEARCH3": "6",
             "CREATEDBY": "1",
             "CREATEDON": "2016-01-01 00:00:00"
-          }
-        }
+
       }
     }
 
