@@ -12,6 +12,11 @@
   "globals": {
     "angular": true,
     "module": true,
-    "inject": true
+    "inject": true,
+    "$" :true,
+    "_" :true
+  },
+  "rules":{
+    "no-console":0
   }
 }
