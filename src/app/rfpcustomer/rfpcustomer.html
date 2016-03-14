@@ -1,0 +1,134 @@
+<div class="container-fluid">
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Add Customer master</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="fieldset" class="form-group">
+              <div class="container-fluid">
+
+           <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="customercode">Customer code</label>
+                  <input type="text" class="form-control" id="customercode" ng-change="rfpcustomermaster.customer('CUSTOMERCODE')" placeholder="Customer code" ng-model="rfpcustomermaster.customer.CUSTOMERCODE" >
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="customername">Customer name</label>
+                  <input type="text" class="form-control" id="customername" placeholder="Customer name" ng-model="rfpcustomermaster.customer.CUSTOMERNAME">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="address">Address</label>
+                  <input type="text" class="form-control" id="address" placeholder="Address" ng-model="rfpcustomermaster.customer.ADDRESS">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Email" ng-model="rfpcustomermaster.customer.EMAIL">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="contactperson">Contact person</label>
+                  <input type="text" class="form-control" id="contactperson" placeholder="Contact person" ng-model="rfpcustomermaster.customer.CONTACTPERSON">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="contactno">Contact no</label>
+                  <input type="number" class="form-control" id="contactno" placeholder="Contact no" ng-model="rfpcustomermaster.customer.CONTACTNO">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="status">Status</label>
+                   <select class="form-control" id="status">
+                      <option value="A" selected>Active</option>
+                      <option value="I" >Inactive</option>
+                    </select>
+                </div>
+              </div>
+             </div>
+
+
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" ng-if="rfpcustomermaster.editingIndex==null" class="btn btn-primary" data-dismiss="modal" ng-click="rfpcustomermaster.add()">Add</button>
+          <button type="button" ng-if="rfpcustomermaster.editingIndex!=null" class="btn btn-primary" data-dismiss="modal" ng-click="rfpcustomermaster.save()">Save</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4"><h1><abbr title="Request for praposal">RFP</abbr> Customer</h1></div>
+    <div class="col-md-4 text-center">
+      <div class="btn-group" data-toggle="buttons">
+      </div>
+    </div>
+    <div class="col-md-4 text-right">
+      <button class="btn btn-default" data-toggle="modal" data-target="#myModal" >Add Customer</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Customer code</th>
+            <th>Customer name</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Contact person</th>
+            <th>Contact no</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--<tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">-->
+          <tr ng-repeat="customer in rfpcustomermaster.customer">
+
+            <td>{{customer.CUSTOMERCODE}}</td>
+            <td>{{customer.CUSTOMERNAME}}</td>
+            <td>{{customer.ADDRESS}}</td>
+            <td>{{customer.EMAIL}}</td>
+            <td>{{customer.CONTACTPERSON}}</td>
+            <td>{{customer.CONTACTNO}}</td>
+            <td>{{customer.ACTIVE}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <button class="btn btn-default" ng-click="rfpcustomermaster.submitcustomerdata()">Save</button>
+    </div>
+  </div>
+
+
+</div>

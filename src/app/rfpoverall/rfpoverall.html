@@ -1,227 +1,254 @@
-<div class="container">
-	<form>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="name">Name</label>
-				    <input type="text" class="form-control" id="name" placeholder="Name">
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="contact">Contact details</label>
-				    <input type="text" class="form-control" id="contact" placeholder="Contact">
-				</div>
-			</div>
-		</div>
+<form action="/">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4"><h1><abbr title="Request for praposal">RFP</abbr> Overall</h1></div>
+      <div class="col-md-4 text-center">
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primary active">
+            <input type="checkbox" autocomplete="off" checked>Overall Details
+          </label>
+          <label class="btn btn-primary">
+            <input type="checkbox" autocomplete="off"> Lane Details
+          </label>
+        </div>
+      </div>
+    </div>
 
-		<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="contactperson">Contact person</label>
-				    <input type="text" class="form-control" id="contactperson" placeholder="Contact person">
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="address">Address</label>
-				    <input type="text" class="form-control" id="address" placeholder="Address">
-				</div>
-			</div>
-		</div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <fieldset>
+          <legend>
+            Customer Details
+          </legend>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
 
-		<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="totallogistics">Total logistics spend(In Lakhs)</label>
-				    <input type="text" class="form-control" id="totallogistics" placeholder="Total logistics spend(In Lakhs)">
-				</div>
-			</div>
-		</div>
+                  <label for="name">Name</label>
+                  <select class="form-control" id="name" ng-model="rfpdetails.customer" ng-change="rfpdetails.getRFP()" ng-options="CUSTOMER as CUSTOMER.CUSTOMERNAME for CUSTOMER in rfpdetails.CUSTOMERNAME_option">
+                </select>
 
-		<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="cashaccountid">CASSH account id</label>
-				    <input type="text" class="form-control" id="cashaccountid" placeholder="CASSH account id">
-				</div>
-			</div>
-		</div>
-<fieldset>
-	<legend>RIP DETAILS</legend>
-</fieldset>
-<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="description">Description</label>
-				    <input type="text" class="form-control" id="description" placeholder="Description">
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="rfpvalue">RFP value(In Lakhs)</label>
-				    <input type="text" class="form-control" id="rfpvalue" placeholder="RFP value(In Lakhs)">
-				</div>
-			</div>
-		</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="contact">Contact details</label>
+                  <input type="text" class="form-control" id="contact" placeholder="Contact" ng-model="rfpdetails.customer.CONTACTNO" ng-disabled="true">
+                </div>
+              </div>
+            </div>
 
-		<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="recivedate">Receive date</label>
-				    <input type="date" class="form-control" id="recivedate" placeholder="Receive date">
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="duedate">Due date</label>
-				    <input type="date" class="form-control" id="duedate" placeholder="Due date">
-				</div>
-			</div>
-		</div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="contactperson">Contact person</label>
+                  <input type="text" class="form-control" id="contactperson" placeholder="Contact person" ng-model="rfpdetails.customer.CONTACTPERSON" ng-disabled="true">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="address">Address</label>
+                  <input type="text" class="form-control" id="address" placeholder="Address" ng-model="rfpdetails.customer.ADDRESS" ng-disabled="true">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="totallogistics">Total logistics spend(In Lakhs)</label>
+                  <input type="number" class="form-control" id="totallogistics" placeholder="Total logistics spend(In Lakhs)" ng-disabled="true">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="cashaccountid">CASSH account id</label>
+                  <input type="text" class="form-control" id="cashaccountid" placeholder="CASSH account id" ng-required="true" ng-model="rfpdetails.customer.CASHACCOUNTID" ng-disabled="true">
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>RFP DETAILS</legend>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <input type="text" class="form-control" id="description" placeholder="Description" ng-required="true" ng-model="rfpdetails.overall.RFPDESC">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="rfpvalue">RFP value (In Lakhs)</label>
+                  <input type="number" class="form-control" id="rfpvalue" ng-required="true" placeholder="RFP value(In Lakhs)">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="recivedate">Receive date</label>
+                  <input type="date" class="form-control"  id="recivedate" placeholder="yyyy-MM-dd" ng-required="true" ng-model="rfpdetails.overall.STARTDATE">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="duedate">Due date</label>
+                  <input type="date" class="form-control" id="duedate" placeholder="Due date" ng-required="true" ng-model="rfpdetails.overall.DUEDATE">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="casshopportunityid">CASSH Opportunity ID</label>
+                  <input type="text" class="form-control" id="casshopportunityid" placeholder="CASSH Opportunity ID" ng-required="true" ng-model="rfpdetails.overall.CASHOPPID">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="productdescription">Product description</label>
+                  <input type="text" class="form-control" id="productdescription" placeholder="Product description" ng-model="rfpdetails.overall.PRODUCTDESC">
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
 
 
-        <div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="casshopportunityid">CASSH Opportunity ID</label>
-				    <input type="text" class="form-control" id="casshopportunityid" placeholder="CASSH Opportunity ID">
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="productdescription">Product description</label>
-				    <input type="text" class="form-control" id="productdescription" placeholder="Product description">
-				</div>
-			</div>
-		</div>
+        <fieldset>
+          <legend>OPERATION DESCRIPTION</legend>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="inboundoutbound">Inbound / outbound</label>
+                  <input type="text" class="form-control" id="inboundoutbound" placeholder="Inbound / outbound" ng-model="rfpdetails.overall.OPPRDOMAIN">
+                </div>
+              </div>
 
-<fieldset>
-	<legend>OPERATION DESCRIPTION</legend>
-</fieldset>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="movmenttype">Movment Type</label>
+                  <select class="form-control" id="movmenttype" ng-model="rfpdetails.overall.ISMULTIDROP" ng-options="movmenttype.name as movmenttype.val for movmenttype in rfpdetails.ISMULTIDROP_option">
+                    </select>
+                </div>
+              </div>
+            </div>
 
-<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="inboundoutbound">Inbound / outbound</label>
-				    <input type="text" class="form-control" id="inboundoutbound" placeholder="Inbound / outbound">
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-					 <label for="movmenttype">Movment Type</label>
-						<select class="form-control" id="movmenttype">
-						  <option value="primary">Primary</option>
-						  <option value="secondary">Secondary</option>
-						</select> 
-				</div>
-			</div>
-		</div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="multipointpickupdrop">Multi-point pickup / drop</label>
+                  <select class="form-control" id="multipointpickupdrop">
+                      <option value="Y">Yes</option>
+                      <option value="N" selected>No</option>
+                    </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="warehousingrequirment">Warehousing requirment</label>
+                  <select class="form-control" id="warehousingrequirment" ng-required="true" ng-model="rfpdetails.overall.ISHUBORWHREQ" ng-options="ISHUB.name as ISHUB.val for ISHUB in rfpdetails.ISHUBORWHREQ_option">
+                </select>
+                </div>
+              </div>
+            </div>
 
-		<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-					 <label for="multipointpickupdrop">Multi-point pickup / drop</label>
-						<select class="form-control" id="multipointpickupdrop">
-						  <option value="yes">Yes</option>
-						  <option value="no">No</option>
-						</select> 
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="warehousingrequirment">Warehousing requirment</label>
-				   <select class="form-control" id="warehousingrequirment">
-						  <option value="yes">Yes</option>
-						  <option value="no">No</option>
-				</select> 
-				</div>
-			</div>
-		</div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="cargotype">Cargo Type </label>
+                  <select class="form-control" id="cargotype" ng-required="true" ng-model="rfpdetails.overall.CARGOTYPE" ng-options="CARGO.name as CARGO.val for CARGO in rfpdetails.CARGOTYPE_option">
+                </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
 
-		<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="cargotype">Cargo Type</label>
-				   <select class="form-control" id="cargotype">
-						  <option value="yes">Yes</option>
-						  <option value="no">No</option>
-				</select> 
-				</div>
-			</div>
-		</div>
+        <fieldset>
+          <legend>CLEANSHEET ASSUMPTIONS</legend>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="diselrate">Disel rate</label>
+                  <input type="number" class="form-control" id="diselrate" placeholder=" " ng-model="rfpdetails.overall.DIESELRATE">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="ageofvehicles">Age of vehicles</label>
+                  <select class="form-control" id="ageofvehicles" ng-model="rfpdetails.overall.AGEOFTRUCK" ng-options="age.name as age.val for age in rfpdetails.AGEOFTRUCK_option"></select>
+                </div>
+              </div>
+            </div>
 
-<fieldset>
-	<legend>CLEANSHEET ASSUMPTIONS</legend>
-</fieldset>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="paymentterms">Payment terms</label>
+                  <input type="number" class="form-control" id="paymentterms" placeholder="Payment terms" ng-model="rfpdetails.overall.PAYMENTTERM">
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
 
-<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="diselrate">Disel rate</label>
-				    <input type="text" class="form-control" id="diselrate" placeholder=" " ng-model="rfpdetails.overall.DIESELRATE">
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-					 <label for="ageofvehicles">Age of vehicles</label>
-						<select class="form-control" id="ageofvehicles">
-						  <option value="four">4</option>
-						  <option value="three">3</option>
-						  <option value="two">2</option>
-						  <option value="one">1</option>
-						</select> 
-				</div>
-			</div>
-		</div>
+        <fieldset>
+          <legend>COMMERCIAL DETAILS</legend>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="unitofrate">Unit of rate</label>
+                  <select class="form-control" id="unitofrate" ng-required="true" ng-model="rfpdetails.overall.RATEUOM" ng-options="UOM.name as UOM.val for UOM in rfpdetails.RATEUOM_option">
+                    </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="penalties">Penalties</label>
+                  <input type="text" class="form-control" id="penalties" placeholder="" ng-model="rfpdetails.overall.PENALITIES">
+                </div>
+              </div>
+            </div>
 
-<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="paymentterms">Payment teerms</label>
-				    <input type="text" class="form-control" id="paymentterms" placeholder="Yes">
-				</div>
-			</div>
-		</div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="detention">Detention</label>
+                  <input type="text" class="form-control" id="detention" placeholder=" " ng-model="rfpdetails.overall.DETENTION">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="loadingunloadingtime">Loading unloading time</label>
+                  <input type="text" class="form-control" id="loadingunloadingtime" placeholder="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
 
-<fieldset>
-	<legend>COMMERCIAL DETAILS</legend>
-</fieldset>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-right">
+         <button type="button" class="btn btn-default" ng-click=rfpdetails.addRfpHeader()>Next</button>
+      </div>
+    </div>
+  </div>
 
-<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-					 <label for="unitofrate">Unit of rate</label>
-						<select class="form-control" id="unitofrate">
-						  <option value="Volvo">Volvo</option>
-						  <option value="Saab">Saab</option>
-						  <option value="Mercedes">Mercedes</option>
-						  <option value="Audi">Audi</option>
-						</select> 
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="penalties">Penalties</label>
-				    <input type="text" class="form-control" id="penalties" placeholder="">
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="detention">Detention</label>
-				    <input type="text" class="form-control" id="detention" placeholder=" ">
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-				    <label for="loadingunloadingtime">Loading unloading time</label>
-				    <input type="text" class="form-control" id="loadingunloadingtime" placeholder="">
-				</div>
-			</div>
-		</div>
-
-	</form>	
-</div>
+</form>
