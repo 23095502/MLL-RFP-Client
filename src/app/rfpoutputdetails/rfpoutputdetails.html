@@ -69,15 +69,21 @@
             <th>ShipEx Rate</th>
             <th>PreviousRFP Rate</th>
             <th>Market Rate</th>
-            <th>BA Qute</th>
             <th>Backhaul Available</th>
+
+            <th >BA Qute</th>
+            <th colspan="11">L1</th>
+            <th>L2</th>
+            <th>L3</th>
+            <th>L4</th>
+            <th>L5</th>
+
             <th>Cleansheet Backhaul %</th>
             <th>Approved Rate</th>
           </tr>
         </thead>
         <tbody>
-          <!--<tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">-->
-          <tr ng-repeat="outputdata in rfpoutput.outputdata" ng-click="rfpoutput.click()">
+           <tr ng-repeat="outputdata in rfpoutput.outputdata" ng-click="rfpoutput.click()">
 
            <td>{{outputdata.FROMLOCATIONNAME}}</td>
            <td>{{outputdata.TOLOCATIONNAME}}</td>
@@ -87,8 +93,15 @@
            <td>{{outputdata.SHIPXRATE}}</td>
            <td>{{outputdata.PVSRFPRATE}}</td>
            <td>{{outputdata.MARKETRATE}}</td>
-           <td>{{outputdata.BAQUOTE}}</td>
            <td>{{outputdata.BACKHAULAVL}}</td>
+           <td>{{outputdata.BAQUOTE}}</td>
+
+           <td>{{outputdata.L1}}</td>
+           <td>{{outputdata.L2}}</td>
+           <td>{{outputdata.L3}}</td>
+           <td>{{outputdata.L4}}</td>
+           <td>{{outputdata.L5}}</td>
+
            <td>{{outputdata.BACKHAULPERCENT}}</td>
            <td>{{outputdata.APPROVEDAMOUNT}}</td>
 

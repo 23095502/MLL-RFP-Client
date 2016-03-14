@@ -19,8 +19,8 @@ export class RFPDashboardController {
 
   }
 
-  click() {
-     this.$state.go("rfpoverall");
+  click(id) {
+     this.$state.go('rfpoutputdetails',{rfpId:id});
   }
 
   CreateRFP(){

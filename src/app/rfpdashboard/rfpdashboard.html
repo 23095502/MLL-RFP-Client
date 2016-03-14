@@ -19,7 +19,7 @@
         </thead>
         <tbody>
           <!--<tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">-->
-          <tr ng-repeat="dashboarddata in rfpdash.dashboarddata" ng-click="rfpdash.click()">
+          <tr ng-repeat="dashboarddata in rfpdash.dashboarddata" ng-click="rfpdash.click(dashboarddata.RFPID)">
 
            <td>{{dashboarddata.STARTDATE}}</td>
            <td>{{dashboarddata.RFPID}}</td>

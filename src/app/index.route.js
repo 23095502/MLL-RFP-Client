@@ -30,7 +30,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     })
 
 .state('rfpoutputdetails', {
-      url: '/rfpoutputdetails',
+      url: '/rfpoutputdetails/:rfpId',
       templateUrl: 'app/rfpoutputdetails/rfpoutputdetails.html',
       controller: 'RFPOutputController',
       controllerAs: 'rfpoutput'
