@@ -1,12 +1,13 @@
 export class RFPDashboardController {
-  constructor ($http) {
+  constructor($http, $state) {
     'ngInject';
-this.$http = $http;
+    this.$http = $http;
+    this.$state = $state;
 
-     $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/getrfpbyrfpid/2')
+    $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/getrfplist/getall')
       .then((res) => {
         this.dashboarddata = res.data;
-        console.table(this.dashboarddata)
+
 
       }, (err) => {
         console.error(err);
@@ -15,6 +16,11 @@ this.$http = $http;
 
 
     this.dashboarddata = []
+
+  }
+
+  click() {
+     this.$state.go("rfpoverall");
 
   }
 }

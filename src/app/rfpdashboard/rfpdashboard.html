@@ -14,14 +14,14 @@
         </thead>
         <tbody>
           <!--<tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">-->
-          <tr ng-repeat="dashboarddata in rfpdash.dashboarddata">
+          <tr ng-repeat="dashboarddata in rfpdash.dashboarddata" ng-click="rfpdash.click()">
 
            <td>{{dashboarddata.STARTDATE}}</td>
-          <td>{{dashboarddata.RFPID}}</td>
+           <td>{{dashboarddata.RFPID}}</td>
            <td>{{dashboarddata.CUSTOMERNAME}}</td>
-             <td>{{dashboarddata.ACTIVE}}</td>
-              <td>{{dashboarddata.ACTIVE}}</td>
-            <td>{{dashboarddata.ACTIVE}}</td>
+           <td>{{dashboarddata.ACTIVE}}</td>
+           <td>{{dashboarddata.ACTIVE}}</td>
+           <td>{{dashboarddata.ACTIVE}}</td>
           </tr>
 
         </tbody>
