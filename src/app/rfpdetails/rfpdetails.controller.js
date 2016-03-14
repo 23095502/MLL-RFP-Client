@@ -3,11 +3,11 @@ export class RFPDetailsController {
     'ngInject';
 
     //GET RFP DETAILS
-
     this.routes = [];
     $http({
       method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/1'
+      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/2'
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/getrfproutebyid/1'
     }).then((res) => {
       this.routes = res.data;
       //console.log(res.data);
@@ -22,7 +22,8 @@ export class RFPDetailsController {
     this.locationname_option = [];
     $http({
       method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/GetLocations?locationid=0&locationcode=HYD&locationname=HYDERABAD&active=A&createdby=1&createdon=2016-03-01&mode=GETALL'
+      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/GetLocations?locationid=0&locationcode=HYD&locationname=HYDERABAD&active=A&createdby=1&createdon=2016-03-01&mode=GETALL'
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/location/0'
     }).then((res) => {
       this.locationname_option = res.data;
     }, (err) => {
@@ -33,14 +34,14 @@ export class RFPDetailsController {
       "LOCATIONID": null,
       "LOCATIONNAME": null
     };
-
     //GET LOCATIONS
 
-    //GET LOCATIONS
+    //GET STATES
     this.statename_option = [];
     $http({
       method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/GetState?stateid=0&statecode=HYD&statename=HYDERABAD&active=A&createdby=1&createdon=2016-03-01&mode=GETALL'
+      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/GetState?stateid=0&statecode=HYD&statename=HYDERABAD&active=A&createdby=1&createdon=2016-03-01&mode=GETALL'
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/state/0'
     }).then((res) => {
       this.statename_option = res.data;
     }, (err) => {
@@ -51,7 +52,14 @@ export class RFPDetailsController {
       "STATEID": null,
       "STATENAME": null
     };
+    //GET STATES
 
+    //GET SERVICETYPE
+    this.isSERVICETYPE_option = _.map(['PTL', 'FTL', 'PTL Conventional'], (i) => ({ name : i, val : i}));
+    //GET SERVICETYPE
+
+    //GET
+    //this.isROUNDTRIP_option = _.map(['PTL', 'FTL'], (i) => ({ name : i, val : i}));
     //GET LOCATIONS
 
 
@@ -104,24 +112,25 @@ export class RFPDetailsController {
     this.route.APPROVEDAMOUNT = 0;
     this.route.AVERAGELOAD = 'NA';
     this.route.BACKHAUL = 0;
-    this.route.CUSTTARGETRATE = 10000.00;
+    //this.route.CUSTTARGETRATE = 10000.00;
     this.route.DISTANCE = 0;
     this.route.FREQUENCY = 'NA';
     this.route.ISLOADUNLOADCHARG = 'N';
-    this.route.ISROUNDTRIP = 'N';
-    this.route.LOADINGUNLOADINGTIME = 0;
+    //this.route.ISROUNDTRIP = 'N';
+    //this.route.VEHICLETYPENAME = '';
+    //this.route.LOADINGUNLOADINGTIME = 0;
     this.route.LOCATIONNAME = '';
     this.route.MHEREQUIREMENT = 'NA';
-    this.route.NOOFTRIPS = 0;
+    //this.route.NOOFTRIPS = 0;
+    //this.route.SERVICETYPE = this.route.SERVICETYPE;
     this.route.OTHERREQUIREMENT = 'NA';
-    this.route.PACKAGETYPEID = 0;
+    //this.route.PACKAGETYPEID = 0;
     this.route.PACKDIMENSION = 'NA';
-    this.route.RFPDURATION= 0;
-    this.route.RFPID= 0;
-    this.route.RFPVOLUME= 0;
-    this.route.SERVICETYPE= 'EXP';
-    this.route.STACKINGNORMS = 'NA';
-    this.route.VEHICLETYPENAME= '';
+    //this.route.RFPDURATION = 0;
+    this.route.RFPID = 0;
+    this.route.RFPVOLUME = 0;
+    //this.route.STACKINGNORMS = 'NA';
+
     this.routes.push(angular.copy(this.route));
     this.resetRoute();
     this.editingIndex = null;
@@ -186,8 +195,15 @@ export class RFPDetailsController {
   }
 
   updateStateName(direction) {
-    this.route[`${direction}STATE`] = _.filter(this.statename_option, (st) => (this.route[`${direction}STATE`] === st.STATEID))[0].STATENAME;
+        this.route[`${direction}STATE`] = _.filter(this.statename_option, (st) => (this.route[`${direction}STATEID`] === st.STATEID))[0].STATENAME;
+   // this.route[`${direction}STATE`] = _.filter(this.statename_option, (st) => (this.route[`${direction}STATEID`] === st.STATEID))[0].FROMSTATE;
   }
 
+  /*
+  updateServiceType(){
+    //this.route.SERVICETYPE = this.route.PACKAGETYPEID;
+    console.log(this.route.SERVICETYPE);
+  }
+  */
 
 }

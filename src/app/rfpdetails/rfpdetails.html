@@ -25,7 +25,7 @@
                     <div class="fieldset" class="form-group">
                       <div class="form-group">
                       <label for="fromState">From State</label>
-                        <select class="form-control" id="fromState" ng-change="rfplanes.updateStateName('FROM')" ng-model="rfplanes.route.FROMSTATE"  ng-options="state.STATEID as state.STATENAME for state in rfplanes.statename_option">
+                        <select class="form-control" id="fromState" ng-change="rfplanes.updateStateName('FROM')" ng-model="rfplanes.route.FROMSTATEID"  ng-options="state.STATEID as state.STATENAME for state in rfplanes.statename_option">
                         </select>
                       </div>
                     </div>
@@ -45,7 +45,7 @@
                     <div class="fieldset" class="form-group">
                      <div class="form-group">
                      <label for="toState">To State</label>
-                        <select class="form-control" id="toState" ng-change="rfplanes.updateStateName('TO')" ng-model="rfplanes.route.TOSTATE" ng-options="state.STATEID as state.STATENAME for state in rfplanes.statename_option">
+                        <select class="form-control" id="toState" ng-change="rfplanes.updateStateName('TO')" ng-model="rfplanes.route.TOSTATEID " ng-options="state.STATEID as state.STATENAME for state in rfplanes.statename_option">
                         </select>
                      </div>
                     </div>
@@ -56,22 +56,17 @@
                     <div class="fieldset" class="form-group">
                       <label>One way/Round trip</label>
                       <br/>
-                      <label class="radio-inline"><input type="radio" name="optradio">One way</label>
-                      <label class="radio-inline"><input type="radio" name="optradio">Round</label>
+                      <label class="radio-inline"><input type="radio" ng-model="rfplanes.route.ISROUNDTRIP" name="optradio" value="N">One way</label>
+                      <label class="radio-inline"><input type="radio" ng-model="rfplanes.route.ISROUNDTRIP" name="optradio" value="Y">Round</label>
                     </div>
                   </div>
-                  <div class="col-sm-6">
-                    <div class="fieldset" class="form-group">
+                    <div class="col-md-6">
                       <div class="form-group">
-                        <label for="sel1">Service Type</label>
-                        <select class="form-control" id="sel1">
-                          <option>FTL</option>
-                          <option>PTL</option>
-                          <option>PTL Conventional</option>
-                        </select>
+                        <label for="servicetype">Service Type</label>
+                        <select class="form-control" id="servicetype" ng-model="rfplanes.route.SERVICETYPE" ng-options="servicetype.name as servicetype.val for servicetype in rfplanes.isSERVICETYPE_option">
+                          </select>
                       </div>
                     </div>
-                  </div>
                 </div>
                 <div class="row">
                   <div class="col-sm-6">
@@ -129,10 +124,8 @@
   </div>
 
 	<div class="row">
-		<div class="col-md-4"><h1><abbr title="Request for praposal">RFP</abbr> details</h1></div>
+		<div class="col-md-4"><h1><abbr title="Request for praposal">RFP</abbr> Details</h1></div>
 		<div class="col-md-4 text-center">
-      <div class="btn-group" data-toggle="buttons">
-      </div>
 		</div>
 		<div class="col-md-4 text-right">
 			<button class="btn btn-default" data-toggle="modal" data-target="#myModal" >Add Route</button>
@@ -162,7 +155,6 @@
       	<tbody>
 
       		<tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">
-
             <td>{{route.DIRTY}}</td>
       			<td>{{route.FROMLOCATIONNAME}}</td>
       			<td>{{route.FROMSTATE}}</td>

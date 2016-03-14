@@ -2,7 +2,7 @@ export class RFPOverallController {
   constructor($http) {
     'ngInject';
 
-    $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/GetCustomers?customerid=0&customercode=&customername=&address=&email=&contactperson=&contactno=&cashaccountid=&totalspend=0&active=A&createdby=1&createdon=2016-03-01&mode=GETALL')
+    $http.get('http://172.32.0.101/RFPRest/RFPRestService.svc/GetCustomers?customerid=0&customercode=&customername=&address=&email=&contactperson=&contactno=&cashaccountid=&totalspend=0&active=A&createdby=1&createdon=2016-03-01&mode=GETALL')
       .then((res) => {
         this.CUSTOMERNAME_option = res.data;
       }, (err) => {
@@ -94,7 +94,7 @@ export class RFPOverallController {
 
   getRFP() {
 
-    this.$http.get(`http://59.160.18.222/RFPRest/RFPRestService.svc/getrfpbycustomerid/${this.customer.CUSTOMERID}`)
+    this.$http.get(`http://172.32.0.101/RFPRest/RFPRestService.svc/getrfpbycustomerid/${this.customer.CUSTOMERID}`)
       .then((res) => {
         console.log(res);
         this.overall = res.data.getrfpbycustomeridResult[0];
