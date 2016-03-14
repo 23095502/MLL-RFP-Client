@@ -1,5 +1,5 @@
 export class RFPDetailsController {
-  constructor($http, $scope) {
+  constructor($http, $scope, $stateParams) {
     'ngInject';
 
     //GET RFP DETAILS
@@ -7,7 +7,7 @@ export class RFPDetailsController {
 
     $http({
       method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/1'
+      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpID}'
       //url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/getrfproutebyid/1'
     }).then((res) => {
       this.routes = res.data;
@@ -113,7 +113,7 @@ export class RFPDetailsController {
       "PACKAGETYPEID": 0,
       "PACKDIMENSION": 'NA',
       "RFPDURATION": 0,
-      "RFPID": 1,
+      "RFPID": rfpID,
       "RFPVOLUME": 0,
       "SERVICETYPE": '',
       "STACKINGNORMS": '',

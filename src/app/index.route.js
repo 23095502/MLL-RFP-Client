@@ -23,7 +23,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     })
 
     .state('rfpdetails', {
-      url: '/rfpdetails',
+      url: '/rfpdetails/:rfpID',
       templateUrl: 'app/rfpdetails/rfpdetails.html',
       controller: 'RFPDetailsController',
       controllerAs: 'rfplanes'
