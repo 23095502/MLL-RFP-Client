@@ -1,5 +1,11 @@
 <div class="container-fluid">
   <div class="row">
+    <div class="col-md-12 text-right">
+      <button class="btn btn-default" ng-csv="rfpoutput.getArray()" csv-header="['CUSTOMERNAME','CASHACCOUNTID','FROM']" filename="test.csv"> <i class="glyphicon glyphicon-export"></i> Export
+      </button>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-4">
       <div class="form-group">
         <label for="name">Name</label>
@@ -51,69 +57,70 @@
       </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-2">
-    <div class="form-group">
-      <label for="from">From</label>
-      <select class="form-control" id="from" ng-model="rfpoutput.nameoutputdata.FROMLOCATIONNAME" ng-change="rfpdetails.getRFP()" ng-options="from as from.FROMLOCATIONNAME for from in rfpoutput.from_option">
-      </select>
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="from">From</label>
+        <select class="form-control" id="from" ng-model="rfpoutput.filterOption.FROMLOCATIONNAME" ng-options="from.FROMLOCATIONNAME as from.FROMLOCATIONNAME for from in rfpoutput.fromLocationOptions"  >
+        </select>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="trucktype">Truck Type</label>
+        <select class="form-control" id="trucktype" ng-model="rfpoutput.filterOption.VEHICLETYPENAME" ng-options="vehicle.VEHICLETYPENAME as vehicle.VEHICLETYPENAME for vehicle in rfpoutput.vehicleTypeOptions">
+        </select>
+      </div>
+    </div>
+    <div class="col-md-2 text-left">
+      <button type="button" class="btn btn-primary" ng-click="rfpoutput.ClearFilter()">Clear Filter</button>
     </div>
   </div>
-  <div class="col-md-2">
-    <div class="form-group">
-      <label for="trucktype">Truck Type</label>
-      <select class="form-control" id="trucktype" ng-model="rfpoutput.nameoutputdata.FROMLOCATIONNAME" ng-change="rfpdetails.getRFP()" ng-options="from as from.FROMLOCATIONNAME for from in rfpoutput.from_option">
-      </select>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table mll-table">
+        <thead>
+          <tr>
+            <th rowspan="2">To</th>
+            <th rowspan="2">From Location</th>
+            <th rowspan="2">VEHICLE TYPE</th>
+            <th rowspan="2">Cleansheet Rate</th>
+            <th rowspan="2">Contract Rate</th>
+            <th rowspan="2">ShipEx Rate</th>
+            <th rowspan="2">PreviousRFP Rate</th>
+            <th rowspan="2">Market Rate</th>
+            <th rowspan="2">Backhaul Available</th>
+            <th colspan="5" >BA Qute</th>
+            <th rowspan="2">Approved Rate</th>
+          </tr>
+          <tr>
+            <th >L1</th>
+            <th>L2</th>
+            <th>L3</th>
+            <th>L4</th>
+            <th>L5</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="outputdata in rfpoutput.outputdata | filter:{FROMLOCATIONNAME : rfpoutput.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : rfpoutput.filterOption.VEHICLETYPENAME}">
+            <td>{{outputdata.TOLOCATIONNAME}}</td>
+            <td>{{outputdata.FROMLOCATIONNAME}}</td>
+            <td>{{outputdata.VEHICLETYPENAME}}</td>
+            <td>{{outputdata.CLEANSHEETRATE}}</td>
+            <td>{{outputdata.CONTRACTRATE}}</td>
+            <td>{{outputdata.SHIPXRATE}}</td>
+            <td>{{outputdata.PVSRFPRATE}}</td>
+            <td>{{outputdata.MARKETRATE}}</td>
+            <td>{{outputdata.BACKHAULAVL}}</td>
+            <td>{{outputdata.L1}}</td>
+            <td>{{outputdata.L2}}</td>
+            <td>{{outputdata.L3}}</td>
+            <td>{{outputdata.L4}}</td>
+            <td>{{outputdata.L5}}</td>
+            <td>{{outputdata.APPROVEDAMOUNT}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <table class="table mll-table">
-      <thead>
-        <tr>
-          <th>From</th>
-          <th>To</th>
-          <th>Truck Type</th>
-          <th>Cleansheet Rate</th>
-          <th>Contract Rate</th>
-          <th>ShipEx Rate</th>
-          <th>PreviousRFP Rate</th>
-          <th>Market Rate</th>
-          <th>Backhaul Available</th>
-          <th >BA Qute</th>
-          <!-- <th >L1</th>
-          <th>L2</th>
-          <th>L3</th>
-          <th>L4</th>
-          <th>L5</th> -->
-          <th>Cleansheet Backhaul %</th>
-          <th>Approved Rate</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="outputdata in rfpoutput.outputdata" ng-click="rfpoutput.click()">
-          <td>{{outputdata.FROMLOCATIONNAME}}</td>
-          <td>{{outputdata.TOLOCATIONNAME}}</td>
-          <td>{{outputdata.VEHICLETYPENAME}}</td>
-          <td>{{outputdata.CLEANSHEETRATE}}</td>
-          <td>{{outputdata.CONTRACTRATE}}</td>
-          <td>{{outputdata.SHIPXRATE}}</td>
-          <td>{{outputdata.PVSRFPRATE}}</td>
-          <td>{{outputdata.MARKETRATE}}</td>
-          <td>{{outputdata.BACKHAULAVL}}</td>
-          <td>{{outputdata.BAQUOTE}}</td>
-          <!--  <td>{{outputdata.L1}}</td>
-          <td>{{outputdata.L2}}</td>
-          <td>{{outputdata.L3}}</td>
-          <td>{{outputdata.L4}}</td>
-          <td>{{outputdata.L5}}</td>
-          -->
-          <td>{{outputdata.BACKHAULPERCENT}}</td>
-          <td>{{outputdata.APPROVEDAMOUNT}}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>
