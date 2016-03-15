@@ -1,5 +1,5 @@
 export class RFPDetailsController {
-  constructor($http, $scope, $stateParams) {
+  constructor($http, $stateParams) {
     'ngInject';
 
     //GET RFP DETAILS
@@ -7,7 +7,7 @@ export class RFPDetailsController {
 
     $http({
       method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpID}'
+      url: `http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpid}`
       //url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/getrfproutebyid/1'
     }).then((res) => {
       this.routes = res.data;
@@ -87,7 +87,7 @@ export class RFPDetailsController {
     this.routes = []
     this.resetRoute();
     this.$http = $http;
-    this.$scope = $scope;
+    this.$stateParams = $stateParams;
   }
 
   resetRoute() {
@@ -113,7 +113,7 @@ export class RFPDetailsController {
       "PACKAGETYPEID": 0,
       "PACKDIMENSION": 'NA',
       "RFPDURATION": 0,
-      "RFPID": rfpID,
+      "RFPID": 1,
       "RFPVOLUME": 0,
       "SERVICETYPE": '',
       "STACKINGNORMS": '',
@@ -134,7 +134,6 @@ export class RFPDetailsController {
   add() {
     this.route.DIRTY = true;
     this.route.ACTIVE = 'A';
-    this.route.VEHICLETYPEID = 1;
     this.route.APPROVEDAMOUNT = 0;
     this.route.AVERAGELOAD = 'NA';
     this.route.BACKHAUL = 0;
