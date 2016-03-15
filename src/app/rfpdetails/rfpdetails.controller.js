@@ -134,7 +134,6 @@ export class RFPDetailsController {
   add() {
     this.route.DIRTY = true;
     this.route.ACTIVE = 'A';
-    //this.route.VEHICLETYPEID = 1;
     this.route.APPROVEDAMOUNT = 0;
     this.route.AVERAGELOAD = 'NA';
     this.route.BACKHAUL = 0;
