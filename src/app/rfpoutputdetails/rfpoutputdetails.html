@@ -1,5 +1,11 @@
  <div class="container-fluid">
             <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-default" ng-csv="rfpoutput.getArray()" csv-header="['CUSTOMERNAME','CASHACCOUNTID','FROM']" filename="test.csv"> Export
+                    </button>
+                </div>
+            </div>
+            <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="name">Name</label>
@@ -16,7 +22,6 @@
                    </div>
                 </div>
               </div>
-
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="contactdetails">Contact details</label>
@@ -26,8 +31,6 @@
                 </div>
               </div>
             </div>
-
-
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
