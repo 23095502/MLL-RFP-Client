@@ -8,26 +8,26 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
       controllerAs: 'main'
     })
 
-    .state('rfpoverall', {
-      url: '/rfpoverall',
-      templateUrl: 'app/rfpoverall/rfpoverall.html',
-      controller: 'RFPOverallController',
-      controllerAs: 'rfpdetails'
-    })
+  .state('rfpoverall', {
+    url: '/rfpoverall',
+    templateUrl: 'app/rfpoverall/rfpoverall.html',
+    controller: 'RFPOverallController',
+    controllerAs: 'rfpdetails'
+  })
 
-    .state('rfpcustomer', {
-      url: '/rfpcustomer',
-      templateUrl: 'app/rfpcustomer/rfpcustomer.html',
-      controller: 'RFPCustomerController',
-      controllerAs: 'rfpcustomermaster'
-    })
+  .state('rfpcustomer', {
+    url: '/rfpcustomer',
+    templateUrl: 'app/rfpcustomer/rfpcustomer.html',
+    controller: 'RFPCustomerController',
+    controllerAs: 'rfpcustomermaster'
+  })
 
-    .state('rfpdashboard', {
-      url: '/rfpdashboard',
-      templateUrl: 'app/rfpdashboard/rfpdashboard.html',
-      controller: 'RFPDashboardController',
-      controllerAs: 'rfpdash'
-    })
+  .state('rfpdetails', {
+    url: '/rfpdetails/:rfpID',
+    templateUrl: 'app/rfpdetails/rfpdetails.html',
+    controller: 'RFPDetailsController',
+    controllerAs: 'rfplanes'
+  });
 
 .state('rfpoutputdetails', {
       url: '/rfpoutputdetails/:rfpId',
@@ -36,12 +36,6 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
       controllerAs: 'rfpoutput'
     })
 
-    .state('rfpdetails', {
-      url: '/rfpdetails',
-      templateUrl: 'app/rfpdetails/rfpdetails.html',
-      controller: 'RFPDetailsController',
-      controllerAs: 'rfplanes'
-    });
 
   $urlRouterProvider.otherwise('/');
 }

@@ -2,7 +2,7 @@ export class RFPCustomerController {
   constructor($http) {
     'ngInject';
 
-    $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/customer/0')
+    $http.get('http://172.32.0.101/RFPRest/RFPRestService.svc/GetCustomers?customerid=0&customercode=&customername=&address=&email=&contactperson=&contactno=cashaccountid=CASH201600100&totalspend=0&active=A&createdby=1&createdon=2016-03-01&mode=GETALL')
       .then((res) => {
         this.customer = res.data;
       }, (err) => {
@@ -18,13 +18,13 @@ export class RFPCustomerController {
   }
 
 resetCustomer() {
-    this.route = {
+    this.customer = {
        "ACTIVE": null,
       "ADDRESS": null,
       "CASHACCOUNTID": null,
       "CONTACTNO": null,
       "CONTACTPERSON": null,
-      "CUSTOMERCODE": "pop",
+      "CUSTOMERCODE": this.customer.CUSTOMERCODE,
       "CUSTOMERID": null,
       "CUSTOMERNAME": null,
       "EMAIL": null,
@@ -36,13 +36,13 @@ resetCustomer() {
   add() {
 
     this.customer.CUSTOMERCODE = "Wipro";
-    this.customer.CUSTOMERNAME = 'Wipro';
+    this.customer.CUSTOMERNAME = 'Wipro Infotech';
     this.customer.ADDRESS = "Pune";
     this.customer.EMAIL = "praveenhart@wipro.com";
     this.customer.CONTACTPERSON = 'Praveen Kumar Singh';
     this.customer.CONTACTNO = 9967288728;
     this.customer.push(angular.copy(this.customer));
-    this.resetCustomer();
+    this.resetRoute();
     this.editingIndex = null;
   }
 
@@ -55,10 +55,10 @@ resetCustomer() {
 
 
 submitcustomerdata() {
-    console.log("Hello");
+
     var req = {
       method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/rfp/1/ManageCustomer',
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/rfp/1/ManageCustomer',
       headers: {
         'Content-Type': 'application/json'
       },
