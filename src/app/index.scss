@@ -27,32 +27,26 @@ $navbar-inverse-bg: $mll-red;/**
   color: #000;
   padding: 0.2em 0;
 }
-
 .thumbnail {
   height: 200px;
 
   img.pull-right {
     width: 50px;
   }
-
 }
-
 body {
   padding-top: 70px;
   font-size: 14px;
 }
-
 .btn-primary {
   font-weight: bold;
   font-size: 14px;
   text-transform: uppercase;
   border-width: 2px;
 }
-
 .fieldset {
   margin-bottom: 10px;
 }
-
 .legend {
   color: $mll-red;
   font-weight: bold;
@@ -61,48 +55,42 @@ body {
   text-transform: uppercase;
   background: $mll-white;
   border-top: 1px solid lighten($mll-grey, 50);
-  border-bottom: 1px solid lighten($mll-grey, 50);;
+  border-bottom: 1px solid lighten($mll-grey, 50);
   padding: 10px 0;
 }
-
 .top-legend {
   border-top: 1px solid lighten($mll-grey, 90);
 }
-
 .form-label {
   font-weight: normal;
   font-style: normal;
   font-size: 12px;
   color: $mll-grey;
 }
-
-.form-title {
+h1 {
   font-weight: bold;
   font-style: normal;
   color: $mll-darkgrey;
   font-size: 16px;
+  text-transform: uppercase;
 }
-
 .btn-default {
   font-weight: bold;
   font-size: 12px;
   border: solid 1px $mll-grey;  /*border-radius: 20px;*/
   text-transform: uppercase;
 }
-
 .form-divider {
   border-bottom: solid 1px rgb(229, 229, 229);
   margin-top: 10px;
   margin-bottom: 30px;
 }
-
 .icon-required {
   font-size: 60%;
   color: $mll-red;
   position: relative;
   top: -4px;
 }
-
 .nav-logo {
   position: absolute;
   top: 0px;
@@ -110,6 +98,58 @@ body {
   height: 51px;
   border-bottom: solid 1px lighten($mll-grey, 50);
 }
+
+/* grid css */
+.mll-table {
+  thead {
+    background-color: $mll-grey;
+    color: $mll-white;
+
+    th {
+      position: relative;
+      font-weight: normal;
+      font-size: 86%;
+      color: rgba(255,255,255,.7);
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        bottom: 7px;
+        top: 7px;
+        width: 1px;
+        border-left: 1px solid lighten($mll-grey, 20);
+      }
+    }
+  }
+  tbody {
+    tr {
+      background-color: rgb(244, 244, 244);
+      //rgb(244, 244, 244);
+      color: $mll-grey;
+
+      td {
+        position: relative;
+        white-space: nowrap;
+        &::after {
+          content: '';
+          position: absolute;
+          right: 0;
+          bottom: 7px;
+          top: 7px;
+          width: 1px;
+          border-left: 1px solid lighten($mll-grey, 40);
+        }
+      }
+    }
+  }
+}
+
+.btn-rounded {
+  border-radius: 20px;
+}
+
+/* grid css */
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
