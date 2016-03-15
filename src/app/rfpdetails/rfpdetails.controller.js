@@ -1,5 +1,5 @@
 export class RFPDetailsController {
-  constructor($http, $scope, $stateParams) {
+  constructor($http,  $stateParams) {
     'ngInject';
 
     //GET RFP DETAILS
@@ -7,11 +7,10 @@ export class RFPDetailsController {
 
     $http({
       method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpID}'
-      //url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/getrfproutebyid/1'
+      url: `http://172.32.0.101/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.id}`
     }).then((res) => {
       this.routes = res.data;
-      //console.log(res.data);
+      //console.log($stateParams.id);
     }, (err) => {
       console.error(err);
     });
@@ -24,7 +23,7 @@ export class RFPDetailsController {
     $http({
       method: 'GET',
       //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/location/0'
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/location/0'
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/location/0'
     }).then((res) => {
       this.locationname_option = res.data;
     }, (err) => {
@@ -41,8 +40,8 @@ export class RFPDetailsController {
     this.statename_option = [];
     $http({
       method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/state/0'
-      //url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/state/0'
+      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/state/0'
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/state/0'
     }).then((res) => {
       this.statename_option = res.data;
     }, (err) => {
@@ -59,8 +58,8 @@ export class RFPDetailsController {
     this.vehicletypename_option = [];
     $http({
       method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/vehicletypes/0'
-      //url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/location/0'
+      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/vehicletypes/0'
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/vehicletypes/0'
     }).then((res) => {
       this.vehicletypename_option = res.data;
     }, (err) => {
@@ -87,7 +86,9 @@ export class RFPDetailsController {
     this.routes = []
     this.resetRoute();
     this.$http = $http;
-    this.$scope = $scope;
+    this.$stateParams = $stateParams;
+    //this.$stateParams.id = $stateParams.id;
+
   }
 
   resetRoute() {
@@ -113,7 +114,7 @@ export class RFPDetailsController {
       "PACKAGETYPEID": 0,
       "PACKDIMENSION": 'NA',
       "RFPDURATION": 0,
-      "RFPID": rfpID,
+      "RFPID": 1,
       "RFPVOLUME": 0,
       "SERVICETYPE": '',
       "STACKINGNORMS": '',
@@ -172,7 +173,7 @@ export class RFPDetailsController {
   save() {
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
-
+    this.resetRoute();
   }
 
   submitData() {
@@ -195,11 +196,12 @@ export class RFPDetailsController {
 
 
     var newfilterRoutes = '{"rfproute":' + JSON.stringify(filterRoutes) + '}';
-    //console.log(filterRoutes);
+    //console.log(newfilterRoutes);
+
 
     var req = {
       method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/routeupdate',
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/routeupdate',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -212,6 +214,7 @@ export class RFPDetailsController {
     }, function(e) {
       console.error(e);
     });
+
 
   }
 
