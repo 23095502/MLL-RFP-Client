@@ -7,7 +7,6 @@ export class RFPDetailsController {
     $http({
       method: 'GET',
       url: `http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpid}`
-
     }).then((res) => {
       this.routes = res.data;
     }, (err) => {
@@ -127,7 +126,6 @@ export class RFPDetailsController {
   add() {
     this.route.DIRTY = true;
     this.route.ACTIVE = 'A';
-    //this.route.VEHICLETYPEID = 1;
     this.route.APPROVEDAMOUNT = 0;
     this.route.AVERAGELOAD = 'NA';
     this.route.BACKHAUL = 0;

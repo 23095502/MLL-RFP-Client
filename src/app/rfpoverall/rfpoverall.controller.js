@@ -72,7 +72,12 @@ export class RFPOverallController {
       val: i
     }));
 
-
+  //Inbound/outbound
+    this.OPPRDOMAIN_option = _.map(['Inbound', 'Outbound'], (i) => ({
+      name: i,
+      val: i
+    }));
+  //Inbound/outbound
 
     this.overall = {
       "RFPID": 0,
