@@ -1,65 +1,30 @@
 export class RFPDetailsController {
-  constructor($http) {
+  constructor($http, $scope) {
     'ngInject';
 
     //GET RFP DETAILS
-    var req = {
-      method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproute/5/BYCUSTOMERID',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+    this.routes = [];
 
-      data: {
-        "rfproute": {
-
-          "RFPID": 1,
-          "FROMLOCATION": "1",
-          "TOLOCATION": "1",
-          "FROMSTATEID": "1",
-          "TOSTATEID": "1",
-          "VEHICLETYPEID": "1",
-          "SERVICETYPE": "EXP",
-          "APPROVEDAMOUNT": 5,
-          "ACTIVE": "A",
-          "RFPVOLUME": 5,
-          "RFPDURATION": 5,
-          "LOADINGUNLOADINGTIME": 5,
-          "DISTANCE": 5,
-          "BACKHAUL": 5,
-          "PACKAGETYPEID": 5,
-          "PACKDIMENSION": "NA",
-          "STACKINGNORMS": "NA",
-          "CUSTTARGETRATE": 1000,
-          "ISLOADUNLOADCHARG": "N",
-          "AVERAGELOAD": "NA",
-          "FREQUENCY": 1,
-          "MHEREQUIREMENT": "NA",
-          "OTHERREQUIREMENT": "N",
-          "NOOFTRIPS": 3,
-          "ISROUNDTRIP": "N",
-          "SEARCH1": "6",
-          "SEARCH2": "6",
-          "SEARCH3": "6",
-          "CREATEDBY": "1",
-          "CREATEDON": "2016-01-01 00:00:00"
-        }
-      }
-    };
-
-    $http(req).then((response) => {
-      console.log(response.data.getrfprouteResult);
-      this.routes = response.data.getrfprouteResult;
-    }, (response) => {
-      console.log(error)
+    $http({
+      method: 'GET',
+      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/1'
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/getrfproutebyid/1'
+    }).then((res) => {
+      this.routes = res.data;
+      //console.log(res.data);
+    }, (err) => {
+      console.error(err);
     });
+
     //GET RFP DETAILS
+
 
     //GET LOCATIONS
     this.locationname_option = [];
     $http({
       method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/GetLocations?locationid=0&locationcode=HYD&locationname=HYDERABAD&active=A&createdby=1&createdon=2016-03-01&mode=GETALL'
+      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/location/0'
+      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/location/0'
     }).then((res) => {
       this.locationname_option = res.data;
     }, (err) => {
@@ -70,14 +35,14 @@ export class RFPDetailsController {
       "LOCATIONID": null,
       "LOCATIONNAME": null
     };
-
     //GET LOCATIONS
 
-    //GET LOCATIONS
+    //GET STATES
     this.statename_option = [];
     $http({
       method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/GetState?stateid=0&statecode=HYD&statename=HYDERABAD&active=A&createdby=1&createdon=2016-03-01&mode=GETALL'
+      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/state/0'
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/state/0'
     }).then((res) => {
       this.statename_option = res.data;
     }, (err) => {
@@ -88,48 +53,76 @@ export class RFPDetailsController {
       "STATEID": null,
       "STATENAME": null
     };
+    //GET STATES
 
-    //GET LOCATIONS
+    //GET VEHICLETYPE
+    this.vehicletypename_option = [];
+    $http({
+      method: 'GET',
+      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/vehicletypes/0'
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/location/0'
+    }).then((res) => {
+      this.vehicletypename_option = res.data;
+    }, (err) => {
+      console.error(err);
+    });
 
+    this.vehicletype = {
+      "VEHICLETYPEID": null,
+      "VEHICLETYPENAME": null
+    };
+    //GET VEHICLETYPE
+
+    //GET SERVICETYPE
+    this.isSERVICETYPE_option = _.map(['PTL', 'FTL', 'PTL Conventional'], (i) => ({
+      name: i,
+      val: i
+    }));
+    //GET SERVICETYPE
 
     this.routes = []
     this.resetRoute();
     this.$http = $http;
+    this.$scope = $scope;
   }
 
   resetRoute() {
     this.route = {
-      "ACTIVE": null,
-      "APPROVEDAMOUNT": null,
-      "AVERAGELOAD": null,
+      "ACTIVE": 'Y',
+      "APPROVEDAMOUNT": 0,
+      "AVERAGELOAD": 0,
       "BACKHAUL": null,
-      "CUSTTARGETRATE": null,
-      "DISTANCE": null,
-      "FREQUENCY": null,
-      "FROMLOCATION": null,
-      "FROMLOCATIONNAME": null,
-      "FROMSTATE": null,
-      "FROMSTATEID": null,
-      "ISLOADUNLOADCHARG": null,
-      "ISROUNDTRIP": null,
-      "LOADINGUNLOADINGTIME": null,
-      "LOCATIONNAME": null,
-      "MHEREQUIREMENT": null,
-      "NOOFTRIPS": null,
-      "OTHERREQUIREMENT": null,
-      "PACKAGETYPEID": null,
-      "PACKDIMENSION": null,
-      "RFPDURATION": null,
-      "RFPID": null,
-      "RFPVOLUME": null,
-      "SERVICETYPE": null,
-      "STACKINGNORMS": null,
-      "TOLOCATION": null,
-      "TOLOCATIONNAME": null,
-      "TOSTATE": null,
-      "TOSTATEID": null,
-      "VEHICLETYPEID": null,
-      "VEHICLETYPENAME": null,
+      "CUSTTARGETRATE": 0,
+      "DISTANCE": 0,
+      "FREQUENCY": 0,
+      "FROMLOCATION": 0,
+      "FROMLOCATIONNAME": '',
+      "FROMSTATE": '',
+      "FROMSTATEID": 0,
+      "ISLOADUNLOADCHARG": 'Y',
+      "ISROUNDTRIP": 'Y',
+      "LOADINGUNLOADINGTIME": 0,
+      "LOCATIONNAME": '',
+      "MHEREQUIREMENT": 'NA',
+      "NOOFTRIPS": 0,
+      "OTHERREQUIREMENT": 'NA',
+      "PACKAGETYPEID": 0,
+      "PACKDIMENSION": 'NA',
+      "RFPDURATION": 0,
+      "RFPID": 1,
+      "RFPVOLUME": 0,
+      "SERVICETYPE": '',
+      "STACKINGNORMS": '',
+      "TOLOCATION": 0,
+      "TOLOCATIONNAME": '',
+      "TOSTATE": '',
+      "TOSTATEID": 0,
+      "VEHICLETYPEID": 0,
+      "VEHICLETYPENAME": '',
+      "MODE": 'INSERT',
+      "SEARCH1": '',
+      "SEARCH2": '',
+      "SEARCH3": '',
       "DIRTY": false
     }
   }
@@ -141,31 +134,33 @@ export class RFPDetailsController {
     this.route.APPROVEDAMOUNT = 0;
     this.route.AVERAGELOAD = 'NA';
     this.route.BACKHAUL = 0;
-    this.route.CUSTTARGETRATE = 10000.00;
     this.route.DISTANCE = 0;
     this.route.FREQUENCY = 'NA';
     this.route.ISLOADUNLOADCHARG = 'N';
-    this.route.ISROUNDTRIP = 'N';
-    this.route.LOADINGUNLOADINGTIME = 0;
     this.route.LOCATIONNAME = '';
     this.route.MHEREQUIREMENT = 'NA';
-    this.route.NOOFTRIPS = 0;
-    this.route.OTHERREQUIREMENT = 'NA';
-    this.route.PACKAGETYPEID = 0;
+    this.route.oTHERREQUIREMENT = 'NA';
     this.route.PACKDIMENSION = 'NA';
-    this.route.RFPDURATION= 0;
-    this.route.RFPID= 0;
-    this.route.RFPVOLUME= 0;
-    this.route.SERVICETYPE= 'EXP';
-    this.route.STACKINGNORMS = 'NA';
-    this.route.VEHICLETYPENAME= '';
+    this.route.RFPID = 0;
+    this.route.RFPVOLUME = 0;
+    this.route.SEARCH1 = '';
+    this.route.SEARCH2 = '';
+    this.route.SEARCH3 = '';
+
     this.routes.push(angular.copy(this.route));
     this.resetRoute();
     this.editingIndex = null;
   }
+
   edit(route, index) {
     this.route = angular.copy(route);
     this.route.DIRTY = true;
+    this.route.SEARCH1 = '';
+    this.route.SEARCH2 = '';
+    this.route.SEARCH3 = '';
+    this.route.MODE = 'INSERT';
+    this.route.CREATEDBY = 1;
+    this.route.CREATEDON = '2016-03-01';
     this.editingIndex = index;
     $('#myModal').modal();
   }
@@ -173,81 +168,83 @@ export class RFPDetailsController {
   save() {
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
-    this.route = {
-      "ACTIVE": "A",
-      "APPROVEDAMOUNT": 5,
-      "AVERAGELOAD": "NA",
-      "BACKHAUL": 5,
-      "CUSTTARGETRATE": "100000.00",
-      "DISTANCE": 5,
-      "FREQUENCY": "NA",
-      "FROMLOCATION": 1,
-      "FROMLOCATIONNAME": "MUMBAI",
-      "FROMSTATE": null,
-      "FROMSTATEID": 0,
-      "ISLOADUNLOADCHARG": "N",
-      "ISROUNDTRIP": "N",
-      "LOADINGUNLOADINGTIME": 5,
-      "LOCATIONNAME": null,
-      "MHEREQUIREMENT": "NA",
-      "NOOFTRIPS": 3,
-      "OTHERREQUIREMENT": "NA",
-      "PACKAGETYPEID": 5,
-      "PACKDIMENSION": "NA",
-      "RFPDURATION": 5,
-      "RFPID": 10,
-      "RFPVOLUME": 5,
-      "SERVICETYPE": "EXP",
-      "STACKINGNORMS": "NA",
-      "TOLOCATION": 1,
-      "TOLOCATIONNAME": "MUMBAI",
-      "TOSTATE": null,
-      "TOSTATEID": 0,
-      "VEHICLETYPEID": 1,
-      "VEHICLETYPENAME": "INDICA",
-      "DIRTY": false
-    }
+
   }
 
   submitData() {
 
-    var filterRoutes = _.filter(this.routes, function(o) {
+    var filterRoutes = _.chain(this.routes).filter((o) => {
       return o.DIRTY;
-    });
-    //console.log(this.route.PACKAGETYPEID);
-    console.log(filterRoutes);
-/*
+    }).map((route) => {
+      delete route.$$hashKey;
+      delete route.DIRTY;
+      delete route.FROMLOCATIONNAME;
+      delete route.LOCATIONNAME;
+      delete route.PACKAGETYPENAME;
+      delete route.RESULT;
+      delete route.TOLOCATIONNAME;
+      delete route.FROMSTATE;
+      delete route.TOSTATE;
+      delete route.VEHICLETYPENAME;
+      return route;
+    }).value();
+
+
+    var newfilterRoutes = '{"rfproute":' + JSON.stringify(filterRoutes) + '}';
+    //console.log(filterRoutes);
+
     var req = {
       method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/rfproute/12/INSERT',
+      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/routeupdate',
       headers: {
         'Content-Type': 'application/json'
       },
 
-      data: filterRoutes
-    };*/
+      data: newfilterRoutes
+    }
 
-    // this.$http(req).then((response) => {
-    //   //this.routes = response.data.getrfprouteResult;
-    //   console.log(response);
-    // }, (response) => {
-    //   console.log(error)
-    // });
-
-  }
-
-  selectCity() {
-    //this.route.FROMLOCATION = this.location.LOCATIONID;
-    //console.log(this.location.LOCATIONID);
+    this.$http(req).then(function(r) {
+      console.log(r);
+    }, function(e) {
+      console.error(e);
+    });
 
   }
+
 
   updateLocationName(direction) {
     this.route[`${direction}LOCATIONNAME`] = _.filter(this.locationname_option, (loc) => (this.route[`${direction}LOCATION`] === loc.LOCATIONID))[0].LOCATIONNAME;
   }
 
   updateStateName(direction) {
-    this.route[`${direction}STATE`] = _.filter(this.statename_option, (st) => (this.route[`${direction}STATE`] === st.STATEID))[0].STATENAME;
+    this.route[`${direction}STATE`] = _.filter(this.statename_option, (st) => (this.route[`${direction}STATEID`] === st.STATEID))[0].STATENAME;
+  }
+
+  removeRow(route, rowindex){
+
+    this.route = angular.copy(route);
+    this.route.DIRTY = true;
+    this.route.SEARCH1 = '';
+    this.route.SEARCH2 = '';
+    this.route.SEARCH3 = '';
+    this.route.MODE = 'INSERT';
+    this.route.CREATEDBY = 1;
+    this.route.CREATEDON = '2016-03-01';
+    this.editingIndex = rowindex;
+
+    delete route.$$hashKey;
+    delete route.DIRTY;
+    delete route.FROMLOCATIONNAME;
+    delete route.LOCATIONNAME;
+    delete route.PACKAGETYPENAME;
+    delete route.RESULT;
+    delete route.TOLOCATIONNAME;
+    delete route.FROMSTATE;
+    delete route.TOSTATE;
+    delete route.VEHICLETYPENAME;
+      //return route;
+    console.log(this.route);
+
   }
 
 

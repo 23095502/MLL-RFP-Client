@@ -130,15 +130,7 @@ export class RFPOverallController {
 
   getRFP() {
 
-    /*this.$http.get(`http://59.160.18.222/RFPRest/RFPRestService.svc/getrfpbycustomerid/${this.customer.CUSTOMERID}`)
-      .then((res) => {
-        console.log(res);
-        this.overall = res.data.getrfpbycustomeridResult[0];
-        this.overall.STARTDATE = new Date(this.overall.STARTDATE);
-        this.overall.DUEDATE = new Date(this.overall.DUEDATE);
-      }, (err) => {
-        console.error(err);
-      });*/
+
   }
 
   addCustomer() {
