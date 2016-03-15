@@ -27,6 +27,7 @@ export class RFPOverallController {
       "TOTALSPEND": 0.00
     };
 
+
     this.AGEOFTRUCK_option = _.times(10, (i) => ({
       name: i,
       val: i

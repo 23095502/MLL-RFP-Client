@@ -56,6 +56,18 @@
               </div>
             </div>
             </div>
+ <!-- <div class="container">
+    <div class="row">
+        <div class="col-md-4">
+           <div class="form-group">
+                <label for="from">From</label>
+                 <select class="form-control" id="from" ng-model="rfpoutput.nameoutputdata.FROMLOCATIONNAME" ng-change="rfpdetails.getRFP()" ng-options="from as from.FROMLOCATIONNAME for from in rfpoutput.from_option">
+                </select>
+                </div>
+              </div>
+
+      </div>
+  </div> -->
 <div class="row">
     <div class="col-md-12">
       <table class="table table-bordered">
@@ -72,11 +84,11 @@
             <th>Backhaul Available</th>
 
             <th >BA Qute</th>
-            <th colspan="11">L1</th>
+            <!-- <th >L1</th>
             <th>L2</th>
             <th>L3</th>
             <th>L4</th>
-            <th>L5</th>
+            <th>L5</th> -->
 
             <th>Cleansheet Backhaul %</th>
             <th>Approved Rate</th>
@@ -96,12 +108,12 @@
            <td>{{outputdata.BACKHAULAVL}}</td>
            <td>{{outputdata.BAQUOTE}}</td>
 
-           <td>{{outputdata.L1}}</td>
+          <!--  <td>{{outputdata.L1}}</td>
            <td>{{outputdata.L2}}</td>
            <td>{{outputdata.L3}}</td>
            <td>{{outputdata.L4}}</td>
            <td>{{outputdata.L5}}</td>
-
+ -->
            <td>{{outputdata.BACKHAULPERCENT}}</td>
            <td>{{outputdata.APPROVEDAMOUNT}}</td>
 
