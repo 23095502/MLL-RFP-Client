@@ -134,7 +134,6 @@ export class RFPDetailsController {
     this.route.ISLOADUNLOADCHARG = 'N';
     this.route.LOCATIONNAME = '';
     this.route.MHEREQUIREMENT = 'NA';
-    //this.route.OTHERREQUIREMENT = 'NA';
     this.route.PACKDIMENSION = 'NA';
     this.route.RFPID = 0;
     this.route.RFPVOLUME = 0;
