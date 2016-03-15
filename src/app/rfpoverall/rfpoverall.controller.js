@@ -116,7 +116,7 @@ export class RFPOverallController {
       "CONTACTNO": '',
       "CASHACCOUNTID": '',
       "TOTALSPEND": '',
-      "DISTANCE": 0
+      "PROXIDISTANCE": 100
     };
 
   }
@@ -217,7 +217,8 @@ export class RFPOverallController {
           "CONTACTPERSON": this.customer.CONTACTPERSON,
           "CONTACTNO": this.customer.CONTACTNO,
           "CASHACCOUNTID": this.customer.CASHACCOUNTID,
-          "TOTALSPEND": this.customer.TOTALSPEND
+          "TOTALSPEND": this.customer.TOTALSPEND,
+          "PROXIDISTANCE": this.customer.PROXIDISTANCE
         }
       }
 
