@@ -27,14 +27,14 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     templateUrl: 'app/rfpdetails/rfpdetails.html',
     controller: 'RFPDetailsController',
     controllerAs: 'rfplanes'
-  });
+  })
 
-.state('rfpoutputdetails', {
-      url: '/rfpoutputdetails/:rfpId',
-      templateUrl: 'app/rfpoutputdetails/rfpoutputdetails.html',
-      controller: 'RFPOutputController',
-      controllerAs: 'rfpoutput'
-    })
+  .state('rfpoutputdetails', {
+    url: '/rfpoutputdetails/:rfpId',
+    templateUrl: 'app/rfpoutputdetails/rfpoutputdetails.html',
+    controller: 'RFPOutputController',
+    controllerAs: 'rfpoutput'
+  })
 
 
   $urlRouterProvider.otherwise('/');
