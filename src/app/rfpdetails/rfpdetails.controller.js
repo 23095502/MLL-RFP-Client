@@ -4,26 +4,20 @@ export class RFPDetailsController {
 
     //GET RFP DETAILS
     this.routes = [];
-
     $http({
       method: 'GET',
       url: `http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpid}`
-      //url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/getrfproutebyid/1'
     }).then((res) => {
       this.routes = res.data;
-      //console.log(res.data);
     }, (err) => {
       console.error(err);
     });
-
     //GET RFP DETAILS
-
 
     //GET LOCATIONS
     this.locationname_option = [];
     $http({
       method: 'GET',
-      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/location/0'
       url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/location/0'
     }).then((res) => {
       this.locationname_option = res.data;
@@ -42,7 +36,6 @@ export class RFPDetailsController {
     $http({
       method: 'GET',
       url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/state/0'
-      //url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/state/0'
     }).then((res) => {
       this.statename_option = res.data;
     }, (err) => {
@@ -60,7 +53,6 @@ export class RFPDetailsController {
     $http({
       method: 'GET',
       url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/vehicletypes/0'
-      //url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/location/0'
     }).then((res) => {
       this.vehicletypename_option = res.data;
     }, (err) => {
@@ -142,13 +134,14 @@ export class RFPDetailsController {
     this.route.ISLOADUNLOADCHARG = 'N';
     this.route.LOCATIONNAME = '';
     this.route.MHEREQUIREMENT = 'NA';
-    this.route.oTHERREQUIREMENT = 'NA';
     this.route.PACKDIMENSION = 'NA';
     this.route.RFPID = 0;
     this.route.RFPVOLUME = 0;
     this.route.SEARCH1 = '';
     this.route.SEARCH2 = '';
     this.route.SEARCH3 = '';
+    this.route.CREATEDBY = 1;
+    this.route.CREATEDON = '2016-03-01';
 
     this.routes.push(angular.copy(this.route));
     this.resetRoute();
@@ -171,7 +164,13 @@ export class RFPDetailsController {
   save() {
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
+  }
 
+  delete(){
+
+    this.route.MODE = 'DELETE';
+    this.routes[this.editingIndex] = this.route;
+    this.editingIndex = null;
   }
 
   submitData() {
@@ -194,7 +193,6 @@ export class RFPDetailsController {
 
 
     var newfilterRoutes = '{"rfproute":' + JSON.stringify(filterRoutes) + '}';
-    //console.log(filterRoutes);
 
     var req = {
       method: 'POST',
@@ -221,34 +219,6 @@ export class RFPDetailsController {
     } else {
       return '-';
     }
-  }
-
-
-  removeRow(route, rowindex){
-
-    this.route = angular.copy(route);
-    this.route.DIRTY = true;
-    this.route.SEARCH1 = '';
-    this.route.SEARCH2 = '';
-    this.route.SEARCH3 = '';
-    this.route.MODE = 'INSERT';
-    this.route.CREATEDBY = 1;
-    this.route.CREATEDON = '2016-03-01';
-    this.editingIndex = rowindex;
-
-    delete route.$$hashKey;
-    delete route.DIRTY;
-    delete route.FROMLOCATIONNAME;
-    delete route.LOCATIONNAME;
-    delete route.PACKAGETYPENAME;
-    delete route.RESULT;
-    delete route.TOLOCATIONNAME;
-    delete route.FROMSTATE;
-    delete route.TOSTATE;
-    delete route.VEHICLETYPENAME;
-      //return route;
-    console.log(this.route);
-
   }
 
 }
