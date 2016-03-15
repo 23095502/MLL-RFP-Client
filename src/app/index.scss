@@ -103,6 +103,14 @@ body {
   top: -4px;
 }
 
+.nav-logo {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 51px;
+  border-bottom: solid 1px lighten($mll-grey, 50);
+}
+
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
