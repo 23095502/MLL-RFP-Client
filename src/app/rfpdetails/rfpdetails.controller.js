@@ -1,5 +1,5 @@
 export class RFPDetailsController {
-  constructor($http, $scope) {
+  constructor($http, $scope, $stateParams) {
     'ngInject';
 
     //GET RFP DETAILS
@@ -7,8 +7,8 @@ export class RFPDetailsController {
 
     $http({
       method: 'GET',
-      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/1'
-      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/getrfproutebyid/1'
+      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpID}'
+      //url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/getrfproutebyid/1'
     }).then((res) => {
       this.routes = res.data;
       //console.log(res.data);
@@ -41,8 +41,8 @@ export class RFPDetailsController {
     this.statename_option = [];
     $http({
       method: 'GET',
-      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/state/0'
-      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/state/0'
+      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/state/0'
+      //url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/state/0'
     }).then((res) => {
       this.statename_option = res.data;
     }, (err) => {
@@ -59,8 +59,8 @@ export class RFPDetailsController {
     this.vehicletypename_option = [];
     $http({
       method: 'GET',
-      //url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/vehicletypes/0'
-      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/location/0'
+      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/vehicletypes/0'
+      //url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/location/0'
     }).then((res) => {
       this.vehicletypename_option = res.data;
     }, (err) => {
@@ -72,6 +72,10 @@ export class RFPDetailsController {
       "VEHICLETYPENAME": null
     };
     //GET VEHICLETYPE
+
+    //GET PACKAGINGTYPE
+    this.isPACKAGETYPEID_option = _.map(['Pallet', 'Corrugated Boxes', 'Bags','Trolley', 'Loose'], (i, d) => ({ name : d, val : i}));
+
 
     //GET SERVICETYPE
     this.isSERVICETYPE_option = _.map(['PTL', 'FTL', 'PTL Conventional'], (i) => ({
@@ -109,7 +113,7 @@ export class RFPDetailsController {
       "PACKAGETYPEID": 0,
       "PACKDIMENSION": 'NA',
       "RFPDURATION": 0,
-      "RFPID": 1,
+      "RFPID": rfpID,
       "RFPVOLUME": 0,
       "SERVICETYPE": '',
       "STACKINGNORMS": '',
@@ -212,13 +216,14 @@ export class RFPDetailsController {
   }
 
 
-  updateLocationName(direction) {
-    this.route[`${direction}LOCATIONNAME`] = _.filter(this.locationname_option, (loc) => (this.route[`${direction}LOCATION`] === loc.LOCATIONID))[0].LOCATIONNAME;
+   map(id, list, idMatcher, nameKey) {
+    if(_.isInteger(id) && list.length > 0) {
+      return _.filter(list, (item) => (item[idMatcher] === id))[0][nameKey];
+    } else {
+      return '-';
+    }
   }
 
-  updateStateName(direction) {
-    this.route[`${direction}STATE`] = _.filter(this.statename_option, (st) => (this.route[`${direction}STATEID`] === st.STATEID))[0].STATENAME;
-  }
 
   removeRow(route, rowindex){
 
@@ -246,6 +251,5 @@ export class RFPDetailsController {
     console.log(this.route);
 
   }
-
 
 }

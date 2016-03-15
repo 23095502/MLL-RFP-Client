@@ -23,11 +23,12 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
   })
 
   .state('rfpdetails', {
-    url: '/rfpdetails/:rfpId',
+    url: '/rfpdetails/:rfpID',
     templateUrl: 'app/rfpdetails/rfpdetails.html',
     controller: 'RFPDetailsController',
     controllerAs: 'rfplanes'
   });
+
 
   $urlRouterProvider.otherwise('/');
 }
