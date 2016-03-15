@@ -55,7 +55,7 @@ resetCustomer() {
 
 
 submitcustomerdata() {
-    console.log("Hello");
+
     var req = {
       method: 'POST',
       url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/rfp/1/ManageCustomer',

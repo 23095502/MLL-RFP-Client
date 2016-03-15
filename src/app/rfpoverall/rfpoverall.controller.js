@@ -120,17 +120,11 @@ export class RFPOverallController {
   getAllCustomers() {
     this.$http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/customer/0')
       .then((res) => {
-        console.log(res.data);
 
         this.CUSTOMERNAME_option = res.data;
       }, (err) => {
         console.error(err);
       });
-  }
-
-  getRFP() {
-
-
   }
 
   addCustomer() {
@@ -162,7 +156,7 @@ export class RFPOverallController {
     };
 
     this.$http(req).then((response) => {
-      console.log(response)
+
         //-------------
         //Get All Cutomers
         this.getAllCustomers();
@@ -175,7 +169,7 @@ export class RFPOverallController {
 
 
   addRfpHeader() {
-    //console.log("Hello");
+
     var req = {
       method: 'POST',
       url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/rfp/INSERT',
@@ -226,7 +220,7 @@ export class RFPOverallController {
     }
 
     this.$http(req).then((response) => {
-      console.log(response.data.rfpResult[0].RFPID);
+
 
       this.$state.go('rfpdetails',{rfpId: response.data.rfpResult[0].RFPID});
 
