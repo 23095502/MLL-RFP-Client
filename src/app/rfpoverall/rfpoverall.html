@@ -122,7 +122,9 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="inboundoutbound">Inbound / outbound</label>
-                  <input type="text" class="form-control" id="inboundoutbound" placeholder="Inbound / outbound" ng-model="rfpdetails.overall.OPPRDOMAIN">
+
+                  <select class="form-control" id="inboundoutbound" ng-required="true" ng-model="rfpdetails.overall.OPPRDOMAIN" ng-options="inboundoutbound.name as inboundoutbound.val for inboundoutbound in rfpdetails.OPPRDOMAIN_option">
+                  </select>
                 </div>
               </div>
               <div class="col-md-6">
@@ -187,7 +189,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <label for="distance">Distance</label>
+                <label for="distance">Proximity Distance(%)</label>
                 <input type="number" class="form-control" id="distance" placeholder="Distance" ng-model="rfpdetails.overall.DISTANCE">
               </div>
             </div>
