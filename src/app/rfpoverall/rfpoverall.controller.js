@@ -72,7 +72,12 @@ export class RFPOverallController {
       val: i
     }));
 
-
+  //Inbound/outbound
+    this.OPPRDOMAIN_option = _.map(['Inbound', 'Outbound'], (i) => ({
+      name: i,
+      val: i
+    }));
+  //Inbound/outbound
 
     this.overall = {
       "RFPID": 0,
@@ -111,7 +116,7 @@ export class RFPOverallController {
       "CONTACTNO": '',
       "CASHACCOUNTID": '',
       "TOTALSPEND": '',
-      "DISTANCE": 0
+      "PROXIDISTANCE": 100
     };
 
   }
@@ -212,14 +217,15 @@ export class RFPOverallController {
           "CONTACTPERSON": this.customer.CONTACTPERSON,
           "CONTACTNO": this.customer.CONTACTNO,
           "CASHACCOUNTID": this.customer.CASHACCOUNTID,
-          "TOTALSPEND": this.customer.TOTALSPEND
+          "TOTALSPEND": this.customer.TOTALSPEND,
+          "PROXIDISTANCE": this.customer.PROXIDISTANCE
         }
       }
 
     }
 
     this.$http(req).then((response) => {
-
+      //console.log(response.data.rfpResult[0].RFPID);
 
       this.$state.go('rfpdetails',{rfpId: response.data.rfpResult[0].RFPID});
 

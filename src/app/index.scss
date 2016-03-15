@@ -2,10 +2,19 @@
  *  If you want to override some bootstrap variables, you have to change values here.
  *  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
  */
-$navbar-inverse-link-color: #5AADBB;
-$icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
-
-/**
+$icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";/* colors swatch */
+$mll-red: rgb(227, 24, 55);
+$mll-white: rgb(255, 255, 255);
+$mll-grey: rgb(109, 110, 113);
+$mll-darkgrey: rgb(51, 51, 51);
+$mll-mediumgrey: rgb(64, 64, 64);
+$mll-black: rgb(14, 9, 7);/* button colors */
+$btn-primary-bg: $mll-white;
+$btn-primary-color: $mll-red;
+$btn-primary-border: $mll-red;
+$btn-font-weight: bold;/* font */
+$navbar-inverse-link-color: $mll-white;
+$navbar-inverse-bg: $mll-red;/**
  *  Do not remove the comments below. It's the markers used by wiredep to inject
  *  sass dependencies when defined in the bower.json of your dependencies
  */
@@ -18,7 +27,6 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   color: #000;
   padding: 0.2em 0;
 }
-
 .thumbnail {
   height: 200px;
 
@@ -26,8 +34,122 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
     width: 50px;
   }
 }
+body {
+  padding-top: 70px;
+  font-size: 14px;
+}
+.btn-primary {
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-width: 2px;
+}
+.fieldset {
+  margin-bottom: 10px;
+}
+.legend {
+  color: $mll-red;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 14px;    /*line-height: 1px;*/
+  text-transform: uppercase;
+  background: $mll-white;
+  border-top: 1px solid lighten($mll-grey, 50);
+  border-bottom: 1px solid lighten($mll-grey, 50);
+  padding: 10px 0;
+}
+.top-legend {
+  border-top: 1px solid lighten($mll-grey, 90);
+}
+.form-label {
+  font-weight: normal;
+  font-style: normal;
+  font-size: 12px;
+  color: $mll-grey;
+}
+h1 {
+  font-weight: bold;
+  font-style: normal;
+  color: $mll-darkgrey;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+.btn-default {
+  font-weight: bold;
+  font-size: 12px;
+  border: solid 1px $mll-grey;  /*border-radius: 20px;*/
+  text-transform: uppercase;
+}
+.form-divider {
+  border-bottom: solid 1px rgb(229, 229, 229);
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+.icon-required {
+  font-size: 60%;
+  color: $mll-red;
+  position: relative;
+  top: -4px;
+}
+.nav-logo {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 51px;
+  border-bottom: solid 1px lighten($mll-grey, 50);
+}
 
-body { padding-top: 70px; }
+/* grid css */
+.mll-table {
+  thead {
+    background-color: $mll-grey;
+    color: $mll-white;
+
+    th {
+      position: relative;
+      font-weight: normal;
+      font-size: 86%;
+      color: rgba(255,255,255,.7);
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        bottom: 7px;
+        top: 7px;
+        width: 1px;
+        border-left: 1px solid lighten($mll-grey, 20);
+      }
+    }
+  }
+  tbody {
+    tr {
+      background-color: rgb(244, 244, 244);
+      //rgb(244, 244, 244);
+      color: $mll-grey;
+
+      td {
+        position: relative;
+        white-space: nowrap;
+        &::after {
+          content: '';
+          position: absolute;
+          right: 0;
+          bottom: 7px;
+          top: 7px;
+          width: 1px;
+          border-left: 1px solid lighten($mll-grey, 40);
+        }
+      }
+    }
+  }
+}
+
+.btn-rounded {
+  border-radius: 20px;
+}
+
+/* grid css */
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
