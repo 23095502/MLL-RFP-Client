@@ -14,7 +14,6 @@ export class RFPDashboardController {
       });
 
 
-
     this.dashboarddata = []
 
   }
