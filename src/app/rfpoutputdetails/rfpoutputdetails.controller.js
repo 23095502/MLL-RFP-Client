@@ -36,6 +36,24 @@ export class RFPOutputController {
 
     //GET From
 
+     //GET Truck Type
+    // this.from_option = [];
+    // $http({
+    //   method: 'GET',
+    //   url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/gettrans/1'
+    // }).then((res) => {
+    //   this.from_option = res.data;
+    // }, (err) => {
+    //   console.error(err);
+    // });
+
+    // this.from = {
+    //   "FROMLOCATION": null,
+    //   "FROMLOCATIONNAME": null
+    // };
+
+     //GET Truck Type
+
 
   }
 }
