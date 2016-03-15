@@ -16,15 +16,18 @@
     <div class="form-divider"></div>
     </div>
   <div class="container">
-
     <div class="row">
       <div class="col-md-12">
         <fieldset class="fieldset">
-          <legend class="legend">
-            CUSTOMER DETAILS:
-            <button class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal" >Add Customer</button>
-          </legend>
           <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <legend class="legend">
+                  CUSTOMER DETAILS:
+                  <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal" >Add Customer</button>
+                </legend>
+              </div>
+            </div>
             <div class="row">
               <div class="col-sm-6 col-md-6">
                 <div class="form-group">
@@ -73,18 +76,22 @@
           </div>
         </fieldset>
         <fieldset class="fieldset">
-          <legend class="legend">RFP DETAILS:</legend>
           <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <legend class="legend">RFP DETAILS:</legend>
+              </div>
+            </div>
             <div class="row">
               <div class="col-sm-6 col-md-6">
                 <div class="form-group">
-                  <label class="form-label" for="description">Description <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                  <label class="form-label" title="required" for="description">Description <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                   <input type="text" class="form-control input-sm" id="description" placeholder="Description" ng-required="true" ng-model="rfpdetails.overall.RFPDESC">
                 </div>
               </div>
               <div class="col-sm-6 col-md-6">
                 <div class="form-group">
-                  <label class="form-label" for="rfpvalue">RFP value <i class="glyphicon glyphicon-asterisk icon-required"></i> (In Lakhs)</label>
+                  <label class="form-label" title="required" for="rfpvalue">RFP value <i class="glyphicon glyphicon-asterisk icon-required"></i> (In Lakhs)</label>
                   <input type="number" class="form-control input-sm" id="rfpvalue" ng-required="true" placeholder="RFP value(In Lakhs)">
                 </div>
               </div>
@@ -92,13 +99,13 @@
             <div class="row">
               <div class="col-sm-6 col-md-6">
                 <div class="form-group">
-                  <label class="form-label" for="recivedate">Receive date <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                  <label class="form-label" title="required" for="recivedate">Receive date <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                   <input type="date" class="form-control input-sm"  id="recivedate" placeholder="yyyy-MM-dd" ng-required="true" ng-model="rfpdetails.overall.STARTDATE">
                 </div>
               </div>
               <div class="col-sm-6 col-md-6">
                 <div class="form-group">
-                  <label class="form-label" for="duedate">Due date <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                  <label class="form-label" title="required" for="duedate">Due date <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                   <input type="date" class="form-control input-sm" id="duedate" placeholder="Due date" ng-required="true" ng-model="rfpdetails.overall.DUEDATE">
                 </div>
               </div>
@@ -106,7 +113,7 @@
             <div class="row">
               <div class="col-sm-6 col-md-6">
                 <div class="form-group">
-                  <label class="form-label" for="casshopportunityid">CA$$H Opportunity ID <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                  <label class="form-label" title="required" for="casshopportunityid">CA$$H Opportunity ID <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                   <input type="text" class="form-control input-sm" id="casshopportunityid" placeholder="CASSH Opportunity ID" ng-required="true" ng-model="rfpdetails.overall.CASHOPPID">
                 </div>
               </div>
@@ -120,8 +127,12 @@
           </div>
         </fieldset>
         <fieldset class="fieldset">
-          <legend class="legend">OPERATION DESCRIPTION:</legend>
           <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <legend class="legend">OPERATION DESCRIPTION:</legend>
+              </div>
+            </div>
             <div class="row">
               <div class="col-sm-6 col-md-6">
                 <div class="form-group">
@@ -156,7 +167,7 @@
             <div class="row">
               <div class="col-sm-6 col-md-6">
                 <div class="form-group">
-                  <label class="form-label" for="cargotype">Cargo Type <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                  <label class="form-label" title="required" for="cargotype">Cargo Type <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                   <select class="form-control input-sm" id="cargotype" ng-required="true" ng-model="rfpdetails.overall.CARGOTYPE" ng-options="CARGO.name as CARGO.val for CARGO in rfpdetails.CARGOTYPE_option">
                   </select>
                 </div>
@@ -165,8 +176,12 @@
           </div>
         </fieldset>
         <fieldset class="fieldset">
-          <legend class="legend">CLEANSHEET ASSUMPTIONS:</legend>
           <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <legend class="legend">CLEANSHEET ASSUMPTIONS:</legend>
+              </div>
+            </div>
             <div class="row">
               <div class="col-sm-6 col-md-6">
                 <div class="form-group">
@@ -184,7 +199,7 @@
           <div class="row">
             <div class="col-sm-6 col-md-6">
               <div class="form-group">
-                <label class="form-label" for="paymentterms">Payment terms <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                <label class="form-label" title="required" for="paymentterms">Payment terms <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                 <input type="number" class="form-control input-sm" id="paymentterms" placeholder="Payment terms" ng-model="rfpdetails.overall.PAYMENTTERM">
               </div>
             </div>
@@ -197,12 +212,16 @@
           </div>
         </fieldset>
         <fieldset class="fieldset">
-          <legend class="legend">COMMERCIAL DETAILS:</legend>
           <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <legend class="legend">COMMERCIAL DETAILS:</legend>
+              </div>
+            </div>
             <div class="row">
               <div class="col-sm-6 col-md-6">
                 <div class="form-group">
-                  <label class="form-label" for="unitofrate">Unit of rate <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                  <label class="form-label" title="required" for="unitofrate">Unit of rate <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                   <select class="form-control input-sm" id="unitofrate" ng-required="true" ng-model="rfpdetails.overall.RATEUOM" ng-options="UOM.name as UOM.val for UOM in rfpdetails.RATEUOM_option">
                   </select>
                 </div>
