@@ -43,7 +43,6 @@ export class RFPOverallController {
     };
 
 
-
     this.AGEOFTRUCK_option = _.times(10, (i) => ({
       name: i,
       val: i

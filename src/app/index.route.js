@@ -29,6 +29,13 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     controllerAs: 'rfplanes'
   });
 
+.state('rfpoutputdetails', {
+      url: '/rfpoutputdetails/:rfpId',
+      templateUrl: 'app/rfpoutputdetails/rfpoutputdetails.html',
+      controller: 'RFPOutputController',
+      controllerAs: 'rfpoutput'
+    })
+
 
   $urlRouterProvider.otherwise('/');
 }
