@@ -2,8 +2,25 @@
  *  If you want to override some bootstrap variables, you have to change values here.
  *  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
  */
-$navbar-inverse-link-color: #5AADBB;
 $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
+
+/* colors swatch */
+$mll-red: rgb(227,24,55);
+$mll-white: rgb(255,255,255);
+$mll-grey: rgb(109,110,113);
+$mll-darkgrey: rgb(51,51,51);
+$mll-mediumgrey: rgb(64,64,64);
+$mll-black: rgb(14,9,7);
+
+/* button colors */
+$btn-primary-bg: $mll-white;
+$btn-primary-color: $mll-red;
+$btn-primary-border: $mll-red;
+$btn-font-weight: bold;
+
+/* font */
+$navbar-inverse-link-color: $mll-white;
+$navbar-inverse-bg: $mll-red;
 
 /**
  *  Do not remove the comments below. It's the markers used by wiredep to inject
@@ -27,7 +44,71 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
   }
 }
 
-body { padding-top: 70px; }
+body {
+  padding-top: 70px;
+  font-size: 14px;
+}
+
+
+.btn-primary {
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-width: 2px;
+}
+
+.legend {
+    color: $mll-red;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 14px;
+    /*line-height: 1px;*/
+    text-transform: uppercase;
+    background: $mll-white;
+}
+
+.form-label {
+  font-weight: normal;
+  font-style: normal;
+  font-size: 12px;
+  color: $mll-grey;
+}
+
+.form-title {
+  font-weight: bold;
+  font-style: normal;
+  color: $mll-darkgrey;
+  font-size: 16px;
+}
+
+.fieldset {
+  margin-bottom: 30px;
+}
+
+.toggle-buttons {
+  font-size: 12px;
+  border: solid 1px $mll-darkgrey;
+  border-radius: 20px;
+}
+
+.btn-default {
+  font-weight: bold;
+  font-size: 12px;
+  border: solid 1px $mll-grey;
+  /*border-radius: 20px;*/
+  text-transform: uppercase;
+}
+
+.form-divider {
+  border-bottom: solid 1px rgb(229, 229, 229);
+  margin-top:10px;
+  margin-bottom:30px;
+}
+
+.icon-required {
+  font-size: 60%;
+  color: $mll-red;
+}
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
