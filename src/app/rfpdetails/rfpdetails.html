@@ -22,7 +22,175 @@
   </div>
   <div class="form-divider"></div>
 </div>
-<div class="container-fluid">
+
+<div class="output-table">
+  <div class="thead-div1">
+    <table class="table mll-table frozen">
+      <thead>
+        <tr>
+          <th>
+            From City
+          </th>
+          <th>
+            From State
+          </th>
+          <th>
+            To City
+          </th>
+          <th>
+            To State
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="thead-div2">
+    <table class="table mll-table">
+      <thead>
+        <tr>
+          <th>
+            One way/Round trip
+          </th>
+          <th>
+            Service Type
+          </th>
+          <th>
+            Vehicle Type
+          </th>
+          <th>
+            Transit Time
+          </th>
+          <th>
+            Product Description
+          </th>
+          <th>
+            Packaging Type
+          </th>
+          <th>
+            Stack
+          </th>
+          <th>
+            Customer Target Rate
+          </th>
+          <th>
+            Package Dimension
+          </th>
+          <th>
+            Average Load
+          </th>
+          <th>
+            Loading/unloading charges
+          </th>
+          <th>
+            Other Requirement
+          </th>
+          <th>
+            MHE Requirement
+          </th>
+          <th>
+            Frequency
+          </th>
+          <th>
+            Distance oneway
+          </th>
+          <th>
+            Loading unloading time
+          </th>
+          <th>
+            No of Trips
+          </th>
+          <th>
+            Backhaul %
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbody-div3">
+    <table class="mll-table table frozen">
+      <tbody>
+        <tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">
+          <td>
+              {{rfplanes.map(route.FROMLOCATION, rfplanes.locationname_option, 'LOCATIONID', 'LOCATIONNAME')}}
+            </td>
+            <td>
+              {{rfplanes.map(route.FROMSTATEID, rfplanes.statename_option, 'STATEID', 'STATENAME')}}
+            </td>
+            <td>
+              {{rfplanes.map(route.TOLOCATION, rfplanes.locationname_option, 'LOCATIONID','LOCATIONNAME')}}
+            </td>
+            <td>
+              {{rfplanes.map(route.TOSTATEID, rfplanes.statename_option, 'STATEID', 'STATENAME')}}
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tbody-div4">
+    <table class="mll-table table">
+      <tbody>
+        <tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">
+          <td>
+              {{route.ISROUNDTRIP}}
+            </td>
+            <td>
+              {{route.SERVICETYPE}}
+            </td>
+            <td>
+              {{rfplanes.map(route.VEHICLETYPEID, rfplanes.vehicletypename_option, 'VEHICLETYPEID', 'VEHICLETYPENAME')}}
+            </td>
+            <td>
+              {{route.RFPDURATION}}
+            </td>
+            <td>
+              NA
+            </td>
+            <td>
+              {{route.PACKAGETYPEID}}
+            </td>
+            <td>
+              {{route.STACKINGNORMS}}
+            </td>
+            <td>
+              {{route.CUSTTARGETRATE}}
+            </td>
+            <td>
+              {{route.PACKDIMENSION}}
+            </td>
+            <td>
+              {{route.AVERAGELOAD}}
+            </td>
+            <td>
+              {{route.ISLOADUNLOADCHARG}}
+            </td>
+            <td>
+              {{route.OTHERREQUIREMENT}}
+            </td>
+            <td>
+              {{route.MHEREQUIREMENT}}
+            </td>
+            <td>
+              {{route.FREQUENCY}}
+            </td>
+            <td>
+              {{route.DISTANCE}}
+            </td>
+            <td>
+              {{route.LOADINGUNLOADINGTIME}}
+            </td>
+            <td>
+              {{route.NOOFTRIPS}}
+            </td>
+            <td>
+              {{route.BACKHAUL}}
+            </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="container-fluid hide">
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">

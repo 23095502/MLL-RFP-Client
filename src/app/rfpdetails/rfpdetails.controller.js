@@ -9,6 +9,7 @@ export class RFPDetailsController {
       url: `http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpid}`
     }).then((res) => {
       this.routes = res.data;
+      console.log(res.data[0]);
     }, (err) => {
       console.error(err);
     });
