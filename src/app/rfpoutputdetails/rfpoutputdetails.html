@@ -2,8 +2,9 @@
   <div class="row">
     <div class="col-sm-6"><h1><abbr title="Request for praposal">RFP</abbr> output details</h1></div>
     <div class="col-md-6 text-right">
-      <button class="btn btn-default" ng-csv="rfpoutput.getArray()" csv-header="['CUSTOMERNAME','CASHACCOUNTID','FROM']" filename="test.csv"> <i class="glyphicon glyphicon-export"></i> Export
+      <button class="btn btn-default" ng-csv="rfpoutput.getArray()" > <i class="glyphicon glyphicon-export"></i> Export
       </button>
+     <!--  csv-header="['CUSTOMERNAME','CASHACCOUNTID','FROM']" filename="test.csv" -->
     </div>
   </div>
 
@@ -63,7 +64,7 @@
     <div class="col-md-2">
       <div class="form-group">
         <label for="from">From</label>
-        <select class="form-control" id="from" ng-model="rfpoutput.filterOption.FROMLOCATIONNAME" ng-options="from.FROMLOCATIONNAME as from.FROMLOCATIONNAME for from in rfpoutput.fromLocationOptions"  >
+        <select class="form-control" id="from" ng-model="rfpoutput.filterOption.FROMLOCATIONNAME" ng-change="rfpoutput.changeLocation()" ng-options="from.FROMLOCATIONNAME as from.FROMLOCATIONNAME for from in rfpoutput.fromLocationOptions"  >
         </select>
       </div>
     </div>
@@ -74,16 +75,21 @@
         </select>
       </div>
     </div>
-    <div class="col-md-2 text-left">
+    <!-- <div class="col-md-2 text-left">
       <button type="button" class="btn btn-primary" ng-click="rfpoutput.ClearFilter()">Clear Filter</button>
-    </div>
+    </div> -->
   </div>
+  {{ rfpoutput.filterOption.FROMLOCATIONNAME}}
+  <br>
+  {{rfpoutput.filterOption.VEHICLETYPENAME }}
   <div class="row">
     <div class="col-md-12">
      <table class="table mll-table">
       <thead>
         <tr>
           <th rowspan="2">To</th>
+          <th rowspan="2">From</th>
+          <th rowspan="2">Vehicle</th>
           <th rowspan="2">Cleansheet Rate</th>
           <th rowspan="2">Contract Rate</th>
           <th rowspan="2">ShipEx Rate</th>
@@ -102,8 +108,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="outputdata in rfpoutput.outputdata | filter:{FROMLOCATIONNAME : rfpoutput.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : rfpoutput.filterOption.VEHICLETYPENAME}">
+        <tr ng-repeat="outputdata in rfpoutput.outputdata | filter:{FROMLOCATIONNAME : rfpoutput.filterOption.FROMLOCATIONNAME,  VEHICLETYPENAME : rfpoutput.filterOption.VEHICLETYPENAME}">
           <td>{{outputdata.TOLOCATIONNAME}}</td>
+          <td>{{outputdata.FROMLOCATIONNAME}}</td>
+          <td>{{outputdata.VEHICLETYPENAME}}</td>
           <td>{{outputdata.CLEANSHEETRATE}}</td>
           <td>{{outputdata.CONTRACTRATE}}</td>
           <td>{{outputdata.SHIPXRATE}}</td>
