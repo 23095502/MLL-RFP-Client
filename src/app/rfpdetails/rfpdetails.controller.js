@@ -1,5 +1,5 @@
 export class RFPDetailsController {
-  constructor($http, $stateParams) {
+    constructor($http, $stateParams, $scope, $timeout) {
     'ngInject';
 
     //GET RFP DETAILS
@@ -7,6 +7,8 @@ export class RFPDetailsController {
     $http({
       method: 'GET',
       url: `http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpid}`
+        //url: 'http://localhost:20572/RFPTool/RFPRestService.svc/getrfproutebyid/1'
+
     }).then((res) => {
       this.routes = res.data;
     }, (err) => {
@@ -66,7 +68,10 @@ export class RFPDetailsController {
     //GET VEHICLETYPE
 
     //GET PACKAGINGTYPE
-    this.isPACKAGETYPEID_option = _.map(['Pallet', 'Corrugated Boxes', 'Bags','Trolley', 'Loose'], (i, d) => ({ name : d, val : i}));
+    this.isPACKAGETYPEID_option = _.map(['Pallet', 'Corrugated Boxes', 'Bags', 'Trolley', 'Loose'], (i, d) => ({
+      name: d,
+      val: i
+    }));
 
 
     //GET SERVICETYPE
@@ -80,6 +85,12 @@ export class RFPDetailsController {
     this.resetRoute();
     this.$http = $http;
     this.$stateParams = $stateParams;
+    /*
+    this.$scope = $scope;
+    this.Upload = Upload;
+    this.$timeout = $timeout;
+    */
+
   }
 
   resetRoute() {
@@ -166,7 +177,7 @@ export class RFPDetailsController {
     this.editingIndex = null;
   }
 
-  delete(){
+  delete() {
 
     this.route.MODE = 'DELETE';
     this.routes[this.editingIndex] = this.route;
@@ -212,9 +223,36 @@ export class RFPDetailsController {
 
   }
 
+  uploadPic(file) {
 
-   map(id, list, idMatcher, nameKey) {
-    if(_.isInteger(id) && list.length > 0) {
+    /*
+    file.upload = this.Upload.upload({
+      //url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+      data: {
+        username: this.$scope.username,
+        file: file
+      },
+    });
+    */
+    console.log(file);
+
+    /*
+    file.upload.then(function(response) {
+      $timeout(function() {
+        file.result = response.data;
+      });
+    }, function(response) {
+      if (response.status > 0)
+        this.$scope.errorMsg = response.status + ': ' + response.data;
+    }, function(evt) {
+      // Math.min is to fix IE which reports 200% sometimes
+      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+    });
+    */
+  }
+
+  map(id, list, idMatcher, nameKey) {
+    if (_.isInteger(id) && list.length > 0) {
       return _.filter(list, (item) => (item[idMatcher] === id))[0][nameKey];
     } else {
       return '-';
