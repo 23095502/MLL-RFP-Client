@@ -116,7 +116,7 @@ export class RFPOverallController {
       "CONTACTNO": '',
       "CASHACCOUNTID": '',
       "TOTALSPEND": '',
-      "DISTANCE": 0
+      "PROXIDISTANCE": 100
     };
 
   }
@@ -217,16 +217,17 @@ export class RFPOverallController {
           "CONTACTPERSON": this.customer.CONTACTPERSON,
           "CONTACTNO": this.customer.CONTACTNO,
           "CASHACCOUNTID": this.customer.CASHACCOUNTID,
-          "TOTALSPEND": this.customer.TOTALSPEND
+          "TOTALSPEND": this.customer.TOTALSPEND,
+          "PROXIDISTANCE": this.customer.PROXIDISTANCE
         }
       }
 
     }
 
     this.$http(req).then((response) => {
-
-
-      this.$state.go('rfpdetails',{rfpId: response.data.rfpResult[0].RFPID});
+      //console.log(response.data.rfpResult[0].RFPID);
+      //this.rfpid = response.data.rfpResult[0].RFPID;
+      this.$state.go('rfpdetails',{rfpid: response.data.rfpResult[0].RFPID});
 
     }, (error) => {
       console.log(error)

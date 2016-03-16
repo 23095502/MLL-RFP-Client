@@ -3,7 +3,6 @@
 import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
-import { MainController } from './main/main.controller';
 import { GithubContributorService } from '../app/components/githubContributor/githubContributor.service';
 import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
@@ -14,7 +13,7 @@ import { RFPDashboardController } from './rfpdashboard/rfpdashboard.controller';
 import { RFPOutputController } from './rfpoutputdetails/rfpoutputdetails.controller';
 import { RFPDetailsController } from './rfpdetails/rfpdetails.controller';
 
-angular.module('mllRfpClient', ['ui.router', 'toastr'])
+angular.module('mllRfpClient', ['ui.router', 'toastr', 'ngCsv'])
   .constant('malarkey', malarkey)
   .constant('moment', moment)
   .config(config)
@@ -22,7 +21,6 @@ angular.module('mllRfpClient', ['ui.router', 'toastr'])
   .run(runBlock)
   .service('githubContributor', GithubContributorService)
   .service('webDevTec', WebDevTecService)
-  .controller('MainController', MainController)
   .controller('RFPOverallController', RFPOverallController)
   .controller('RFPCustomerController', RFPCustomerController)
   .controller('RFPDashboardController', RFPDashboardController)
