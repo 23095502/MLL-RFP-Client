@@ -22,8 +22,4 @@ export class RFPOutputController {
   ClearFilter(){
       this.filterOption = undefined;
   }
-
-  getArray(){
-    return _.map(this.outputdata, (v)=>(_.pick(v, ['CUSTOMERNAME','CASHACCOUNTID','FROMLOCATIONNAME'])));
-  }
 }
