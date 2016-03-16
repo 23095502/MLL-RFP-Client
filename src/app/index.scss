@@ -115,7 +115,7 @@ h1 {
       font-size: 86%;
       color: rgba(255,255,255,.7);
 
-      &::after {
+      &:not(:nth-last-child(-n+1))::after {
         content: '';
         position: absolute;
         right: 0;
@@ -135,7 +135,7 @@ h1 {
       td {
         position: relative;
         white-space: nowrap;
-        &::after {
+        &:not(:nth-last-child(-n+1))::after{
           content: '';
           position: absolute;
           right: 0;
