@@ -115,7 +115,7 @@ h1 {
       font-size: 86%;
       color: rgba(255,255,255,.7);
 
-      &::after {
+      &:not(:nth-last-child(-n+1))::after {
         content: '';
         position: absolute;
         right: 0;
@@ -135,7 +135,7 @@ h1 {
       td {
         position: relative;
         white-space: nowrap;
-        &::after {
+        &:not(:nth-last-child(-n+1))::after{
           content: '';
           position: absolute;
           right: 0;
@@ -153,7 +153,6 @@ h1 {
   background-color: $mll-darkgrey;
   color: $mll-white;
   padding-top: 10px;
-  padding-bottom: 10px;
 }
 
 .filter-margin {
@@ -168,6 +167,10 @@ h1 {
   top: 15px;
   font-size: 12px;
   color: $mll-grey;
+}
+
+.table-colspan-header {
+  border-bottom: 1px solid lighten($mll-grey, 20) !important;
 }
 
 /* grid css */
