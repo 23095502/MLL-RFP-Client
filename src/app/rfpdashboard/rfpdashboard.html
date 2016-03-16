@@ -1,7 +1,17 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6"><h1>Dashboard</div>
-    <div class="col-md-6 text-right">
+    <div class="col-sm-4"><h1>Dashboard</div>
+
+    <div class="col-sm-4">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for customer name" ng-model="searchText.CUSTOMERNAME">
+        <span class="input-group-btn">
+          <!--<button class="btn btn-default" type="button">Go!</button>-->
+        </span>
+      </div>
+    </div>
+
+    <div class="col-sm-4 text-right">
       <button type="button" class="btn btn-primary" ng-click="rfpdash.CreateRFP()">Create New RFP</button>
     </div>
   </div>
@@ -19,7 +29,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="dashboarddata in rfpdash.dashboarddata" ng-click="rfpdash.click(dashboarddata.RFPID)">
+          <tr ng-repeat="dashboarddata in rfpdash.dashboarddata  | filter:searchText" ng-click="rfpdash.click(dashboarddata.RFPID)">
             <td>{{dashboarddata.STARTDATE}}</td>
             <td>{{dashboarddata.RFPID}}</td>
             <td>{{dashboarddata.CUSTOMERNAME}}</td>

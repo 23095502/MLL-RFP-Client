@@ -1,10 +1,12 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-12 text-right">
+    <div class="col-sm-6"><h1><abbr title="Request for praposal">RFP</abbr> output details</h1></div>
+    <div class="col-md-6 text-right">
       <button class="btn btn-default" ng-csv="rfpoutput.getArray()" csv-header="['CUSTOMERNAME','CASHACCOUNTID','FROM']" filename="test.csv"> <i class="glyphicon glyphicon-export"></i> Export
       </button>
     </div>
   </div>
+
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
@@ -78,49 +80,45 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <table class="table mll-table">
-        <thead>
-          <tr>
-            <th rowspan="2">To</th>
-            <th rowspan="2">From Location</th>
-            <th rowspan="2">VEHICLE TYPE</th>
-            <th rowspan="2">Cleansheet Rate</th>
-            <th rowspan="2">Contract Rate</th>
-            <th rowspan="2">ShipEx Rate</th>
-            <th rowspan="2">PreviousRFP Rate</th>
-            <th rowspan="2">Market Rate</th>
-            <th rowspan="2">Backhaul Available</th>
-            <th colspan="5" >BA Qute</th>
-            <th rowspan="2">Approved Rate</th>
-          </tr>
-          <tr>
-            <th >L1</th>
-            <th>L2</th>
-            <th>L3</th>
-            <th>L4</th>
-            <th>L5</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="outputdata in rfpoutput.outputdata | filter:{FROMLOCATIONNAME : rfpoutput.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : rfpoutput.filterOption.VEHICLETYPENAME}">
-            <td>{{outputdata.TOLOCATIONNAME}}</td>
-            <td>{{outputdata.FROMLOCATIONNAME}}</td>
-            <td>{{outputdata.VEHICLETYPENAME}}</td>
-            <td>{{outputdata.CLEANSHEETRATE}}</td>
-            <td>{{outputdata.CONTRACTRATE}}</td>
-            <td>{{outputdata.SHIPXRATE}}</td>
-            <td>{{outputdata.PVSRFPRATE}}</td>
-            <td>{{outputdata.MARKETRATE}}</td>
-            <td>{{outputdata.BACKHAULAVL}}</td>
-            <td>{{outputdata.L1}}</td>
-            <td>{{outputdata.L2}}</td>
-            <td>{{outputdata.L3}}</td>
-            <td>{{outputdata.L4}}</td>
-            <td>{{outputdata.L5}}</td>
-            <td>{{outputdata.APPROVEDAMOUNT}}</td>
-          </tr>
-        </tbody>
-      </table>
+     <table class="table mll-table">
+      <thead>
+        <tr>
+          <th rowspan="2">To</th>
+          <th rowspan="2">Cleansheet Rate</th>
+          <th rowspan="2">Contract Rate</th>
+          <th rowspan="2">ShipEx Rate</th>
+          <th rowspan="2">PreviousRFP Rate</th>
+          <th rowspan="2">Market Rate</th>
+          <th rowspan="2">Backhaul Available</th>
+          <th colspan="5" >BA Qute</th>
+          <th rowspan="2">Approved Rate</th>
+        </tr>
+        <tr>
+          <th >L1</th>
+          <th>L2</th>
+          <th>L3</th>
+          <th>L4</th>
+          <th>L5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="outputdata in rfpoutput.outputdata | filter:{FROMLOCATIONNAME : rfpoutput.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : rfpoutput.filterOption.VEHICLETYPENAME}">
+          <td>{{outputdata.TOLOCATIONNAME}}</td>
+          <td>{{outputdata.CLEANSHEETRATE}}</td>
+          <td>{{outputdata.CONTRACTRATE}}</td>
+          <td>{{outputdata.SHIPXRATE}}</td>
+          <td>{{outputdata.PVSRFPRATE}}</td>
+          <td>{{outputdata.MARKETRATE}}</td>
+          <td>{{outputdata.BACKHAULAVL}}</td>
+          <td>{{outputdata.L1}}</td>
+          <td>{{outputdata.L2}}</td>
+          <td>{{outputdata.L3}}</td>
+          <td>{{outputdata.L4}}</td>
+          <td>{{outputdata.L5}}</td>
+          <td>{{outputdata.APPROVEDAMOUNT}}</td>
+        </tr>
+      </tbody>
+    </table>
     </div>
   </div>
 </div>
