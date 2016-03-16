@@ -208,6 +208,10 @@ h1 {
 .thead-div1, .thead-div2, .tbody-div3, .tbody-div4 {
   overflow: hidden;
   position: absolute;
+
+  .mll-table {
+    position: relative;
+  }
 }
 
 .thead-div2, .tbody-div4 {
