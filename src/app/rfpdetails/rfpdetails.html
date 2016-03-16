@@ -11,6 +11,7 @@
         </label>
       </div>
     </div>
+<<<<<<< HEAD
     <div class="col-md-4 text-right">
       <button class="btn btn-default" data-toggle="modal" data-target="#myModal">
       <i class="glyphicon glyphicon-plus"></i>  Add Route
@@ -18,6 +19,87 @@
       <button class="btn btn-default">
       <i class="glyphicon glyphicon-import"></i>  Import Routes
       </button>
+=======
+
+    <div class="modal fade" id="myModalBrowse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">
+                        Import Routes
+                    </h4>
+                </div>
+                <div class="modal-body">
+                  <!--<div>
+                      <input id="filePicker" type="file" name="Package" file-model="myFile" />
+                      <br />
+                      <button title="upload" ng-click="rfplanes.uploadFile()">
+                          <span>Upload</span>
+                      </button>
+                      </div>-->
+                    <fieldset>
+                      <legend>Upload on form submit</legend>
+                      File Name :
+                      <input type="text" name="userName" ng-model="rfplanes.username" size="31" required >
+                      <i ng-show="myForm.userName.$error.required">*required</i>
+                      <br>
+                      File :
+                      <input type="file" ngf-select ng-model="rfplanes.picFile" name="file"
+                             accept="excel/*" ngf-max-size="2MB" required
+                             ngf-model-invalid="rfplanes.errorFile">
+                      <i ng-show="myForm.file.$error.required">*required</i><br>
+                      <i ng-show="myForm.file.$error.maxSize">File too large
+                          {{rfplanes.errorFile.size / 1000000|number:1}}MB: max 2M</i>
+                      <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+                      <br>
+                      <button
+                              ng-click="rfplanes.uploadPic(picFile)">Submit</button>
+                      <span class="progress" ng-show="picFile.progress >= 0">
+                        <div style="width:{{rfplanes.picFile.progress}}%"
+                            ng-bind="rfplanes.picFile.progress + '%'"></div>
+                      </span>
+                      <span ng-show="rfplanes.picFile.result">Upload Successful</span>
+                      <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
+                    </fieldset>
+                    <!--<input name="myFile" type="file" />-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h1>
+                <abbr title="Request for praposal">
+                    RFP
+                </abbr>
+                Details
+            </h1>
+        </div>
+        <div class="col-md-4 text-center">
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary">
+                  <input type="checkbox" autocomplete="off" checked>Overall Details
+                </label>
+                <label class="btn btn-primary active">
+                  <input type="checkbox" autocomplete="off"> Lane Details
+                </label>
+            </div>
+        </div>
+        <div class="col-md-4 text-right">
+            <button class="btn btn-default" data-toggle="modal" data-target="#myModal">
+                Add Route
+            </button>
+            <button class="btn btn-default" data-toggle="modal" data-target="#myModalBrowse">
+                Import Routes
+            </button>
+        </div>
+>>>>>>> written code for file upload
     </div>
   </div>
   <div class="form-divider"></div>
