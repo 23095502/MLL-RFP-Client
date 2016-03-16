@@ -3,7 +3,7 @@ export class RFPDetailsController {
     'ngInject';
 
     this.iswarehousing = $stateParams.iswarehousing;
-    (this.iswarehousing === 'Y') ? this.iswarehousing = true : this.iswarehousing = false;
+    (this.iswarehousing === 'Y') ? this.iswarehousing = true: this.iswarehousing = false;
 
     console.log(this.iswh);
     //GET RFP DETAILS
@@ -13,7 +13,6 @@ export class RFPDetailsController {
       url: `http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpid}`
     }).then((res) => {
       this.routes = res.data;
-      console.log(this.routes);
     }, (err) => {
       console.error(err);
     });
@@ -71,11 +70,14 @@ export class RFPDetailsController {
     //GET VEHICLETYPE
 
     //GET PACKAGINGTYPE
-    this.isPACKAGETYPEID_option = _.map(['','Pallet', 'Corrugated Boxes', 'Bags','Trolley', 'Loose'], (i, d) => ({ name : d, val : i}));
+    this.isPACKAGETYPEID_option = _.map(['', 'Pallet', 'Corrugated Boxes', 'Bags', 'Trolley', 'Loose'], (i, d) => ({
+      name: d,
+      val: i
+    }));
 
 
     //GET SERVICETYPE
-    this.isSERVICETYPE_option = _.map(['FTL','ODC', 'Surface Exp', 'PTL Conventional', 'Fixed Vehicle', 'Air Express'], (i) => ({
+    this.isSERVICETYPE_option = _.map(['FTL', 'ODC', 'Surface Exp', 'PTL Conventional', 'Fixed Vehicle', 'Air Express'], (i) => ({
       name: i,
       val: i
     }));
@@ -88,15 +90,14 @@ export class RFPDetailsController {
     this.isServiceTypeODC;
   }
 
-   changePackageDimension(){
-      if(this.route.SERVICETYPE == 'ODC') {
+  changePackageDimension() {
+    if (this.route.SERVICETYPE == 'ODC') {
       this.isServiceTypeODC = true;
-    }
-    else {
+    } else {
       this.isServiceTypeODC = false;
     }
     //console.log(this.isrequired);
-   }
+  }
 
   resetRoute() {
     this.route = {
@@ -182,7 +183,7 @@ export class RFPDetailsController {
     this.editingIndex = null;
   }
 
-  delete(){
+  delete() {
 
     this.route.MODE = 'DELETE';
     this.routes[this.editingIndex] = this.route;
@@ -229,8 +230,8 @@ export class RFPDetailsController {
   }
 
 
-   map(id, list, idMatcher, nameKey) {
-    if(_.isInteger(id) && list.length > 0) {
+  map(id, list, idMatcher, nameKey) {
+    if (_.isInteger(id) && list.length > 0) {
       return _.filter(list, (item) => (item[idMatcher] === id))[0][nameKey];
     } else {
       return '-';

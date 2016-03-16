@@ -3,10 +3,10 @@
     <div class="col-sm-4"><h1><abbr title="Request for praposal">RFP</abbr> Details</h1></div>
     <div class="col-sm-4 text-center">
       <div class="btn-group" data-toggle="buttons" >
-        <label class="btn btn-default btn-rounded active">
+        <label class="btn btn-default btn-rounded">
           <input name="togglebutton" type="checkbox" autocomplete="off" checked>Overall Details
         </label>
-        <label class="btn btn-default btn-rounded">
+        <label class="btn btn-default btn-rounded active">
           <input name="togglebutton" type="checkbox" autocomplete="off"> Lane Details
         </label>
       </div>
@@ -22,408 +22,419 @@
   </div>
   <div class="form-divider"></div>
 </div>
+<div class="output-table">
+  <div class="thead-div1">
+    <table class="table mll-table frozen">
+      <thead>
+        <tr>
+          <th>
+            From City
+          </th>
+          <th>
+            From State
+          </th>
+          <th>
+            To City
+          </th>
+          <th>
+            To State
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="thead-div2">
+    <table class="table mll-table">
+      <thead>
+        <tr>
+          <th>
+            One way/Round trip
+          </th>
+          <th>
+            Service Type
+          </th>
+          <th>
+            Vehicle Type
+          </th>
+          <th>
+            Transit Time
+          </th>
+          <th>
+            Product Description
+          </th>
+          <th>
+            Packaging Type
+          </th>
+          <th>
+            Stack
+          </th>
+          <th>
+            Customer Target Rate
+          </th>
+          <th>
+            Package Dimension
+          </th>
+          <th>
+            Average Load
+          </th>
+          <th>
+            Loading/unloading charges
+          </th>
+          <th>
+            Other Requirement
+          </th>
+          <th>
+            MHE Requirement
+          </th>
+          <th>
+            Frequency
+          </th>
+          <th>
+            Distance oneway
+          </th>
+          <th>
+            Loading unloading time
+          </th>
+          <th>
+            No of Trips
+          </th>
+          <th>
+            Backhaul %
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbody-div3">
+    <table class="mll-table table frozen">
+      <tbody>
+        <tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">
+          <td>
+            {{rfplanes.map(route.FROMLOCATION, rfplanes.locationname_option, 'LOCATIONID', 'LOCATIONNAME')}}
+          </td>
+          <td>
+            {{rfplanes.map(route.FROMSTATEID, rfplanes.statename_option, 'STATEID', 'STATENAME')}}
+          </td>
+          <td>
+            {{rfplanes.map(route.TOLOCATION, rfplanes.locationname_option, 'LOCATIONID','LOCATIONNAME')}}
+          </td>
+          <td>
+            {{rfplanes.map(route.TOSTATEID, rfplanes.statename_option, 'STATEID', 'STATENAME')}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tbody-div4">
+    <table class="mll-table table">
+      <tbody>
+        <tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">
+          <td>
+            {{route.ISROUNDTRIP}}
+          </td>
+          <td>
+            {{route.SERVICETYPE}}
+          </td>
+          <td>
+            {{rfplanes.map(route.VEHICLETYPEID, rfplanes.vehicletypename_option, 'VEHICLETYPEID', 'VEHICLETYPENAME')}}
+          </td>
+          <td>
+            {{route.RFPDURATION}}
+          </td>
+          <td>
+            NA
+          </td>
+          <td>
+            {{route.PACKAGETYPEID}}
+          </td>
+          <td>
+            {{route.STACKINGNORMS}}
+          </td>
+          <td>
+            {{route.CUSTTARGETRATE}}
+          </td>
+          <td>
+            {{route.PACKDIMENSION}}
+          </td>
+          <td>
+            {{route.AVERAGELOAD}}
+          </td>
+          <td>
+            {{route.ISLOADUNLOADCHARG}}
+          </td>
+          <td>
+            {{route.OTHERREQUIREMENT}}
+          </td>
+          <td>
+            {{route.MHEREQUIREMENT}}
+          </td>
+          <td>
+            {{route.FREQUENCY}}
+          </td>
+          <td>
+            {{route.DISTANCE}}
+          </td>
+          <td>
+            {{route.LOADINGUNLOADINGTIME}}
+          </td>
+          <td>
+            {{route.NOOFTRIPS}}
+          </td>
+          <td>
+            {{route.BACKHAUL}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 <div class="container-fluid">
-
-
-
-
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">
-            &times;
-          </span>
-          </button>
-          <h4 class="modal-title" id="myModalLabel">
-          Add Route
-          </h4>
-        </div>
-        <div class="modal-body">
-          <div style="overflow: auto; height: 60vh">
-            <form>
-              <div class="fieldset" class="form-group">
-                <div class="container-fluid">
-                    <fieldset class="fieldset">
-                       <div class="container-fluid">
-                           <div class="row">
-                                <div class="col-sm-12">
-                                    <legend class="legend top-legend">
-                                      Lane Details:
-                                    </legend>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label class="form-label" title="required" for="fromCity">From city  <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                                        <select class="form-control input-sm" id="fromCity" ng-model="rfplanes.route.FROMLOCATION" ng-options="location.LOCATIONID as location.LOCATIONNAME for location in rfplanes.locationname_option">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label class="form-label" title="required" for="fromState">From state  <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                                        <select class="form-control input-sm" id="fromState" ng-model="rfplanes.route.FROMSTATEID" ng-options="state.STATEID as state.STATENAME for state in rfplanes.statename_option">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                      <label class="form-label" title="required" for="toCity">To city <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                                      <select class="form-control input-sm" id="toCity" ng-model="rfplanes.route.TOLOCATION" ng-options="location.LOCATIONID as location.LOCATIONNAME for location in rfplanes.locationname_option">
-                                      </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label class="form-label" title="required" for="toState">To state <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                                        <select class="form-control input-sm" id="toState" ng-model="rfplanes.route.TOSTATEID " ng-options="state.STATEID as state.STATENAME for state in rfplanes.statename_option">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label class="form-label" title="required" for="servicetype">Service Type <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                                        <select class="form-control input-sm" id="servicetype" ng-model="rfplanes.route.SERVICETYPE" ng-options="servicetype.name as servicetype.val for servicetype in rfplanes.isSERVICETYPE_option" ng-change="rfplanes.changePackageDimension()">
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                      <label class="form-label" title="required" for="vehType">Vehicle Type <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                                      <select class="form-control input-sm" id="vehType" ng-model="rfplanes.route.VEHICLETYPEID" ng-options="vehicletype.VEHICLETYPEID as vehicletype.VEHICLETYPENAME for vehicletype in rfplanes.vehicletypename_option">
-                                      </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group">
-                                        <label class="form-label" title="required" for="name">One way/ Round Trip <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                                        <br/>
-                                        <label class="radio-inline">
-                                          <input type="radio" ng-model="rfplanes.route.ISROUNDTRIP" name="optradio" value="one way" /> One way
-                                        </label>
-                                        <label class="radio-inline">
-                                          <input type="radio" ng-model="rfplanes.route.ISROUNDTRIP" name="optradio" value="round trip" /> Round
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                       </div>
-                    </fieldset>
-                    <fieldset class="fieldset">
-                       <div class="container-fluid">
-                          <div class="row">
-                              <div class="col-sm-12">
-                                <legend class="legend">Solution Design Details:</legend>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-sm-4">
-                                  <div class="form-group">
-                                    <label class="form-label" title="required" for="packageDimensions">Package Dimension<i ng-show="rfplanes.isServiceTypeODC" class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                                    <input type="text" id="packageDimensions" class="form-control input-sm" ng-model="rfplanes.route.PACKDIMENSION" placeholder="Enter Package Dimensions" ng-required="rfplanes.isServiceTypeODC" />
-                                  </div>
-                              </div>
-                              <div class="col-sm-4">
-                                  <div class="form-group">
-                                    <label class="form-label" title="required" for="name">Loading/Unloading Charges<i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
-                                    <br/>
-                                    <label class="radio-inline">
-                                      <input type="radio" ng-model="rfplanes.route.ISLOADUNLOADCHARG" name="optradio" value="Y" /> Yes
-                                    </label>
-                                    <label class="radio-inline">
-                                      <input type="radio" ng-model="rfplanes.route.ISLOADUNLOADCHARG" name="optradio" value="N" /> No
-                                    </label>
-                                  </div>
-                              </div>
-                              <div class="col-sm-4">
-                                  <div class="form-group">
-                                    <label class="form-label" title="required" for="stackingNorms">Stacking Norms<i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
-                                    <input type="text" id="stackingNorms" class="form-control input-sm" ng-model="rfplanes.route.STACKINGNORMS" placeholder="Enter Stacking Norms"  ng-required="rfplanes.iswarehousing"/>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-sm-4">
-                                  <div class="form-group">
-                                      <label class="form-label" title="required" for="desc">Description <i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
-                                      <input type="text" id="desc" class="form-control input-sm" placeholder="Enter Description" ng-required="rfplanes.iswarehousing" />
-                                  </div>
-                              </div>
-                              <div class="col-sm-4">
-                                  <div class="form-group">
-                                      <label class="form-label" title="required" for="transitTime">Transit Time</label>
-                                      <input type="text" id="transitTime" class="form-control input-sm" ng-model="rfplanes.route.RFPDURATION" placeholder="Enter Transit Time" />
-                                  </div>
-                              </div>
-                              <div class="col-sm-4">
-                                  <div class="form-group">
-                                      <label class="form-label" title="required" for="packType">Packaging Type <i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
-                                      <select class="form-control input-sm" id="packType" ng-model="rfplanes.route.PACKAGETYPEID" ng-options="packType.name as packType.val for packType in rfplanes.isPACKAGETYPEID_option" ng-required="rfplanes.iswarehousing">
-                                      </select>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-sm-4">
-                                  <div class="form-group">
-                                      <label class="form-label" title="required" for="mheReq">MHE requirement <i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
-                                      <input type="text" id="mheReq" class="form-control input-sm" ng-model="rfplanes.route.MHEREQUIREMENT" placeholder="Enter MHE requirement" ng-required="rfplanes.iswarehousing" />
-                                  </div>
-                              </div>
-                              <div class="col-sm-4">
-                                  <div class="form-group">
-                                      <label class="form-label" title="required" for="freq">Frequency</label>
-                                      <input type="text" id="freq" class="form-control input-sm" ng-model="rfplanes.route.FREQUENCY" placeholder="Enter frequency" />
-                                  </div>
-                              </div>
-                              <div class="col-sm-4">
-                                  <div class="form-group">
-                                      <label class="form-label" title="required" for="avgLoad">Average Load
-                                      </label>
-                                      <input type="text" id="avgLoad" class="form-control input-sm" ng-model="rfplanes.route.AVERAGELOAD" placeholder="Enter Average Load" />
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-sm-4">
-                                  <div class="form-group">
-                                      <label class="form-label" title="required" for="current">Customer Target Rate </label>
-                                      <input type="text" id="current" class="form-control input-sm" ng-model="rfplanes.route.CUSTTARGETRATE" placeholder="Enter Current" />
-                                  </div>
-                              </div>
-                              <div class="col-sm-8">
-                                  <div class="form-group">
-                                      <label class="form-label" title="required" for="otherReq">Other requirement </label>
-                                      <input type="text" id="otherReq" class="form-control input-sm" ng-model="rfplanes.route.OTHERREQUIREMENT" placeholder="Enter description" />
-                                  </div>
-                              </div>
-                          </div>
-                       </div>
-                    </fieldset>
-                    <fieldset class="fieldset">
-                       <div class="container-fluid">
-                          <div class="row">
-                              <div class="col-sm-12">
-                                <legend class="legend">Cleansheet Details:</legend>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-sm-4">
-                                  <div class="form-group">
-                                    <label class="form-label" title="required" for="distOneway">Distance oneway</label>
-                                    <input type="text" id="distOneway" class="form-control input-sm" ng-model="rfplanes.route.DISTANCE" placeholder="Enter distance" />
-                                  </div>
-                              </div>
-                              <div class="col-sm-4">
-                                  <div class="form-group">
-                                      <label class="form-label" title="required" for="loadUnloadTime">Loading unloading time </label>
-                                      <input type="text" id="loadUnloadTime" class="form-control input-sm" ng-model="rfplanes.route.LOADINGUNLOADINGTIME" placeholder="Enter Loading unloading time" />
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-sm-4">
-                                  <div class="form-group">
-                                      <label class="form-label" title="required" for="noofTrips">No of trips
-                                      </label>
-                                      <input type="text" id="noofTrips" class="form-control input-sm" ng-model="rfplanes.route.NOOFTRIPS" placeholder="Enter no of trips" />
-                                  </div>
-                              </div>
-                              <div class="col-sm-4">
-                                  <div class="form-group">
-                                      <label class="form-label" title="required" for="backhaul">Backhaul(%)
-                                      </label>
-                                      <input type="text" id="backhaul" class="form-control input-sm" ng-model="rfplanes.route.BACKHAUL" placeholder="Enter Backhaul %" />
-                                  </div>
-                              </div>
-                          </div>
-                       </div>
-                    </fieldset>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" ng-if="rfplanes.editingIndex==null" class="btn btn-primary" data-dismiss="modal" ng-click="rfplanes.add()">
-          Add
-          </button>
-          <button type="button" ng-if="rfplanes.editingIndex!=null" class="btn btn-danger" data-dismiss="modal" ng-click="rfplanes.delete()">
-          Delete
-          </button>
-          <button type="button" ng-if="rfplanes.editingIndex!=null" class="btn btn-primary" data-dismiss="modal" ng-click="rfplanes.save()">
-          Save
-          </button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">
-          Close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-
-
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table mll-table">
-        <thead>
-          <tr>
-            <th>
-              From City
-            </th>
-            <th>
-              From State
-            </th>
-            <th>
-              To City
-            </th>
-            <th>
-              To State
-            </th>
-            <th>
-              One way/Round trip
-            </th>
-            <th>
-              Service Type
-            </th>
-            <th>
-              Vehicle Type
-            </th>
-            <th>
-              Transit Time
-            </th>
-            <th>
-              Description
-            </th>
-            <th>
-              Packaging Type
-            </th>
-            <th>
-              Stack
-            </th>
-            <th>
-              Customer Target Rate
-            </th>
-            <th>
-              Package Dimension
-            </th>
-            <th>
-              Average Load
-            </th>
-            <th>
-              Loading/unloading charges
-            </th>
-            <th>
-              Other Requirement
-            </th>
-            <th>
-              MHE Requirement
-            </th>
-            <th>
-              Frequency
-            </th>
-            <th>
-              Distance oneway
-            </th>
-            <th>
-              Loading unloading time
-            </th>
-            <th>
-              No of Trips
-            </th>
-            <th>
-              Backhaul %
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">
-            <!-- <tr ng-repeat="route in rfplanes.routes"> -->
-            <td>
-              {{rfplanes.map(route.FROMLOCATION, rfplanes.locationname_option, 'LOCATIONID', 'LOCATIONNAME')}}
-            </td>
-            <td>
-              {{rfplanes.map(route.FROMSTATEID, rfplanes.statename_option, 'STATEID', 'STATENAME')}}
-            </td>
-            <td>
-              {{rfplanes.map(route.TOLOCATION, rfplanes.locationname_option, 'LOCATIONID','LOCATIONNAME')}}
-            </td>
-            <td>
-              {{rfplanes.map(route.TOSTATEID, rfplanes.statename_option, 'STATEID', 'STATENAME')}}
-            </td>
-            <td>
-              {{route.ISROUNDTRIP}}
-            </td>
-            <td>
-              {{route.SERVICETYPE}}
-            </td>
-            <td>
-              {{rfplanes.map(route.VEHICLETYPEID, rfplanes.vehicletypename_option, 'VEHICLETYPEID', 'VEHICLETYPENAME')}}
-            </td>
-            <td>
-              {{route.RFPDURATION}}
-            </td>
-            <td>
-              NA
-            </td>
-            <td>
-              {{route.PACKAGETYPEID}}
-            </td>
-            <td>
-              {{route.STACKINGNORMS}}
-            </td>
-            <td>
-              {{route.CUSTTARGETRATE}}
-            </td>
-            <td>
-              {{route.PACKDIMENSION}}
-            </td>
-            <td>
-              {{route.AVERAGELOAD}}
-            </td>
-            <td>
-              {{route.ISLOADUNLOADCHARG}}
-            </td>
-            <td>
-              {{route.OTHERREQUIREMENT}}
-            </td>
-            <td>
-              {{route.MHEREQUIREMENT}}
-            </td>
-            <td>
-              {{route.FREQUENCY}}
-            </td>
-            <td>
-              {{route.DISTANCE}}
-            </td>
-            <td>
-              {{route.LOADINGUNLOADINGTIME}}
-            </td>
-            <td>
-              {{route.NOOFTRIPS}}
-            </td>
-            <td>
-              {{route.BACKHAUL}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
   <div class="row">
     <div class="col-md-12 text-right">
       <button class="btn btn-default" ng-click="rfplanes.submitData()">
       Save
       </button>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">
+          &times;
+        </span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+        Add Route
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div style="overflow: auto; height: 60vh">
+          <form>
+            <div class="fieldset" class="form-group">
+              <div class="container-fluid">
+                <fieldset class="fieldset">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <legend class="legend top-legend">
+                          Lane Details:
+                        </legend>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="fromCity">From city  <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                          <select class="form-control input-sm" id="fromCity" ng-model="rfplanes.route.FROMLOCATION" ng-options="location.LOCATIONID as location.LOCATIONNAME for location in rfplanes.locationname_option">
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="fromState">From state  <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                          <select class="form-control input-sm" id="fromState" ng-model="rfplanes.route.FROMSTATEID" ng-options="state.STATEID as state.STATENAME for state in rfplanes.statename_option">
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="toCity">To city <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                          <select class="form-control input-sm" id="toCity" ng-model="rfplanes.route.TOLOCATION" ng-options="location.LOCATIONID as location.LOCATIONNAME for location in rfplanes.locationname_option">
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="toState">To state <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                          <select class="form-control input-sm" id="toState" ng-model="rfplanes.route.TOSTATEID " ng-options="state.STATEID as state.STATENAME for state in rfplanes.statename_option">
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="servicetype">Service Type <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                          <select class="form-control input-sm" id="servicetype" ng-model="rfplanes.route.SERVICETYPE" ng-options="servicetype.name as servicetype.val for servicetype in rfplanes.isSERVICETYPE_option" ng-change="rfplanes.changePackageDimension()">
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="vehType">Vehicle Type <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                          <select class="form-control input-sm" id="vehType" ng-model="rfplanes.route.VEHICLETYPEID" ng-options="vehicletype.VEHICLETYPEID as vehicletype.VEHICLETYPENAME for vehicletype in rfplanes.vehicletypename_option">
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="name">One way/ Round Trip <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                          <br/>
+                          <label class="radio-inline">
+                            <input type="radio" ng-model="rfplanes.route.ISROUNDTRIP" name="optradio" value="one way" /> One way
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" ng-model="rfplanes.route.ISROUNDTRIP" name="optradio" value="round trip" /> Round
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="fieldset">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <legend class="legend">Solution Design Details:</legend>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="packageDimensions">Package Dimension<i ng-show="rfplanes.isServiceTypeODC" class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                          <input type="text" id="packageDimensions" class="form-control input-sm" ng-model="rfplanes.route.PACKDIMENSION" placeholder="Enter Package Dimensions" ng-required="rfplanes.isServiceTypeODC" />
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="name">Loading/Unloading Charges<i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
+                          <br/>
+                          <label class="radio-inline">
+                            <input type="radio" ng-model="rfplanes.route.ISLOADUNLOADCHARG" name="optradio" value="Y" /> Yes
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" ng-model="rfplanes.route.ISLOADUNLOADCHARG" name="optradio" value="N" /> No
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="stackingNorms">Stacking Norms<i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
+                          <input type="text" id="stackingNorms" class="form-control input-sm" ng-model="rfplanes.route.STACKINGNORMS" placeholder="Enter Stacking Norms"  ng-required="rfplanes.iswarehousing"/>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="desc">Description <i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
+                          <input type="text" id="desc" class="form-control input-sm" placeholder="Enter Description" ng-required="rfplanes.iswarehousing" />
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="transitTime">Transit Time</label>
+                          <input type="text" id="transitTime" class="form-control input-sm" ng-model="rfplanes.route.RFPDURATION" placeholder="Enter Transit Time" />
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="packType">Packaging Type <i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
+                          <select class="form-control input-sm" id="packType" ng-model="rfplanes.route.PACKAGETYPEID" ng-options="packType.name as packType.val for packType in rfplanes.isPACKAGETYPEID_option" ng-required="rfplanes.iswarehousing">
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="mheReq">MHE requirement <i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
+                          <input type="text" id="mheReq" class="form-control input-sm" ng-model="rfplanes.route.MHEREQUIREMENT" placeholder="Enter MHE requirement" ng-required="rfplanes.iswarehousing" />
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="freq">Frequency</label>
+                          <input type="text" id="freq" class="form-control input-sm" ng-model="rfplanes.route.FREQUENCY" placeholder="Enter frequency" />
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="avgLoad">Average Load
+                          </label>
+                          <input type="text" id="avgLoad" class="form-control input-sm" ng-model="rfplanes.route.AVERAGELOAD" placeholder="Enter Average Load" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="current">Customer Target Rate </label>
+                          <input type="text" id="current" class="form-control input-sm" ng-model="rfplanes.route.CUSTTARGETRATE" placeholder="Enter Current" />
+                        </div>
+                      </div>
+                      <div class="col-sm-8">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="otherReq">Other requirement </label>
+                          <input type="text" id="otherReq" class="form-control input-sm" ng-model="rfplanes.route.OTHERREQUIREMENT" placeholder="Enter description" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="fieldset">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <legend class="legend">Cleansheet Details:</legend>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="distOneway">Distance oneway</label>
+                          <input type="text" id="distOneway" class="form-control input-sm" ng-model="rfplanes.route.DISTANCE" placeholder="Enter distance" />
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="loadUnloadTime">Loading unloading time </label>
+                          <input type="text" id="loadUnloadTime" class="form-control input-sm" ng-model="rfplanes.route.LOADINGUNLOADINGTIME" placeholder="Enter Loading unloading time" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="noofTrips">No of trips
+                          </label>
+                          <input type="text" id="noofTrips" class="form-control input-sm" ng-model="rfplanes.route.NOOFTRIPS" placeholder="Enter no of trips" />
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="form-group">
+                          <label class="form-label" title="required" for="backhaul">Backhaul(%)
+                          </label>
+                          <input type="text" id="backhaul" class="form-control input-sm" ng-model="rfplanes.route.BACKHAUL" placeholder="Enter Backhaul %" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-if="rfplanes.editingIndex==null" class="btn btn-primary" data-dismiss="modal" ng-click="rfplanes.add()">
+        Add
+        </button>
+        <button type="button" ng-if="rfplanes.editingIndex!=null" class="btn btn-danger" data-dismiss="modal" ng-click="rfplanes.delete()">
+        Delete
+        </button>
+        <button type="button" ng-if="rfplanes.editingIndex!=null" class="btn btn-primary" data-dismiss="modal" ng-click="rfplanes.save()">
+        Save
+        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+        Close
+        </button>
+      </div>
     </div>
   </div>
 </div>

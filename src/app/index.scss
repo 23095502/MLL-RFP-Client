@@ -105,6 +105,22 @@ h1 {
 
 /* grid css */
 .mll-table {
+
+  &.frozen {
+    thead {
+      background-color: $mll-white;
+
+      th{
+        color: $mll-grey;
+      }
+    }
+
+    tbody {
+      tr{
+        background-color: $mll-white;
+      }
+    }
+  }
   thead {
     background-color: $mll-grey;
     color: $mll-white;
@@ -114,6 +130,7 @@ h1 {
       font-weight: normal;
       font-size: 86%;
       color: rgba(255,255,255,.7);
+      white-space: nowrap;
 
       &:not(:nth-last-child(-n+1))::after {
         content: '';
@@ -132,9 +149,11 @@ h1 {
       //rgb(244, 244, 244);
       color: $mll-grey;
 
+
       td {
         position: relative;
         white-space: nowrap;
+        font-size: 86%;
         &:not(:nth-last-child(-n+1))::after{
           content: '';
           position: absolute;
@@ -144,6 +163,11 @@ h1 {
           width: 1px;
           border-left: 1px solid lighten($mll-grey, 40);
         }
+      }
+
+      &:hover {
+        background-color: lighten($mll-red, 45);
+        cursor: pointer;
       }
     }
   }
@@ -173,7 +197,61 @@ h1 {
   border-bottom: 1px solid lighten($mll-grey, 20) !important;
 }
 
-/* grid css */
+/* grid scoll css */
+
+.output-table {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+}
+
+.thead-div1, .thead-div2, .tbody-div3, .tbody-div4 {
+  overflow: hidden;
+  position: absolute;
+}
+
+.thead-div2, .tbody-div4 {
+  border-left: 1px solid lighten($mll-darkgrey, 60);
+}
+
+.tbody-div3, .tbody-div4 {
+  margin-bottom: 20px;
+}
+
+.thead-div1 {
+  width: 400px;
+  height: 32px;
+  top: 0;
+  left: 0;
+  border-top: 1px solid lighten($mll-darkgrey, 60);
+}
+
+.thead-div2 {
+  height: 32px;
+  top: 0;
+  left: 400px;
+  right: 0;
+  border-top: 1px solid lighten($mll-darkgrey, 60);
+}
+
+.tbody-div3 {
+  top: 32px;
+  bottom: 0;
+  width: 400px;
+  left: 0;
+  border-bottom: 1px solid lighten($mll-darkgrey, 60);
+}
+
+.tbody-div4 {
+  top: 32px;
+  bottom: 0;
+  right: 0;
+  left: 400px;
+  overflow: auto;
+  border-bottom: 1px solid lighten($mll-darkgrey, 60);
+}
+
+/* grid scoll css */
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
