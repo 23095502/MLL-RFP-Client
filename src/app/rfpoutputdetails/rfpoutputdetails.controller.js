@@ -53,7 +53,11 @@ export class RFPOutputController {
     // };
 
      //GET Truck Type
+  }
 
-
+  getArray(){
+    //console.log(_.map(this.outputdata, (v)=>(_.pick(v, ['CUSTOMERNAME','CASHACCOUNTID']))));
+    //console.log(_.map(this.outputdata), (v)=>(_.pick(v, ['CASHACCOUNTID']))));
+    return _.map(this.outputdata, (v)=>(_.pick(v, ['CUSTOMERNAME','CASHACCOUNTID','FROMLOCATIONNAME'])));
   }
 }
