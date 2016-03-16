@@ -5,59 +5,25 @@ export class RFPOutputController {
     $http.get(`http://59.160.18.222/RFPRest/RFPRestService.svc/gettrans/${$stateParams.rfpId}`)
       .then((res) => {
         this.outputdata = res.data;
-        this.nameoutputdata = res.data[0];
+        this.nameoutputdata = this.outputdata[0];
+        this.fromLocationOptions = _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
+        this.vehicleTypeOptions = _.uniqBy(this.outputdata, 'VEHICLETYPENAME');
       }, (err) => {
         console.error(err);
       });
 
-    this.outputdata = []
+    this.outputdata = [];
+    this.filterOption;
+
     this.$http = $http;
 
-    this.outputdata = {
-      "FROMLOCATIONNAME": null,
-      "FROMSTATE": null
-    };
+  }
 
-   //GET From
-    this.from_option = [];
-    $http({
-      method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/gettrans/1'
-    }).then((res) => {
-      this.from_option = res.data;
-    }, (err) => {
-      console.error(err);
-    });
-
-    this.from = {
-      "FROMLOCATION": null,
-      "FROMLOCATIONNAME": null
-    };
-
-    //GET From
-
-     //GET Truck Type
-    // this.from_option = [];
-    // $http({
-    //   method: 'GET',
-    //   url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/gettrans/1'
-    // }).then((res) => {
-    //   this.from_option = res.data;
-    // }, (err) => {
-    //   console.error(err);
-    // });
-
-    // this.from = {
-    //   "FROMLOCATION": null,
-    //   "FROMLOCATIONNAME": null
-    // };
-
-     //GET Truck Type
+  ClearFilter(){
+      this.filterOption = undefined;
   }
 
   getArray(){
-    //console.log(_.map(this.outputdata, (v)=>(_.pick(v, ['CUSTOMERNAME','CASHACCOUNTID']))));
-    //console.log(_.map(this.outputdata), (v)=>(_.pick(v, ['CASHACCOUNTID']))));
     return _.map(this.outputdata, (v)=>(_.pick(v, ['CUSTOMERNAME','CASHACCOUNTID','FROMLOCATIONNAME'])));
   }
 }
