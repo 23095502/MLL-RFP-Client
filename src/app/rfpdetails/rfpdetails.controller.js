@@ -88,6 +88,15 @@ export class RFPDetailsController {
     this.$http = $http;
     this.$stateParams = $stateParams;
     this.isServiceTypeODC;
+
+    document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function(e){
+      //console.log(e.target.scrollTop);
+      // console.dir(document.querySelector('.tbody-div3 table'));
+      document.querySelector('.tbody-div3 table').style.top = `-${e.target.scrollTop}px`;
+      document.querySelector('.thead-div2 table').style.left = `-${e.target.scrollLeft}px`;
+    });
+
+
   }
 
   changePackageDimension() {
