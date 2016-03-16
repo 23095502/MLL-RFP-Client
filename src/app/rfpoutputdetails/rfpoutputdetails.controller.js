@@ -12,8 +12,6 @@ export class RFPOutputController {
         _.each(this.routesGroupByLocation, (objectlist, key) => {
           this.routesGroupByLocation[key] = _.uniqBy(objectlist, 'VEHICLETYPENAME');
 
-          //console.log(objectlist);
-          // console.log(key);
         });
 
 
@@ -23,9 +21,9 @@ export class RFPOutputController {
           VEHICLETYPENAME: this.fromLocationOptions[0].VEHICLETYPENAME
         };
 
-        // console.log(this.filterOption.FROMLOCATIONNAME);
+
         this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
-        // console.log(this.vehicleTypeOptions);
+
       }, (err) => {
         console.error(err);
       });
