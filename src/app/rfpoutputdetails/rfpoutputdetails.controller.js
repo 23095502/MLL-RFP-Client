@@ -7,19 +7,34 @@ export class RFPOutputController {
         this.outputdata = res.data;
         this.nameoutputdata = this.outputdata[0];
         this.fromLocationOptions = _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
-        this.vehicleTypeOptions = _.uniqBy(this.outputdata, 'VEHICLETYPENAME');
+        this.routesGroupByLocation = _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
+
+        _.each(this.routesGroupByLocation, (objectlist, key) => {
+          this.routesGroupByLocation[key] = _.uniqBy(objectlist, 'VEHICLETYPENAME');
+
+        });
+
+
+
+        this.filterOption = {
+          FROMLOCATIONNAME: this.fromLocationOptions[0].FROMLOCATIONNAME,
+          VEHICLETYPENAME: this.fromLocationOptions[0].VEHICLETYPENAME
+        };
+
+
+        this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+
       }, (err) => {
         console.error(err);
       });
 
     this.outputdata = [];
-    this.filterOption;
-
     this.$http = $http;
 
   }
 
-  ClearFilter(){
-      this.filterOption = undefined;
+  changeLocation() {
+    this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+    this.filterOption.VEHICLETYPENAME = this.vehicleTypeOptions[0].VEHICLETYPENAME;
   }
 }
