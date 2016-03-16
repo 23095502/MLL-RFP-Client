@@ -1,5 +1,5 @@
 export class RFPDetailsController {
-    constructor($http, $stateParams, $scope, $timeout) {
+  constructor($http, $stateParams, $timeout, Upload) {
     'ngInject';
 
     //GET RFP DETAILS
@@ -85,11 +85,8 @@ export class RFPDetailsController {
     this.resetRoute();
     this.$http = $http;
     this.$stateParams = $stateParams;
-    /*
-    this.$scope = $scope;
     this.Upload = Upload;
-    this.$timeout = $timeout;
-    */
+    // this.$timeout = $timeout;
 
   }
 
@@ -223,32 +220,21 @@ export class RFPDetailsController {
 
   }
 
-  uploadPic(file) {
+  uploadFile(file) {
 
-    /*
-    file.upload = this.Upload.upload({
-      //url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+    this.Upload.upload({
+      url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/1/${file.name}/1`,
       data: {
-        username: this.$scope.username,
         file: file
-      },
-    });
-    */
-    console.log(file);
-
-    /*
-    file.upload.then(function(response) {
-      $timeout(function() {
-        file.result = response.data;
-      });
-    }, function(response) {
-      if (response.status > 0)
-        this.$scope.errorMsg = response.status + ': ' + response.data;
+      }
+    }).then(function(resp) {
+      console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+    }, function(resp) {
+      console.log('Error status: ' + resp.status);
     }, function(evt) {
-      // Math.min is to fix IE which reports 200% sometimes
-      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+      console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
     });
-    */
   }
 
   map(id, list, idMatcher, nameKey) {
