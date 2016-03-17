@@ -9,7 +9,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     })
 
   .state('rfpoverall', {
-    url: '/rfpoverall',
+    url: '/create/overall',
     templateUrl: 'app/rfpoverall/rfpoverall.html',
     controller: 'RFPOverallController',
     controllerAs: 'rfpdetails'
@@ -23,21 +23,28 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
   })
 
   .state('rfpdetails', {
-    url: '/rfpdetails/:rfpid/:iswarehousing',
+    url: '/create/lanes/:rfpid/:iswarehousing',
     templateUrl: 'app/rfpdetails/rfpdetails.html',
     controller: 'RFPDetailsController',
     controllerAs: 'rfplanes'
   })
 
   .state('rfpdashboard', {
-    url: '/rfpdashboard',
+    url: '/dashboard',
     templateUrl: 'app/rfpdashboard/rfpdashboard.html',
     controller: 'RFPDashboardController',
     controllerAs: 'rfpdash'
   })
 
+  .state('rfplogin', {
+    url: '/login',
+    templateUrl: 'app/rfplogin/rfplogin.html',
+    controller: 'RFPLoginControler',
+    controllerAs: 'rfplogin'
+  })
+
   .state('rfpoutputdetails', {
-    url: '/rfpoutputdetails/:rfpId',
+    url: '/output/:rfpId',
     templateUrl: 'app/rfpoutputdetails/rfpoutputdetails.html',
     controller: 'RFPOutputController',
     controllerAs: 'rfpoutput'

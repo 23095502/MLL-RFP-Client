@@ -9,6 +9,7 @@ import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
 import { RFPOverallController } from './rfpoverall/rfpoverall.controller';
 import { RFPCustomerController } from './rfpcustomer/rfpcustomer.controller';
+import { RFPLoginControler } from './rfplogin/rfplogin.controller';
 
 import { RFPDashboardController } from './rfpdashboard/rfpdashboard.controller';
 import { RFPOutputController } from './rfpoutputdetails/rfpoutputdetails.controller';
@@ -26,6 +27,7 @@ angular.module('mllRfpClient', ['ui.router', 'toastr'])
   .controller('RFPOverallController', RFPOverallController)
   .controller('RFPCustomerController', RFPCustomerController)
 
+  .controller('RFPLoginControler', RFPLoginControler)
   .controller('RFPDashboardController', RFPDashboardController)
   .controller('RFPOutputController', RFPOutputController)
 

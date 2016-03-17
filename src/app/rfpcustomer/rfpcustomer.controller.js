@@ -2,7 +2,9 @@ export class RFPCustomerController {
   constructor($http) {
     'ngInject';
 
-    $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/GetCustomers?customerid=0&customercode=&customername=&address=&email=&contactperson=&contactno=cashaccountid=CASH201600100&totalspend=0&active=A&createdby=1&createdon=2016-03-01&mode=GETALL')
+
+    $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/customer/0')
+
       .then((res) => {
         this.customer = res.data;
       }, (err) => {
@@ -33,32 +35,69 @@ resetCustomer() {
   }
 
 
+  // add() {
+
+  //   this.rfpcustomermaster.customer.CUSTOMERCODE = null;
+  //   this.customer.CUSTOMERNAME = 'Wipro Infotech';
+  //   this.customer.ADDRESS = "Pune";
+  //   this.customer.EMAIL = "praveenhart@wipro.com";
+  //   this.customer.CONTACTPERSON = 'Praveen Kumar Singh';
+  //   this.customer.CONTACTNO = 9967288728;
+  //   this.customer.push(angular.copy(this.customer));
+  //   // this.resetRoute();
+  //   this.editingIndex = null;
+  // }
+
+  // edit(customer, index) {
+  //   this.customer = angular.copy(customer);
+  //   this.editingIndex = index;
+  //   $('#myModal').modal();
+  // }
+
   add() {
 
-    this.customer.CUSTOMERCODE = "Wipro";
-    this.customer.CUSTOMERNAME = 'Wipro Infotech';
-    this.customer.ADDRESS = "Pune";
-    this.customer.EMAIL = "praveenhart@wipro.com";
-    this.customer.CONTACTPERSON = 'Praveen Kumar Singh';
-    this.customer.CONTACTNO = 9967288728;
-    this.customer.push(angular.copy(this.customer));
-    this.resetRoute();
-    this.editingIndex = null;
-  }
+    var req = {
+      method: 'POST',
+      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/customer/1',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      data: {
+        "cust": {
+          "CUSTOMERID": this.customer.CUSTOMERID,
+          "CUSTOMERCODE": this.customer.CUSTOMERCODE,
+          "CUSTOMERNAME": this.customer.CUSTOMERNAME,
+          "ADDRESS": this.customer.ADDRESS,
+          "CONTACTPERSON": this.customer.CONTACTPERSON,
+          "CONTACTNO": this.customer.CONTACTNO,
+          "CASHACCOUNTID": this.customer.CASHACCOUNTID,
+          "TOTALSPEND": this.customer.TOTALSPEND,
+          "EMAIL": this.customer.EMAIL,
+          "ACTIVE": "A",
+          "MODE": "INSERT",
+          "CREATEDBY": 5,
+          "CREATEDON": "2016-01-01 00:00:00"
+        }
+      }
 
-  edit(customer, index) {
-    this.customer = angular.copy(customer);
-    this.editingIndex = index;
-    $('#myModal').modal();
-  }
+    };
 
+this.$http(req).then((response) => {
 
+        //-------------
+        //Get All Cutomers
+        // this.getAllCustomers();
+        //-------------
+    }, (response) => {
+      console.log(error)
+    });
+}
 
 submitcustomerdata() {
 
     var req = {
       method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/rfp/1/ManageCustomer',
+      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/customer/1',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -79,11 +118,7 @@ submitcustomerdata() {
 
     }
 
-    this.$http(req).then(function(response) {
-      console.log(response)
-    }, function(response) {
-      console.log(error)
-    });
+
 
 
 

@@ -67,7 +67,7 @@
       <div class="form-inline">
         <div class="form-group">
           <label class="form-label" for="from">From</label>
-          <select class="form-control input-sm" id="from" ng-model="rfpoutput.filterOption.FROMLOCATIONNAME" ng-options="from.FROMLOCATIONNAME as from.FROMLOCATIONNAME for from in rfpoutput.fromLocationOptions" ng-change="rfpoutput.changeLocation()">
+          <select class="form-control input-sm"  id="from" ng-model="rfpoutput.filterOption.FROMLOCATIONNAME" ng-options="from.FROMLOCATIONNAME as from.FROMLOCATIONNAME for from in rfpoutput.fromLocationOptions" ng-change="rfpoutput.changeLocation()"  >
           </select>
         </div>
         <div class="form-group">
@@ -96,7 +96,7 @@
             <th rowspan="2">Market Rate</th>
             <th rowspan="2">Backhaul Available</th>
             <th colspan="5" class="table-colspan-header">BA Quote</th>
-            <th rowspan="2">Approved Rate</th>
+            <th rowspan="2" > Approved Rate</th>
           </tr>
           <tr>
             <th>L1</th>
@@ -107,20 +107,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="outputdata in rfpoutput.outputdata | filter:{FROMLOCATIONNAME : rfpoutput.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : rfpoutput.filterOption.VEHICLETYPENAME}">
+          <tr  ng-repeat="outputdata in rfpoutput.outputdata | filter:{FROMLOCATIONNAME : rfpoutput.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : rfpoutput.filterOption.VEHICLETYPENAME}">
             <td>{{outputdata.TOLOCATIONNAME}}</td>
-            <td>{{outputdata.CLEANSHEETRATE}}</td>
-            <td>{{outputdata.CONTRACTRATE}}</td>
-            <td>{{outputdata.SHIPXRATE}}</td>
-            <td>{{outputdata.PVSRFPRATE}}</td>
-            <td>{{outputdata.MARKETRATE}}</td>
+            <!--  <td>{{outputdata.FROMLOCATIONNAME}}</td>
+            <td>{{outputdata.VEHICLETYPENAME}}</td> -->
+            <td ng-class="rfpoutput.changecolor(outputdata.CLEANSHEETRATE,outputdata.APPROVEDAMOUNT)" >{{outputdata.CLEANSHEETRATE}}</td>
+            <td ng-class="rfpoutput.changecolor(outputdata.CONTRACTRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.CONTRACTRATE}}</td>
+            <td ng-class="rfpoutput.changecolor(outputdata.SHIPXRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.SHIPXRATE}}</td>
+            <td ng-class="rfpoutput.changecolor(outputdata.PVSRFPRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.PVSRFPRATE}}</td>
+            <td ng-class="rfpoutput.changecolor(outputdata.MARKETRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.MARKETRATE}}</td>
             <td>{{outputdata.BACKHAULAVL}}</td>
             <td>{{outputdata.L1}}</td>
             <td>{{outputdata.L2}}</td>
             <td>{{outputdata.L3}}</td>
             <td>{{outputdata.L4}}</td>
             <td>{{outputdata.L5}}</td>
-            <td>{{outputdata.APPROVEDAMOUNT}}</td>
+            <td >{{outputdata.APPROVEDAMOUNT}}</td>
           </tr>
         </tbody>
       </table>
