@@ -12,7 +12,6 @@ export class masterService {
 
       this._api.get('mstlist/RFPAPI').then((res) => {
         this._master = res.data[0];
-        console.log(this._master);
         sessionStorage.master = JSON.stringify(this._master);
       }, (err) => {
         console.error(err);
@@ -23,9 +22,6 @@ export class masterService {
       this._master = JSON.parse(sessionStorage.master);
 
     }
-
-    console.log(this._master);
-
   }
 
   getCustomers() {
@@ -46,6 +42,28 @@ export class masterService {
 
   getVehicleTypes() {
     return this._master.VehicleTypeList;
+  }
+
+  refresh(data) {
+
+    if (_.isUndefined(data)) {
+      this._api.get('mstlist/RFPAPI').then((res) => {
+        this._master = res.data[0];
+        sessionStorage.master = JSON.stringify(this._master);
+      }, (err) => {
+        console.error(err);
+      });
+    } else {
+
+      this._master = data.data[0];
+      sessionStorage.master = JSON.stringify(this._master);
+
+    }
+
+  }
+
+  refreshPromise() {
+    return this._api.get('mstlist/RFPAPI');
   }
 
 }

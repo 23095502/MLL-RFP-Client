@@ -11,8 +11,6 @@ export class DashboardController {
 
   init() {
 
-    this._master.init();
-
     this._api.get('getrfplist/getall').then((res) => {
       var rfps = res.data;
       rfps = _.map(rfps, (rfp) => {

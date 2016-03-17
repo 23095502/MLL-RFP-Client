@@ -1,3 +1,4 @@
+<div ng-init="rfpdetails.init()">
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-4">
@@ -168,17 +169,14 @@
                   </select>
                 </div>
               </div>
-
-
-<div class="col-sm-3 col-md-3">
-              <div class="form-group">
-                <label class="form-label" for="distance">Proximity distance (%)</label>
-                <input t
-                ype="number" min="0" max="100" maxlength="3" class="form-control input-sm" id="distance" placeholder="Distance" ng-model="rfpdetails.overall.PROXIDISTANCE">
+              <div class="col-sm-3 col-md-3">
+                <div class="form-group">
+                  <label class="form-label" for="distance">Proximity distance (%)</label>
+                  <input t
+                  ype="number" min="0" max="100" maxlength="3" class="form-control input-sm" id="distance" placeholder="Distance" ng-model="rfpdetails.overall.PROXIDISTANCE">
+                </div>
               </div>
             </div>
-</div>
-
           </div>
         </fieldset>
         <fieldset class="fieldset">
@@ -192,72 +190,71 @@
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
                   <label class="form-label" title="required" for="paymentterms">Payment terms (days) <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                  <select class="form-control input-sm" id="paymentterms" ng-model="rfpdetails.overall.PAYMENTTERM" ng-options="payment.name as payment.val for payment in rfpdetails.PAYMENTTERM_option"></select>
-                 <!--  <input type="number" class="form-control input-sm" id="paymentterms" placeholder="Payment terms" ng-model="rfpdetails.overall.PAYMENTTERM"> -->
-                </div>
-              </div>
-              <div class="col-sm-3 col-md-3">
-                <div class="form-group">
-                  <label class="form-label" for="diselrate">Diesel rate (Rs/Litre)</label>
-                  <input type="number" maxlength="5" class="form-control input-sm" id="diselrate" placeholder="Diesel rate (Rs/Litre) " ng-model="rfpdetails.overall.DIESELRATE">
-                </div>
-              </div>
-              <div class="col-sm-3 col-md-3">
-                <div class="form-group">
-                  <label class="form-label" for="ageofvehicles">Age of vehicles (yrs)</label>
-                <select class="form-control input-sm" id="ageofvehicles" ng-model="rfpdetails.overall.AGEOFTRUCK" ng-options="age.name as age.val for age in rfpdetails.AGEOFTRUCK_option"></select>
+                <select class="form-control input-sm" id="paymentterms" ng-model="rfpdetails.overall.PAYMENTTERM" ng-options="payment.name as payment.val for payment in rfpdetails.PAYMENTTERM_option"></select>
+                <!--  <input type="number" class="form-control input-sm" id="paymentterms" placeholder="Payment terms" ng-model="rfpdetails.overall.PAYMENTTERM"> -->
               </div>
             </div>
-            <!-- <div class="col-sm-3 col-md-3">
+            <div class="col-sm-3 col-md-3">
               <div class="form-group">
-                <label class="form-label" for="distance">Proximity distance (%)</label>
-                <input t
-                ype="number" min="0" max="100" maxlength="3" class="form-control input-sm" id="distance" placeholder="Distance" ng-model="rfpdetails.overall.PROXIDISTANCE">
-              </div>
-            </div> -->
-          </div>
-        </fieldset>
-        <fieldset class="fieldset">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-12 col-md-12">
-                <legend class="legend">COMMERCIAL DETAILS</legend>
+                <label class="form-label" for="diselrate">Diesel rate (Rs/Litre)</label>
+                <input type="number" maxlength="5" class="form-control input-sm" id="diselrate" placeholder="Diesel rate (Rs/Litre) " ng-model="rfpdetails.overall.DIESELRATE">
               </div>
             </div>
-            <div class="row">
-              <div class="col-sm-3 col-md-3">
-                <div class="form-group">
-                  <label class="form-label" title="required" for="unitofrate">Unit of rate <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                  <select class="form-control input-sm" id="unitofrate" ng-required="true" ng-model="rfpdetails.overall.RATEUOM" ng-options="UOM.name as UOM.val for UOM in rfpdetails.RATEUOM_option">
-                  </select>
-                </div>
-              </div>
-              <div class="col-sm-3 col-md-3">
-                <div class="form-group">
-                  <label class="form-label" for="penalties">Penalties</label>
-                  <input type="text" class="form-control input-sm" id="penalties" placeholder="" ng-model="rfpdetails.overall.PENALITIES">
-                </div>
-              </div>
-              <div class="col-sm-3 col-md-3">
-                <div class="form-group">
-                  <label class="form-label" for="detention">Detention</label>
-                  <input type="text" class="form-control input-sm" id="detention" placeholder=" " ng-model="rfpdetails.overall.DETENTION">
-                </div>
-              </div>
-              <div class="col-sm-3 col-md-3">
-                <div class="form-group">
-                  <label class="form-label" for="loadingunloadingtime">Loading unloading time (days)</label>
-                  <input type="number" class="form-control input-sm" id="loadingunloadingtime" placeholder="">
-                </div>
-              </div>
+            <div class="col-sm-3 col-md-3">
+              <div class="form-group">
+                <label class="form-label" for="ageofvehicles">Age of vehicles (yrs)</label>
+              <select class="form-control input-sm" id="ageofvehicles" ng-model="rfpdetails.overall.AGEOFTRUCK" ng-options="age.name as age.val for age in rfpdetails.AGEOFTRUCK_option"></select>
             </div>
           </div>
-        </fieldset>
+          <!-- <div class="col-sm-3 col-md-3">
+            <div class="form-group">
+              <label class="form-label" for="distance">Proximity distance (%)</label>
+              <input t
+              ype="number" min="0" max="100" maxlength="3" class="form-control input-sm" id="distance" placeholder="Distance" ng-model="rfpdetails.overall.PROXIDISTANCE">
+            </div>
+          </div> -->
+        </div>
+      </fieldset>
+      <fieldset class="fieldset">
         <div class="container">
           <div class="row">
-            <div class="col-md-12 text-right">
-              <button type="submit" class="btn btn-primary">Next</button>
+            <div class="col-sm-12 col-md-12">
+              <legend class="legend">COMMERCIAL DETAILS</legend>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3 col-md-3">
+              <div class="form-group">
+                <label class="form-label" title="required" for="unitofrate">Unit of rate <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                <select class="form-control input-sm" id="unitofrate" ng-required="true" ng-model="rfpdetails.overall.RATEUOM" ng-options="UOM.name as UOM.val for UOM in rfpdetails.RATEUOM_option">
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-3 col-md-3">
+              <div class="form-group">
+                <label class="form-label" for="penalties">Penalties</label>
+                <input type="text" class="form-control input-sm" id="penalties" placeholder="" ng-model="rfpdetails.overall.PENALITIES">
+              </div>
+            </div>
+            <div class="col-sm-3 col-md-3">
+              <div class="form-group">
+                <label class="form-label" for="detention">Detention</label>
+                <input type="text" class="form-control input-sm" id="detention" placeholder=" " ng-model="rfpdetails.overall.DETENTION">
+              </div>
+            </div>
+            <div class="col-sm-3 col-md-3">
+              <div class="form-group">
+                <label class="form-label" for="loadingunloadingtime">Loading unloading time (days)</label>
+                <input type="number" class="form-control input-sm" id="loadingunloadingtime" placeholder="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-primary">Next</button>
           </div>
         </div>
       </div>
@@ -342,5 +339,6 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 <!-- Add Cusomer -->
