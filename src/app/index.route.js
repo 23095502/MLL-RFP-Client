@@ -9,11 +9,11 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     controllerAs: 'rfpdetails'
   })
 
-  .state('rfpcustomer', {
-    url: '/rfpcustomer',
-    templateUrl: 'app/rfpcustomer/rfpcustomer.html',
-    controller: 'RFPCustomerController',
-    controllerAs: 'rfpcustomermaster'
+  .state('customer', {
+    url: '/customer',
+    templateUrl: 'app/customer/customer.html',
+    controller: 'CustomerController',
+    controllerAs: 'cust'
   })
 
   .state('rfpdetails', {
