@@ -262,10 +262,33 @@ export class LanesController {
 
   }
 
+  uploadBlobOrFile(blobOrFile) {
+    var client = new XMLHttpRequest();
+    client.open('POST', 'http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/1',false);
+    //client.setRequestHeader('Content-length', blobOrFile.length);
+    client.setRequestHeader("Content-Type", "multipart/form-data");
+
+    /* Check the response status */
+    client.onreadystatechange = function () {
+        alert ("rdystate: " + client.readyState + " status: "   + client.status + " Text: "     + client.statusText);
+      if (client.readyState == 4 && client.status == 200) {
+               alert(client.responseText);
+      }
+    }
+
+    /* Send to server */
+    client.send(blobOrFile);
+   }
+
   uploadFile(file) {
 
     this.Upload.upload({
-      url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/1/Routeupload/1`,
+      url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`,
+      //url: `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/93`,
+      /*headers: {
+        'Content-Type': 'multipart/form-data',
+        'Content-length': file.size
+      },*/
       data: {
         file: file
       }

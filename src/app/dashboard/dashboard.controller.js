@@ -32,7 +32,7 @@ export class DashboardController {
   }
 
   createRFP() {
-    this.$state.go("rfpoverall");
+    this.$state.go('overall');
   }
 
 

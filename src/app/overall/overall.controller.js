@@ -1,4 +1,4 @@
-export class RFPOverallController {
+export class OverallController {
   constructor($state, masterService, apiService) {
     'ngInject';
 
@@ -38,8 +38,6 @@ export class RFPOverallController {
       "CREATEDBY": 0,
       "CREATEDON": null
     };
-
-
   }
 
   init() {

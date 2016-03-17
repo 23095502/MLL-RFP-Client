@@ -2,11 +2,11 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
   'ngInject';
   $stateProvider
 
-  .state('rfpoverall', {
+  .state('overall', {
     url: '/create/overall',
-    templateUrl: 'app/rfpoverall/rfpoverall.html',
-    controller: 'RFPOverallController',
-    controllerAs: 'rfpdetails'
+    templateUrl: 'app/overall/overall.html',
+    controller: 'OverallController',
+    controllerAs: 'overall'
   })
 
   .state('customer', {
