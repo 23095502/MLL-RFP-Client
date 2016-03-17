@@ -293,9 +293,10 @@ export class RFPDetailsController {
       data: newfilterRoutes
     };
 
-    this.$http(req).then(function(r) {
-      alert('Data Saved Successfully...');
-    }, function(e) {
+    this.$http(req).then((r)=> {
+      //alert('Data Saved Successfully...');
+      this.$state.go('rfpdashboard');
+    }, (e)=> {
       console.error(e);
     });
 
