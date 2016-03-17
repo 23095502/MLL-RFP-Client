@@ -3,6 +3,14 @@ export class LanesController {
 
     'ngInject';
 
+
+    this.iswarehousing = $stateParams.iswarehousing;
+    (this.iswarehousing === 'Y') ? this.iswarehousing = true: this.iswarehousing = false;
+
+    this.$stateParams = $stateParams;
+    this.$state = $state;
+    //GET RFP DETAILS
+
     this.routes = [];
     this.routes = [];
     this.$http = $http;
@@ -131,7 +139,7 @@ export class LanesController {
       "PACKAGETYPEID": 1,
       "PACKDIMENSION": 'NA',
       "RFPDURATION": 0,
-      "RFPID": 1,
+      "RFPID": this.$stateParams.rfpid,
       "RFPVOLUME": 0,
       "SERVICETYPE": this.isSERVICETYPE_option[0].val,
       "STACKINGNORMS": '',
@@ -161,7 +169,7 @@ export class LanesController {
     this.route.LOCATIONNAME = '';
     this.route.MHEREQUIREMENT = 'NA';
     this.route.PACKDIMENSION = 'NA';
-    this.route.RFPID = 0;
+    this.route.RFPID = this.$stateParams.rfpid;
     this.route.RFPVOLUME = 0;
     this.route.SEARCH1 = '';
     this.route.SEARCH2 = '';
@@ -246,14 +254,47 @@ export class LanesController {
       data: newfilterRoutes
     };
 
+
     this.$http(req).then((r)=> {
       //alert('Data Saved Successfully...');
       this.$state.go('rfpdashboard');
     }, (e)=> {
+
+    this.$http(req).then((r) => {
+
+        /*var req2 = {
+              method: 'POST',
+              url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/apiupdate/ ${$stateParams.rfpId}',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              data: newfilterRoutes
+            };
+            this.$http(req2).then(function(r) {
+              alert('Data Saved Successfully...');
+            }, function(e) {
+              console.error(e);
+            });
+          }*/
+        this.$http({
+          method: 'GET',
+          url: `http://59.160.18.222/RFPRest/RFPRestService.svc/apiupdate/${this.$stateParams.rfpid}`
+
+        }).then((res) => {
+            alert('Data Saved Successfully...');
+        }, (err) => {
+          console.error(err);
+        });
+
+    }, (e) => {
+
       console.error(e);
     });
-
   }
+
+
+
+
 
   uploadFile(file) {
 
