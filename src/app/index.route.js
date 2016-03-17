@@ -1,12 +1,6 @@
 export function routerConfig($stateProvider, $urlRouterProvider) {
   'ngInject';
   $stateProvider
-    .state('home', {
-      url: '/',
-      templateUrl: 'app/rfpdashboard/rfpdashboard.html',
-      controller: 'RFPDashboardController',
-      controllerAs: 'rfpdash'
-    })
 
   .state('rfpoverall', {
     url: '/create/overall',
@@ -15,32 +9,32 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     controllerAs: 'rfpdetails'
   })
 
-  .state('rfpcustomer', {
-    url: '/rfpcustomer',
-    templateUrl: 'app/rfpcustomer/rfpcustomer.html',
-    controller: 'RFPCustomerController',
-    controllerAs: 'rfpcustomermaster'
+  .state('customer', {
+    url: '/customer',
+    templateUrl: 'app/customer/customer.html',
+    controller: 'CustomerController',
+    controllerAs: 'cust'
   })
 
-  .state('rfpdetails', {
+  .state('lanes', {
     url: '/create/lanes/:rfpid/:iswarehousing',
-    templateUrl: 'app/rfpdetails/rfpdetails.html',
-    controller: 'RFPDetailsController',
-    controllerAs: 'rfplanes'
+    templateUrl: 'app/lanes/lanes.html',
+    controller: 'LanesController',
+    controllerAs: 'lane'
   })
 
-  .state('rfpdashboard', {
+  .state('dashboard', {
     url: '/dashboard',
-    templateUrl: 'app/rfpdashboard/rfpdashboard.html',
-    controller: 'RFPDashboardController',
-    controllerAs: 'rfpdash'
+    templateUrl: 'app/dashboard/dashboard.html',
+    controller: 'DashboardController',
+    controllerAs: 'dash'
   })
 
-  .state('rfplogin', {
-    url: '/login',
-    templateUrl: 'app/rfplogin/rfplogin.html',
-    controller: 'RFPLoginControler',
-    controllerAs: 'rfplogin'
+  .state('login', {
+    url: '/',
+    templateUrl: 'app/login/login.html',
+    controller: 'LoginController',
+    controllerAs: 'login'
   })
 
   .state('rfpoutputdetails', {

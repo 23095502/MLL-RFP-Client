@@ -16,13 +16,13 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="customercode">Customer code</label>
-                  <input type="text" class="form-control" id="customercode"  placeholder="Customer code" ng-model="rfpcustomermaster.customer.CUSTOMERCODE" >
+                  <input type="text" class="form-control" id="customercode"  placeholder="Customer code" ng-model="cust.customer.CUSTOMERCODE" >
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="customername">Customer name</label>
-                  <input type="text" class="form-control" id="customername" placeholder="Customer name" ng-model="rfpcustomermaster.customer.CUSTOMERNAME">
+                  <input type="text" class="form-control" id="customername" placeholder="Customer name" ng-model="cust.customer.CUSTOMERNAME">
                 </div>
               </div>
             </div>
@@ -31,13 +31,13 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="contactperson">Contact person</label>
-                  <input type="text" class="form-control" id="contactperson" placeholder="Contact person" ng-model="rfpcustomermaster.customer.CONTACTPERSON">
+                  <input type="text" class="form-control" id="contactperson" placeholder="Contact person" ng-model="cust.customer.CONTACTPERSON">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="contactno">Contact no</label>
-                  <input type="number" class="form-control" id="contactno" placeholder="Contact no" ng-model="rfpcustomermaster.customer.CONTACTNO">
+                  <input type="number" class="form-control" id="contactno" placeholder="Contact no" ng-model="cust.customer.CONTACTNO">
                 </div>
               </div>
             </div>
@@ -46,13 +46,13 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="address">Address</label>
-                  <textarea  class="form-control" rows="3" id="address" placeholder="Address" ng-model="rfpcustomermaster.customer.ADDRESS"></textarea>
+                  <textarea  class="form-control" rows="3" id="address" placeholder="Address" ng-model="cust.customer.ADDRESS"></textarea>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="email">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="Email" ng-model="rfpcustomermaster.customer.EMAIL">
+                  <input type="email" class="form-control" id="email" placeholder="Email" ng-model="cust.customer.EMAIL">
                 </div>
               </div>
             </div>
@@ -75,8 +75,8 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" ng-if="rfpcustomermaster.editingIndex==null" class="btn btn-primary" data-dismiss="modal" ng-click="rfpcustomermaster.add()">Add</button>
-          <button type="button" ng-if="rfpcustomermaster.editingIndex!=null" class="btn btn-primary" data-dismiss="modal" ng-click="rfpcustomermaster.save()">Save</button>
+          <button type="button" ng-if="cust.editingIndex==null" class="btn btn-primary" data-dismiss="modal" ng-click="cust.add()">Add</button>
+          <button type="button" ng-if="cust.editingIndex!=null" class="btn btn-primary" data-dismiss="modal" ng-click="cust.save()">Save</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -109,7 +109,7 @@
         </thead>
         <tbody>
           <!--<tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">-->
-          <tr ng-repeat="customer in rfpcustomermaster.customer">
+          <tr ng-repeat="customer in cust.customer">
 
             <td>{{customer.CUSTOMERCODE}}</td>
             <td>{{customer.CUSTOMERNAME}}</td>
@@ -126,9 +126,7 @@
   </div>
   <!-- <div class="row">
     <div class="col-md-12 text-right">
-      <button class="btn btn-default" ng-click="rfpcustomermaster.submitcustomerdata()">Save</button>
+      <button class="btn btn-default" ng-click="cust.submitcustomerdata()">Save</button>
     </div>
   </div> -->
-
-
 </div>
