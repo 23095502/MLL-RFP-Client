@@ -2,15 +2,17 @@ export class RFPOutputController {
   constructor($http, $stateParams) {
     'ngInject';
 
-    $http.get(`http://59.160.18.222/RFPRest/RFPRestService.svc/gettrans/${$stateParams.rfpId}`)
+    $http.get(`http://172.32.0.101/RFPRest/RFPRestService.svc/gettrans/${$stateParams.rfpId}`)
       .then((res) => {
         this.outputdata = res.data;
         this.nameoutputdata = this.outputdata[0];
         this.fromLocationOptions = _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
         this.routesGroupByLocation = _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
 
-        _.each(this.routesGroupByLocation, (objectlist, key) => {
-          this.routesGroupByLocation[key] = _.uniqBy(objectlist, 'VEHICLETYPENAME');
+        _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+          this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+
+
 
         });
 
@@ -32,6 +34,15 @@ export class RFPOutputController {
     this.$http = $http;
 
   }
+  changecolor(toMatch, approvedRate) {
+    if (toMatch >= approvedRate) {
+      return 'above'
+    } else {
+      return 'below'
+
+    }
+  }
+
 
   changeLocation() {
     this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
