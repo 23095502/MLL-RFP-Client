@@ -1,4 +1,4 @@
-export class RFPCustomerController {
+export class CustomerController {
   constructor($http) {
     'ngInject';
 
