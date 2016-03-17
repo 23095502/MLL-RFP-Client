@@ -11,6 +11,7 @@ export class LanesController {
     this.isServiceTypeODC;
     this.statename_option = [];
     this.isSERVICETYPE_option = [];
+
     this.locationname_option = [];
     this.vehicletype = {
       "VEHICLETYPEID": null,
@@ -171,6 +172,12 @@ export class LanesController {
     this.routes.push(angular.copy(this.route));
     this.resetRoute();
     this.editingIndex = null;
+
+    //---------------------
+    //set width to route grid columns
+    this.setupRoutTable();
+    //---------------------
+    $('#myModal').modal('hide');
   }
 
   edit(route, index) {
@@ -189,6 +196,11 @@ export class LanesController {
   save() {
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
+    //---------------------
+    //set width to route grid columns
+    // this.setupRoutTable();
+    //---------------------
+    $('#myModal').modal('hide');
   }
 
   delete() {
@@ -196,6 +208,11 @@ export class LanesController {
     this.route.MODE = 'DELETE';
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
+    //---------------------
+    //set width to route grid columns
+    this.setupRoutTable();
+    //---------------------
+    $('#myModal').modal('hide');
   }
 
   submitData() {
@@ -217,21 +234,20 @@ export class LanesController {
     }).value();
 
 
-    var newfilterRoutes = '{"rfproute":' + JSON.stringify(filterRoutes) + '}';
-
+    var newfilterRoutes = {
+      rfproute: filterRoutes
+    };
     var req = {
       method: 'POST',
       url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/routeupdate',
       headers: {
         'Content-Type': 'application/json'
       },
-
       data: newfilterRoutes
-    }
+    };
 
     this.$http(req).then(function(r) {
-      //console.log(r);
-      alert('Data Saved SUccessfully...');
+      alert('Data Saved Successfully...');
     }, function(e) {
       console.error(e);
     });
