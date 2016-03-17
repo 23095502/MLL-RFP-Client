@@ -75,23 +75,18 @@
   <div class="tbody-div3">
     <table class="mll-table table frozen">
       <tbody>
-        <!-- <tr ng-repeat="i in [1,11,12,13,14,15,16,17,18,19,10,0112,1213,135,16776,1678,671,12323,146,1889,198,189]">
+        <tr ng-dblclick="lane.edit(route, $index)" ng-repeat="route in lane.routes">
           <td>
-            {{$index}}
-          </td>
-        </tr> -->
-        <tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">
-          <td>
-            <span>{{rfplanes.map(route.FROMLOCATION, rfplanes.locationname_option, 'LOCATIONID', 'LOCATIONNAME')}}</span>
+            <span>{{lane.map(route.FROMLOCATION, lane.locationname_option, 'LOCATIONID', 'LOCATIONNAME')}}</span>
           </td>
           <td>
-            <span>{{rfplanes.map(route.FROMSTATEID, rfplanes.statename_option, 'STATEID', 'STATECODE')}}</span>
+            <span>{{lane.map(route.FROMSTATEID, lane.statename_option, 'STATEID', 'STATECODE')}}</span>
           </td>
           <td>
-            <span>{{rfplanes.map(route.TOLOCATION, rfplanes.locationname_option, 'LOCATIONID','LOCATIONNAME')}}</span>
+            <span>{{lane.map(route.TOLOCATION, lane.locationname_option, 'LOCATIONID','LOCATIONNAME')}}</span>
           </td>
           <td>
-            <span>{{rfplanes.map(route.TOSTATEID, rfplanes.statename_option, 'STATEID', 'STATECODE')}}</span>
+            <span>{{lane.map(route.TOSTATEID, lane.statename_option, 'STATEID', 'STATECODE')}}</span>
           </td>
         </tr>
       </tbody>
@@ -100,12 +95,7 @@
   <div class="tbody-div4">
     <table class="mll-table table">
       <tbody>
-        <!-- <tr ng-repeat="i in [1,11,12,13,14,15,16,17,18,19,10,0112,1213,135,16776,1678,671,12323,146,1889,198,189]">
-          <td ng-repeat="j in [1,11,12,13,14,15,16,17,18,19,10,0112,1213,135,16776,1678,671,12323]">
-            {{$index}} , {{j}} {{$index}} , {{j}} {{$index}} , {{j}} {{$index}} , {{j}} {{$index}} , {{j}} {{$index}} , {{j}}
-          </td>
-        </tr> -->
-        <tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">
+        <tr ng-dblclick="lane.edit(route, $index)" ng-repeat="route in lane.routes">
           <td>
             <span>{{route.ISROUNDTRIP}}</span>
           </td>
@@ -113,7 +103,7 @@
             <span>{{route.SERVICETYPE}}</span>
           </td>
           <td>
-            <span>{{rfplanes.map(route.VEHICLETYPEID, rfplanes.vehicletypename_option, 'VEHICLETYPEID', 'VEHICLETYPENAME')}}</span>
+            <span>{{lane.map(route.VEHICLETYPEID, lane.vehicletypename_option, 'VEHICLETYPEID', 'VEHICLETYPENAME')}}</span>
           </td>
           <td>
             <span>{{route.DISTANCE}}</span>
@@ -135,13 +125,13 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12 text-right">
-      <button class="btn btn-primary" ng-click="rfplanes.submitData()">
+      <button class="btn btn-primary" ng-click="lane.submitData()">
       Save
       </button>
     </div>
   </div>
 </div>
-<form ng-submit="rfplanes.add()">
+<form ng-submit="lane.add()">
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -172,7 +162,7 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="fromCity">From city  <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <select class="form-control input-sm" id="fromCity" ng-model="rfplanes.route.FROMLOCATION" ng-options="location.LOCATIONID as location.LOCATIONNAME for location in rfplanes.locationname_option" required>
+                          <select class="form-control input-sm" id="fromCity" ng-model="lane.route.FROMLOCATION" ng-options="location.LOCATIONID as location.LOCATIONNAME for location in lane.locationname_option" required>
                             <option value="">Select</option>
                           </select>
                         </div>
@@ -180,7 +170,7 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="fromState">From state  <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <select class="form-control input-sm" id="fromState" ng-model="rfplanes.route.FROMSTATEID" ng-options="state.STATEID as state.STATENAME for state in rfplanes.statename_option" required>
+                          <select class="form-control input-sm" id="fromState" ng-model="lane.route.FROMSTATEID" ng-options="state.STATEID as state.STATENAME for state in lane.statename_option" required>
                             <option value="">Select</option>
                           </select>
                         </div>
@@ -190,7 +180,7 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="toCity">To city <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <select class="form-control input-sm" id="toCity" ng-model="rfplanes.route.TOLOCATION" ng-options="location.LOCATIONID as location.LOCATIONNAME for location in rfplanes.locationname_option" required>
+                          <select class="form-control input-sm" id="toCity" ng-model="lane.route.TOLOCATION" ng-options="location.LOCATIONID as location.LOCATIONNAME for location in lane.locationname_option" required>
                             <option value="">Select</option>
                           </select>
                         </div>
@@ -198,7 +188,7 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="toState">To state <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <select class="form-control input-sm" id="toState" ng-model="rfplanes.route.TOSTATEID " ng-options="state.STATEID as state.STATENAME for state in rfplanes.statename_option" required>
+                          <select class="form-control input-sm" id="toState" ng-model="lane.route.TOSTATEID " ng-options="state.STATEID as state.STATENAME for state in lane.statename_option" required>
                             <option value="">Select</option>
                           </select>
                         </div>
@@ -208,7 +198,7 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="servicetype">Service Type <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <select class="form-control input-sm" id="servicetype" ng-model="rfplanes.route.SERVICETYPE" ng-options="servicetype.name as servicetype.val for servicetype in rfplanes.isSERVICETYPE_option" ng-change="rfplanes.changePackageDimension()" required>
+                          <select class="form-control input-sm" id="servicetype" ng-model="lane.route.SERVICETYPE" ng-options="servicetype.name as servicetype.val for servicetype in lane.isSERVICETYPE_option" ng-change="lane.changePackageDimension()" required>
                             <option value="">Select</option>
                           </select>
                         </div>
@@ -216,7 +206,7 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="vehType">Vehicle Type <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <select class="form-control input-sm" id="vehType" ng-model="rfplanes.route.VEHICLETYPEID" ng-options="vehicletype.VEHICLETYPEID as vehicletype.VEHICLETYPENAME for vehicletype in rfplanes.vehicletypename_option" required>
+                          <select class="form-control input-sm" id="vehType" ng-model="lane.route.VEHICLETYPEID" ng-options="vehicletype.VEHICLETYPEID as vehicletype.VEHICLETYPENAME for vehicletype in lane.vehicletypename_option" required>
                             <option value="">Select</option>
                           </select>
                         </div>
@@ -226,10 +216,10 @@
                           <label class="form-label" title="required" for="name">One way/ Round Trip <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                           <br/>
                           <label class="radio-inline">
-                            <input type="radio" ng-model="rfplanes.route.ISROUNDTRIP" name="optradio" value="N" /> One way
+                            <input type="radio" ng-model="lane.route.ISROUNDTRIP" name="optradiotype" value="N" /> One way
                           </label>
                           <label class="radio-inline">
-                            <input type="radio" ng-model="rfplanes.route.ISROUNDTRIP" name="optradio" value="Y" /> Round
+                            <input type="radio" ng-model="lane.route.ISROUNDTRIP" name="optradiotype" value="Y" /> Round
                           </label>
                         </div>
                       </div>
@@ -246,46 +236,46 @@
                     <div class="row">
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label class="form-label" title="required" for="packageDimensions">Package Dimension<i ng-show="rfplanes.isServiceTypeODC" class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <input type="text" id="packageDimensions" class="form-control input-sm" ng-model="rfplanes.route.PACKDIMENSION" placeholder="Enter Package Dimensions" ng-required="rfplanes.isServiceTypeODC" />
+                          <label class="form-label" title="required" for="packageDimensions">Package Dimension<i ng-show="lane.isServiceTypeODC" class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                          <input type="text" id="packageDimensions" class="form-control input-sm" ng-model="lane.route.PACKDIMENSION" placeholder="Enter Package Dimensions" ng-required="lane.isServiceTypeODC" />
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label class="form-label" title="required" for="name">Loading / Unloading Charges<i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
+                          <label class="form-label" title="required" for="name">Loading / Unloading Charges<i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
                           <br/>
                           <label class="radio-inline">
-                            <input type="radio" ng-model="rfplanes.route.ISLOADUNLOADCHARG" name="optradio" value="Y" /> Yes
+                            <input type="radio" ng-model="lane.route.ISLOADUNLOADCHARG" name="optradio" value="Y" /> Yes
                           </label>
                           <label class="radio-inline">
-                            <input type="radio" ng-model="rfplanes.route.ISLOADUNLOADCHARG" name="optradio" value="N" /> No
+                            <input type="radio" ng-model="lane.route.ISLOADUNLOADCHARG" name="optradio" value="N" /> No
                           </label>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label class="form-label" title="required" for="stackingNorms">Stacking Norms<i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
-                          <input type="text" id="stackingNorms" class="form-control input-sm" ng-model="rfplanes.route.STACKINGNORMS" placeholder="Enter Stacking Norms"  ng-required="rfplanes.iswarehousing"/>
+                          <label class="form-label" title="required" for="stackingNorms">Stacking Norms<i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
+                          <input type="text" id="stackingNorms" class="form-control input-sm" ng-model="lane.route.STACKINGNORMS" placeholder="Enter Stacking Norms"  ng-required="lane.iswarehousing"/>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label class="form-label" title="required" for="desc">Description <i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
-                          <input type="text" id="desc" class="form-control input-sm" placeholder="Enter Description" ng-required="rfplanes.iswarehousing" />
+                          <label class="form-label" title="required" for="desc">Description <i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
+                          <input type="text" id="desc" class="form-control input-sm" placeholder="Enter Description" ng-required="lane.iswarehousing" />
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="transitTime">Transit Time</label>
-                          <input type="text" id="transitTime" class="form-control input-sm" ng-model="rfplanes.route.RFPDURATION" placeholder="Enter Transit Time" />
+                          <input type="text" id="transitTime" class="form-control input-sm" ng-model="lane.route.RFPDURATION" placeholder="Enter Transit Time" />
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label class="form-label" title="required" for="packType">Packaging Type <i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
-                          <select class="form-control input-sm" id="packType" ng-model="rfplanes.route.PACKAGETYPEID" ng-options="packType.name as packType.val for packType in rfplanes.isPACKAGETYPEID_option" ng-required="rfplanes.iswarehousing">
+                          <label class="form-label" title="required" for="packType">Packaging Type <i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
+                          <select class="form-control input-sm" id="packType" ng-model="lane.route.PACKAGETYPEID" ng-options="packType.name as packType.val for packType in lane.isPACKAGETYPEID_option" ng-required="lane.iswarehousing">
                           </select>
                         </div>
                       </div>
@@ -293,21 +283,21 @@
                     <div class="row">
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label class="form-label" title="required" for="mheReq">MHE requirement <i class="glyphicon glyphicon-asterisk icon-required" ng-show="rfplanes.iswarehousing"></i></label>
-                          <input type="text" id="mheReq" class="form-control input-sm" ng-model="rfplanes.route.MHEREQUIREMENT" placeholder="Enter MHE requirement" ng-required="rfplanes.iswarehousing" />
+                          <label class="form-label" title="required" for="mheReq">MHE requirement <i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
+                          <input type="text" id="mheReq" class="form-control input-sm" ng-model="lane.route.MHEREQUIREMENT" placeholder="Enter MHE requirement" ng-required="lane.iswarehousing" />
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="freq">Frequency</label>
-                          <input type="text" id="freq" class="form-control input-sm" ng-model="rfplanes.route.FREQUENCY" placeholder="Enter frequency" />
+                          <input type="text" id="freq" class="form-control input-sm" ng-model="lane.route.FREQUENCY" placeholder="Enter frequency" />
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="avgLoad">Average Load
                           </label>
-                          <input type="text" id="avgLoad" class="form-control input-sm" ng-model="rfplanes.route.AVERAGELOAD" placeholder="Enter Average Load" />
+                          <input type="text" id="avgLoad" class="form-control input-sm" ng-model="lane.route.AVERAGELOAD" placeholder="Enter Average Load" />
                         </div>
                       </div>
                     </div>
@@ -315,13 +305,13 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="current">Customer Target Rate </label>
-                          <input type="text" id="current" class="form-control input-sm" ng-model="rfplanes.route.CUSTTARGETRATE" placeholder="Enter Current" />
+                          <input type="text" id="current" class="form-control input-sm" ng-model="lane.route.CUSTTARGETRATE" placeholder="Enter Current" />
                         </div>
                       </div>
                       <div class="col-sm-8">
                         <div class="form-group">
                           <label class="form-label" title="required" for="otherReq">Other requirement </label>
-                          <input type="text" id="otherReq" class="form-control input-sm" ng-model="rfplanes.route.OTHERREQUIREMENT" placeholder="Enter description" />
+                          <input type="text" id="otherReq" class="form-control input-sm" ng-model="lane.route.OTHERREQUIREMENT" placeholder="Enter description" />
                         </div>
                       </div>
                     </div>
@@ -338,13 +328,13 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="distOneway">Distance oneway</label>
-                          <input type="text" id="distOneway" class="form-control input-sm" ng-model="rfplanes.route.DISTANCE" placeholder="Enter distance" />
+                          <input type="text" id="distOneway" class="form-control input-sm" ng-model="lane.route.DISTANCE" placeholder="Enter distance" />
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="loadUnloadTime">Loading unloading time </label>
-                          <input type="text" id="loadUnloadTime" class="form-control input-sm" ng-model="rfplanes.route.LOADINGUNLOADINGTIME" placeholder="Enter Loading unloading time" />
+                          <input type="text" id="loadUnloadTime" class="form-control input-sm" ng-model="lane.route.LOADINGUNLOADINGTIME" placeholder="Enter Loading unloading time" />
                         </div>
                       </div>
                     </div>
@@ -353,14 +343,14 @@
                         <div class="form-group">
                           <label class="form-label" title="required" for="noofTrips">No of trips
                           </label>
-                          <input type="text" id="noofTrips" class="form-control input-sm" ng-model="rfplanes.route.NOOFTRIPS" placeholder="Enter no of trips" />
+                          <input type="text" id="noofTrips" class="form-control input-sm" ng-model="lane.route.NOOFTRIPS" placeholder="Enter no of trips" />
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="backhaul">Backhaul(%)
                           </label>
-                          <input type="text" id="backhaul" class="form-control input-sm" ng-model="rfplanes.route.BACKHAUL" placeholder="Enter Backhaul %" />
+                          <input type="text" id="backhaul" class="form-control input-sm" ng-model="lane.route.BACKHAUL" placeholder="Enter Backhaul %" />
                         </div>
                       </div>
                     </div>
@@ -371,13 +361,13 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" ng-if="rfplanes.editingIndex==null" class="btn btn-primary">
+          <button type="submit" ng-if="lane.editingIndex==null" class="btn btn-primary">
           Add
           </button>
-          <button type="button" ng-if="rfplanes.editingIndex!=null" class="btn btn-danger" data-dismiss="modal" ng-click="rfplanes.delete()">
+          <button type="button" ng-if="lane.editingIndex!=null" class="btn btn-danger" data-dismiss="modal" ng-click="lane.delete()">
           Delete
           </button>
-          <button type="button" ng-if="rfplanes.editingIndex!=null" class="btn btn-primary" data-dismiss="modal" ng-click="rfplanes.save()">
+          <button type="button" ng-if="lane.editingIndex!=null" class="btn btn-primary" data-dismiss="modal" ng-click="lane.save()">
           Save
           </button>
           <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -397,31 +387,23 @@
         </h4>
       </div>
       <div class="modal-body">
-        <!--<div>
-          <input id="filePicker" type="file" name="Package" file-model="myFile" />
-          <br />
-          <button title="upload" ng-click="rfplanes.uploadFile()">
-          <span>Upload</span>
-          </button>
-        </div>-->
         <fieldset>
           <legend>Upload on form submit</legend>
-          <input type="file" ngf-select ng-model="rfplanes.file" name="file"
+          <input type="file" ngf-select ng-model="lane.file" name="file"
           accept="excel/*" ngf-max-size="2MB" required
-          ngf-model-invalid="rfplanes.errorFile">
+          ngf-model-invalid="lane.errorFile">
           <i ng-show="myForm.file.$error.required">*required</i><br>
           <i ng-show="myForm.file.$error.maxSize">File too large
-          {{rfplanes.errorFile.size / 1000000|number:1}}MB: max 2M</i>
+          {{lane.errorFile.size / 1000000|number:1}}MB: max 2M</i>
           <button
-          ng-click="rfplanes.uploadFile(rfplanes.file)">Submit</button>
-          <span class="progress" ng-show="rfplanes.file.progress >= 0">
-            <div style="width:{{rfplanes.file.progress}}%"
-            ng-bind="rfplanes.file.progress + '%'"></div>
+          ng-click="lane.uploadFile(lane.file)">Submit</button>
+          <span class="progress" ng-show="lane.file.progress >= 0">
+            <div style="width:{{lane.file.progress}}%"
+            ng-bind="lane.file.progress + '%'"></div>
           </span>
-          <span ng-show="rfplanes.file.result">Upload Successful</span>
+          <span ng-show="lane.file.result">Upload Successful</span>
           <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
         </fieldset>
-        <!--<input name="myFile" type="file" />-->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -442,13 +424,14 @@
       <div class="modal-body">
         <fieldset>
           <legend>Upload on form submit</legend>
-          <input type="file" ngf-select ng-model="rfplanes.file" name="file"
+          <input type="file" ngf-select ng-model="lane.file" name="file"
           accept="excel/*" ngf-max-size="2MB" required
-          ngf-model-invalid="rfplanes.errorFile">
+          ngf-model-invalid="lane.errorFile">
           <i ng-show="myForm.file.$error.required">*required</i><br>
           <i ng-show="myForm.file.$error.maxSize">File too large
-          {{rfplanes.errorFile.size / 1000000|number:1}}MB: max 2M</i>
+          {{lane.errorFile.size / 1000000|number:1}}MB: max 2M</i>
           <button
+<<<<<<< HEAD:src/app/rfpdetails/rfpdetails.html
           ng-click="rfplanes.uploadFile(rfplanes.file) ">Submit</button>
           <span class="progress" ng-show="rfplanes.file.progress >= 0">
             <div style="width:{{rfplanes.file.progress}}%"
@@ -457,6 +440,15 @@
           <span ng-show="rfplanes.file.result">Upload Successful</span>
           <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
 console.log(rfplanes.file.result);
+=======
+          ng-click="lane.uploadFile(lane.file)">Submit</button>
+          <span class="progress" ng-show="lane.file.progress >= 0">
+            <div style="width:{{lane.file.progress}}%"
+            ng-bind="lane.file.progress + '%'"></div>
+          </span>
+          <span ng-show="lane.file.result">Upload Successful</span>
+          <span class="err" ng-show="errorMsg">{{lane.errorMsg}}</span>
+>>>>>>> develop:src/app/lanes/lanes.html
         </fieldset>
       </div>
       <div class="modal-footer">
