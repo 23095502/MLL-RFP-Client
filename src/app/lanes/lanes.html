@@ -75,11 +75,6 @@
   <div class="tbody-div3">
     <table class="mll-table table frozen">
       <tbody>
-        <!-- <tr ng-repeat="i in [1,11,12,13,14,15,16,17,18,19,10,0112,1213,135,16776,1678,671,12323,146,1889,198,189]">
-          <td>
-            {{$index}}
-          </td>
-        </tr> -->
         <tr ng-dblclick="lane.edit(route, $index)" ng-repeat="route in lane.routes">
           <td>
             <span>{{lane.map(route.FROMLOCATION, lane.locationname_option, 'LOCATIONID', 'LOCATIONNAME')}}</span>
@@ -100,11 +95,6 @@
   <div class="tbody-div4">
     <table class="mll-table table">
       <tbody>
-        <!-- <tr ng-repeat="i in [1,11,12,13,14,15,16,17,18,19,10,0112,1213,135,16776,1678,671,12323,146,1889,198,189]">
-          <td ng-repeat="j in [1,11,12,13,14,15,16,17,18,19,10,0112,1213,135,16776,1678,671,12323]">
-            {{$index}} , {{j}} {{$index}} , {{j}} {{$index}} , {{j}} {{$index}} , {{j}} {{$index}} , {{j}} {{$index}} , {{j}}
-          </td>
-        </tr> -->
         <tr ng-dblclick="lane.edit(route, $index)" ng-repeat="route in lane.routes">
           <td>
             <span>{{route.ISROUNDTRIP}}</span>
@@ -226,10 +216,10 @@
                           <label class="form-label" title="required" for="name">One way/ Round Trip <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                           <br/>
                           <label class="radio-inline">
-                            <input type="radio" ng-model="lane.route.ISROUNDTRIP" name="optradio" value="N" /> One way
+                            <input type="radio" ng-model="lane.route.ISROUNDTRIP" name="optradiotype" value="N" /> One way
                           </label>
                           <label class="radio-inline">
-                            <input type="radio" ng-model="lane.route.ISROUNDTRIP" name="optradio" value="Y" /> Round
+                            <input type="radio" ng-model="lane.route.ISROUNDTRIP" name="optradiotype" value="Y" /> Round
                           </label>
                         </div>
                       </div>
