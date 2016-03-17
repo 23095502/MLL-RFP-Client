@@ -1,11 +1,12 @@
 export class RFPDetailsController {
-constructor($http, $stateParams, $timeout, Upload) {
+  constructor($http, $stateParams, $timeout, $state, Upload) {
 
     'ngInject';
 
     this.iswarehousing = $stateParams.iswarehousing;
     (this.iswarehousing === 'Y') ? this.iswarehousing = true: this.iswarehousing = false;
 
+    this.$state = $state;
     //GET RFP DETAILS
     this.routes = [];
     $http({
@@ -15,42 +16,12 @@ constructor($http, $stateParams, $timeout, Upload) {
     }).then((res) => {
 
       this.routes = res.data;
-
-      $timeout(function() {
-        let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.offsetWidth));
-        let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 td'), (td) => (td.offsetWidth));
-
-        let finalFrozenWidth = _.chain(div3BodyWidth)
-          .map((item, i) => Math.max(item, div1HeadWidth[i]))
-          .reject((item) => (_.isNaN(item)))
-          .value();
-
-        //Fix width for div1 (left head) & div3 (left body)
-        let div1Head = document.querySelectorAll('.thead-div2 th');
-        let div3Body = document.querySelectorAll('.tbody-div4 td');
-
-        _.each(finalFrozenWidth, (list, key) => {
-              div1Head[key].children[0].style.width = finalFrozenWidth[key]+'px';
-              div3Body[key].children[0].style.width = finalFrozenWidth[key]+'px';
-        });
-
-
-        let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth));
-        let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 td'), (td) => (td.offsetWidth));
-        let finalWidth = _.chain(div4BodyWidth)
-          .map((item, i) => Math.max(item, div2HeadWidth[i]))
-          .reject((item) => (_.isNaN(item)))
-          .value();
-
-        //Fix width for div2 (right head) & div4 (right body)
-        let div2Head = document.querySelectorAll('.thead-div2 th');
-        let div4Body = document.querySelectorAll('.tbody-div4 td');
-
-        _.each(finalWidth, (list, key) => {
-              div2Head[key].children[0].style.width = finalWidth[key]+'px';
-              div4Body[key].children[0].style.width = finalWidth[key]+'px';
-        });
-      }, 500);
+      //---------------------
+      this.$timeout = $timeout;
+      //---------------------
+      //set width to route grid columns
+      this.setupRoutTable();
+      //---------------------
 
     }, (err) => {
       console.error(err);
@@ -138,6 +109,43 @@ constructor($http, $stateParams, $timeout, Upload) {
     });
   }
 
+  setupRoutTable(){
+    this.$timeout(function() {
+      let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.offsetWidth));
+      let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 td'), (td) => (td.offsetWidth));
+
+      let finalFrozenWidth = _.chain(div3BodyWidth)
+        .map((item, i) => Math.max(item, div1HeadWidth[i]))
+        .reject((item) => (_.isNaN(item)))
+        .value();
+
+      //Fix width for div1 (left head) & div3 (left body)
+      let div1Head = document.querySelectorAll('.thead-div2 th');
+      let div3Body = document.querySelectorAll('.tbody-div4 td');
+
+      _.each(finalFrozenWidth, (list, key) => {
+        div1Head[key].children[0].style.width = finalFrozenWidth[key] + 'px';
+        div3Body[key].children[0].style.width = finalFrozenWidth[key] + 'px';
+      });
+
+
+      let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth));
+      let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 td'), (td) => (td.offsetWidth));
+      let finalWidth = _.chain(div4BodyWidth)
+        .map((item, i) => Math.max(item, div2HeadWidth[i]))
+        .reject((item) => (_.isNaN(item)))
+        .value();
+
+      //Fix width for div2 (right head) & div4 (right body)
+      let div2Head = document.querySelectorAll('.thead-div2 th');
+      let div4Body = document.querySelectorAll('.tbody-div4 td');
+
+      _.each(finalWidth, (list, key) => {
+        div2Head[key].children[0].style.width = finalWidth[key] + 'px';
+        div4Body[key].children[0].style.width = finalWidth[key] + 'px';
+      });
+    }, 500);
+  }
 
   changePackageDimension() {
     if (this.route.SERVICETYPE == 'ODC') {
@@ -211,6 +219,12 @@ constructor($http, $stateParams, $timeout, Upload) {
     this.routes.push(angular.copy(this.route));
     this.resetRoute();
     this.editingIndex = null;
+
+    //---------------------
+    //set width to route grid columns
+    this.setupRoutTable();
+    //---------------------
+    $('#myModal').modal('hide');
   }
 
   edit(route, index) {
@@ -229,6 +243,11 @@ constructor($http, $stateParams, $timeout, Upload) {
   save() {
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
+    //---------------------
+    //set width to route grid columns
+    // this.setupRoutTable();
+    //---------------------
+    $('#myModal').modal('hide');
   }
 
   delete() {
@@ -236,6 +255,11 @@ constructor($http, $stateParams, $timeout, Upload) {
     this.route.MODE = 'DELETE';
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
+    //---------------------
+    //set width to route grid columns
+    this.setupRoutTable();
+    //---------------------
+    $('#myModal').modal('hide');
   }
 
   submitData() {
@@ -257,21 +281,20 @@ constructor($http, $stateParams, $timeout, Upload) {
     }).value();
 
 
-    var newfilterRoutes = '{"rfproute":' + JSON.stringify(filterRoutes) + '}';
-
+    var newfilterRoutes = {
+      rfproute : filterRoutes
+    };
     var req = {
       method: 'POST',
       url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/routeupdate',
       headers: {
         'Content-Type': 'application/json'
       },
-
       data: newfilterRoutes
-    }
+    };
 
     this.$http(req).then(function(r) {
-      //console.log(r);
-      alert('Data Saved SUccessfully...');
+      alert('Data Saved Successfully...');
     }, function(e) {
       console.error(e);
     });
