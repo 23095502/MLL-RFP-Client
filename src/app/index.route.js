@@ -3,9 +3,9 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'app/rfpdashboard/rfpdashboard.html',
-      controller: 'RFPDashboardController',
-      controllerAs: 'rfpdash'
+      templateUrl: 'app/dashboard/dashboard.html',
+      controller: 'DashboardController',
+      controllerAs: 'dash'
     })
 
   .state('rfpoverall', {
@@ -29,11 +29,11 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     controllerAs: 'rfplanes'
   })
 
-  .state('rfpdashboard', {
+  .state('dashboard', {
     url: '/dashboard',
-    templateUrl: 'app/rfpdashboard/rfpdashboard.html',
-    controller: 'RFPDashboardController',
-    controllerAs: 'rfpdash'
+    templateUrl: 'app/dashboard/dashboard.html',
+    controller: 'DashboardController',
+    controllerAs: 'dash'
   })
 
   .state('rfplogin', {

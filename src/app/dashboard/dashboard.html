@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4"><h1>Dashboard</div>
+    <div class="col-sm-8 text-right">
+      <div class="form-inline">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search for customer name" ng-model="searchText.CUSTOMERNAME">
+        </div>
+        <button type="button" class="btn btn-primary" ng-click="dash.createRFP()">
+        <i class="glyphicon glyphicon-plus"></i> &nbsp;Create New RFP
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table mll-table">
+        <thead>
+          <tr>
+            <th>Client Name</th>
+            <th>Received Date</th>
+            <th>Due Date</th>
+            <th>RFP Value ('000 INR')</th>
+            <th>Status</th>
+            <th>RFP ID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="rfp in dash.rfps  | filter:searchText" ng-click="dash.click(rfp.RFPID)">
+            <td>{{rfp.CUSTOMERNAME}}</td>
+            <td>{{rfp.RFPDATE  |  date:"dd/MM/yyyy"}}</td>
+            <td>{{rfp.DUEDATE | date: 'dd/MM/yyyy'}}</td>
+            <td>{{rfp.RFPAMOUNT / 1000 | number:1 }}</td>
+            <td>{{rfp.ACTIVE}}</td>
+            <td>{{rfp.RFPCODE}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
