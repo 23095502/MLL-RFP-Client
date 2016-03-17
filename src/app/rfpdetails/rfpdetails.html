@@ -443,13 +443,14 @@
           <i ng-show="myForm.file.$error.maxSize">File too large
           {{rfplanes.errorFile.size / 1000000|number:1}}MB: max 2M</i>
           <button
-          ng-click="rfplanes.uploadFile(rfplanes.file)">Submit</button>
+          ng-click="rfplanes.uploadFile(rfplanes.file) ">Submit</button>
           <span class="progress" ng-show="rfplanes.file.progress >= 0">
             <div style="width:{{rfplanes.file.progress}}%"
             ng-bind="rfplanes.file.progress + '%'"></div>
           </span>
           <span ng-show="rfplanes.file.result">Upload Successful</span>
           <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
+console.log(rfplanes.file.result);
         </fieldset>
       </div>
       <div class="modal-footer">
