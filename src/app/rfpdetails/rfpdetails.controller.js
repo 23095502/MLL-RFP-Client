@@ -1,5 +1,6 @@
 export class RFPDetailsController {
-  constructor($http, $stateParams, $scope, $timeout) {
+constructor($http, $stateParams, $timeout, Upload) {
+
     'ngInject';
 
     this.iswarehousing = $stateParams.iswarehousing;
@@ -10,7 +11,6 @@ export class RFPDetailsController {
     $http({
       method: 'GET',
       url: `http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpid}`
-        //url: 'http://localhost:20572/RFPTool/RFPRestService.svc/getrfproutebyid/1'
 
     }).then((res) => {
 
@@ -103,6 +103,7 @@ export class RFPDetailsController {
     this.resetRoute();
     this.$http = $http;
     this.$stateParams = $stateParams;
+    this.Upload = Upload;
     this.isServiceTypeODC;
 
     document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function(e) {
@@ -253,32 +254,21 @@ export class RFPDetailsController {
 
   }
 
-  uploadPic(file) {
+  uploadFile(file) {
 
-    /*
-    file.upload = this.Upload.upload({
-      //url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+    this.Upload.upload({
+      url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/1/Routeupload/1`,
       data: {
-        username: this.$scope.username,
         file: file
-      },
-    });
-    */
-    console.log(file);
-
-    /*
-    file.upload.then(function(response) {
-      $timeout(function() {
-        file.result = response.data;
-      });
-    }, function(response) {
-      if (response.status > 0)
-        this.$scope.errorMsg = response.status + ': ' + response.data;
+      }
+    }).then(function(resp) {
+      console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+    }, function(resp) {
+      console.log('Error status: ' + resp.status);
     }, function(evt) {
-      // Math.min is to fix IE which reports 200% sometimes
-      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+      console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
     });
-    */
   }
 
   map(id, list, idMatcher, nameKey) {

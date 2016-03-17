@@ -14,7 +14,8 @@ import { RFPDashboardController } from './rfpdashboard/rfpdashboard.controller';
 import { RFPOutputController } from './rfpoutputdetails/rfpoutputdetails.controller';
 import { RFPDetailsController } from './rfpdetails/rfpdetails.controller';
 
-angular.module('mllRfpClient', ['ui.router', 'toastr'])
+
+angular.module('mllRfpClient', ['ui.router', 'toastr', 'ngCsv', 'ngFileUpload'])
   .constant('malarkey', malarkey)
   .constant('moment', moment)
   .config(config)
