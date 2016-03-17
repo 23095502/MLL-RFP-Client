@@ -1,29 +1,24 @@
 export class RFPDashboardController {
-  constructor($http, $state) {
+  constructor($http, $state, apiService) {
     'ngInject';
     this.$http = $http;
     this.$state = $state;
+    this.dashboarddata = [];
 
-    $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/getrfplist/getall')
-      .then((res) => {
-        this.dashboarddata = res.data;
-
-
-      }, (err) => {
-        console.error(err);
-      });
-
-
-
-    this.dashboarddata = []
-
+    apiService.get('getrfplist/getall').then((res) => {
+      this.dashboarddata = res.data;
+    }, (err) => {
+      console.error(err);
+    });
   }
 
   click(id) {
-     this.$state.go('rfpoutputdetails',{rfpId:id});
+    this.$state.go('rfpoutputdetails', {
+      rfpId: id
+    });
   }
 
-  CreateRFP(){
-     this.$state.go("rfpoverall");
+  CreateRFP() {
+    this.$state.go("rfpoverall");
   }
 }

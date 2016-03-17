@@ -9,6 +9,7 @@ import { RFPLoginControler } from './rfplogin/rfplogin.controller';
 import { RFPDashboardController } from './rfpdashboard/rfpdashboard.controller';
 import { RFPOutputController } from './rfpoutputdetails/rfpoutputdetails.controller';
 import { RFPDetailsController } from './rfpdetails/rfpdetails.controller';
+import { apiService } from '../app/components/api/api.service';
 
 
 angular.module('mllRfpClient', ['ui.router', 'ngFileUpload'])
@@ -20,4 +21,5 @@ angular.module('mllRfpClient', ['ui.router', 'ngFileUpload'])
   .controller('RFPLoginControler', RFPLoginControler)
   .controller('RFPDashboardController', RFPDashboardController)
   .controller('RFPOutputController', RFPOutputController)
-  .controller('RFPDetailsController', RFPDetailsController);
+  .controller('RFPDetailsController', RFPDetailsController)
+  .service('apiService', apiService);
