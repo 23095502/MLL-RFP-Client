@@ -2,7 +2,7 @@ export class RFPOutputController {
   constructor($http, $stateParams) {
     'ngInject';
 
-    $http.get(`http://172.32.0.101/RFPRest/RFPRestService.svc/gettrans/${$stateParams.rfpId}`)
+    $http.get(`http://59.160.18.222/RFPRest/RFPRestService.svc/gettrans/${$stateParams.rfpId}`)
       .then((res) => {
         this.outputdata = res.data;
         this.nameoutputdata = this.outputdata[0];
