@@ -1,5 +1,6 @@
 export class RFPDetailsController {
-  constructor($http, $stateParams, $timeout) {
+constructor($http, $stateParams, $timeout, Upload) {
+
     'ngInject';
 
     this.iswarehousing = $stateParams.iswarehousing;
@@ -10,6 +11,7 @@ export class RFPDetailsController {
     $http({
       method: 'GET',
       url: `http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpid}`
+
     }).then((res) => {
 
       this.routes = res.data;
@@ -49,7 +51,6 @@ export class RFPDetailsController {
               div4Body[key].children[0].style.width = finalWidth[key]+'px';
         });
       }, 500);
-
 
     }, (err) => {
       console.error(err);
@@ -126,6 +127,7 @@ export class RFPDetailsController {
     this.resetRoute();
     this.$http = $http;
     this.$stateParams = $stateParams;
+    this.Upload = Upload;
     this.isServiceTypeODC;
 
     document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function(e) {
@@ -136,13 +138,13 @@ export class RFPDetailsController {
     });
   }
 
+
   changePackageDimension() {
     if (this.route.SERVICETYPE == 'ODC') {
       this.isServiceTypeODC = true;
     } else {
       this.isServiceTypeODC = false;
     }
-    //console.log(this.isrequired);
   }
 
   resetRoute() {
@@ -276,6 +278,22 @@ export class RFPDetailsController {
 
   }
 
+  uploadFile(file) {
+
+    this.Upload.upload({
+      url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/1/Routeupload/1`,
+      data: {
+        file: file
+      }
+    }).then(function(resp) {
+      console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+    }, function(resp) {
+      console.log('Error status: ' + resp.status);
+    }, function(evt) {
+      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+      console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+    });
+  }
 
   map(id, list, idMatcher, nameKey) {
     if (_.isInteger(id) && list.length > 0) {

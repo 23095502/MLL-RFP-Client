@@ -67,6 +67,11 @@ export class RFPOverallController {
       val: i
     }));
 
+    this.PAYMENTTERM_option = _.map(['15', '30', '45', '60', '75', '90'], (i) => ({
+      name: i,
+      val: i
+    }));
+
     this.CARGOTYPE_option = _.map(['Volumetric', 'Dense'], (i) => ({
       name: i,
       val: i
@@ -90,7 +95,7 @@ export class RFPOverallController {
       "RFPOWNER": 1,
       "CURRENTSTAGINGOWNER": 1,
       "DIESELRATE": 0,
-      "AGEOFTRUCK": 0,
+      "AGEOFTRUCK":this.AGEOFTRUCK_option[4].val,
       "RFPDESC": '',
       "DUEDATE": '1800-01-01 00:00:00',
       "PRODUCTDESC": '',
@@ -103,7 +108,7 @@ export class RFPOverallController {
       "SEARCH1": '',
       "SEARCH2": '',
       "SEARCH3": '',
-      "PAYMENTTERM": 0,
+      "PAYMENTTERM": this.PAYMENTTERM_option[3].val,
       "RATEUOM": this.RATEUOM_option[1].val,
       "PENALITIES": '',
       "DETENTION": '',
@@ -116,7 +121,7 @@ export class RFPOverallController {
       "CONTACTNO": '',
       "CASHACCOUNTID": '',
       "TOTALSPEND": '',
-      "PROXIDISTANCE": 100
+      "PROXIDISTANCE": 10
     };
 
   }

@@ -383,3 +383,81 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="myModalBrowse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">
+        Import Routes
+        </h4>
+      </div>
+      <div class="modal-body">
+        <!--<div>
+          <input id="filePicker" type="file" name="Package" file-model="myFile" />
+          <br />
+          <button title="upload" ng-click="rfplanes.uploadFile()">
+          <span>Upload</span>
+          </button>
+        </div>-->
+        <fieldset>
+          <legend>Upload on form submit</legend>
+          <input type="file" ngf-select ng-model="rfplanes.file" name="file"
+          accept="excel/*" ngf-max-size="2MB" required
+          ngf-model-invalid="rfplanes.errorFile">
+          <i ng-show="myForm.file.$error.required">*required</i><br>
+          <i ng-show="myForm.file.$error.maxSize">File too large
+          {{rfplanes.errorFile.size / 1000000|number:1}}MB: max 2M</i>
+          <button
+          ng-click="rfplanes.uploadFile(rfplanes.file)">Submit</button>
+          <span class="progress" ng-show="rfplanes.file.progress >= 0">
+            <div style="width:{{rfplanes.file.progress}}%"
+            ng-bind="rfplanes.file.progress + '%'"></div>
+          </span>
+          <span ng-show="rfplanes.file.result">Upload Successful</span>
+          <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
+        </fieldset>
+        <!--<input name="myFile" type="file" />-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+        Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModalBrowse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">
+        Import Routes
+        </h4>
+      </div>
+      <div class="modal-body">
+        <fieldset>
+          <legend>Upload on form submit</legend>
+          <input type="file" ngf-select ng-model="rfplanes.file" name="file"
+          accept="excel/*" ngf-max-size="2MB" required
+          ngf-model-invalid="rfplanes.errorFile">
+          <i ng-show="myForm.file.$error.required">*required</i><br>
+          <i ng-show="myForm.file.$error.maxSize">File too large
+          {{rfplanes.errorFile.size / 1000000|number:1}}MB: max 2M</i>
+          <button
+          ng-click="rfplanes.uploadFile(rfplanes.file)">Submit</button>
+          <span class="progress" ng-show="rfplanes.file.progress >= 0">
+            <div style="width:{{rfplanes.file.progress}}%"
+            ng-bind="rfplanes.file.progress + '%'"></div>
+          </span>
+          <span ng-show="rfplanes.file.result">Upload Successful</span>
+          <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
+        </fieldset>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+        Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
