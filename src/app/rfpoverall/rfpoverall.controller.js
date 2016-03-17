@@ -211,7 +211,7 @@ export class RFPOverallController {
     var rfpHeaderURL = 'rfp/INSERT';
 
     this._api.post(rfpHeaderURL, rfpHeader).then((response) => {
-      this.$state.go('rfpdetails', {
+      this.$state.go('lanes', {
         rfpid: response.data.rfpResult[0].RFPID,
         iswarehousing: this.overall.ISHUBORWHREQ
       });

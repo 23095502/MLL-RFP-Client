@@ -1,11 +1,10 @@
 export class LanesController {
-  constructor($http, $stateParams, $timeout, Upload, masterService, apiService) {
+  constructor($state, $stateParams, $timeout, Upload, masterService, apiService) {
 
     'ngInject';
 
     this.routes = [];
     this.routes = [];
-    this.$http = $http;
     this.$timeout = $timeout;
     this.$stateParams = $stateParams;
     this.Upload = Upload;
@@ -13,6 +12,7 @@ export class LanesController {
     this.statename_option = [];
     this.isSERVICETYPE_option = [];
     this._api = apiService;
+    this.$state = $state;
 
     this.locationname_option = [];
     this.vehicletype = {
@@ -239,18 +239,18 @@ export class LanesController {
     var newfilterRoutes = {
       rfproute: filterRoutes
     };
-    var req = {
+    /*var req = {
       method: 'POST',
       url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/routeupdate',
       headers: {
         'Content-Type': 'application/json'
       },
       data: newfilterRoutes
-    };
+    };*/
 
-    this.$http(req).then((r)=> {
+    this._api.post('routeupdate', newfilterRoutes).then((r)=> {
       //alert('Data Saved Successfully...');
-      this.apiService.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
+      this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
         this.$state.go('dashboard');
       }, (err) => {
         console.error(err);
