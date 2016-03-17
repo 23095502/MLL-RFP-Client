@@ -73,11 +73,13 @@
         </select>
       </div>
     </div>
-    <div class="col-md-2 text-left">
+    <!--<div class="col-md-2 text-left">
       <button type="button" class="btn btn-primary" ng-click="rfpoutput.ClearFilter()">Clear Filter</button>
-    </div>
-    <div class="col-md-6 text-right">
-      <button type="button" class="btn btn-primary" ng-click="rfpoutput.submit()">Submit</button>
+    </div>-->
+    <div class="col-md-8 text-right">
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" ng-click="rfpoutput.submit()">Submit</button>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -107,11 +109,11 @@
           <tr ng-repeat="outputdata in rfpoutput.outputdata | filter:{FROMLOCATIONNAME : rfpoutput.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : rfpoutput.filterOption.VEHICLETYPENAME}">
             <td>{{outputdata.TOLOCATIONNAME}}</td>
             <td>{{outputdata.CLEANSHEETRATE}}</td>
-            <td ng-click="rfpoutput.showModal('contract', outputdata)">{{outputdata.CONTRACTRATE}}</td>
+            <td ng-click="rfpoutput.showModal('contract', outputdata, 'CONTRACTRATE')">{{outputdata.CONTRACTRATE}}</td>
             <td>{{outputdata.SHIPXRATE}}</td>
-            <td ng-click="rfpoutput.showModal('rfphistory', outputdata)">{{outputdata.PVSRFPRATE}}</td>
+            <td ng-click="rfpoutput.showModal('rfphistory', outputdata, 'PVSRFPRATE')">{{outputdata.PVSRFPRATE}}</td>
             <td>{{outputdata.MARKETRATE}}</td>
-            <td ng-click="rfpoutput.showModal('backhaul', outputdata)">{{outputdata.BACKHAULAVL}}</td>
+            <td ng-click="rfpoutput.showModal('backhaul', outputdata, 'BACKHAULAVL')">{{outputdata.BACKHAULAVL}}</td>
             <td>{{outputdata.L1}}</td>
             <td>{{outputdata.L2}}</td>
             <td>{{outputdata.L3}}</td>
@@ -129,7 +131,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">
-        Variable Contract Rates
+        <b>VARIABLE CONTRACT RATES FOR:</b>
         </h4>
       </div>
       <div class="modal-body">
@@ -151,7 +153,7 @@
                     Vehicle Type
                   </div>
                   <div class="col-sm-2">
-                    Pricing
+
                   </div>
                 </div>
                 <div class="row">
@@ -168,12 +170,13 @@
                     <b>{{rfpoutput.filterOption.VEHICLETYPENAME}}</b>
                   </div>
                   <div class="col-sm-2">
-                    <b>'Pricing in ('000 INR')</b>
+                    'Pricing in ('000 INR')
                   </div>
                 </div>
+                <hr/>
                 <div class="row">
                   <div class="col-sm-12">
-                  {{rfpoutput.selectedrow}}
+                    {{rfpoutput.selectedrow}}
                     <table class="table mll-table">
                       <thead>
                         <tr>
@@ -187,7 +190,6 @@
                       </thead>
                       <tbody>
                         <tr ng-repeat="griddata in rfpoutput.gridData">
-
                           <td>
                             <input type="radio" ng-click="rfpoutput.updateContractRate(griddata)"  name="optradio">
                           {{griddata.ORIGIN}}</td>
