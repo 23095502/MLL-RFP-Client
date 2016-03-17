@@ -1,12 +1,6 @@
 export function routerConfig($stateProvider, $urlRouterProvider) {
   'ngInject';
   $stateProvider
-    .state('home', {
-      url: '/',
-      templateUrl: 'app/dashboard/dashboard.html',
-      controller: 'DashboardController',
-      controllerAs: 'dash'
-    })
 
   .state('rfpoverall', {
     url: '/create/overall',
@@ -37,7 +31,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
   })
 
   .state('rfplogin', {
-    url: '/login',
+    url: '/',
     templateUrl: 'app/rfplogin/rfplogin.html',
     controller: 'RFPLoginControler',
     controllerAs: 'rfplogin'
