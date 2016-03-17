@@ -230,8 +230,6 @@ export class RFPOverallController {
     }
 
     this.$http(req).then((response) => {
-      //console.log(response.data.rfpResult[0].RFPID);
-      //this.rfpid = response.data.rfpResult[0].RFPID;
       this.$state.go('rfpdetails',{rfpid: response.data.rfpResult[0].RFPID, iswarehousing: this.overall.ISHUBORWHREQ});
 
     }, (error) => {
