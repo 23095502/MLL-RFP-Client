@@ -6,7 +6,13 @@ export class RFPDashboardController {
     this.dashboarddata = [];
 
     apiService.get('getrfplist/getall').then((res) => {
-      this.dashboarddata = res.data;
+      var data = res.data;
+      data = _.map(data, (row) => {
+        row.RFPDATE = new Date(row.RFPDATE);
+        row.DUEDATE = new Date(row.DUEDATE);
+        return row;
+      })
+      this.dashboarddata = data;
     }, (err) => {
       console.error(err);
     });
