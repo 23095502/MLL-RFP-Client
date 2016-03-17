@@ -1,16 +1,34 @@
 export class RFPDetailsController {
-  constructor($http, $stateParams, $timeout, Upload) {
+constructor($http, $stateParams, $timeout, Upload) {
+
     'ngInject';
+
+    this.iswarehousing = $stateParams.iswarehousing;
+    (this.iswarehousing === 'Y') ? this.iswarehousing = true: this.iswarehousing = false;
 
     //GET RFP DETAILS
     this.routes = [];
     $http({
       method: 'GET',
       url: `http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpid}`
-        //url: 'http://localhost:20572/RFPTool/RFPRestService.svc/getrfproutebyid/1'
 
     }).then((res) => {
+
       this.routes = res.data;
+
+      $timeout(function() {
+        let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth));
+        let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 td'), (td) => (td.offsetWidth));
+        let finalWidth = _.chain(div4BodyWidth)
+          .map((item, i) => Math.max(item, div2HeadWidth[i]))
+          .reject((item) => (_.isNaN(item)))
+          .value();
+
+        // _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth = 100));
+        console.log(finalWidth);
+      });
+
+
     }, (err) => {
       console.error(err);
     });
@@ -68,14 +86,14 @@ export class RFPDetailsController {
     //GET VEHICLETYPE
 
     //GET PACKAGINGTYPE
-    this.isPACKAGETYPEID_option = _.map(['Pallet', 'Corrugated Boxes', 'Bags', 'Trolley', 'Loose'], (i, d) => ({
+    this.isPACKAGETYPEID_option = _.map(['', 'Pallet', 'Corrugated Boxes', 'Bags', 'Trolley', 'Loose'], (i, d) => ({
       name: d,
       val: i
     }));
 
 
     //GET SERVICETYPE
-    this.isSERVICETYPE_option = _.map(['PTL', 'FTL', 'PTL Conventional'], (i) => ({
+    this.isSERVICETYPE_option = _.map(['FTL', 'ODC', 'Surface Exp', 'PTL Conventional', 'Fixed Vehicle', 'Air Express'], (i) => ({
       name: i,
       val: i
     }));
@@ -86,8 +104,23 @@ export class RFPDetailsController {
     this.$http = $http;
     this.$stateParams = $stateParams;
     this.Upload = Upload;
-    // this.$timeout = $timeout;
+    this.isServiceTypeODC;
 
+    document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function(e) {
+      //console.log(e.target.scrollTop);
+      // console.dir(document.querySelector('.tbody-div3 table'));
+      document.querySelector('.tbody-div3 table').style.top = `-${e.target.scrollTop}px`;
+      document.querySelector('.thead-div2 table').style.left = `-${e.target.scrollLeft}px`;
+    });
+  }
+
+
+  changePackageDimension() {
+    if (this.route.SERVICETYPE == 'ODC') {
+      this.isServiceTypeODC = true;
+    } else {
+      this.isServiceTypeODC = false;
+    }
   }
 
   resetRoute() {
@@ -110,12 +143,12 @@ export class RFPDetailsController {
       "MHEREQUIREMENT": 'NA',
       "NOOFTRIPS": 0,
       "OTHERREQUIREMENT": 'NA',
-      "PACKAGETYPEID": 0,
+      "PACKAGETYPEID": this.isPACKAGETYPEID_option[0].val,
       "PACKDIMENSION": 'NA',
       "RFPDURATION": 0,
       "RFPID": 1,
       "RFPVOLUME": 0,
-      "SERVICETYPE": '',
+      "SERVICETYPE": this.isSERVICETYPE_option[0].val,
       "STACKINGNORMS": '',
       "TOLOCATION": 0,
       "TOLOCATIONNAME": '',
@@ -213,7 +246,8 @@ export class RFPDetailsController {
     }
 
     this.$http(req).then(function(r) {
-      console.log(r);
+      //console.log(r);
+      alert('Data Saved SUccessfully...');
     }, function(e) {
       console.error(e);
     });
