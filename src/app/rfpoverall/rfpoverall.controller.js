@@ -97,7 +97,7 @@ export class RFPOverallController {
       "RFPOWNER": 1,
       "CURRENTSTAGINGOWNER": 1,
       "DIESELRATE": 0,
-      "AGEOFTRUCK":this.AGEOFTRUCK_option[4].val,
+      "AGEOFTRUCK": this.AGEOFTRUCK_option[4].val,
       "RFPDESC": '',
       "DUEDATE": '1800-01-01 00:00:00',
       "PRODUCTDESC": '',
@@ -230,9 +230,8 @@ export class RFPOverallController {
     }
 
     this.$http(req).then((response) => {
-      //console.log(response.data.rfpResult[0].RFPID);
-      //this.rfpid = response.data.rfpResult[0].RFPID;
-      this.$state.go('rfpdetails', {
+
+      this.$state.go('create/lanes/', {
         rfpid: response.data.rfpResult[0].RFPID,
         iswarehousing: this.overall.ISHUBORWHREQ
       });

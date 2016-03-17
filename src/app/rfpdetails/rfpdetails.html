@@ -4,10 +4,10 @@
     <div class="col-sm-4 text-center">
       <div class="btn-group" data-toggle="buttons" >
         <label class="btn btn-default btn-rounded">
-          <input name="togglebutton" type="checkbox" autocomplete="off" checked>Overall Details
+          <input name="togglebutton" type="checkbox" autocomplete="off">Overall Details
         </label>
         <label class="btn btn-default btn-rounded active">
-          <input name="togglebutton" type="checkbox" autocomplete="off"> Lane Details
+          <input name="togglebutton" type="checkbox" autocomplete="off" checked> Lane Details
         </label>
       </div>
     </div>
@@ -28,16 +28,16 @@
       <thead>
         <tr>
           <th>
-            From City
+            <span>From City</span>
           </th>
           <th>
-            From State
+            <span>From State</span>
           </th>
           <th>
-            To City
+            <span>To City</span>
           </th>
           <th>
-            To State
+            <span>To State</span>
           </th>
         </tr>
       </thead>
@@ -48,58 +48,25 @@
       <thead>
         <tr>
           <th>
-            One way / Round trip
+            <span>One way / Round trip</span>
           </th>
           <th>
-            Service Type
+            <span>Service Type</span>
           </th>
           <th>
-            Vehicle Type
+            <span>Vehicle Type</span>
           </th>
           <th>
-            Transit Time
+            <span>Distance oneway</span>
           </th>
           <th>
-            Product Description
+            <span>Loading unloading time</span>
           </th>
           <th>
-            Packaging Type
+            <span>No. of Trips</span>
           </th>
           <th>
-            Stack
-          </th>
-          <th>
-            Customer Target Rate
-          </th>
-          <th>
-            Package Dimension
-          </th>
-          <th>
-            Average Load
-          </th>
-          <th>
-            Loading / Unloading charges
-          </th>
-          <th>
-            Other Requirement
-          </th>
-          <th>
-            MHE Requirement
-          </th>
-          <th>
-            Frequency
-          </th>
-          <th>
-            Distance oneway
-          </th>
-          <th>
-            Loading unloading time
-          </th>
-          <th>
-            No. of Trips
-          </th>
-          <th>
-            Backhaul (%)
+            <span>Backhaul (%)</span>
           </th>
         </tr>
       </thead>
@@ -115,16 +82,16 @@
         </tr> -->
         <tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">
           <td>
-            {{rfplanes.map(route.FROMLOCATION, rfplanes.locationname_option, 'LOCATIONID', 'LOCATIONNAME')}}
+           <span>{{rfplanes.map(route.FROMLOCATION, rfplanes.locationname_option, 'LOCATIONID', 'LOCATIONNAME')}}</span>
           </td>
           <td>
-            {{rfplanes.map(route.FROMSTATEID, rfplanes.statename_option, 'STATEID', 'STATENAME')}}
+            <span>{{rfplanes.map(route.FROMSTATEID, rfplanes.statename_option, 'STATEID', 'STATECODE')}}</span>
           </td>
           <td>
-            {{rfplanes.map(route.TOLOCATION, rfplanes.locationname_option, 'LOCATIONID','LOCATIONNAME')}}
+            <span>{{rfplanes.map(route.TOLOCATION, rfplanes.locationname_option, 'LOCATIONID','LOCATIONNAME')}}</span>
           </td>
           <td>
-            {{rfplanes.map(route.TOSTATEID, rfplanes.statename_option, 'STATEID', 'STATENAME')}}
+            <span>{{rfplanes.map(route.TOSTATEID, rfplanes.statename_option, 'STATEID', 'STATECODE')}}</span>
           </td>
         </tr>
       </tbody>
@@ -141,58 +108,25 @@
 
         <tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">
           <td>
-            {{route.ISROUNDTRIP}}
+            <span>{{route.ISROUNDTRIP}}</span>
           </td>
           <td>
-            {{route.SERVICETYPE}}
+            <span>{{route.SERVICETYPE}}</span>
           </td>
           <td>
-            {{rfplanes.map(route.VEHICLETYPEID, rfplanes.vehicletypename_option, 'VEHICLETYPEID', 'VEHICLETYPENAME')}}
+            <span>{{rfplanes.map(route.VEHICLETYPEID, rfplanes.vehicletypename_option, 'VEHICLETYPEID', 'VEHICLETYPENAME')}}</span>
           </td>
           <td>
-            {{route.RFPDURATION}}
+            <span>{{route.DISTANCE}}</span>
           </td>
           <td>
-            NA
+            <span>{{route.LOADINGUNLOADINGTIME}}</span>
           </td>
           <td>
-            {{route.PACKAGETYPEID}}
+            <span>{{route.NOOFTRIPS}}</span>
           </td>
           <td>
-            {{route.STACKINGNORMS}}
-          </td>
-          <td>
-            {{route.CUSTTARGETRATE}}
-          </td>
-          <td>
-            {{route.PACKDIMENSION}}
-          </td>
-          <td>
-            {{route.AVERAGELOAD}}
-          </td>
-          <td>
-            {{route.ISLOADUNLOADCHARG}}
-          </td>
-          <td>
-            {{route.OTHERREQUIREMENT}}
-          </td>
-          <td>
-            {{route.MHEREQUIREMENT}}
-          </td>
-          <td>
-            {{route.FREQUENCY}}
-          </td>
-          <td>
-            {{route.DISTANCE}}
-          </td>
-          <td>
-            {{route.LOADINGUNLOADINGTIME}}
-          </td>
-          <td>
-            {{route.NOOFTRIPS}}
-          </td>
-          <td>
-            {{route.BACKHAUL}}
+            <span>{{route.BACKHAUL}}</span>
           </td>
         </tr>
       </tbody>
