@@ -1,11 +1,18 @@
 export class RFPCustomerController {
-  constructor($http, masterService) {
+  constructor($http) {
     'ngInject';
 
     this.$http = $http;
     this.customer = []
     this.resetCustomer();
-    this.customer = masterService.getCustomers();
+
+
+    $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/customer/0')
+      .then((res) => {
+        this.customer = res.data;
+      }, (err) => {
+        console.error(err);
+      });
   }
 
   resetCustomer() {
