@@ -74,7 +74,6 @@ export class RFPOutputController {
     this.selectedLane = table;
     this.rowClickedColName = clickedColName;
 
-    /*
     this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
     this.inproxiparam.ORIGINSTATE = this.outputdata[0].FROMSTATE;
     this.inproxiparam.DESTINATION = this.outputdata[0].TOLOCATIONNAME;
@@ -82,8 +81,6 @@ export class RFPOutputController {
     this.inproxiparam.VEHICLETYPE = this.filterOption.VEHICLETYPENAME;
     this.inproxiparam.DISTANCE = this.outputdata[0].DISTANCE;
     this.inproxiparam.NOOFTRIPS = this.outputdata[0].NOOFTRIPS;
-    console.log(this.inproxiparam);
-    */
 
     var newfilterRoutes = '{"inproxiparam":' + JSON.stringify(this.inproxiparam) + '}';
 
