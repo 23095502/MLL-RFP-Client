@@ -15,7 +15,7 @@
       <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
       <i class="glyphicon glyphicon-plus"></i>  Add Route
       </button>
-      <button class="btn btn-default btn-xs">
+      <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalBrowse">
       <i class="glyphicon glyphicon-import"></i>  Import Routes
       </button>
     </div>
@@ -82,7 +82,7 @@
         </tr> -->
         <tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">
           <td>
-           <span>{{rfplanes.map(route.FROMLOCATION, rfplanes.locationname_option, 'LOCATIONID', 'LOCATIONNAME')}}</span>
+            <span>{{rfplanes.map(route.FROMLOCATION, rfplanes.locationname_option, 'LOCATIONID', 'LOCATIONNAME')}}</span>
           </td>
           <td>
             <span>{{rfplanes.map(route.FROMSTATEID, rfplanes.statename_option, 'STATEID', 'STATECODE')}}</span>
@@ -105,7 +105,6 @@
             {{$index}} , {{j}} {{$index}} , {{j}} {{$index}} , {{j}} {{$index}} , {{j}} {{$index}} , {{j}} {{$index}} , {{j}}
           </td>
         </tr> -->
-
         <tr ng-dblclick="rfplanes.edit(route, $index)" ng-repeat="route in rfplanes.routes">
           <td>
             <span>{{route.ISROUNDTRIP}}</span>
