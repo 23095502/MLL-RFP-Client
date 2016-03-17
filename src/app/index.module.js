@@ -10,6 +10,7 @@ import { DashboardController } from './dashboard/dashboard.controller';
 import { RFPOutputController } from './rfpoutputdetails/rfpoutputdetails.controller';
 import { RFPDetailsController } from './rfpdetails/rfpdetails.controller';
 import { apiService } from '../app/components/api/api.service';
+import { masterService } from '../app/components/master/master.service';
 
 
 angular.module('mllRfpClient', ['ui.router', 'ngFileUpload'])
@@ -22,4 +23,5 @@ angular.module('mllRfpClient', ['ui.router', 'ngFileUpload'])
   .controller('DashboardController', DashboardController)
   .controller('RFPOutputController', RFPOutputController)
   .controller('RFPDetailsController', RFPDetailsController)
-  .service('apiService', apiService);
+  .service('apiService', apiService)
+  .service('masterService', masterService);

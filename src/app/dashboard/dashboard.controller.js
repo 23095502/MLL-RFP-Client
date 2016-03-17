@@ -1,11 +1,19 @@
 export class DashboardController {
-  constructor($http, $state, apiService) {
+  constructor($http, $state, apiService, masterService) {
     'ngInject';
     this.$http = $http;
     this.$state = $state;
     this.rfps = [];
+    this._api = apiService;
+    this._master = masterService;
 
-    apiService.get('getrfplist/getall').then((res) => {
+  }
+
+  init() {
+
+    this._master.init();
+
+    this._api.get('getrfplist/getall').then((res) => {
       var rfps = res.data;
       rfps = _.map(rfps, (rfp) => {
         rfp.RFPDATE = new Date(rfp.RFPDATE);
@@ -16,6 +24,7 @@ export class DashboardController {
     }, (err) => {
       console.error(err);
     });
+
   }
 
   click(id) {
@@ -27,4 +36,6 @@ export class DashboardController {
   createRFP() {
     this.$state.go("rfpoverall");
   }
+
+
 }
