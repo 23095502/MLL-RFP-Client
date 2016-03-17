@@ -37,11 +37,11 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     controllerAs: 'login'
   })
 
-  .state('rfpoutputdetails', {
+  .state('output', {
     url: '/output/:rfpId',
-    templateUrl: 'app/rfpoutputdetails/rfpoutputdetails.html',
-    controller: 'RFPOutputController',
-    controllerAs: 'rfpoutput'
+    templateUrl: 'app/output/output.html',
+    controller: 'OutputController',
+    controllerAs: 'output'
   })
 
 

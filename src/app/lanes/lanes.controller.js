@@ -6,11 +6,13 @@ export class LanesController {
     this.routes = [];
     this.routes = [];
     this.$http = $http;
+    this.$timeout = $timeout;
     this.$stateParams = $stateParams;
     this.Upload = Upload;
     this.isServiceTypeODC;
     this.statename_option = [];
     this.isSERVICETYPE_option = [];
+    this._api = apiService;
 
     this.locationname_option = [];
     this.vehicletype = {
@@ -61,13 +63,13 @@ export class LanesController {
     let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 td'), (td) => (td.offsetWidth));
 
     let finalFrozenWidth = _.chain(div3BodyWidth)
-      .map((item, i) => Math.max(item, div1HeadWidth[i]))
+      .map((item, i) => Math.min(item, div1HeadWidth[i]))
       .reject((item) => (_.isNaN(item)))
       .value();
 
     //Fix width for div1 (left head) & div3 (left body)
-    let div1Head = document.querySelectorAll('.thead-div2 th');
-    let div3Body = document.querySelectorAll('.tbody-div4 td');
+    let div1Head = document.querySelectorAll('.thead-div1 th');
+    let div3Body = document.querySelectorAll('.tbody-div3 td');
 
     _.each(finalFrozenWidth, (list, key) => {
       div1Head[key].children[0].style.width = finalFrozenWidth[key] + 'px';
@@ -131,7 +133,7 @@ export class LanesController {
       "PACKAGETYPEID": 1,
       "PACKDIMENSION": 'NA',
       "RFPDURATION": 0,
-      "RFPID": 1,
+      "RFPID": this.$stateParams.rfpid,
       "RFPVOLUME": 0,
       "SERVICETYPE": this.isSERVICETYPE_option[0].val,
       "STACKINGNORMS": '',
@@ -161,7 +163,7 @@ export class LanesController {
     this.route.LOCATIONNAME = '';
     this.route.MHEREQUIREMENT = 'NA';
     this.route.PACKDIMENSION = 'NA';
-    this.route.RFPID = 0;
+    this.route.RFPID = this.$stateParams.rfpid;
     this.route.RFPVOLUME = 0;
     this.route.SEARCH1 = '';
     this.route.SEARCH2 = '';
@@ -175,7 +177,7 @@ export class LanesController {
 
     //---------------------
     //set width to route grid columns
-    this.setupRoutTable();
+    this.$timeout(this.adjustScrollableTable);
     //---------------------
     $('#myModal').modal('hide');
   }
@@ -198,7 +200,7 @@ export class LanesController {
     this.editingIndex = null;
     //---------------------
     //set width to route grid columns
-    // this.setupRoutTable();
+    this.$timeout$timeout(this.adjustScrollableTable);
     //---------------------
     $('#myModal').modal('hide');
   }
@@ -210,7 +212,7 @@ export class LanesController {
     this.editingIndex = null;
     //---------------------
     //set width to route grid columns
-    this.setupRoutTable();
+    this.$timeout(this.adjustScrollableTable);
     //---------------------
     $('#myModal').modal('hide');
   }
@@ -248,7 +250,12 @@ export class LanesController {
 
     this.$http(req).then((r)=> {
       //alert('Data Saved Successfully...');
-      this.$state.go('rfpdashboard');
+      this.apiService.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
+        this.$state.go('dashboard');
+      }, (err) => {
+        console.error(err);
+      });
+
     }, (e)=> {
       console.error(e);
     });

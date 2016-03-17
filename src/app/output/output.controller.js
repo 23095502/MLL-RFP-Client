@@ -1,10 +1,10 @@
-export class RFPOutputController {
+export class OutputController {
   constructor($http, $stateParams) {
     'ngInject';
 
     this.outputdata = [];
 
-
+    this.$stateParams = $stateParams;
     this.$http = $http;
     this.gridData = [];
     this.inproxiparam = {
@@ -36,7 +36,35 @@ export class RFPOutputController {
       'cleansheet': ''
     }
 
-    $http.get(`http://59.160.18.222/RFPRest/RFPRestService.svc/gettrans/${$stateParams.rfpId}`)
+    this.getTransactionData();
+
+    /*$http.get(`http://59.160.18.222/RFPRest/RFPRestService.svc/gettrans/${$stateParams.rfpId}`)
+      .then((res) => {
+        this.outputdata = res.data;
+        this.nameoutputdata = this.outputdata[0];
+        this.fromLocationOptions = _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
+        this.routesGroupByLocation = _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
+
+        _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+          this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+        });
+
+        this.filterOption = {
+          FROMLOCATIONNAME: this.fromLocationOptions[0].FROMLOCATIONNAME,
+          VEHICLETYPENAME: this.fromLocationOptions[0].VEHICLETYPENAME
+        };
+
+        this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+
+      }, (err) => {
+        console.error(err);
+      });*/
+
+
+  }
+
+  getTransactionData(){
+    this.$http.get(`http://59.160.18.222/RFPRest/RFPRestService.svc/gettrans/${this.$stateParams.rfpId}`)
       .then((res) => {
         this.outputdata = res.data;
         this.nameoutputdata = this.outputdata[0];
@@ -57,8 +85,6 @@ export class RFPOutputController {
       }, (err) => {
         console.error(err);
       });
-
-
   }
 
   ClearFilter() {
@@ -74,7 +100,7 @@ export class RFPOutputController {
     this.selectedLane = table;
     this.rowClickedColName = clickedColName;
 
-    /*
+
     this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
     this.inproxiparam.ORIGINSTATE = this.outputdata[0].FROMSTATE;
     this.inproxiparam.DESTINATION = this.outputdata[0].TOLOCATIONNAME;
@@ -82,8 +108,7 @@ export class RFPOutputController {
     this.inproxiparam.VEHICLETYPE = this.filterOption.VEHICLETYPENAME;
     this.inproxiparam.DISTANCE = this.outputdata[0].DISTANCE;
     this.inproxiparam.NOOFTRIPS = this.outputdata[0].NOOFTRIPS;
-    console.log(this.inproxiparam);
-    */
+
 
     var newfilterRoutes = '{"inproxiparam":' + JSON.stringify(this.inproxiparam) + '}';
 
@@ -156,7 +181,7 @@ export class RFPOutputController {
 
     }).value();
 
-    var newRFPOutputDetails = '{"apptrans":' + JSON.stringify(revisedOutput) + '}';
+    var newOutputDetails = '{"apptrans":' + JSON.stringify(revisedOutput) + '}';
 
     var req = {
       method: 'POST',
@@ -164,13 +189,12 @@ export class RFPOutputController {
       headers: {
         'Content-Type': 'application/json'
       },
-
-      data: newRFPOutputDetails
+      data: newOutputDetails
     }
 
     this.$http(req).then((res) => {
-    console.log(res.data);
-    //console.log(this.gridData);
+      //console.log(res.data);
+      this.getTransactionData();
     }, (err) => {
       console.error(err);
     });
