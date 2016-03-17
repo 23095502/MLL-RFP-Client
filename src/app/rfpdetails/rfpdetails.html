@@ -525,13 +525,6 @@
         </h4>
       </div>
       <div class="modal-body">
-        <!--<div>
-          <input id="filePicker" type="file" name="Package" file-model="myFile" />
-          <br />
-          <button title="upload" ng-click="rfplanes.uploadFile()">
-          <span>Upload</span>
-          </button>
-        </div>-->
         <fieldset>
           <legend>Upload on form submit</legend>
           <input type="file" ngf-select ng-model="rfplanes.file" name="file"
@@ -549,7 +542,6 @@
           <span ng-show="rfplanes.file.result">Upload Successful</span>
           <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
         </fieldset>
-        <!--<input name="myFile" type="file" />-->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">

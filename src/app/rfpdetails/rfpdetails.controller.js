@@ -223,7 +223,7 @@ export class RFPDetailsController {
   uploadFile(file) {
 
     this.Upload.upload({
-      url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/1/${file.name}/1`,
+      url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/1/Routeupload/1`,
       data: {
         file: file
       }
