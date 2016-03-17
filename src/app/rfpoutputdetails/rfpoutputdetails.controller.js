@@ -31,9 +31,9 @@ export class RFPOutputController {
 
   changecolor(toMatch, approvedRate) {
     if (toMatch >= approvedRate) {
-      return 'above'
-    } else {
       return 'below'
+    } else {
+      return 'above'
 
     }
   }
