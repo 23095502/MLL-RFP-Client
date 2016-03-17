@@ -8,7 +8,7 @@ import { CustomerController } from './customer/customer.controller';
 import { LoginController } from './login/login.controller';
 import { DashboardController } from './dashboard/dashboard.controller';
 import { RFPOutputController } from './rfpoutputdetails/rfpoutputdetails.controller';
-import { RFPDetailsController } from './rfpdetails/rfpdetails.controller';
+import { LanesController } from './lanes/lanes.controller';
 import { apiService } from '../app/components/api/api.service';
 import { masterService } from '../app/components/master/master.service';
 
@@ -22,6 +22,6 @@ angular.module('mllRfpClient', ['ui.router', 'ngFileUpload'])
   .controller('LoginController', LoginController)
   .controller('DashboardController', DashboardController)
   .controller('RFPOutputController', RFPOutputController)
-  .controller('RFPDetailsController', RFPDetailsController)
+  .controller('LanesController', LanesController)
   .service('apiService', apiService)
   .service('masterService', masterService);

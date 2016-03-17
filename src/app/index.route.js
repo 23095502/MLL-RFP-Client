@@ -16,11 +16,11 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     controllerAs: 'cust'
   })
 
-  .state('rfpdetails', {
+  .state('lanes', {
     url: '/create/lanes/:rfpid/:iswarehousing',
-    templateUrl: 'app/rfpdetails/rfpdetails.html',
-    controller: 'RFPDetailsController',
-    controllerAs: 'rfplanes'
+    templateUrl: 'app/lanes/lanes.html',
+    controller: 'LanesController',
+    controllerAs: 'lane'
   })
 
   .state('dashboard', {

@@ -1,16 +1,16 @@
-export class RFPDetailsController {
-  constructor($http, $stateParams, $timeout, Upload) {
+export class LanesController {
+  constructor($http, $stateParams, $timeout, Upload, masterService, apiService) {
 
     'ngInject';
 
     this.routes = [];
-    this.routes = []
-    this.resetRoute();
+    this.routes = [];
     this.$http = $http;
     this.$stateParams = $stateParams;
     this.Upload = Upload;
     this.isServiceTypeODC;
     this.statename_option = [];
+    this.isSERVICETYPE_option = [];
     this.locationname_option = [];
     this.vehicletype = {
       "VEHICLETYPEID": null,
@@ -24,75 +24,9 @@ export class RFPDetailsController {
     this.iswarehousing = $stateParams.iswarehousing;
     (this.iswarehousing === 'Y') ? this.iswarehousing = true: this.iswarehousing = false;
 
-    //GET RFP DETAILS
-
-    $http({
-      method: 'GET',
-      url: `http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpid}`
-    }).then((res) => {
-
+    apiService.get(`getrfproutebyid/${$stateParams.rfpid}`).then((res) => {
       this.routes = res.data;
-
-      $timeout(function() {
-        let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.offsetWidth));
-        let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 td'), (td) => (td.offsetWidth));
-
-        let finalFrozenWidth = _.chain(div3BodyWidth)
-          .map((item, i) => Math.max(item, div1HeadWidth[i]))
-          .reject((item) => (_.isNaN(item)))
-          .value();
-
-        //Fix width for div1 (left head) & div3 (left body)
-        let div1Head = document.querySelectorAll('.thead-div2 th');
-        let div3Body = document.querySelectorAll('.tbody-div4 td');
-
-        _.each(finalFrozenWidth, (list, key) => {
-          div1Head[key].children[0].style.width = finalFrozenWidth[key] + 'px';
-          div3Body[key].children[0].style.width = finalFrozenWidth[key] + 'px';
-        });
-
-
-        let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth));
-        let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 td'), (td) => (td.offsetWidth));
-        let finalWidth = _.chain(div4BodyWidth)
-          .map((item, i) => Math.max(item, div2HeadWidth[i]))
-          .reject((item) => (_.isNaN(item)))
-          .value();
-
-
-        //Fix width for div2 (right head) & div4 (right body)
-        let div2Head = document.querySelectorAll('.thead-div2 th');
-        let div4Body = document.querySelectorAll('.tbody-div4 td');
-
-        _.each(finalWidth, (list, key) => {
-          div2Head[key].children[0].style.width = finalWidth[key] + 'px';
-          div4Body[key].children[0].style.width = finalWidth[key] + 'px';
-        });
-      }, 500);
-
-    }, (err) => {
-      console.error(err);
-    });
-    //GET RFP DETAILS
-
-    //GET LOCATIONS
-
-    $http({
-      method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/location/0'
-    }).then((res) => {
-      this.locationname_option = res.data;
-    }, (err) => {
-      console.error(err);
-    });
-    //GET LOCATIONS
-
-    //GET STATES
-    $http({
-      method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/state/0'
-    }).then((res) => {
-      this.statename_option = res.data;
+      $timeout(this.adjustScrollableTable);
     }, (err) => {
       console.error(err);
     });
@@ -102,39 +36,67 @@ export class RFPDetailsController {
       "STATENAME": null,
       "STATECODE": null
     };
-    //GET STATES
 
-    //GET VEHICLETYPE
-    this.vehicletypename_option = [];
-    $http({
-      method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/vehicletypes/0'
-    }).then((res) => {
-      this.vehicletypename_option = res.data;
-    }, (err) => {
-      console.error(err);
-    });
-    //GET VEHICLETYPE
-
-    //GET PACKAGINGTYPE
-    this.isPACKAGETYPEID_option = _.map(['', 'Pallet', 'Corrugated Boxes', 'Bags', 'Trolley', 'Loose'], (i, d) => ({
-      name: d,
-      val: i
-    }));
-
-    //GET SERVICETYPE
-    this.isSERVICETYPE_option = _.map(['FTL', 'ODC', 'Surface Exp', 'PTL Conventional', 'Fixed Vehicle', 'Air Express'], (i) => ({
-      name: i,
-      val: i
-    }));
-    //GET SERVICETYPE
+    this.locationname_option = masterService.getLocations();
+    this.statename_option = masterService.getStates();
+    this.vehicletypename_option = masterService.getVehicleTypes();
+    this.isPACKAGETYPEID_option = this.prepareForDropdown(['', 'Pallet', 'Corrugated Boxes', 'Bags', 'Trolley', 'Loose']);
+    this.isSERVICETYPE_option = this.prepareForDropdown(['FTL', 'ODC', 'Surface Exp', 'PTL Conventional', 'Fixed Vehicle', 'Air Express']);
 
     document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function(e) {
-      //console.log(e.target.scrollTop);
-      // console.dir(document.querySelector('.tbody-div3 table'));
       document.querySelector('.tbody-div3 table').style.top = `-${e.target.scrollTop}px`;
       document.querySelector('.thead-div2 table').style.left = `-${e.target.scrollLeft}px`;
     });
+
+    this.resetRoute();
+  }
+
+  init() {
+
+  }
+
+  adjustScrollableTable() {
+    let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.offsetWidth));
+    let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 td'), (td) => (td.offsetWidth));
+
+    let finalFrozenWidth = _.chain(div3BodyWidth)
+      .map((item, i) => Math.max(item, div1HeadWidth[i]))
+      .reject((item) => (_.isNaN(item)))
+      .value();
+
+    //Fix width for div1 (left head) & div3 (left body)
+    let div1Head = document.querySelectorAll('.thead-div2 th');
+    let div3Body = document.querySelectorAll('.tbody-div4 td');
+
+    _.each(finalFrozenWidth, (list, key) => {
+      div1Head[key].children[0].style.width = finalFrozenWidth[key] + 'px';
+      div3Body[key].children[0].style.width = finalFrozenWidth[key] + 'px';
+    });
+
+
+    let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth));
+    let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 td'), (td) => (td.offsetWidth));
+    let finalWidth = _.chain(div4BodyWidth)
+      .map((item, i) => Math.max(item, div2HeadWidth[i]))
+      .reject((item) => (_.isNaN(item)))
+      .value();
+
+
+    //Fix width for div2 (right head) & div4 (right body)
+    let div2Head = document.querySelectorAll('.thead-div2 th');
+    let div4Body = document.querySelectorAll('.tbody-div4 td');
+
+    _.each(finalWidth, (list, key) => {
+      div2Head[key].children[0].style.width = finalWidth[key] + 'px';
+      div4Body[key].children[0].style.width = finalWidth[key] + 'px';
+    });
+  }
+
+  prepareForDropdown(list) {
+    return _.map(list, (i) => ({
+      name: i,
+      val: i
+    }));
   }
 
   changePackageDimension() {
