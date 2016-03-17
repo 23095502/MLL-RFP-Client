@@ -15,6 +15,24 @@ export class RFPDetailsController {
       this.routes = res.data;
 
       $timeout(function() {
+        let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.offsetWidth));
+        let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 td'), (td) => (td.offsetWidth));
+
+        let finalFrozenWidth = _.chain(div3BodyWidth)
+          .map((item, i) => Math.max(item, div1HeadWidth[i]))
+          .reject((item) => (_.isNaN(item)))
+          .value();
+
+        //Fix width for div1 (left head) & div3 (left body)
+        let div1Head = document.querySelectorAll('.thead-div2 th');
+        let div3Body = document.querySelectorAll('.tbody-div4 td');
+
+        _.each(finalFrozenWidth, (list, key) => {
+              div1Head[key].children[0].style.width = finalFrozenWidth[key]+'px';
+              div3Body[key].children[0].style.width = finalFrozenWidth[key]+'px';
+        });
+
+
         let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth));
         let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 td'), (td) => (td.offsetWidth));
         let finalWidth = _.chain(div4BodyWidth)
@@ -22,9 +40,15 @@ export class RFPDetailsController {
           .reject((item) => (_.isNaN(item)))
           .value();
 
-         // _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth = 100));
-        console.log(finalWidth);
-      });
+        //Fix width for div2 (right head) & div4 (right body)
+        let div2Head = document.querySelectorAll('.thead-div2 th');
+        let div4Body = document.querySelectorAll('.tbody-div4 td');
+
+        _.each(finalWidth, (list, key) => {
+              div2Head[key].children[0].style.width = finalWidth[key]+'px';
+              div4Body[key].children[0].style.width = finalWidth[key]+'px';
+        });
+      }, 500);
 
 
     }, (err) => {
@@ -62,7 +86,8 @@ export class RFPDetailsController {
 
     this.state = {
       "STATEID": null,
-      "STATENAME": null
+      "STATENAME": null,
+      "STATECODE": null
     };
     //GET STATES
 
