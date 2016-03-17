@@ -91,7 +91,7 @@
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
                   <label class="form-label" title="required" for="rfpvalue">RFP value (In Lakhs)<i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                  <input type="number" class="form-control input-sm" id="rfpvalue" ng-required="true" placeholder="RFP value(In Lakhs)">
+                  <input type="number" step="0.01" class="form-control input-sm" id="rfpvalue" ng-required="true" placeholder="RFP value(In Lakhs)">
                 </div>
               </div>
               <div class="col-sm-6 col-md-6">
@@ -140,7 +140,7 @@
               </div>
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
-                  <label class="form-label" for="movmenttype">Movment Type</label>
+                  <label class="form-label" for="movmenttype">Movement Type</label>
                   <select class="form-control input-sm" id="movmenttype" ng-model="rfpdetails.overall.DISTRIBUTIONTYPE" ng-options="movmenttype.name as movmenttype.val for movmenttype in rfpdetails.DISTRIBUTIONTYPE_option">
                   </select>
                 </div>
@@ -154,7 +154,7 @@
               </div>
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
-                  <label class="form-label" for="warehousingrequirment">Warehousing requirment</label>
+                  <label class="form-label" for="warehousingrequirment">Warehousing requirment <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                   <select class="form-control input-sm" id="warehousingrequirment" ng-required="true" ng-model="rfpdetails.overall.ISHUBORWHREQ" ng-options="ISHUB.val as ISHUB.name for ISHUB in rfpdetails.ISHUBORWHREQ_option">
                   </select>
                 </div>
@@ -168,7 +168,17 @@
                   </select>
                 </div>
               </div>
+
+
+<div class="col-sm-3 col-md-3">
+              <div class="form-group">
+                <label class="form-label" for="distance">Proximity distance (%)</label>
+                <input t
+                ype="number" min="0" max="100" maxlength="3" class="form-control input-sm" id="distance" placeholder="Distance" ng-model="rfpdetails.overall.PROXIDISTANCE">
+              </div>
             </div>
+</div>
+
           </div>
         </fieldset>
         <fieldset class="fieldset">
@@ -181,14 +191,15 @@
             <div class="row">
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
-                  <label class="form-label" title="required" for="paymentterms">Payment terms (days)<i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                  <input type="number" class="form-control input-sm" id="paymentterms" placeholder="Payment terms" ng-model="rfpdetails.overall.PAYMENTTERM">
+                  <label class="form-label" title="required" for="paymentterms">Payment terms (days) <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                  <select class="form-control input-sm" id="paymentterms" ng-model="rfpdetails.overall.PAYMENTTERM" ng-options="payment.name as payment.val for payment in rfpdetails.PAYMENTTERM_option"></select>
+                 <!--  <input type="number" class="form-control input-sm" id="paymentterms" placeholder="Payment terms" ng-model="rfpdetails.overall.PAYMENTTERM"> -->
                 </div>
               </div>
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
-                  <label class="form-label" for="diselrate">Diesel rate (INR)</label>
-                  <input type="number" maxlength="5" class="form-control input-sm" id="diselrate" placeholder="Diesel rate" ng-model="rfpdetails.overall.DIESELRATE">
+                  <label class="form-label" for="diselrate">Diesel rate (Rs/Litre)</label>
+                  <input type="number" maxlength="5" class="form-control input-sm" id="diselrate" placeholder="Diesel rate (Rs/Litre) " ng-model="rfpdetails.overall.DIESELRATE">
                 </div>
               </div>
               <div class="col-sm-3 col-md-3">
@@ -197,13 +208,13 @@
                 <select class="form-control input-sm" id="ageofvehicles" ng-model="rfpdetails.overall.AGEOFTRUCK" ng-options="age.name as age.val for age in rfpdetails.AGEOFTRUCK_option"></select>
               </div>
             </div>
-            <div class="col-sm-3 col-md-3">
+            <!-- <div class="col-sm-3 col-md-3">
               <div class="form-group">
                 <label class="form-label" for="distance">Proximity distance (%)</label>
                 <input t
                 ype="number" min="0" max="100" maxlength="3" class="form-control input-sm" id="distance" placeholder="Distance" ng-model="rfpdetails.overall.PROXIDISTANCE">
               </div>
-            </div>
+            </div> -->
           </div>
         </fieldset>
         <fieldset class="fieldset">
