@@ -25,6 +25,8 @@ export class RFPOutputController {
       });
 
     this.outputdata = [];
+
+
     this.$http = $http;
 
     this.inproxiparam = {
@@ -197,6 +199,19 @@ export class RFPOutputController {
     this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
     this.filterOption.VEHICLETYPENAME = this.vehicleTypeOptions[0].VEHICLETYPENAME;
 
+  }
+
+  export(){
+    //export
+    this.$http({
+      method: 'GET',
+      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/exportrfpout/1'
+    }).then((res) => {
+      window.open(res.data);
+    }, (err) => {
+      console.error(err);
+    });
+    //export
   }
 
 }
