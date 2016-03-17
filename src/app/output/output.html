@@ -3,9 +3,8 @@
     <div class="col-sm-6">
     <h1><abbr title="Request for praposal">RFP</abbr> output details</h1></div>
     <div class="col-md-6 text-right">
-      <button class="btn btn-default btn-xs" ng-click="rfpoutput.export()"> <i class="glyphicon glyphicon-export" ></i> Export
+      <button class="btn btn-default btn-xs" ng-click="output.export()"> <i class="glyphicon glyphicon-export" ></i> Export
       </button>
-      <!--  csv-header="['CUSTOMERNAME','CASHACCOUNTID','FROM']" filename="test.csv" -->
     </div>
   </div>
   <div class="row filter-details">
@@ -13,7 +12,7 @@
       <div class="form-group">
         <label class="form-label" for="name">Name</label>
         <div>
-          {{rfpoutput.nameoutputdata.CUSTOMERNAME}}
+          {{output.nameoutputdata.CUSTOMERNAME}}
         </div>
       </div>
     </div>
@@ -21,7 +20,7 @@
       <div class="form-group">
         <label class="form-label" for="address">Address</label>
         <div>
-          {{rfpoutput.nameoutputdata.ADDRESS}}
+          {{output.nameoutputdata.ADDRESS}}
         </div>
       </div>
     </div>
@@ -29,7 +28,7 @@
       <div class="form-group">
         <label class="form-label" for="contactdetails">Contact details</label>
         <div>
-          {{rfpoutput.nameoutputdata.CONTACTNO}}
+          {{output.nameoutputdata.CONTACTNO}}
         </div>
       </div>
     </div>
@@ -39,7 +38,7 @@
       <div class="form-group">
         <label class="form-label" for="contactperson">Contact person</label>
         <div>
-          {{rfpoutput.nameoutputdata.CONTACTPERSON}}
+          {{output.nameoutputdata.CONTACTPERSON}}
         </div>
       </div>
     </div>
@@ -47,7 +46,7 @@
       <div class="form-group">
         <label class="form-label" for="totallogisticsspend">Total logistics spend(In Lakhs)</label>
         <div>
-          {{rfpoutput.nameoutputdata.TOTALSPEND}}
+          {{output.nameoutputdata.TOTALSPEND}}
         </div>
       </div>
     </div>
@@ -55,7 +54,7 @@
       <div class="form-group">
         <label class="form-label" for="casshaccountid">CA$$H account ID</label>
         <div>
-          {{rfpoutput.nameoutputdata.CASHACCOUNTID}}
+          {{output.nameoutputdata.CASHACCOUNTID}}
         </div>
       </div>
     </div>
@@ -67,12 +66,12 @@
       <div class="form-inline">
         <div class="form-group">
           <label class="form-label" for="from">From</label>
-          <select class="form-control input-sm"  id="from" ng-model="rfpoutput.filterOption.FROMLOCATIONNAME" ng-options="from.FROMLOCATIONNAME as from.FROMLOCATIONNAME for from in rfpoutput.fromLocationOptions" ng-change="rfpoutput.changeLocation()"  >
+          <select class="form-control input-sm"  id="from" ng-model="output.filterOption.FROMLOCATIONNAME" ng-options="from.FROMLOCATIONNAME as from.FROMLOCATIONNAME for from in output.fromLocationOptions" ng-change="output.changeLocation()"  >
           </select>
         </div>
         <div class="form-group">
           <label class="form-label" for="trucktype">&nbsp;&nbsp;Truck Type</label>
-          <select class="form-control input-sm" id="trucktype" ng-model="rfpoutput.filterOption.VEHICLETYPENAME" ng-options="vehicle.VEHICLETYPENAME as vehicle.VEHICLETYPENAME for vehicle in rfpoutput.vehicleTypeOptions">
+          <select class="form-control input-sm" id="trucktype" ng-model="output.filterOption.VEHICLETYPENAME" ng-options="vehicle.VEHICLETYPENAME as vehicle.VEHICLETYPENAME for vehicle in output.vehicleTypeOptions">
           </select>
         </div>
       </div>
@@ -82,7 +81,7 @@
       <span class="unit">All pricing in ('000 INR)</span>
     </div>
     <div class="col-md-2 text-right">
-        <button type="button" class="btn btn-primary" ng-click="rfpoutput.submit()">Submit</button>
+        <button type="button" class="btn btn-primary" ng-click="output.submit()">Submit</button>
     </div>
   </div>
 </div>
@@ -111,16 +110,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr  ng-repeat="outputdata in rfpoutput.outputdata | filter:{FROMLOCATIONNAME : rfpoutput.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : rfpoutput.filterOption.VEHICLETYPENAME}">
+          <tr  ng-repeat="outputdata in output.outputdata | filter:{FROMLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
             <td>{{outputdata.TOLOCATIONNAME}}</td>
             <!--  <td>{{outputdata.FROMLOCATIONNAME}}</td>
             <td>{{outputdata.VEHICLETYPENAME}}</td> -->
-            <td ng-class="rfpoutput.changecolor(outputdata.CLEANSHEETRATE,outputdata.APPROVEDAMOUNT)" >{{outputdata.CLEANSHEETRATE}}</td>
-            <td ng-click="rfpoutput.showModal('contract', outputdata, 'CONTRACTRATE')" ng-class="rfpoutput.changecolor(outputdata.CONTRACTRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.CONTRACTRATE}}</td>
-            <td ng-class="rfpoutput.changecolor(outputdata.SHIPXRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.SHIPXRATE}}</td>
-            <td ng-click="rfpoutput.showModal('rfphistory', outputdata, 'PVSRFPRATE')" ng-class="rfpoutput.changecolor(outputdata.PVSRFPRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.PVSRFPRATE}}</td>
-            <td ng-class="rfpoutput.changecolor(outputdata.MARKETRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.MARKETRATE}}</td>
-            <td ng-click="rfpoutput.showModal('backhaul', outputdata, 'BACKHAULAVL')">{{outputdata.BACKHAULAVL}}</td>
+            <td ng-class="output.changecolor(outputdata.CLEANSHEETRATE,outputdata.APPROVEDAMOUNT)" >{{outputdata.CLEANSHEETRATE}}</td>
+            <td ng-click="output.showModal('contract', outputdata, 'CONTRACTRATE')" ng-class="output.changecolor(outputdata.CONTRACTRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.CONTRACTRATE}}</td>
+            <td ng-class="output.changecolor(outputdata.SHIPXRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.SHIPXRATE}}</td>
+            <td ng-click="output.showModal('rfphistory', outputdata, 'PVSRFPRATE')" ng-class="output.changecolor(outputdata.PVSRFPRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.PVSRFPRATE}}</td>
+            <td ng-class="output.changecolor(outputdata.MARKETRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.MARKETRATE}}</td>
+            <td ng-click="output.showModal('backhaul', outputdata, 'BACKHAULAVL')">{{outputdata.BACKHAULAVL}}</td>
             <td>{{outputdata.L1}}</td>
             <td>{{outputdata.L2}}</td>
             <td>{{outputdata.L3}}</td>
@@ -166,16 +165,16 @@
                 </div>
                 <div class="row">
                   <div class="col-sm-2">
-                    <b>{{rfpoutput.filterOption.FROMLOCATIONNAME}}</b>
+                    <b>{{output.filterOption.FROMLOCATIONNAME}}</b>
                   </div>
                   <div class="col-sm-2">
-                    <b>{{rfpoutput.TOLOCATIONNAME}}</b>
+                    <b>{{output.TOLOCATIONNAME}}</b>
                   </div>
                   <div class="col-sm-2">
-                    <b>{{rfpoutput.CONTRACTRATE}}</b>
+                    <b>{{output.CONTRACTRATE}}</b>
                   </div>
                   <div class="col-sm-4">
-                    <b>{{rfpoutput.filterOption.VEHICLETYPENAME}}</b>
+                    <b>{{output.filterOption.VEHICLETYPENAME}}</b>
                   </div>
                   <div class="col-sm-2">
                     'Pricing in ('000 INR')
@@ -184,7 +183,7 @@
                 <hr/>
                 <div class="row">
                   <div class="col-sm-12">
-                    {{rfpoutput.selectedrow}}
+                    {{output.selectedrow}}
                     <table class="table mll-table">
                       <thead>
                         <tr>
@@ -197,9 +196,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr ng-repeat="griddata in rfpoutput.gridData">
+                        <tr ng-repeat="griddata in output.gridData">
                           <td>
-                            <input type="radio" ng-click="rfpoutput.updateContractRate(griddata)"  name="optradio">
+                            <input type="radio" ng-click="output.updateContractRate(griddata)"  name="optradio">
                           {{griddata.ORIGIN}}</td>
                           <td>{{griddata.DESTINATION}}</td>
                           <td>{{griddata.FREIGHTRATE}}</td>

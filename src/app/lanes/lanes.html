@@ -397,6 +397,8 @@
           {{lane.errorFile.size / 1000000|number:1}}MB: max 2M</i>
           <button
           ng-click="lane.uploadFile(lane.file)">Submit</button>
+          <!-- <button
+          ng-click="lane.uploadBlobOrFile(file.files[0])">Submit</button> -->
           <span class="progress" ng-show="lane.file.progress >= 0">
             <div style="width:{{lane.file.progress}}%"
             ng-bind="lane.file.progress + '%'"></div>
