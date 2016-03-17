@@ -11,18 +11,12 @@ export class RFPOutputController {
 
         _.each(this.routesGroupByLocation, (vehiclelist, key) => {
           this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
-
-
-
         });
-
-
 
         this.filterOption = {
           FROMLOCATIONNAME: this.fromLocationOptions[0].FROMLOCATIONNAME,
           VEHICLETYPENAME: this.fromLocationOptions[0].VEHICLETYPENAME
         };
-
 
         this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
 
@@ -34,6 +28,7 @@ export class RFPOutputController {
     this.$http = $http;
 
   }
+
   changecolor(toMatch, approvedRate) {
     if (toMatch >= approvedRate) {
       return 'above'
@@ -43,13 +38,8 @@ export class RFPOutputController {
     }
   }
 
-
   changeLocation() {
     this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
     this.filterOption.VEHICLETYPENAME = this.vehicleTypeOptions[0].VEHICLETYPENAME;
-  }
-
-  getArray() {
-    return _.map(this.outputdata, (v) => (_.pick(v, ['CUSTOMERNAME', 'CASHACCOUNTID', 'FROMLOCATIONNAME'])));
   }
 }

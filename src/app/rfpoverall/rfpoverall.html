@@ -1,8 +1,9 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-4"><h1>Create new <abbr title="Request for praposal">RFP</abbr></h1></div>
+    <div class="col-sm-4">
+    <h1>Create new <abbr title="Request for praposal">RFP</abbr></h1></div>
     <div class="col-sm-4 text-center">
-      <div class="btn-group" data-toggle="buttons" >
+      <div class="btn-group" data-toggle="buttons">
         <label class="btn btn-default btn-rounded active">
           <input name="togglebutton" disabled="true" type="checkbox" autocomplete="off" checked>Overall Details
         </label>
@@ -23,8 +24,8 @@
             <div class="row">
               <div class="col-sm-12 col-md-12">
                 <legend class="legend top-legend">
-                  CUSTOMER DETAILS:
-                  <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal" >Add Customer</button>
+                  CUSTOMER DETAILS
+                  <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">Add Customer</button>
                 </legend>
               </div>
             </div>
@@ -77,7 +78,7 @@
           <div class="container">
             <div class="row">
               <div class="col-sm-12 col-md-12">
-                <legend class="legend">RFP DETAILS:</legend>
+                <legend class="legend">RFP DETAILS</legend>
               </div>
             </div>
             <div class="row">
@@ -89,7 +90,7 @@
               </div>
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
-                  <label class="form-label" title="required" for="rfpvalue">RFP value <i class="glyphicon glyphicon-asterisk icon-required"></i> (In Lakhs)</label>
+                  <label class="form-label" title="required" for="rfpvalue">RFP value (In Lakhs)<i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                   <input type="number" class="form-control input-sm" id="rfpvalue" ng-required="true" placeholder="RFP value(In Lakhs)">
                 </div>
               </div>
@@ -104,7 +105,7 @@
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
                   <label class="form-label" title="required" for="recivedate">Receive date <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                  <input type="date" class="form-control input-sm"  id="recivedate" placeholder="yyyy-MM-dd" ng-required="true" ng-model="rfpdetails.overall.STARTDATE">
+                  <input type="date" class="form-control input-sm" id="recivedate" placeholder="yyyy-MM-dd" ng-required="true" ng-model="rfpdetails.overall.STARTDATE">
                 </div>
               </div>
               <div class="col-sm-3 col-md-3">
@@ -126,7 +127,7 @@
           <div class="container">
             <div class="row">
               <div class="col-sm-12 col-md-12">
-                <legend class="legend">OPERATION DESCRIPTION:</legend>
+                <legend class="legend">OPERATION DESCRIPTION</legend>
               </div>
             </div>
             <div class="row">
@@ -147,7 +148,7 @@
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
                   <label class="form-label" for="multipointpickupdrop">Multi-point pickup / drop</label>
-                  <select class="form-control input-sm" id="multipointpickupdrop"ng-model="rfpdetails.overall.ISMULTIDROP" ng-options="ISMULTI.val as ISMULTI.name for ISMULTI in rfpdetails.ISMULTIDROP_option">
+                  <select class="form-control input-sm" id="multipointpickupdrop" ng-model="rfpdetails.overall.ISMULTIDROP" ng-options="ISMULTI.val as ISMULTI.name for ISMULTI in rfpdetails.ISMULTIDROP_option">
                   </select>
                 </div>
               </div>
@@ -162,7 +163,7 @@
             <div class="row">
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
-                  <label class="form-label" for="inboundoutbound">Inbound / outbound</label>
+                  <label class="form-label" title="required" for="inboundoutbound">Inbound / outbound <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                   <select class="form-control input-sm" id="inboundoutbound" ng-required="true" ng-model="rfpdetails.overall.OPPRDOMAIN" ng-options="inboundoutbound.name as inboundoutbound.val for inboundoutbound in rfpdetails.OPPRDOMAIN_option">
                   </select>
                 </div>
@@ -174,32 +175,33 @@
           <div class="container">
             <div class="row">
               <div class="col-sm-12 col-md-12">
-                <legend class="legend">CLEANSHEET ASSUMPTIONS:</legend>
+                <legend class="legend">CLEANSHEET ASSUMPTIONS</legend>
               </div>
             </div>
             <div class="row">
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
-                  <label class="form-label" title="required" for="paymentterms">Payment terms <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                  <label class="form-label" title="required" for="paymentterms">Payment terms (days)<i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                   <input type="number" class="form-control input-sm" id="paymentterms" placeholder="Payment terms" ng-model="rfpdetails.overall.PAYMENTTERM">
                 </div>
               </div>
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
-                  <label class="form-label" for="diselrate">Diesel rate</label>
+                  <label class="form-label" for="diselrate">Diesel rate (INR)</label>
                   <input type="number" maxlength="5" class="form-control input-sm" id="diselrate" placeholder="Diesel rate" ng-model="rfpdetails.overall.DIESELRATE">
                 </div>
               </div>
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
-                  <label class="form-label" for="ageofvehicles">Age of vehicles</label>
+                  <label class="form-label" for="ageofvehicles">Age of vehicles (yrs)</label>
                 <select class="form-control input-sm" id="ageofvehicles" ng-model="rfpdetails.overall.AGEOFTRUCK" ng-options="age.name as age.val for age in rfpdetails.AGEOFTRUCK_option"></select>
               </div>
             </div>
             <div class="col-sm-3 col-md-3">
               <div class="form-group">
-                <label class="form-label" for="distance">Proximity distance(%)</label>
-                <input type="number" min="0" max="100" maxlength="3" class="form-control input-sm" id="distance" placeholder="Distance" ng-model="rfpdetails.overall.PROXIDISTANCE">
+                <label class="form-label" for="distance">Proximity distance (%)</label>
+                <input t
+                ype="number" min="0" max="100" maxlength="3" class="form-control input-sm" id="distance" placeholder="Distance" ng-model="rfpdetails.overall.PROXIDISTANCE">
               </div>
             </div>
           </div>
@@ -208,7 +210,7 @@
           <div class="container">
             <div class="row">
               <div class="col-sm-12 col-md-12">
-                <legend class="legend">COMMERCIAL DETAILS:</legend>
+                <legend class="legend">COMMERCIAL DETAILS</legend>
               </div>
             </div>
             <div class="row">
@@ -233,7 +235,7 @@
               </div>
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
-                  <label class="form-label" for="loadingunloadingtime">Loading unloading time</label>
+                  <label class="form-label" for="loadingunloadingtime">Loading unloading time (days)</label>
                   <input type="number" class="form-control input-sm" id="loadingunloadingtime" placeholder="">
                 </div>
               </div>
@@ -257,7 +259,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add Customer master</h4>
+        <h4 class="modal-title" id="myModalLabel">Add Customer</h4>
       </div>
       <div class="modal-body">
         <form>
@@ -267,7 +269,7 @@
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
                     <label class="form-label" for="customercode">Customer code</label>
-                    <input type="text" class="form-control input-sm" id="customercode" placeholder="Customer code" ng-model="rfpdetails.newCustomer.CUSTOMERCODE" >
+                    <input type="text" class="form-control input-sm" id="customercode" placeholder="Customer code" ng-model="rfpdetails.newCustomer.CUSTOMERCODE">
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-6">

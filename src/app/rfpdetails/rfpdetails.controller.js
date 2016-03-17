@@ -2,6 +2,10 @@ export class RFPDetailsController {
   constructor($http, $stateParams) {
     'ngInject';
 
+    this.iswarehousing = $stateParams.iswarehousing;
+    (this.iswarehousing === 'Y') ? this.iswarehousing = true: this.iswarehousing = false;
+
+    console.log(this.iswh);
     //GET RFP DETAILS
     this.routes = [];
     $http({
@@ -66,11 +70,14 @@ export class RFPDetailsController {
     //GET VEHICLETYPE
 
     //GET PACKAGINGTYPE
-    this.isPACKAGETYPEID_option = _.map(['Pallet', 'Corrugated Boxes', 'Bags','Trolley', 'Loose'], (i, d) => ({ name : d, val : i}));
+    this.isPACKAGETYPEID_option = _.map(['', 'Pallet', 'Corrugated Boxes', 'Bags', 'Trolley', 'Loose'], (i, d) => ({
+      name: d,
+      val: i
+    }));
 
 
     //GET SERVICETYPE
-    this.isSERVICETYPE_option = _.map(['PTL', 'FTL', 'PTL Conventional'], (i) => ({
+    this.isSERVICETYPE_option = _.map(['FTL', 'ODC', 'Surface Exp', 'PTL Conventional', 'Fixed Vehicle', 'Air Express'], (i) => ({
       name: i,
       val: i
     }));
@@ -80,6 +87,25 @@ export class RFPDetailsController {
     this.resetRoute();
     this.$http = $http;
     this.$stateParams = $stateParams;
+    this.isServiceTypeODC;
+
+    document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function(e){
+      //console.log(e.target.scrollTop);
+      // console.dir(document.querySelector('.tbody-div3 table'));
+      document.querySelector('.tbody-div3 table').style.top = `-${e.target.scrollTop}px`;
+      document.querySelector('.thead-div2 table').style.left = `-${e.target.scrollLeft}px`;
+    });
+
+
+  }
+
+  changePackageDimension() {
+    if (this.route.SERVICETYPE == 'ODC') {
+      this.isServiceTypeODC = true;
+    } else {
+      this.isServiceTypeODC = false;
+    }
+    //console.log(this.isrequired);
   }
 
   resetRoute() {
@@ -102,12 +128,12 @@ export class RFPDetailsController {
       "MHEREQUIREMENT": 'NA',
       "NOOFTRIPS": 0,
       "OTHERREQUIREMENT": 'NA',
-      "PACKAGETYPEID": 0,
+      "PACKAGETYPEID": this.isPACKAGETYPEID_option[0].val,
       "PACKDIMENSION": 'NA',
       "RFPDURATION": 0,
       "RFPID": 1,
       "RFPVOLUME": 0,
-      "SERVICETYPE": '',
+      "SERVICETYPE": this.isSERVICETYPE_option[0].val,
       "STACKINGNORMS": '',
       "TOLOCATION": 0,
       "TOLOCATIONNAME": '',
@@ -166,7 +192,7 @@ export class RFPDetailsController {
     this.editingIndex = null;
   }
 
-  delete(){
+  delete() {
 
     this.route.MODE = 'DELETE';
     this.routes[this.editingIndex] = this.route;
@@ -213,8 +239,8 @@ export class RFPDetailsController {
   }
 
 
-   map(id, list, idMatcher, nameKey) {
-    if(_.isInteger(id) && list.length > 0) {
+  map(id, list, idMatcher, nameKey) {
+    if (_.isInteger(id) && list.length > 0) {
       return _.filter(list, (item) => (item[idMatcher] === id))[0][nameKey];
     } else {
       return '-';
