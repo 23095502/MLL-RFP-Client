@@ -30,11 +30,11 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     controllerAs: 'dash'
   })
 
-  .state('rfplogin', {
+  .state('login', {
     url: '/',
-    templateUrl: 'app/rfplogin/rfplogin.html',
-    controller: 'RFPLoginControler',
-    controllerAs: 'rfplogin'
+    templateUrl: 'app/login/login.html',
+    controller: 'LoginController',
+    controllerAs: 'login'
   })
 
   .state('rfpoutputdetails', {

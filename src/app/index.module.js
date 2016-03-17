@@ -5,7 +5,7 @@ import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 import { RFPOverallController } from './rfpoverall/rfpoverall.controller';
 import { RFPCustomerController } from './rfpcustomer/rfpcustomer.controller';
-import { RFPLoginControler } from './rfplogin/rfplogin.controller';
+import { LoginController } from './login/login.controller';
 import { DashboardController } from './dashboard/dashboard.controller';
 import { RFPOutputController } from './rfpoutputdetails/rfpoutputdetails.controller';
 import { RFPDetailsController } from './rfpdetails/rfpdetails.controller';
@@ -18,7 +18,7 @@ angular.module('mllRfpClient', ['ui.router', 'ngFileUpload'])
   .run(runBlock)
   .controller('RFPOverallController', RFPOverallController)
   .controller('RFPCustomerController', RFPCustomerController)
-  .controller('RFPLoginControler', RFPLoginControler)
+  .controller('LoginController', LoginController)
   .controller('DashboardController', DashboardController)
   .controller('RFPOutputController', RFPOutputController)
   .controller('RFPDetailsController', RFPDetailsController)
