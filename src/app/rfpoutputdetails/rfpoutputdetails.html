@@ -1,16 +1,17 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-6"><h1><abbr title="Request for praposal">RFP</abbr> output details</h1></div>
+    <div class="col-sm-6">
+    <h1><abbr title="Request for praposal">RFP</abbr> output details</h1></div>
     <div class="col-md-6 text-right">
-      <button class="btn btn-default" ng-csv="rfpoutput.getArray()" csv-header="['CUSTOMERNAME','CASHACCOUNTID','FROM']" filename="test.csv"> <i class="glyphicon glyphicon-export"></i> Export
+      <button class="btn btn-default btn-xs"> <i class="glyphicon glyphicon-export"></i> Export
       </button>
+      <!--  csv-header="['CUSTOMERNAME','CASHACCOUNTID','FROM']" filename="test.csv" -->
     </div>
   </div>
-
-  <div class="row">
+  <div class="row filter-details">
     <div class="col-md-4">
       <div class="form-group">
-        <label for="name">Name</label>
+        <label class="form-label" for="name">Name</label>
         <div>
           {{rfpoutput.nameoutputdata.CUSTOMERNAME}}
         </div>
@@ -18,7 +19,7 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="address">Address</label>
+        <label class="form-label" for="address">Address</label>
         <div>
           {{rfpoutput.nameoutputdata.ADDRESS}}
         </div>
@@ -26,17 +27,17 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="contactdetails">Contact details</label>
+        <label class="form-label" for="contactdetails">Contact details</label>
         <div>
           {{rfpoutput.nameoutputdata.CONTACTNO}}
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row filter-details">
     <div class="col-md-4">
       <div class="form-group">
-        <label for="contactperson">Contact person</label>
+        <label class="form-label" for="contactperson">Contact person</label>
         <div>
           {{rfpoutput.nameoutputdata.CONTACTPERSON}}
         </div>
@@ -44,7 +45,7 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="totallogisticsspend">Total logistics spend(In Lakhs)</label>
+        <label class="form-label" for="totallogisticsspend">Total logistics spend(In Lakhs)</label>
         <div>
           {{rfpoutput.nameoutputdata.TOTALSPEND}}
         </div>
@@ -52,73 +53,79 @@
     </div>
     <div class="col-md-4">
       <div class="form-group">
-        <label for="casshaccountid">CASSH account id</label>
+        <label class="form-label" for="casshaccountid">CA$$H account ID</label>
         <div>
           {{rfpoutput.nameoutputdata.CASHACCOUNTID}}
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-2">
-      <div class="form-group">
-        <label for="from">From</label>
-        <select class="form-control" id="from" ng-model="rfpoutput.filterOption.FROMLOCATIONNAME" ng-options="from.FROMLOCATIONNAME as from.FROMLOCATIONNAME for from in rfpoutput.fromLocationOptions"  >
-        </select>
+</div>
+<div class="container-fluid">
+  <div class="row filter-margin">
+    <div class="col-md-6">
+      <div class="form-inline">
+        <div class="form-group">
+          <label class="form-label" for="from">From</label>
+          <select class="form-control input-sm"  id="from" ng-model="rfpoutput.filterOption.FROMLOCATIONNAME" ng-options="from.FROMLOCATIONNAME as from.FROMLOCATIONNAME for from in rfpoutput.fromLocationOptions" ng-change="rfpoutput.changeLocation()"  >
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="trucktype">&nbsp;&nbsp;Truck Type</label>
+          <select class="form-control input-sm" id="trucktype" ng-model="rfpoutput.filterOption.VEHICLETYPENAME" ng-options="vehicle.VEHICLETYPENAME as vehicle.VEHICLETYPENAME for vehicle in rfpoutput.vehicleTypeOptions">
+          </select>
+        </div>
       </div>
     </div>
-    <div class="col-md-2">
-      <div class="form-group">
-        <label for="trucktype">Truck Type</label>
-        <select class="form-control" id="trucktype" ng-model="rfpoutput.filterOption.VEHICLETYPENAME" ng-options="vehicle.VEHICLETYPENAME as vehicle.VEHICLETYPENAME for vehicle in rfpoutput.vehicleTypeOptions">
-        </select>
-      </div>
-    </div>
-    <div class="col-md-2 text-left">
-      <button type="button" class="btn btn-primary" ng-click="rfpoutput.ClearFilter()">Clear Filter</button>
+    <div class="col-md-6 text-right">
+      <span class="unit">All pricing in ('000 INR)</span>
     </div>
   </div>
+</div>
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-     <table class="table mll-table">
-      <thead>
-        <tr>
-          <th rowspan="2">To</th>
-          <th rowspan="2">Cleansheet Rate</th>
-          <th rowspan="2">Contract Rate</th>
-          <th rowspan="2">ShipEx Rate</th>
-          <th rowspan="2">PreviousRFP Rate</th>
-          <th rowspan="2">Market Rate</th>
-          <th rowspan="2">Backhaul Available</th>
-          <th colspan="5" >BA Qute</th>
-          <th rowspan="2">Approved Rate</th>
-        </tr>
-        <tr>
-          <th >L1</th>
-          <th>L2</th>
-          <th>L3</th>
-          <th>L4</th>
-          <th>L5</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="outputdata in rfpoutput.outputdata | filter:{FROMLOCATIONNAME : rfpoutput.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : rfpoutput.filterOption.VEHICLETYPENAME}">
-          <td>{{outputdata.TOLOCATIONNAME}}</td>
-          <td>{{outputdata.CLEANSHEETRATE}}</td>
-          <td>{{outputdata.CONTRACTRATE}}</td>
-          <td>{{outputdata.SHIPXRATE}}</td>
-          <td>{{outputdata.PVSRFPRATE}}</td>
-          <td>{{outputdata.MARKETRATE}}</td>
-          <td>{{outputdata.BACKHAULAVL}}</td>
-          <td>{{outputdata.L1}}</td>
-          <td>{{outputdata.L2}}</td>
-          <td>{{outputdata.L3}}</td>
-          <td>{{outputdata.L4}}</td>
-          <td>{{outputdata.L5}}</td>
-          <td>{{outputdata.APPROVEDAMOUNT}}</td>
-        </tr>
-      </tbody>
-    </table>
+      <table class="table mll-table">
+        <thead>
+          <tr>
+            <th rowspan="2">To</th>
+            <th rowspan="2">Cleansheet Rate</th>
+            <th rowspan="2">Contract Rate</th>
+            <th rowspan="2">ShipX Rate</th>
+            <th rowspan="2">Previous RFP Rate</th>
+            <th rowspan="2">Market Rate</th>
+            <th rowspan="2">Backhaul Available</th>
+            <th colspan="5" class="table-colspan-header">BA Quote</th>
+            <th rowspan="2" > Approved Rate</th>
+          </tr>
+          <tr>
+            <th>L1</th>
+            <th>L2</th>
+            <th>L3</th>
+            <th>L4</th>
+            <th>L5</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  ng-repeat="outputdata in rfpoutput.outputdata | filter:{FROMLOCATIONNAME : rfpoutput.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : rfpoutput.filterOption.VEHICLETYPENAME}">
+            <td>{{outputdata.TOLOCATIONNAME}}</td>
+            <!--  <td>{{outputdata.FROMLOCATIONNAME}}</td>
+            <td>{{outputdata.VEHICLETYPENAME}}</td> -->
+            <td ng-class="rfpoutput.changecolor(outputdata.CLEANSHEETRATE,outputdata.APPROVEDAMOUNT)" >{{outputdata.CLEANSHEETRATE}}</td>
+            <td ng-class="rfpoutput.changecolor(outputdata.CONTRACTRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.CONTRACTRATE}}</td>
+            <td ng-class="rfpoutput.changecolor(outputdata.SHIPXRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.SHIPXRATE}}</td>
+            <td ng-class="rfpoutput.changecolor(outputdata.PVSRFPRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.PVSRFPRATE}}</td>
+            <td ng-class="rfpoutput.changecolor(outputdata.MARKETRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.MARKETRATE}}</td>
+            <td>{{outputdata.BACKHAULAVL}}</td>
+            <td>{{outputdata.L1}}</td>
+            <td>{{outputdata.L2}}</td>
+            <td>{{outputdata.L3}}</td>
+            <td>{{outputdata.L4}}</td>
+            <td>{{outputdata.L5}}</td>
+            <td >{{outputdata.APPROVEDAMOUNT}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
