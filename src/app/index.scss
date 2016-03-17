@@ -91,7 +91,7 @@ h1 {
 .form-divider {
   border-bottom: solid 1px rgb(229, 229, 229);
   margin-top: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 .icon-required {
   font-size: 60%;
@@ -197,6 +197,10 @@ h1 {
 }
 .btn-rounded {
   border-radius: 20px;
+}
+.active {
+  background-color: $mll-darkgrey !important;
+  color: $mll-white !important;
 }
 .unit {
   position: relative;
