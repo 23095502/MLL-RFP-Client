@@ -166,58 +166,51 @@ export class RFPOverallController {
 
   addRfpHeader() {
 
-    var req = {
-      method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/rfp/INSERT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: {
-        "rfpupdt": {
-          "RFPID": 0,
-          "RFPCODE": this.overall.RFPCODE,
-          "RFPDATE": "2016-01-01 00:00:00", //this.overall.RFPDATE,
-          "CUSTOMERID": this.customer.CUSTOMERID,
-          "INDUSTRYTYPEID": this.overall.INDUSTRYTYPEID,
-          "RFPAMOUNT": this.overall.RFPAMOUNT,
-          "STARTDATE": "2016-01-01 00:00:00",
-          "RFPOWNER": this.overall.RFPOWNER,
-          "CURRENTSTAGINGOWNER": this.overall.CURRENTSTAGINGOWNER,
-          "DIESELRATE": this.overall.DIESELRATE,
-          "AGEOFTRUCK": this.overall.AGEOFTRUCK,
-          "RFPDESC": this.overall.RFPDESC,
-          "DUEDATE": "2016-01-01 00:00:00", //this.overall.DUEDATE,
-          "PRODUCTDESC": this.overall.PRODUCTDESC,
-          "CASHOPPID": this.overall.CASHOPPID,
-          "OPPRDOMAIN": this.overall.OPPRDOMAIN,
-          "DISTRIBUTIONTYPE": this.overall.DISTRIBUTIONTYPE,
-          "ISMULTIDROP": this.overall.ISMULTIDROP,
-          "ISHUBORWHREQ": this.overall.ISHUBORWHREQ,
-          "CARGOTYPE": this.overall.CARGOTYPE,
-          "SEARCH1": "6",
-          "SEARCH2": "6",
-          "SEARCH3": "6",
-          "PAYMENTTERM": this.overall.PAYMENTTERM,
-          "RATEUOM": this.overall.RATEUOM,
-          "PENALITIES": this.overall.PENALITIES,
-          "DETENTION": this.overall.DETENTION,
-          "ESCCLAUSE": "6",
-          "ACTIVE": "A",
-          "CREATEDBY": "1",
-          "CREATEDON": "2016-01-01 00:00:00",
-          "ADDRESS": this.customer.ADDRESS,
-          "CONTACTPERSON": this.customer.CONTACTPERSON,
-          "CONTACTNO": this.customer.CONTACTNO,
-          "CASHACCOUNTID": this.customer.CASHACCOUNTID,
-          "TOTALSPEND": this.customer.TOTALSPEND,
-          "PROXIDISTANCE": this.customer.PROXIDISTANCE
-        }
+    var rfpHeader = {
+      "rfpupdt": {
+        "RFPID": 0,
+        "RFPCODE": this.overall.RFPCODE,
+        "RFPDATE": "2016-01-01 00:00:00", //this.overall.RFPDATE,
+        "CUSTOMERID": this.customer.CUSTOMERID,
+        "INDUSTRYTYPEID": this.overall.INDUSTRYTYPEID,
+        "RFPAMOUNT": this.overall.RFPAMOUNT,
+        "STARTDATE": "2016-01-01 00:00:00",
+        "RFPOWNER": this.overall.RFPOWNER,
+        "CURRENTSTAGINGOWNER": this.overall.CURRENTSTAGINGOWNER,
+        "DIESELRATE": this.overall.DIESELRATE,
+        "AGEOFTRUCK": this.overall.AGEOFTRUCK,
+        "RFPDESC": this.overall.RFPDESC,
+        "DUEDATE": "2016-01-01 00:00:00", //this.overall.DUEDATE,
+        "PRODUCTDESC": this.overall.PRODUCTDESC,
+        "CASHOPPID": this.overall.CASHOPPID,
+        "OPPRDOMAIN": this.overall.OPPRDOMAIN,
+        "DISTRIBUTIONTYPE": this.overall.DISTRIBUTIONTYPE,
+        "ISMULTIDROP": this.overall.ISMULTIDROP,
+        "ISHUBORWHREQ": this.overall.ISHUBORWHREQ,
+        "CARGOTYPE": this.overall.CARGOTYPE,
+        "SEARCH1": "6",
+        "SEARCH2": "6",
+        "SEARCH3": "6",
+        "PAYMENTTERM": this.overall.PAYMENTTERM,
+        "RATEUOM": this.overall.RATEUOM,
+        "PENALITIES": this.overall.PENALITIES,
+        "DETENTION": this.overall.DETENTION,
+        "ESCCLAUSE": "6",
+        "ACTIVE": "A",
+        "CREATEDBY": "1",
+        "CREATEDON": "2016-01-01 00:00:00",
+        "ADDRESS": this.customer.ADDRESS,
+        "CONTACTPERSON": this.customer.CONTACTPERSON,
+        "CONTACTNO": this.customer.CONTACTNO,
+        "CASHACCOUNTID": this.customer.CASHACCOUNTID,
+        "TOTALSPEND": this.customer.TOTALSPEND,
+        "PROXIDISTANCE": this.customer.PROXIDISTANCE
       }
+    };
 
-    }
+    var rfpHeaderURL = 'rfp/INSERT';
 
-    this.$http(req).then((response) => {
-
+    this._api.post(rfpHeaderURL, rfpHeader).then((response) => {
       this.$state.go('rfpdetails', {
         rfpid: response.data.rfpResult[0].RFPID,
         iswarehousing: this.overall.ISHUBORWHREQ
@@ -228,5 +221,4 @@ export class RFPOverallController {
     });
 
   }
-
 }

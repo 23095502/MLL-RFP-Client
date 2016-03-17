@@ -26,6 +26,7 @@ export class masterService {
 
   getCustomers() {
     return this._master.CustomerList;
+
   }
 
   getLocations() {
