@@ -3,15 +3,35 @@ constructor($http, $stateParams, $timeout, Upload) {
 
     'ngInject';
 
+    this.routes = [];
+    this.routes = []
+    this.resetRoute();
+    this.$http = $http;
+    this.$stateParams = $stateParams;
+    this.Upload = Upload;
+    this.isServiceTypeODC;
+    this.statename_option = [];
+    this.locationname_option = [];
+    this.vehicletype = {
+      "VEHICLETYPEID": null,
+      "VEHICLETYPENAME": null
+    };
+    this.location = {
+      "LOCATIONID": null,
+      "LOCATIONNAME": null
+    };
+    this.state = {
+      "STATEID": null,
+      "STATENAME": null
+    };
     this.iswarehousing = $stateParams.iswarehousing;
     (this.iswarehousing === 'Y') ? this.iswarehousing = true: this.iswarehousing = false;
 
     //GET RFP DETAILS
-    this.routes = [];
+
     $http({
       method: 'GET',
       url: `http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpid}`
-
     }).then((res) => {
 
       this.routes = res.data;
@@ -27,15 +47,13 @@ constructor($http, $stateParams, $timeout, Upload) {
         // _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth = 100));
         console.log(finalWidth);
       });
-
-
     }, (err) => {
       console.error(err);
     });
     //GET RFP DETAILS
 
     //GET LOCATIONS
-    this.locationname_option = [];
+
     $http({
       method: 'GET',
       url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/location/0'
@@ -44,15 +62,9 @@ constructor($http, $stateParams, $timeout, Upload) {
     }, (err) => {
       console.error(err);
     });
-
-    this.location = {
-      "LOCATIONID": null,
-      "LOCATIONNAME": null
-    };
     //GET LOCATIONS
 
     //GET STATES
-    this.statename_option = [];
     $http({
       method: 'GET',
       url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/state/0'
@@ -61,11 +73,6 @@ constructor($http, $stateParams, $timeout, Upload) {
     }, (err) => {
       console.error(err);
     });
-
-    this.state = {
-      "STATEID": null,
-      "STATENAME": null
-    };
     //GET STATES
 
     //GET VEHICLETYPE
@@ -78,11 +85,6 @@ constructor($http, $stateParams, $timeout, Upload) {
     }, (err) => {
       console.error(err);
     });
-
-    this.vehicletype = {
-      "VEHICLETYPEID": null,
-      "VEHICLETYPENAME": null
-    };
     //GET VEHICLETYPE
 
     //GET PACKAGINGTYPE
@@ -91,20 +93,12 @@ constructor($http, $stateParams, $timeout, Upload) {
       val: i
     }));
 
-
     //GET SERVICETYPE
     this.isSERVICETYPE_option = _.map(['FTL', 'ODC', 'Surface Exp', 'PTL Conventional', 'Fixed Vehicle', 'Air Express'], (i) => ({
       name: i,
       val: i
     }));
     //GET SERVICETYPE
-
-    this.routes = []
-    this.resetRoute();
-    this.$http = $http;
-    this.$stateParams = $stateParams;
-    this.Upload = Upload;
-    this.isServiceTypeODC;
 
     document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function(e) {
       //console.log(e.target.scrollTop);
@@ -113,7 +107,6 @@ constructor($http, $stateParams, $timeout, Upload) {
       document.querySelector('.thead-div2 table').style.left = `-${e.target.scrollLeft}px`;
     });
   }
-
 
   changePackageDimension() {
     if (this.route.SERVICETYPE == 'ODC') {

@@ -25,7 +25,6 @@ export class RFPOverallController {
       "CREATEDBY": 0,
       "CREATEDON": null
     };
-
     this.newCustomer = {
       "CUSTOMERID": 0,
       "CUSTOMERCODE": null,
@@ -41,44 +40,46 @@ export class RFPOverallController {
       "CREATEDBY": 0,
       "CREATEDON": null
     };
-
-
     this.AGEOFTRUCK_option = _.times(10, (i) => ({
       name: i,
       val: i
     }));
-
     this.DISTRIBUTIONTYPE_option = _.map(['Primary', 'Secondary', 'Distribution'], (i) => ({
       name: i,
       val: i
     }));
-
     /*this.ISHUBORWHREQ_option = _.map(['Yes', 'No'], (i) => ({
       name: i,
       val: i
     }));*/
-
-    this.ISMULTIDROP_option = [{name:'Yes', val:'Y'},{name:'No', val:'N'}]
-
-    this.ISHUBORWHREQ_option = [{name:'Yes', val:'Y'},{name:'No', val:'N'}]
-
+    this.ISMULTIDROP_option = [{
+      name: 'Yes',
+      val: 'Y'
+    }, {
+      name: 'No',
+      val: 'N'
+    }]
+    this.ISHUBORWHREQ_option = [{
+      name: 'Yes',
+      val: 'Y'
+    }, {
+      name: 'No',
+      val: 'N'
+    }]
     this.RATEUOM_option = _.map(['PTPK', 'Per trip', 'Per Kg', 'Per Km', 'Per month'], (i) => ({
       name: i,
       val: i
     }));
-
     this.CARGOTYPE_option = _.map(['Volumetric', 'Dense'], (i) => ({
       name: i,
       val: i
     }));
-
-  //Inbound/outbound
+    //Inbound/outbound
     this.OPPRDOMAIN_option = _.map(['Inbound', 'Outbound'], (i) => ({
       name: i,
       val: i
     }));
-  //Inbound/outbound
-
+    //Inbound/outbound
     this.overall = {
       "RFPID": 0,
       "RFPCODE": '',
@@ -160,17 +161,15 @@ export class RFPOverallController {
     };
 
     this.$http(req).then((response) => {
-
-        //-------------
-        //Get All Cutomers
-        this.getAllCustomers();
-        //-------------
+      //-------------
+      //Get All Cutomers
+      this.getAllCustomers();
+      //-------------
     }, (response) => {
       console.log(error)
     });
 
   }
-
 
   addRfpHeader() {
 
@@ -227,7 +226,10 @@ export class RFPOverallController {
     this.$http(req).then((response) => {
       //console.log(response.data.rfpResult[0].RFPID);
       //this.rfpid = response.data.rfpResult[0].RFPID;
-      this.$state.go('rfpdetails',{rfpid: response.data.rfpResult[0].RFPID, iswarehousing: this.overall.ISHUBORWHREQ});
+      this.$state.go('rfpdetails', {
+        rfpid: response.data.rfpResult[0].RFPID,
+        iswarehousing: this.overall.ISHUBORWHREQ
+      });
 
     }, (error) => {
       console.log(error)
