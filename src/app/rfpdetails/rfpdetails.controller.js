@@ -1,18 +1,32 @@
 export class RFPDetailsController {
-  constructor($http, $stateParams) {
+  constructor($http, $stateParams, $timeout) {
     'ngInject';
 
     this.iswarehousing = $stateParams.iswarehousing;
     (this.iswarehousing === 'Y') ? this.iswarehousing = true: this.iswarehousing = false;
 
-    console.log(this.iswh);
     //GET RFP DETAILS
     this.routes = [];
     $http({
       method: 'GET',
       url: `http://59.160.18.222/RFPRest/RFPRestService.svc/getrfproutebyid/${$stateParams.rfpid}`
     }).then((res) => {
+
       this.routes = res.data;
+
+      $timeout(function() {
+        let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth));
+        let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 td'), (td) => (td.offsetWidth));
+        let finalWidth = _.chain(div4BodyWidth)
+          .map((item, i) => Math.max(item, div2HeadWidth[i]))
+          .reject((item) => (_.isNaN(item)))
+          .value();
+
+         // _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth = 100));
+        console.log(finalWidth);
+      });
+
+
     }, (err) => {
       console.error(err);
     });
@@ -89,14 +103,12 @@ export class RFPDetailsController {
     this.$stateParams = $stateParams;
     this.isServiceTypeODC;
 
-    document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function(e){
+    document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function(e) {
       //console.log(e.target.scrollTop);
       // console.dir(document.querySelector('.tbody-div3 table'));
       document.querySelector('.tbody-div3 table').style.top = `-${e.target.scrollTop}px`;
       document.querySelector('.thead-div2 table').style.left = `-${e.target.scrollLeft}px`;
     });
-
-
   }
 
   changePackageDimension() {
@@ -231,7 +243,8 @@ export class RFPDetailsController {
     }
 
     this.$http(req).then(function(r) {
-      console.log(r);
+      //console.log(r);
+      alert('Data Saved SUccessfully...');
     }, function(e) {
       console.error(e);
     });
