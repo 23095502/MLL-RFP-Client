@@ -2,6 +2,40 @@ export class RFPOutputController {
   constructor($http, $stateParams) {
     'ngInject';
 
+    this.outputdata = [];
+
+
+    this.$http = $http;
+    this.gridData = [];
+    this.inproxiparam = {
+      "ORIGIN": "Kalwa",
+      "ORIGINSTATE": "Maharashtra",
+      "DESTINATION": "KUNDLI",
+      "DESTINATIONSTATE": "Haryana",
+      "VEHICLETYPE": "Container 4.5 MT 14 FT",
+      "DISTANCE": 100,
+      "NOOFTRIPS": 0
+    }
+    this.apptrans = {
+      "RFPID":1,
+      "BANAME":"IVC",
+      "APPROVEDAMOUNT":5000,
+      "FROMLOCATIONID":1,
+      "TOLOCATIONID":2,
+      "FROMSTATEID":20,
+      "TOSTATEID":10,
+      "VEHICLETYPEID":2,
+      "ACTIVE":"A",
+      "CREATEDBY":"1",
+      "CREATEDON":"2016-01-01 00:00:00"
+    }
+    this.urlMaps = {
+      'contract': 'http://59.160.18.222/bacontract/Service.svc/getproximitybadata',
+      'backhaul': 'http://59.160.18.222/bacontract/Service.svc/dvprdata',
+      'rfphistory': 'http://59.160.18.222/RFPTool/RFPRestService.svc/rfphistory',
+      'cleansheet': ''
+    }
+
     $http.get(`http://59.160.18.222/RFPRest/RFPRestService.svc/gettrans/${$stateParams.rfpId}`)
       .then((res) => {
         this.outputdata = res.data;
@@ -24,43 +58,6 @@ export class RFPOutputController {
         console.error(err);
       });
 
-    this.outputdata = [];
-
-
-    this.$http = $http;
-
-    this.inproxiparam = {
-      "ORIGIN": "Kalwa",
-      "ORIGINSTATE": "Maharashtra",
-      "DESTINATION": "KUNDLI",
-      "DESTINATIONSTATE": "Haryana",
-      "VEHICLETYPE": "Container 4.5 MT 14 FT",
-      "DISTANCE": 100,
-      "NOOFTRIPS": 0
-    }
-
-    this.apptrans = {
-      "RFPID":1,
-      "BANAME":"IVC",
-      "APPROVEDAMOUNT":5000,
-      "FROMLOCATIONID":1,
-      "TOLOCATIONID":2,
-      "FROMSTATEID":20,
-      "TOSTATEID":10,
-      "VEHICLETYPEID":2,
-      "ACTIVE":"A",
-      "CREATEDBY":"1",
-      "CREATEDON":"2016-01-01 00:00:00"
-    }
-
-    this.urlMaps = {
-      'contract': 'http://59.160.18.222/bacontract/Service.svc/getproximitybadata',
-      'backhaul': 'http://59.160.18.222/bacontract/Service.svc/dvprdata',
-      'rfphistory': 'http://59.160.18.222/RFPTool/RFPRestService.svc/rfphistory',
-      'cleansheet': ''
-    }
-
-    this.gridData = [];
 
   }
 

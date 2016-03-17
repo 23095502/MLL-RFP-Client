@@ -1,6 +1,11 @@
-export class RFPCustomerController {
+export class CustomerController {
   constructor($http) {
     'ngInject';
+
+    this.$http = $http;
+    this.customer = []
+    this.resetCustomer();
+
 
     $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/customer/0')
       .then((res) => {
@@ -8,18 +13,11 @@ export class RFPCustomerController {
       }, (err) => {
         console.error(err);
       });
-
-
-    this.$http = $http;
-
-    this.customer = []
-    this.resetCustomer();
-
   }
 
-resetCustomer() {
+  resetCustomer() {
     this.customer = {
-       "ACTIVE": null,
+      "ACTIVE": null,
       "ADDRESS": null,
       "CASHACCOUNTID": null,
       "CONTACTNO": null,
@@ -31,26 +29,6 @@ resetCustomer() {
       "TOTALSPEND": null
     }
   }
-
-
-  // add() {
-
-  //   this.rfpcustomermaster.customer.CUSTOMERCODE = null;
-  //   this.customer.CUSTOMERNAME = 'Wipro Infotech';
-  //   this.customer.ADDRESS = "Pune";
-  //   this.customer.EMAIL = "praveenhart@wipro.com";
-  //   this.customer.CONTACTPERSON = 'Praveen Kumar Singh';
-  //   this.customer.CONTACTNO = 9967288728;
-  //   this.customer.push(angular.copy(this.customer));
-  //   // this.resetRoute();
-  //   this.editingIndex = null;
-  // }
-
-  // edit(customer, index) {
-  //   this.customer = angular.copy(customer);
-  //   this.editingIndex = index;
-  //   $('#myModal').modal();
-  // }
 
   add() {
 
@@ -80,18 +58,12 @@ resetCustomer() {
 
     };
 
-this.$http(req).then((response) => {
-
-        //-------------
-        //Get All Cutomers
-        // this.getAllCustomers();
-        //-------------
-    }, (response) => {
+    this.$http(req).then((response) => {}, (response) => {
       console.log(error)
     });
-}
+  }
 
-submitcustomerdata() {
+  submitcustomerdata() {
 
     var req = {
       method: 'POST',
@@ -115,10 +87,5 @@ submitcustomerdata() {
       }
 
     }
-
-
-
-
-
   }
 }
