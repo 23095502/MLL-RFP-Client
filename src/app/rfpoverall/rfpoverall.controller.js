@@ -122,7 +122,7 @@ export class RFPOverallController {
   }
 
   getAllCustomers() {
-    this.$http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/customer/0')
+    this.$http.get('http://172.32.0.101/RFPRest/RFPRestService.svc/customer/0')
       .then((res) => {
 
         this.CUSTOMERNAME_option = res.data;
@@ -135,7 +135,7 @@ export class RFPOverallController {
 
     var req = {
       method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/updtcustomer',
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/updtcustomer',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -176,7 +176,7 @@ export class RFPOverallController {
 
     var req = {
       method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/rfp/INSERT',
+      url: 'http://172.32.0.101/RFPRest/RFPRestService.svc/rfp/INSERT',
       headers: {
         'Content-Type': 'application/json'
       },
