@@ -3,7 +3,8 @@ export class apiService {
     'ngInject';
 
     this.$http = $http;
-    this._baseURL = 'http://59.160.18.222/RFPRest/RFPRestService.svc';
+    this._host = 'http://59.160.18.222';
+    this._baseURL = `${this._host}/RFPRest/RFPRestService.svc`;
 
     this._requestTemplate = {
       method: '',
@@ -21,10 +22,14 @@ export class apiService {
     return this.$http(this._requestTemplate);
   }
 
-  post(url, data) {
+  post(url, data, isFullURL) {
     this._requestTemplate.method = 'POST';
-    this._requestTemplate.url = `${this._baseURL}/${url}`;
+    this._requestTemplate.url = isFullURL ? url : `${this._baseURL}/${url}`;
     this._requestTemplate.data = data;
     return this.$http(this._requestTemplate);
+  }
+
+  getHost() {
+    return this._host;
   }
 }

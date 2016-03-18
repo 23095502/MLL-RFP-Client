@@ -43,6 +43,7 @@ export class OverallController {
   init() {
 
     this.CUSTOMERNAME_option = this._master.getCustomers();
+    console.log(this._master.getCustomers());
 
     this.AGEOFTRUCK_option = _.times(10, (i) => ({
       name: i,
