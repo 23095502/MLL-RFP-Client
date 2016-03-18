@@ -266,6 +266,7 @@
   </div>
 </form>
 <!-- Add Cusomer -->
+<form ng-submit="overall.addCustomer()">
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -274,20 +275,20 @@
         <h4 class="modal-title" id="myModalLabel">Add Customer</h4>
       </div>
       <div class="modal-body">
-        <form>
+
           <div class="fieldset" class="form-group">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
-                    <label class="form-label" for="customercode">Customer code</label>
-                    <input type="text" class="form-control input-sm" id="customercode" placeholder="Customer code" ng-model="overall.newCustomer.CUSTOMERCODE">
+                    <label class="form-label" for="customercode">Customer code <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                    <input type="text" class="form-control input-sm" id="customercode" placeholder="Customer code" ng-model="overall.newCustomer.CUSTOMERCODE" ng-required="true">
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
-                    <label class="form-label" for="customername">Customer name</label>
-                    <input type="text" class="form-control input-sm" id="customername" placeholder="Customer name" ng-model="overall.newCustomer.CUSTOMERNAME">
+                    <label class="form-label" for="customername">Customer name <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                    <input type="text" class="form-control input-sm" id="customername" placeholder="Customer name" ng-model="overall.newCustomer.CUSTOMERNAME" ng-required="true">
                   </div>
                 </div>
               </div>
@@ -301,7 +302,7 @@
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
                     <label class="form-label" for="email">Email</label>
-                    <input type="email" class="form-control input-sm" id="email" placeholder="Email" ng-model="overall.newCustomer.EMAIL">
+                    <input type="email" class="form-control input-sm" id="email" placeholder="Email" ng-model="overall.newCustomer.EMAIL" ng-required="true">
                   </div>
                 </div>
               </div>
@@ -322,8 +323,8 @@
               <div class="row">
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
-                    <label class="form-label" for="contactperson">CA$$H Account ID</label>
-                    <input type="text" class="form-control input-sm" id="casshaccountid" placeholder="CA$$H Account ID" ng-model="overall.newoppCustomer.CASHACCOUNTID">
+                    <label class="form-label" title="required" for="casshaccountid">CA$$H Account ID <i class="glyphicon glyphicon-asterisk icon-required"></i></i></label>
+                    <input type="text" class="form-control input-sm" id="cashaccid" placeholder="CA$$H Account ID" ng-model="overall.newoppCustomer.CASHACCOUNTID" ng-required="true">
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-6">
@@ -335,14 +336,13 @@
               </div>
             </div>
           </div>
-        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" ng-if="overall.editingIndex==null" class="btn btn-primary" data-dismiss="modal" ng-click="overall.addCustomer()">Add</button>
+        <button type="submit" ng-if="overall.editingIndex==null" class="btn btn-primary">Add</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
+</form>
 <!-- Add Cusomer -->
-

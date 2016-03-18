@@ -200,7 +200,7 @@ export class LanesController {
     this.editingIndex = null;
     //---------------------
     //set width to route grid columns
-    this.$timeout$timeout(this.adjustScrollableTable);
+    this.$timeout(this.adjustScrollableTable);
     //---------------------
     $('#myModal').modal('hide');
   }
@@ -249,7 +249,6 @@ export class LanesController {
     };*/
 
     this._api.post('routeupdate', newfilterRoutes).then((r)=> {
-      //alert('Data Saved Successfully...');
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
         this.$state.go('dashboard');
       }, (err) => {
@@ -308,6 +307,14 @@ export class LanesController {
     } else {
       return '-';
     }
+  }
+
+  showModal(){
+
+    this.resetRoute();
+    this.editingIndex = null;
+    $('#myModal').modal();
+
   }
 
 }

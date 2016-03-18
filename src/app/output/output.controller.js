@@ -8,14 +8,15 @@ export class OutputController {
     this.outputdata = [];
 
     this.inproxiparam = {
-      "ORIGIN": "Kalwa",
-      "ORIGINSTATE": "Maharashtra",
-      "DESTINATION": "KUNDLI",
-      "DESTINATIONSTATE": "Haryana",
-      "VEHICLETYPE": "Container 4.5 MT 14 FT",
-      "DISTANCE": 100,
+      "ORIGIN": '',
+      "ORIGINSTATE": '',
+      "DESTINATION": '',
+      "DESTINATIONSTATE": '',
+      "VEHICLETYPE": '',
+      "DISTANCE": 0,
       "NOOFTRIPS": 0
     }
+
     this.apptrans = {
       "RFPID": 1,
       "BANAME": "IVC",
@@ -29,6 +30,7 @@ export class OutputController {
       "CREATEDBY": "1",
       "CREATEDON": "2016-01-01 00:00:00"
     }
+
     this.urlMaps = {
       'contract': `${this._api.getHost()}/bacontract/Service.svc/getproximitybadata`,
       'backhaul': `${this._api.getHost()}/bacontract/Service.svc/dvprdata`,
@@ -36,7 +38,11 @@ export class OutputController {
       'cleansheet': ''
     };
 
-    // console.log(this.urlMaps);
+    this.responseKeys = {
+      'CONTRACTRATE': 'getproximitybadataResult',
+      'PVSRFPRATE': 'rfphistoryResult',
+      'BACKHAULAVL': 'dvprdataResult'
+    };
 
     this.getTransactionData();
   }
@@ -86,20 +92,18 @@ export class OutputController {
     this.inproxiparam.DISTANCE = this.outputdata[0].PROXIDISTANCE;
     this.inproxiparam.NOOFTRIPS = this.outputdata[0].NOOFTRIPS;
 
-
     this.gridData = [];
 
     var newfilterRoutes = {
       inproxiparam: this.inproxiparam
     };
 
-    console.log(newfilterRoutes);
-
     this.TOLOCATIONNAME = table.TOLOCATIONNAME;
-    this.CONTRACTRATE = table.CONTRACTRATE;
+    this.CONTRACTRATE = table[clickedColName];
+    console.log(this.CONTRACTRATE, this.urlMaps[colname]);
 
     this._api.post(this.urlMaps[colname], newfilterRoutes, true).then((res) => {
-      this.gridData = res.data.getproximitybadataResult;
+      this.gridData = res.data[this.responseKeys[clickedColName]];
     }, (err) => {
       console.error(err);
     });
