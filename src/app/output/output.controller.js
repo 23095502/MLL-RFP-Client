@@ -32,7 +32,7 @@ export class OutputController {
     this.urlMaps = {
       'contract': `${this._api.getHost()}/bacontract/Service.svc/getproximitybadata`,
       'backhaul': `${this._api.getHost()}/bacontract/Service.svc/dvprdata`,
-      'rfphistory': `${this._api.getHost()}/RFPTool/RFPRestService.svc/rfphistory`,
+      'rfphistory': `${this._api.getHost()}/RFPRest/RFPRestService.svc/rfphistory`,
       'cleansheet': ''
     };
 
