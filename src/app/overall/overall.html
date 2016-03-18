@@ -34,7 +34,7 @@
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
                     <label class="form-label" title="required" for="name">Customer <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                    <select class="form-control input-sm" id="name" ng-model="overall.customer" ng-options="CUSTOMER as CUSTOMER.CUSTOMERNAME for CUSTOMER in overall.CUSTOMERNAME_option" required>
+                    <select class="form-control input-sm" id="name" ng-model="overall.customer" ng-options="CUSTOMER as CUSTOMER.CUSTOMERNAME for CUSTOMER in overall.CUSTOMERNAME_option  | orderBy: 'CUSTOMERNAME' " required>
                       <option value=""></option>
                     </select>
                   </div>
@@ -174,7 +174,7 @@
                 </div>
                 <div class="col-sm-3 col-md-3">
                   <div class="form-group">
-                    <label class="form-label" for="distance">Proximity %)</label>
+                    <label class="form-label" for="distance">Proximity (%)</label>
                     <input t
                     ype="number" min="0" max="100" maxlength="3" class="form-control input-sm" id="distance" placeholder="Distance" ng-model="overall.overall.PROXIDISTANCE">
                   </div>
@@ -200,7 +200,7 @@
               <div class="col-sm-3 col-md-3">
                 <div class="form-group">
                   <label class="form-label" for="diselrate">Diesel rate (Rs/Litre)</label>
-                  <input type="number" maxlength="5" class="form-control input-sm" id="diselrate" placeholder="Diesel rate (Rs/Litre) " ng-model="overall.overall.DIESELRATE">
+                  <input type="number" step="0.01" maxlength="5" class="form-control input-sm" id="diselrate" placeholder="Diesel rate (Rs/Litre) " ng-model="overall.overall.DIESELRATE">
                 </div>
               </div>
               <div class="col-sm-3 col-md-3">
@@ -346,3 +346,7 @@
 </div>
 </form>
 <!-- Add Cusomer -->
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
