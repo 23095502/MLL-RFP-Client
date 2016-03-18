@@ -8,14 +8,15 @@ export class OutputController {
     this.outputdata = [];
 
     this.inproxiparam = {
-      "ORIGIN": "Kalwa",
-      "ORIGINSTATE": "Maharashtra",
-      "DESTINATION": "KUNDLI",
-      "DESTINATIONSTATE": "Haryana",
-      "VEHICLETYPE": "Container 4.5 MT 14 FT",
-      "DISTANCE": 100,
+      "ORIGIN": '',
+      "ORIGINSTATE": '',
+      "DESTINATION": '',
+      "DESTINATIONSTATE": '',
+      "VEHICLETYPE": '',
+      "DISTANCE": 0,
       "NOOFTRIPS": 0
     }
+
     this.apptrans = {
       "RFPID": 1,
       "BANAME": "IVC",
@@ -29,14 +30,13 @@ export class OutputController {
       "CREATEDBY": "1",
       "CREATEDON": "2016-01-01 00:00:00"
     }
+
     this.urlMaps = {
       'contract': `${this._api.getHost()}/bacontract/Service.svc/getproximitybadata`,
       'backhaul': `${this._api.getHost()}/bacontract/Service.svc/dvprdata`,
       'rfphistory': `${this._api.getHost()}/RFPRest/RFPRestService.svc/rfphistory`,
       'cleansheet': ''
     };
-
-    // console.log(this.urlMaps);
 
     this.getTransactionData();
   }
@@ -77,6 +77,7 @@ export class OutputController {
 
     this.selectedLane = table;
     this.rowClickedColName = clickedColName;
+
 
     this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
     this.inproxiparam.ORIGINSTATE = this.outputdata[0].FROMSTATE;

@@ -136,36 +136,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">
-        <b>VARIABLE CONTRACT RATES FOR:</b>
+        <b>VARIABLE CONTRACT RATES FOR </b>
         </h4>
       </div>
       <div class="modal-body">
         <div style="overflow: auto; height: 60vh">
           <form>
-
               <div class="container-fluid">
-                <!-- <div class="row">
-                  <div class="col-sm-2">
-                    <label class="form-label">From</label>
-                  </div>
-                  <div class="col-sm-2">
-                    <label class="form-label">To</label>
-                  </div>
-                  <div class="col-sm-2">
-                    <label class="form-label">Contract Rate</label>
-                  </div>
-                  <div class="col-sm-3">
-                    <label class="form-label">Vehicle Type</label>
-                  </div>
-                  <div class="col-sm-3">
-
-                  </div>
-                </div> -->
                 <div class="col-md-2">
                   <div class="form-group">
                     <label class="form-label" for="from">From</label>
                     <div>
-                      <b>{{output.nameoutputdata.ADDRESS}}</b>
+                      <b>{{output.filterOption.FROMLOCATIONNAME}}</b>
                     </div>
                   </div>
                 </div>
@@ -173,7 +155,7 @@
                   <div class="form-group">
                     <label class="form-label" for="to">To</label>
                     <div>
-                      <b>{{output.filterOption.FROMLOCATIONNAME}}</b>
+                      <b>{{output.TOLOCATIONNAME}}</b>
                     </div>
                   </div>
                 </div>
@@ -185,7 +167,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <div class="form-group">
                     <label class="form-label" for="vehicletype">Vehicle Type</label>
                     <div>
@@ -193,30 +175,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                   <div class="form-group">
                     <div>
-                      <span class="unit">*Pricing in ('000 INR')</span>
+                      <span class="unit">*Pricing in (000 INR)</span>
                     </div>
                   </div>
                 </div>
-                <!-- <div class="row">
-                  <div class="col-sm-2">
-                    <b>{{output.filterOption.FROMLOCATIONNAME}}</b>
-                  </div>
-                  <div class="col-sm-2">
-                    <b>{{output.TOLOCATIONNAME}}</b>
-                  </div>
-                  <div class="col-sm-2">
-                    <b>{{output.CONTRACTRATE}}</b>
-                  </div>
-                  <div class="col-sm-3">
-                    <b>{{output.filterOption.VEHICLETYPENAME}}</b>
-                  </div>
-                  <div class="col-sm-3 text-right">
-                    <span class="unit">*Pricing in ('000 INR')</span>
-                  </div>
-                </div> -->
                 <br><hr/>
                 <div class="form-divider"></div>
                 <div class="row">
