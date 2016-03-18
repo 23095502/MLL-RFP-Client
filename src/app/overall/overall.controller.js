@@ -86,6 +86,9 @@ export class OverallController {
       val: i
     }));
 
+    var dueDate = new Date();
+    dueDate.setDate(dueDate.getDate() + 7);
+
     this.overall = {
       "RFPID": 0,
       "RFPCODE": '',
@@ -99,7 +102,7 @@ export class OverallController {
       "DIESELRATE": 0,
       "AGEOFTRUCK": this.AGEOFTRUCK_option[4].val,
       "RFPDESC": '',
-      "DUEDATE": new Date(),
+      "DUEDATE": dueDate,
       "PRODUCTDESC": '',
       "CASHOPPID": '',
       "OPPRDOMAIN": '',
