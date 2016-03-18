@@ -142,26 +142,65 @@
       <div class="modal-body">
         <div style="overflow: auto; height: 60vh">
           <form>
-            <div class="fieldset" class="form-group">
+
               <div class="container-fluid">
-                <div class="row">
+                <!-- <div class="row">
                   <div class="col-sm-2">
-                    From
+                    <label class="form-label">From</label>
                   </div>
                   <div class="col-sm-2">
-                    To
+                    <label class="form-label">To</label>
                   </div>
                   <div class="col-sm-2">
-                    Contract Rate
+                    <label class="form-label">Contract Rate</label>
                   </div>
-                  <div class="col-sm-4">
-                    Vehicle Type
+                  <div class="col-sm-3">
+                    <label class="form-label">Vehicle Type</label>
                   </div>
-                  <div class="col-sm-2">
+                  <div class="col-sm-3">
 
                   </div>
+                </div> -->
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label class="form-label" for="from">From</label>
+                    <div>
+                      <b>{{output.nameoutputdata.ADDRESS}}</b>
+                    </div>
+                  </div>
                 </div>
-                <div class="row">
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label class="form-label" for="to">To</label>
+                    <div>
+                      <b>{{output.filterOption.FROMLOCATIONNAME}}</b>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label class="form-label" for="contractrate">Contract Rate</label>
+                    <div>
+                      <b>{{output.CONTRACTRATE}}</b>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="form-label" for="vehicletype">Vehicle Type</label>
+                    <div>
+                      <b>{{output.filterOption.VEHICLETYPENAME}}</b>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <div>
+                      <span class="unit">*Pricing in ('000 INR')</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="row">
                   <div class="col-sm-2">
                     <b>{{output.filterOption.FROMLOCATIONNAME}}</b>
                   </div>
@@ -171,14 +210,15 @@
                   <div class="col-sm-2">
                     <b>{{output.CONTRACTRATE}}</b>
                   </div>
-                  <div class="col-sm-4">
+                  <div class="col-sm-3">
                     <b>{{output.filterOption.VEHICLETYPENAME}}</b>
                   </div>
-                  <div class="col-sm-2">
-                    'Pricing in ('000 INR')
+                  <div class="col-sm-3 text-right">
+                    <span class="unit">*Pricing in ('000 INR')</span>
                   </div>
-                </div>
-                <hr/>
+                </div> -->
+                <br><hr/>
+                <div class="form-divider"></div>
                 <div class="row">
                   <div class="col-sm-12">
                     {{output.selectedrow}}
@@ -209,7 +249,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+
           </form>
         </div>
       </div>
