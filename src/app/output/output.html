@@ -114,7 +114,7 @@
             <!--  <td>{{outputdata.FROMLOCATIONNAME}}</td>
             <td>{{outputdata.VEHICLETYPENAME}}</td> -->
             <td ng-class="output.changecolor(outputdata.CLEANSHEETRATE,outputdata.APPROVEDAMOUNT)" >{{outputdata.CLEANSHEETRATE/1000 | number : 2}}</td>
-            <td ng-click="output.showModal('contract', outputdata, 'CONTRACTRATE')" ng-class="output.changecolor(outputdata.CONTRACTRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.CONTRACTRATE/1000 | number : 2}}</td>
+            <td ng-click="output.showModal('contract', outputdata, 'CONTRACTRATE', $index)" ng-class="output.changecolor(outputdata.CONTRACTRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.CONTRACTRATE/1000 | number : 2}}</td>
             <td ng-class="output.changecolor(outputdata.SHIPXRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.SHIPXRATE/1000}}</td>
             <td ng-click="output.showModal('rfphistory', outputdata, 'PVSRFPRATE')" ng-class="output.changecolor(outputdata.PVSRFPRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.PVSRFPRATE/1000 | number : 2}}</td>
             <td ng-class="output.changecolor(outputdata.MARKETRATE,outputdata.APPROVEDAMOUNT)">{{outputdata.MARKETRATE/1000 | number : 2}}</td>
@@ -142,14 +142,10 @@
       <div class="modal-body">
         <div style="overflow: auto; height: 60vh">
           <form>
-<<<<<<< HEAD
-              <div class="container-fluid">
-                <div class="col-md-2">
-=======
+
             <div class="container-fluid">
               <!-- <div class="row filter-margin">
                 <div class="col-sm-2">
->>>>>>> develop
                   <div class="form-group">
                     <label class="form-label" for="from">From</label>
                     <div>
@@ -174,11 +170,7 @@
                   </div>
                   <div class="arrow-down"></div>
                 </div>
-<<<<<<< HEAD
-                <div class="col-md-3">
-=======
                 <div class="col-sm-4">
->>>>>>> develop
                   <div class="form-group">
                     <label class="form-label" for="vehicletype">Vehicle Type</label>
                     <div>
@@ -186,45 +178,6 @@
                     </div>
                   </div>
                 </div>
-<<<<<<< HEAD
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <div>
-                      <span class="unit">*Pricing in (000 INR)</span>
-                    </div>
-                  </div>
-                </div>
-                <br><hr/>
-                <div class="form-divider"></div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    {{output.selectedrow}}
-                    <table class="table mll-table">
-                      <thead>
-                        <tr>
-                          <th>From</th>
-                          <th>To</th>
-                          <th>Contract Rate</th>
-                          <th>BA Name</th>
-                          <th>Customer Name</th>
-                          <th>Contract No./ID</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr ng-repeat="griddata in output.gridData">
-                          <td>
-                            <input type="radio" ng-click="output.updateContractRate(griddata)"  name="optradio">
-                          {{griddata.ORIGIN}}</td>
-                          <td>{{griddata.DESTINATION}}</td>
-                          <td>{{griddata.FREIGHTRATE}}</td>
-                          <td>{{griddata.BANAME}}</td>
-                          <td>{{griddata.CUSTOMERNAME}}</td>
-                          <td>{{griddata.CONTRACTID}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-=======
                 <div class="col-sm-2">
                   <div class="form-group">
                     <div>
@@ -251,7 +204,7 @@
                           <div class="highlight-rate">
                             <div class="form-group">
                               <span class="mll-table-label exclude">Contract Rate</span><br>
-                              <span class="mll-table-value exclude">{{output.CONTRACTRATE}}</span>
+                              <span class="mll-table-value exclude">{{output.CONTRACTRATE/1000 | number : 2}}</span>
                             </div>
                           </div>
                           <div class="arrow-down"></div>
@@ -283,14 +236,13 @@
                           <input type="radio" ng-click="output.updateContractRate(griddata)"  name="optradio">
                         {{griddata.ORIGIN}}</td>
                         <td>{{griddata.DESTINATION}}</td>
-                        <td>{{griddata.FREIGHTRATE}}</td>
+                        <td>{{griddata.FREIGHTRATE/ 1000 | number : 2}}</td>
                         <td>{{griddata.BANAME}}</td>
                         <td>{{griddata.CUSTOMERNAME}}</td>
                         <td>{{griddata.CONTRACTID}}</td>
                       </tr>
                     </tbody>
                   </table>
->>>>>>> develop
                 </div>
               </div>
             </div>
