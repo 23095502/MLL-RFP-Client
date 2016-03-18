@@ -65,12 +65,12 @@
     <div class="col-md-8">
       <div class="form-inline">
         <div class="form-group">
-          <label class="form-label" for="from">From</label>
+          <label class="form-label" for="from">From&nbsp;</label>
           <select class="form-control input-sm"  id="from" ng-model="output.filterOption.FROMLOCATIONNAME" ng-options="from.FROMLOCATIONNAME as from.FROMLOCATIONNAME for from in output.fromLocationOptions" ng-change="output.changeLocation()"  >
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label" for="trucktype">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Truck Type</label>
+          <label class="form-label" for="trucktype">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Truck Type&nbsp;</label>
           <select class="form-control input-sm" id="trucktype" ng-model="output.filterOption.VEHICLETYPENAME" ng-options="vehicle.VEHICLETYPENAME as vehicle.VEHICLETYPENAME for vehicle in output.vehicleTypeOptions">
           </select>
         </div>
@@ -80,7 +80,7 @@
       <span class="unit">All pricing in ('000 INR)</span>
     </div>
     <div class="col-md-2 text-right">
-        <button type="button" class="btn btn-primary" ng-click="output.submit()">Submit</button>
+      <button type="button" class="btn btn-primary" ng-click="output.submit()">Submit</button>
     </div>
   </div>
 </div>
@@ -142,50 +142,34 @@
       <div class="modal-body">
         <div style="overflow: auto; height: 60vh">
           <form>
-
-              <div class="container-fluid">
-                <!-- <div class="row">
-                  <div class="col-sm-2">
-                    <label class="form-label">From</label>
-                  </div>
-                  <div class="col-sm-2">
-                    <label class="form-label">To</label>
-                  </div>
-                  <div class="col-sm-2">
-                    <label class="form-label">Contract Rate</label>
-                  </div>
-                  <div class="col-sm-3">
-                    <label class="form-label">Vehicle Type</label>
-                  </div>
-                  <div class="col-sm-3">
-
-                  </div>
-                </div> -->
-                <div class="col-md-2">
+            <div class="container-fluid">
+              <!-- <div class="row filter-margin">
+                <div class="col-sm-2">
                   <div class="form-group">
                     <label class="form-label" for="from">From</label>
-                    <div>
-                      <b>{{output.nameoutputdata.ADDRESS}}</b>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-2">
-                  <div class="form-group">
-                    <label class="form-label" for="to">To</label>
                     <div>
                       <b>{{output.filterOption.FROMLOCATIONNAME}}</b>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-sm-2">
+                  <div class="form-group">
+                    <label class="form-label" for="to">To</label>
+                    <div>
+                      <b>{{output.TOLOCATIONNAME}}</b>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-2 highlight-rate">
                   <div class="form-group">
                     <label class="form-label" for="contractrate">Contract Rate</label>
                     <div>
                       <b>{{output.CONTRACTRATE}}</b>
                     </div>
                   </div>
+                  <div class="arrow-down"></div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-sm-4">
                   <div class="form-group">
                     <label class="form-label" for="vehicletype">Vehicle Type</label>
                     <div>
@@ -193,63 +177,74 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-sm-2">
                   <div class="form-group">
                     <div>
-                      <span class="unit">*Pricing in ('000 INR')</span>
+                      <span class="unit">Pricing in ('000 INR)</span>
                     </div>
                   </div>
                 </div>
-                <!-- <div class="row">
-                  <div class="col-sm-2">
-                    <b>{{output.filterOption.FROMLOCATIONNAME}}</b>
-                  </div>
-                  <div class="col-sm-2">
-                    <b>{{output.TOLOCATIONNAME}}</b>
-                  </div>
-                  <div class="col-sm-2">
-                    <b>{{output.CONTRACTRATE}}</b>
-                  </div>
-                  <div class="col-sm-3">
-                    <b>{{output.filterOption.VEHICLETYPENAME}}</b>
-                  </div>
-                  <div class="col-sm-3 text-right">
-                    <span class="unit">*Pricing in ('000 INR')</span>
-                  </div>
-                </div> -->
-                <br><hr/>
-                <div class="form-divider"></div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    {{output.selectedrow}}
-                    <table class="table mll-table">
-                      <thead>
-                        <tr>
-                          <th>From</th>
-                          <th>To</th>
-                          <th>Contract Rate</th>
-                          <th>BA Name</th>
-                          <th>Customer Name</th>
-                          <th>Contract No./ID</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr ng-repeat="griddata in output.gridData">
-                          <td>
-                            <input type="radio" ng-click="output.updateContractRate(griddata)"  name="optradio">
-                          {{griddata.ORIGIN}}</td>
-                          <td>{{griddata.DESTINATION}}</td>
-                          <td>{{griddata.FREIGHTRATE}}</td>
-                          <td>{{griddata.BANAME}}</td>
-                          <td>{{griddata.CUSTOMERNAME}}</td>
-                          <td>{{griddata.CONTRACTID}}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+              </div>
+              <br> -->
+              <div class="row">
+                <div class="col-sm-12">
+                  <table class="table mll-table">
+                    <thead>
+                      <tr class="mll-table-rate">
+                        <td>
+                          <span class="mll-table-label">From</span><br>
+                          <span class="mll-table-value">{{output.filterOption.FROMLOCATIONNAME}}</span>
+                        </td>
+                        <td>
+                          <span class="mll-table-label">To</span><br>
+                          <span class="mll-table-value">{{output.TOLOCATIONNAME}}</span>
+                        </td>
+                        <td>
+                          <div class="highlight-rate">
+                            <div class="form-group">
+                              <span class="mll-table-label exclude">Contract Rate</span><br>
+                              <span class="mll-table-value exclude">{{output.CONTRACTRATE}}</span>
+                            </div>
+                          </div>
+                          <div class="arrow-down"></div>
+                        </td>
+                        <td>
+                          <span class="mll-table-label">Vehicle Type</span><br>
+                          <span class="mll-table-value">{{output.filterOption.VEHICLETYPENAME}}</span>
+                        </td>
+                        <td>
+                          <span class="mll-table-label"></span>
+                          <span class="mll-table-value"></span>
+                        </td>
+                        <td>
+                          <span class="unit">Pricing in ('000 INR)</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Contract Rate</th>
+                        <th>BA Name</th>
+                        <th>Customer Name</th>
+                        <th>Contract No./ID</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="griddata in output.gridData">
+                        <td>
+                          <input type="radio" ng-click="output.updateContractRate(griddata)"  name="optradio">
+                        {{griddata.ORIGIN}}</td>
+                        <td>{{griddata.DESTINATION}}</td>
+                        <td>{{griddata.FREIGHTRATE}}</td>
+                        <td>{{griddata.BANAME}}</td>
+                        <td>{{griddata.CUSTOMERNAME}}</td>
+                        <td>{{griddata.CONTRACTID}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
-
+            </div>
           </form>
         </div>
       </div>
@@ -258,7 +253,6 @@
         Close
         </button>
       </div>
-
     </div>
   </div>
 </div>
