@@ -23,27 +23,14 @@ export class OverallController {
       "CREATEDBY": 0,
       "CREATEDON": null
     };
-    this.newCustomer = {
-      "CUSTOMERID": 0,
-      "CUSTOMERCODE": '',
-      "CUSTOMERNAME": '',
-      "ADDRESS": '',
-      "CONTACTPERSON": '',
-      "CONTACTNO": 0,
-      "CASHACCOUNTID": '',
-      "TOTALSPEND": 0,
-      "EMAIL": '',
-      "ACTIVE": "A",
-      "MODE": "INSERT",
-      "CREATEDBY": 0,
-      "CREATEDON": null
-    };
+
+
   }
+
 
   init() {
 
     this.CUSTOMERNAME_option = this._master.getCustomers();
-    console.log(this._master.getCustomers());
 
     this.AGEOFTRUCK_option = _.times(10, (i) => ({
       name: i,
@@ -150,8 +137,6 @@ export class OverallController {
 
   addCustomer() {
 
-    //alert('Hi');
-
     var customer = {
       "cust": {
         "CUSTOMERID": this.newCustomer.CUSTOMERID,
@@ -168,9 +153,12 @@ export class OverallController {
         "CREATEDBY": 5,
         "CREATEDON": new Date()
       }
+
     };
 
     var customerURL = 'updtcustomer';
+
+    console.log(customer);
 
     this._api.post(customerURL, customer).then((response) => {
       this._master.refreshPromise().then((response) => {
