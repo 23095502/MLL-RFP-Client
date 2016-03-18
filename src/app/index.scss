@@ -211,6 +211,9 @@ h1 {
 .table-colspan-header {
   border-bottom: 1px solid lighten($mll-grey, 20) !important;
 }
+.table-colspan-header-sm {
+  width: 10px;
+}
 
 /* grid scoll css */
 .output-table {
