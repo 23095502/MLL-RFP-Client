@@ -1,12 +1,12 @@
-export class RFPOutputController {
-  constructor($http, $stateParams) {
+export class OutputController {
+  constructor($stateParams, $state, apiService) {
     'ngInject';
 
+    this.$stateParams = $stateParams;
+    this._api = apiService;
+    this.gridData = [];
     this.outputdata = [];
 
-
-    this.$http = $http;
-    this.gridData = [];
     this.inproxiparam = {
       "ORIGIN": "Kalwa",
       "ORIGINSTATE": "Maharashtra",
@@ -17,48 +17,52 @@ export class RFPOutputController {
       "NOOFTRIPS": 0
     }
     this.apptrans = {
-      "RFPID":1,
-      "BANAME":"IVC",
-      "APPROVEDAMOUNT":5000,
-      "FROMLOCATIONID":1,
-      "TOLOCATIONID":2,
-      "FROMSTATEID":20,
-      "TOSTATEID":10,
-      "VEHICLETYPEID":2,
-      "ACTIVE":"A",
-      "CREATEDBY":"1",
-      "CREATEDON":"2016-01-01 00:00:00"
+      "RFPID": 1,
+      "BANAME": "IVC",
+      "APPROVEDAMOUNT": 5000,
+      "FROMLOCATIONID": 1,
+      "TOLOCATIONID": 2,
+      "FROMSTATEID": 20,
+      "TOSTATEID": 10,
+      "VEHICLETYPEID": 2,
+      "ACTIVE": "A",
+      "CREATEDBY": "1",
+      "CREATEDON": "2016-01-01 00:00:00"
     }
     this.urlMaps = {
-      'contract': 'http://59.160.18.222/bacontract/Service.svc/getproximitybadata',
-      'backhaul': 'http://59.160.18.222/bacontract/Service.svc/dvprdata',
-      'rfphistory': 'http://59.160.18.222/RFPTool/RFPRestService.svc/rfphistory',
+      'contract': `${this._api.getHost()}/bacontract/Service.svc/getproximitybadata`,
+      'backhaul': `${this._api.getHost()}/bacontract/Service.svc/dvprdata`,
+      'rfphistory': `${this._api.getHost()}/RFPRest/RFPRestService.svc/rfphistory`,
       'cleansheet': ''
-    }
+    };
 
-    $http.get(`http://59.160.18.222/RFPRest/RFPRestService.svc/gettrans/${$stateParams.rfpId}`)
-      .then((res) => {
-        this.outputdata = res.data;
-        this.nameoutputdata = this.outputdata[0];
-        this.fromLocationOptions = _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
-        this.routesGroupByLocation = _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
+    // console.log(this.urlMaps);
 
-        _.each(this.routesGroupByLocation, (vehiclelist, key) => {
-          this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
-        });
+    this.getTransactionData();
+  }
 
-        this.filterOption = {
-          FROMLOCATIONNAME: this.fromLocationOptions[0].FROMLOCATIONNAME,
-          VEHICLETYPENAME: this.fromLocationOptions[0].VEHICLETYPENAME
-        };
+  getTransactionData() {
 
-        this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+    this._api.get(`gettrans/${this.$stateParams.rfpId}`).then((res) => {
+      this.outputdata = res.data;
+      this.nameoutputdata = this.outputdata[0];
+      this.fromLocationOptions = _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
+      this.routesGroupByLocation = _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
 
-      }, (err) => {
-        console.error(err);
+      _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+        this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
       });
 
+      this.filterOption = {
+        FROMLOCATIONNAME: this.fromLocationOptions[0].FROMLOCATIONNAME,
+        VEHICLETYPENAME: this.fromLocationOptions[0].VEHICLETYPENAME
+      };
 
+      this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+
+    }, (err) => {
+      console.error(err);
+    });
   }
 
   ClearFilter() {
@@ -73,47 +77,37 @@ export class RFPOutputController {
 
     this.selectedLane = table;
     this.rowClickedColName = clickedColName;
-
     /*
     this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
     this.inproxiparam.ORIGINSTATE = this.outputdata[0].FROMSTATE;
     this.inproxiparam.DESTINATION = this.outputdata[0].TOLOCATIONNAME;
     this.inproxiparam.DESTINATIONSTATE = this.outputdata[0].TOSTATE;
     this.inproxiparam.VEHICLETYPE = this.filterOption.VEHICLETYPENAME;
-    this.inproxiparam.DISTANCE = this.outputdata[0].DISTANCE;
+    this.inproxiparam.DISTANCE = this.outputdata[0].PROXIDISTANCE;
     this.inproxiparam.NOOFTRIPS = this.outputdata[0].NOOFTRIPS;
-    console.log(this.inproxiparam);
     */
 
-    var newfilterRoutes = '{"inproxiparam":' + JSON.stringify(this.inproxiparam) + '}';
+    this.gridData = [];
+
+    var newfilterRoutes = {
+      inproxiparam: this.inproxiparam
+    };
+
+    console.log(newfilterRoutes);
 
     this.TOLOCATIONNAME = table.TOLOCATIONNAME;
     this.CONTRACTRATE = table.CONTRACTRATE;
 
-    var req = {
-      method: 'POST',
-      url: 'http://59.160.18.222/bacontract/Service.svc/getproximitybadata',
-      //url: this.urlMaps[colname],
-      headers: {
-        'Content-Type': 'application/json'
-      },
-
-      data: newfilterRoutes
-    }
-
-    this.$http(req).then((res) => {
-    this.gridData = res.data.getproximitybadataResult;
+    this._api.post(this.urlMaps[colname], newfilterRoutes, true).then((res) => {
+      this.gridData = res.data.getproximitybadataResult;
     }, (err) => {
       console.error(err);
     });
 
-
     $('#myModalOutputDetails').modal();
-
   }
 
-
-  submit(){
+  submit() {
 
     var revisedOutput = _.chain(this.outputdata).map((output) => {
 
@@ -153,33 +147,21 @@ export class RFPOutputController {
       delete output.TOTALSPEND;
       delete output.VEHICLETYPENAME;
       return output;
-
     }).value();
 
-    var newRFPOutputDetails = '{"apptrans":' + JSON.stringify(revisedOutput) + '}';
+    var newOutputDetails = {
+      apptrans: revisedOutput
+    };
 
-    var req = {
-      method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/apptrans',
-      headers: {
-        'Content-Type': 'application/json'
-      },
 
-      data: newRFPOutputDetails
-    }
-
-    this.$http(req).then((res) => {
-    console.log(res.data);
-    //console.log(this.gridData);
+    this._api.post('apptrans', newOutputDetails).then((res) => {
+      this.getTransactionData();
     }, (err) => {
       console.error(err);
     });
-
   }
 
-
-  updateContractRate(popupGridData){
-
+  updateContractRate(popupGridData) {
     this.CONTRACTRATE = popupGridData.FREIGHTRATE;
     this.selectedLane[this.rowClickedColName] = popupGridData.FREIGHTRATE;
   }
@@ -195,20 +177,23 @@ export class RFPOutputController {
   changeLocation() {
     this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
     this.filterOption.VEHICLETYPENAME = this.vehicleTypeOptions[0].VEHICLETYPENAME;
-
+    this.outputdata[0].CLEANSHEETRATE = this.outputdata[0].CLEANSHEETRATE / 1000;
   }
 
-  export(){
-    //export
-    this.$http({
-      method: 'GET',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/exportrfpout/1'
-    }).then((res) => {
+  export () {
+    this._api.get('exportrfpout/1').then((res) => {
       window.open(res.data);
     }, (err) => {
       console.error(err);
     });
-    //export
+  }
+
+  checkBackhaul() {
+
+  }
+
+  closeModal() {
+    $('#myModalOutputDetails').modal('hide');
   }
 
 }

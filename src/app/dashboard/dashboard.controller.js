@@ -26,13 +26,13 @@ export class DashboardController {
   }
 
   click(id) {
-    this.$state.go('rfpoutputdetails', {
+    this.$state.go('output', {
       rfpId: id
     });
   }
 
   createRFP() {
-    this.$state.go("rfpoverall");
+    this.$state.go('overall');
   }
 
 }

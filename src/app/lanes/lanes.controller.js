@@ -1,24 +1,18 @@
 export class LanesController {
-  constructor($http, $stateParams, $timeout, Upload, masterService, apiService) {
+  constructor($state, $stateParams, $timeout, Upload, masterService, apiService) {
 
     'ngInject';
 
-
-    this.iswarehousing = $stateParams.iswarehousing;
-    (this.iswarehousing === 'Y') ? this.iswarehousing = true: this.iswarehousing = false;
-
-    this.$stateParams = $stateParams;
-    this.$state = $state;
-    //GET RFP DETAILS
-
     this.routes = [];
     this.routes = [];
-    this.$http = $http;
+    this.$timeout = $timeout;
     this.$stateParams = $stateParams;
     this.Upload = Upload;
     this.isServiceTypeODC;
     this.statename_option = [];
     this.isSERVICETYPE_option = [];
+    this._api = apiService;
+    this.$state = $state;
 
     this.locationname_option = [];
     this.vehicletype = {
@@ -69,13 +63,13 @@ export class LanesController {
     let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 td'), (td) => (td.offsetWidth));
 
     let finalFrozenWidth = _.chain(div3BodyWidth)
-      .map((item, i) => Math.max(item, div1HeadWidth[i]))
+      .map((item, i) => Math.min(item, div1HeadWidth[i]))
       .reject((item) => (_.isNaN(item)))
       .value();
 
     //Fix width for div1 (left head) & div3 (left body)
-    let div1Head = document.querySelectorAll('.thead-div2 th');
-    let div3Body = document.querySelectorAll('.tbody-div4 td');
+    let div1Head = document.querySelectorAll('.thead-div1 th');
+    let div3Body = document.querySelectorAll('.tbody-div3 td');
 
     _.each(finalFrozenWidth, (list, key) => {
       div1Head[key].children[0].style.width = finalFrozenWidth[key] + 'px';
@@ -183,7 +177,7 @@ export class LanesController {
 
     //---------------------
     //set width to route grid columns
-    this.setupRoutTable();
+    this.$timeout(this.adjustScrollableTable);
     //---------------------
     $('#myModal').modal('hide');
   }
@@ -206,7 +200,7 @@ export class LanesController {
     this.editingIndex = null;
     //---------------------
     //set width to route grid columns
-    // this.setupRoutTable();
+    this.$timeout$timeout(this.adjustScrollableTable);
     //---------------------
     $('#myModal').modal('hide');
   }
@@ -218,7 +212,7 @@ export class LanesController {
     this.editingIndex = null;
     //---------------------
     //set width to route grid columns
-    this.setupRoutTable();
+    this.$timeout(this.adjustScrollableTable);
     //---------------------
     $('#myModal').modal('hide');
   }
@@ -245,61 +239,56 @@ export class LanesController {
     var newfilterRoutes = {
       rfproute: filterRoutes
     };
-    var req = {
+    /*var req = {
       method: 'POST',
       url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/routeupdate',
       headers: {
         'Content-Type': 'application/json'
       },
       data: newfilterRoutes
-    };
+    };*/
 
-
-    this.$http(req).then((r)=> {
+    this._api.post('routeupdate', newfilterRoutes).then((r)=> {
       //alert('Data Saved Successfully...');
-      this.$state.go('rfpdashboard');
+      this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
+        this.$state.go('dashboard');
+      }, (err) => {
+        console.error(err);
+      });
+
     }, (e)=> {
-
-    this.$http(req).then((r) => {
-
-        /*var req2 = {
-              method: 'POST',
-              url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/apiupdate/ ${$stateParams.rfpId}',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              data: newfilterRoutes
-            };
-            this.$http(req2).then(function(r) {
-              alert('Data Saved Successfully...');
-            }, function(e) {
-              console.error(e);
-            });
-          }*/
-        this.$http({
-          method: 'GET',
-          url: `http://59.160.18.222/RFPRest/RFPRestService.svc/apiupdate/${this.$stateParams.rfpid}`
-
-        }).then((res) => {
-            alert('Data Saved Successfully...');
-        }, (err) => {
-          console.error(err);
-        });
-
-    }, (e) => {
-
       console.error(e);
     });
+
   }
 
+  uploadBlobOrFile(blobOrFile) {
+    var client = new XMLHttpRequest();
+    client.open('POST', 'http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/1',false);
+    //client.setRequestHeader('Content-length', blobOrFile.length);
+    client.setRequestHeader("Content-Type", "multipart/form-data");
 
+    /* Check the response status */
+    client.onreadystatechange = function () {
+        alert ("rdystate: " + client.readyState + " status: "   + client.status + " Text: "     + client.statusText);
+      if (client.readyState == 4 && client.status == 200) {
+               alert(client.responseText);
+      }
+    }
 
-
+    /* Send to server */
+    client.send(blobOrFile);
+   }
 
   uploadFile(file) {
 
     this.Upload.upload({
-      url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/1/Routeupload/1`,
+      url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`,
+      //url: `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/93`,
+      /*headers: {
+        'Content-Type': 'multipart/form-data',
+        'Content-length': file.size
+      },*/
       data: {
         file: file
       }
