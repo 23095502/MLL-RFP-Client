@@ -223,6 +223,7 @@ export class OverallController {
 
     var rfpHeaderURL = 'rfp/INSERT';
 
+    console.log(rfpHeader);
     this._api.post(rfpHeaderURL, rfpHeader).then((response) => {
       this.$state.go('lanes', {
         rfpid: response.data.rfpResult[0].RFPID,

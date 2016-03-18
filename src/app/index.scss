@@ -264,8 +264,49 @@ h1 {
   overflow: auto;
   border-bottom: 1px solid lighten($mll-darkgrey, 60);
 }
+.highlight-rate {
+  background-color: rgb(141, 199, 63);
+  margin-bottom: -10px;
+  margin-top: -20px;
+  padding-top: 20px;
+  color: $mll-white;
+  text-align: center;
+}
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgb(141, 199, 63);
+  margin-left: 40px;
+  position: absolute;
+  margin-top: -5px;
+}
+.mll-table-rate {
+  background-color: $mll-white;
+  color: $mll-darkgrey;
+}
+.mll-table-label {
 
-/* grid scoll css */
+  font-size: 12px;
+  display: inline-block;
+  margin-bottom: 5px;
+
+  &:not(.exclude) {
+    color: $mll-grey;
+  }
+}
+.mll-table-value {
+
+  font-size: 14px;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 5px;
+
+  &:not(.exclude) {
+    color: $mll-grey;
+  }
+}
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
