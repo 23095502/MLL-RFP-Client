@@ -35,5 +35,4 @@ export class DashboardController {
     this.$state.go("rfpoverall");
   }
 
-
 }

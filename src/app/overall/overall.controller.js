@@ -85,6 +85,9 @@ export class OverallController {
       val: i
     }));
 
+    var dueDate = new Date();
+    dueDate.setDate(dueDate.getDate() + 7);
+
     this.overall = {
       "RFPID": 0,
       "RFPCODE": '',
@@ -98,7 +101,7 @@ export class OverallController {
       "DIESELRATE": 0,
       "AGEOFTRUCK": this.AGEOFTRUCK_option[4].val,
       "RFPDESC": '',
-      "DUEDATE": new Date(),
+      "DUEDATE": dueDate,
       "PRODUCTDESC": '',
       "CASHOPPID": '',
       "OPPRDOMAIN": '',
@@ -209,7 +212,7 @@ export class OverallController {
     var rfpHeaderURL = 'rfp/INSERT';
 
     this._api.post(rfpHeaderURL, rfpHeader).then((response) => {
-      this.$state.go('rfpdetails', {
+      this.$state.go('lanes', {
         rfpid: response.data.rfpResult[0].RFPID,
         iswarehousing: this.overall.ISHUBORWHREQ
       });
