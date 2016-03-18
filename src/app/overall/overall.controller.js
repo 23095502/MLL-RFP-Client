@@ -24,7 +24,6 @@ export class OverallController {
       "CREATEDON": null
     };
 
-
   }
 
 
@@ -218,7 +217,7 @@ export class OverallController {
         "CONTACTNO": this.customer.CONTACTNO,
         "CASHACCOUNTID": this.customer.CASHACCOUNTID,
         "TOTALSPEND": this.customer.TOTALSPEND,
-        "PROXIDISTANCE": this.customer.PROXIDISTANCE
+        "PROXIDISTANCE": this.overall.PROXIDISTANCE
       }
     };
 

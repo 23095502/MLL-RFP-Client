@@ -38,6 +38,12 @@ export class OutputController {
       'cleansheet': ''
     };
 
+    this.responseKeys = {
+      'CONTRACTRATE': 'getproximitybadataResult',
+      'PVSRFPRATE': 'rfphistoryResult',
+      'BACKHAULAVL': 'dvprdataResult'
+    };
+
     this.getTransactionData();
   }
 
@@ -93,10 +99,11 @@ export class OutputController {
     };
 
     this.TOLOCATIONNAME = table.TOLOCATIONNAME;
-    this.CONTRACTRATE = table.CONTRACTRATE;
+    this.CONTRACTRATE = table[clickedColName];
+    console.log(this.CONTRACTRATE, this.urlMaps[colname]);
 
     this._api.post(this.urlMaps[colname], newfilterRoutes, true).then((res) => {
-      this.gridData = res.data.getproximitybadataResult;
+      this.gridData = res.data[this.responseKeys[clickedColName]];
     }, (err) => {
       console.error(err);
     });
