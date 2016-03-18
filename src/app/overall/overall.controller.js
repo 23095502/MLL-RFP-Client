@@ -206,12 +206,13 @@ export class OverallController {
         "CONTACTNO": this.customer.CONTACTNO,
         "CASHACCOUNTID": this.customer.CASHACCOUNTID,
         "TOTALSPEND": this.customer.TOTALSPEND,
-        "PROXIDISTANCE": this.customer.PROXIDISTANCE
+        "PROXIDISTANCE": this.overall.PROXIDISTANCE
       }
     };
 
     var rfpHeaderURL = 'rfp/INSERT';
 
+    console.log(rfpHeader);
     this._api.post(rfpHeaderURL, rfpHeader).then((response) => {
       this.$state.go('lanes', {
         rfpid: response.data.rfpResult[0].RFPID,
