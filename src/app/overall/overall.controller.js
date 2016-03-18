@@ -25,14 +25,14 @@ export class OverallController {
     };
     this.newCustomer = {
       "CUSTOMERID": 0,
-      "CUSTOMERCODE": null,
-      "CUSTOMERNAME": null,
-      "ADDRESS": null,
-      "CONTACTPERSON": null,
-      "CONTACTNO": null,
-      "CASHACCOUNTID": null,
-      "TOTALSPEND": null,
-      "EMAIL": null,
+      "CUSTOMERCODE": '',
+      "CUSTOMERNAME": '',
+      "ADDRESS": '',
+      "CONTACTPERSON": '',
+      "CONTACTNO": 0,
+      "CASHACCOUNTID": '',
+      "TOTALSPEND": 0,
+      "EMAIL": '',
       "ACTIVE": "A",
       "MODE": "INSERT",
       "CREATEDBY": 0,
@@ -125,9 +125,29 @@ export class OverallController {
       "TOTALSPEND": 0,
       "PROXIDISTANCE": 10
     };
+
+    this.customer = {
+      "cust": {
+        "CUSTOMERID": 0,
+        "CUSTOMERCODE": '',
+        "CUSTOMERNAME": '',
+        "ADDRESS": '',
+        "CONTACTPERSON": '',
+        "CONTACTNO": 0,
+        "CASHACCOUNTID": '',
+        "TOTALSPEND": '',
+        "EMAIL": '',
+        "ACTIVE": "A",
+        "MODE": "INSERT",
+        "CREATEDBY": 5,
+        "CREATEDON": new Date()
+      }
+    };
   }
 
   addCustomer() {
+
+    //alert('Hi');
 
     var customer = {
       "cust": {
@@ -137,7 +157,7 @@ export class OverallController {
         "ADDRESS": this.newCustomer.ADDRESS,
         "CONTACTPERSON": this.newCustomer.CONTACTPERSON,
         "CONTACTNO": this.newCustomer.CONTACTNO,
-        "CASHACCOUNTID": this.newCustomer.CASHACCOUNTID,
+        "CASHACCOUNTID": this.newoppCustomer.CASHACCOUNTID,
         "TOTALSPEND": this.newCustomer.TOTALSPEND,
         "EMAIL": this.newCustomer.EMAIL,
         "ACTIVE": "A",
@@ -153,13 +173,17 @@ export class OverallController {
       this._master.refreshPromise().then((response) => {
         this._master.refresh(response);
         this.CUSTOMERNAME_option = this._master.getCustomers();
+
       }, (error) => {
         console.error(error);
+
       });
 
     }, (error) => {
       console.error(error)
     });
+
+    $('#myModal').modal('hide');
 
   }
 

@@ -77,7 +77,7 @@ export class OutputController {
 
     this.selectedLane = table;
     this.rowClickedColName = clickedColName;
-    /*
+
     this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
     this.inproxiparam.ORIGINSTATE = this.outputdata[0].FROMSTATE;
     this.inproxiparam.DESTINATION = this.outputdata[0].TOLOCATIONNAME;
@@ -85,7 +85,7 @@ export class OutputController {
     this.inproxiparam.VEHICLETYPE = this.filterOption.VEHICLETYPENAME;
     this.inproxiparam.DISTANCE = this.outputdata[0].PROXIDISTANCE;
     this.inproxiparam.NOOFTRIPS = this.outputdata[0].NOOFTRIPS;
-    */
+
 
     this.gridData = [];
 
