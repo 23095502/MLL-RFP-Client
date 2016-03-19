@@ -123,6 +123,7 @@ h1 {
       }
     }
   }
+
   thead {
     background-color: $mll-grey;
     color: $mll-white;
@@ -146,6 +147,10 @@ h1 {
         width: 1px;
         border-left: 1px solid lighten($mll-grey, 20);
       }
+
+      &.highlight {
+          background-color: rgb(110, 116, 104);
+      }
     }
   }
   tbody {
@@ -159,6 +164,8 @@ h1 {
         white-space: nowrap;
         font-size: 86%;
 
+        vertical-align:middle;
+
         span {
           display: inline-block;
         }
@@ -171,10 +178,18 @@ h1 {
           width: 1px;
           border-left: 1px solid lighten($mll-grey, 40);
         }
+
+        &.highlight {
+          background-color: rgb(243, 249, 235);
+        }
       }
       &:hover {
         background-color: lighten($mll-red, 45);
         cursor: pointer;
+      }
+      &.rate-details {
+        background-color: $mll-white;
+        color: $mll-darkgrey;
       }
     }
   }
@@ -268,6 +283,8 @@ h1 {
   background-color: rgb(141, 199, 63);
   margin-bottom: -10px;
   margin-top: -20px;
+  padding-left: 5px;
+  padding-right: 5px;
   padding-top: 20px;
   color: $mll-white;
   text-align: center;
@@ -278,7 +295,7 @@ h1 {
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
   border-top: 10px solid rgb(141, 199, 63);
-  margin-left: 40px;
+  margin-left: 4%;
   position: absolute;
   margin-top: -5px;
 }
@@ -307,6 +324,19 @@ h1 {
     color: $mll-grey;
   }
 }
+
+.radio-rate {
+
+  transform: scale(2.5);
+  width: 30px;
+  vertical-align: middle;
+
+}
+
+.radio-rate:checked {
+  outline: none !important;
+}
+
 
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject

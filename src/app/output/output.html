@@ -143,49 +143,6 @@
         <div style="overflow: auto; height: 60vh">
           <form>
             <div class="container-fluid">
-              <!-- <div class="row filter-margin">
-                <div class="col-sm-2">
-                  <div class="form-group">
-                    <label class="form-label" for="from">From</label>
-                    <div>
-                      <b>{{output.filterOption.FROMLOCATIONNAME}}</b>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2">
-                  <div class="form-group">
-                    <label class="form-label" for="to">To</label>
-                    <div>
-                      <b>{{output.TOLOCATIONNAME}}</b>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2 highlight-rate">
-                  <div class="form-group">
-                    <label class="form-label" for="contractrate">Contract Rate</label>
-                    <div>
-                      <b>{{output.CONTRACTRATE/1000 | number : 2 }}</b>
-                    </div>
-                  </div>
-                  <div class="arrow-down"></div>
-                </div>
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <label class="form-label" for="vehicletype">Vehicle Type</label>
-                    <div>
-                      <b>{{output.filterOption.VEHICLETYPENAME}}</b>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-2">
-                  <div class="form-group">
-                    <div>
-                      <span class="unit">Pricing in ('000 INR)</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <br> -->
               <div class="row">
                 <div class="col-sm-12">
                   <table class="table mll-table">
@@ -223,19 +180,24 @@
                       <tr>
                         <th>From</th>
                         <th>To</th>
-                        <th>Contract Rate</th>
+                        <th class="highlight">Contract Rate</th>
                         <th>BA Name</th>
                         <th>Customer Name</th>
                         <th>Contract No./ID</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="griddata in output.gridData">
+                      <tr class="rate-details" ng-repeat="griddata in output.gridData">
                         <td>
-                          <input type="radio" ng-click="output.updateContractRate(griddata)"  name="optradio">
-                        {{griddata.ORIGIN}}</td>
-                        <td>{{griddata.DESTINATION}}</td>
-                        <td>{{griddata.FREIGHTRATE}}</td>
+                          <div class="form-inline">
+                            <input type="radio" ng-click="output.updateContractRate(griddata)" name="optradio" class="radio-rate" >
+                            <div class="form-group">
+                              <span> {{griddata.ORIGIN}}</span> <br><span> {{griddata.ORIGINSTATE}}</span>
+                            </div>
+                          </div>
+                        </td>
+                        <td>{{griddata.DESTINATION}} <br> {{griddata.DESTINATIONSTATE}}</td>
+                        <td class="highlight">{{griddata.FREIGHTRATE}}</td>
                         <td>{{griddata.BANAME}}</td>
                         <td>{{griddata.CUSTOMERNAME}}</td>
                         <td>{{griddata.CONTRACTID}}</td>
