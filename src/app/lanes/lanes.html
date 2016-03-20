@@ -9,7 +9,7 @@
         </label>
         <input name="togglebutton" type="radio" autocomplete="off" class="radio-input" checked>
         <label class="btn btn-default btn-rounded">
-           Lane Details
+          Lane Details
         </label>
       </div> -->
       <div class="switch-field">
@@ -387,27 +387,23 @@
     </div>
   </div>
 </form>
-<div class="modal fade" id="myModalBrowse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="myModalBrowse" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">
-        Import Routes
-        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Import Routes</h4>
       </div>
       <div class="modal-body">
         <fieldset>
-          <legend>Upload on form submit</legend>
           <input type="file" ngf-select ng-model="lane.file" name="file"
           accept="excel/*" ngf-max-size="2MB" required
           ngf-model-invalid="lane.errorFile">
-          <i ng-show="myForm.file.$error.required">*required</i><br>
-          <i ng-show="myForm.file.$error.maxSize">File too large
+          <i ng-show="lane.file.$error.required">*required</i><br>
+          <i ng-show="lane.file.$error.maxSize">File too large
           {{lane.errorFile.size / 1000000|number:1}}MB: max 2M</i>
-          <button
-          ng-click="lane.uploadFile(lane.file)">Submit</button>
-          <!-- <button
-          ng-click="lane.uploadBlobOrFile(file.files[0])">Submit</button> -->
+
+          <!-- <button ng-click="lane.uploadBlobOrFile(lane.file)">Submit</button> -->
           <span class="progress" ng-show="lane.file.progress >= 0">
             <div style="width:{{lane.file.progress}}%"
             ng-bind="lane.file.progress + '%'"></div>
@@ -417,44 +413,8 @@
         </fieldset>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">
-        Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="myModalBrowse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">
-        Import Routes
-        </h4>
-      </div>
-      <div class="modal-body">
-        <fieldset>
-          <legend>Upload on form submit</legend>
-          <input type="file" ngf-select ng-model="lane.file" name="file"
-          accept="excel/*" ngf-max-size="2MB" required
-          ngf-model-invalid="lane.errorFile">
-          <i ng-show="myForm.file.$error.required">*required</i><br>
-          <i ng-show="myForm.file.$error.maxSize">File too large
-          {{lane.errorFile.size / 1000000|number:1}}MB: max 2M</i>
-          <button
-          ng-click="lane.uploadFile(lane.file)">Submit</button>
-          <span class="progress" ng-show="lane.file.progress >= 0">
-            <div style="width:{{lane.file.progress}}%"
-            ng-bind="lane.file.progress + '%'"></div>
-          </span>
-          <span ng-show="lane.file.result">Upload Successful</span>
-          <span class="err" ng-show="errorMsg">{{lane.errorMsg}}</span>
-        </fieldset>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">
-        Close
-        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="lane.uploadBlobOrFile(lane.file)">Import Routes</button>
       </div>
     </div>
   </div>

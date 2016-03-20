@@ -27,12 +27,10 @@ export class LanesController {
     this.iswarehousing = $stateParams.iswarehousing;
     (this.iswarehousing === 'Y') ? this.iswarehousing = true: this.iswarehousing = false;
 
-    apiService.get(`getrfproutebyid/${$stateParams.rfpid}`).then((res) => {
-      this.routes = res.data;
-      $timeout(this.adjustScrollableTable);
-    }, (err) => {
-      console.error(err);
-    });
+    //===========================
+    //Get all RFP routes by RFP ID
+    this.getRPFRoutes();
+    //===========================
 
     this.state = {
       "STATEID": null,
@@ -54,6 +52,15 @@ export class LanesController {
     this.resetRoute();
   }
 
+  getRPFRoutes() {
+    this._api.get(`getrfproutebyid/${this.$stateParams.rfpid}`).then((res) => {
+      this.routes = res.data;
+      this.$timeout(this.adjustScrollableTable);
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
   init() {
 
   }
@@ -73,14 +80,6 @@ export class LanesController {
       .map((item, i) => Math.max(item, div2HeadWidth[i]))
       .reject((item) => (_.isNaN(item)))
       .value();
-
-    console.log(div1HeadWidth);
-    console.log(div3BodyWidth);
-    console.log(div2HeadWidth);
-    console.log(div4BodyWidth);
-
-    console.log(document.querySelectorAll('.tbody-div4 tr')[0].getElementsByTagName('td')[2]);
-
 
     //Fix width for div1 (left head) & div3 (left body)
     let div1Head = document.querySelectorAll('.thead-div1 th');
@@ -257,58 +256,61 @@ export class LanesController {
       data: newfilterRoutes
     };*/
 
-    this._api.post('routeupdate', newfilterRoutes).then((r)=> {
+    this._api.post('routeupdate', newfilterRoutes).then((r) => {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
         this.$state.go('dashboard');
       }, (err) => {
         console.error(err);
       });
 
-    }, (e)=> {
+    }, (e) => {
       console.error(e);
     });
 
   }
 
   uploadBlobOrFile(blobOrFile) {
+
     var client = new XMLHttpRequest();
-    client.open('POST', 'http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/1',false);
+    client.open('POST', `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
+    //client.open('POST', `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`, false);
     //client.setRequestHeader('Content-length', blobOrFile.length);
     client.setRequestHeader("Content-Type", "multipart/form-data");
 
     /* Check the response status */
-    client.onreadystatechange = function () {
-        alert ("rdystate: " + client.readyState + " status: "   + client.status + " Text: "     + client.statusText);
+    client.onreadystatechange = () => {
+      //console.log(document.readyState);
+      console.log("rdystate: " + client.readyState + " status: " + client.status + " Text: " + client.statusText);
       if (client.readyState == 4 && client.status == 200) {
-               alert(client.responseText);
+        console.log(client.responseText);
+        //===========================
+        //Get all RFP routes by RFP ID
+        this.getRPFRoutes();
+        //===========================
+        $('#myModalBrowse').modal('hide');
       }
     }
 
     /* Send to server */
     client.send(blobOrFile);
-   }
-
-  uploadFile(file) {
-
-    this.Upload.upload({
-      url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`,
-      //url: `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/93`,
-      /*headers: {
-        'Content-Type': 'multipart/form-data',
-        'Content-length': file.size
-      },*/
-      data: {
-        file: file
-      }
-    }).then(function(resp) {
-      console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-    }, function(resp) {
-      console.log('Error status: ' + resp.status);
-    }, function(evt) {
-      var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-      console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-    });
   }
+
+  /*  uploadFile(file) {
+
+      this.Upload.upload({
+        //url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`,
+        url: `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`,
+        data: {},
+        file: file
+      }).then(function(resp) {
+        console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+      }, function(resp) {
+        console.log('Error status: ' + resp.status);
+      }, function(evt) {
+        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+      });
+    }*/
 
   map(id, list, idMatcher, nameKey) {
     if (_.isInteger(id) && list.length > 0) {
@@ -318,7 +320,7 @@ export class LanesController {
     }
   }
 
-  showModal(){
+  showModal() {
 
     this.resetRoute();
     this.editingIndex = null;
