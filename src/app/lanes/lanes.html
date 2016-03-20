@@ -2,13 +2,21 @@
   <div class="row">
     <div class="col-sm-4"><h1>Create new <abbr title="Request for praposal">RFP</abbr> </h1></div>
     <div class="col-sm-4 text-center">
-      <div class="btn-group" data-toggle="buttons" >
+      <!-- <div class="btn-group" data-toggle="buttons" >
+        <input name="togglebutton" type="radio" autocomplete="off" class="radio-input">
         <label class="btn btn-default btn-rounded">
-          <input name="togglebutton" type="checkbox" autocomplete="off">Overall Details
+          Overall Details
         </label>
-        <label class="btn btn-default btn-rounded active">
-          <input name="togglebutton" type="checkbox" autocomplete="off" checked> Lane Details
+        <input name="togglebutton" type="radio" autocomplete="off" class="radio-input" checked>
+        <label class="btn btn-default btn-rounded">
+           Lane Details
         </label>
+      </div> -->
+      <div class="switch-field">
+        <input type="radio" id="switch_left" name="switch_2" value="yes" />
+        <label for="switch_left">Overall Details</label>
+        <input type="radio" id="switch_right" name="switch_2" value="no" checked/>
+        <label for="switch_right">Lane Details</label>
       </div>
     </div>
     <div class="col-md-4 text-right">
@@ -20,7 +28,8 @@
       </button>
     </div>
   </div>
-  <div class="form-divider"></div>
+  <!-- <div>&nbsp;</div> -->
+  <!-- <div class="form-divider"></div> -->
 </div>
 <div class="output-table">
   <div class="thead-div1">
@@ -60,7 +69,7 @@
             <span>Distance oneway</span>
           </th>
           <th>
-            <span>Loading unloading time</span>
+            <span>Loading / Unloading time</span>
           </th>
           <th>
             <span>No. of Trips</span>
@@ -96,7 +105,7 @@
     <table class="mll-table table">
       <tbody>
         <tr ng-dblclick="lane.edit(route, $index)" ng-repeat="route in lane.routes">
-          <td>
+          <td >
             <span>{{route.ISROUNDTRIP}}</span>
           </td>
           <td>
@@ -105,16 +114,16 @@
           <td>
             <span>{{lane.map(route.VEHICLETYPEID, lane.vehicletypename_option, 'VEHICLETYPEID', 'VEHICLETYPENAME')}}</span>
           </td>
-          <td>
+          <td class="number-center">
             <span>{{route.DISTANCE}}</span>
           </td>
-          <td>
+          <td class="number-center">
             <span>{{route.LOADINGUNLOADINGTIME}}</span>
           </td>
-          <td>
+          <td class="number-center">
             <span>{{route.NOOFTRIPS}}</span>
           </td>
-          <td>
+          <td class="number-center">
             <span>{{route.BACKHAUL}}</span>
           </td>
         </tr>
@@ -226,7 +235,7 @@
                     </div>
                   </div>
                 </fieldset>
-                <fieldset class="fieldset">
+                <fieldset class="fieldset" ng-hide="true">
                   <div class="container-fluid">
                     <div class="row">
                       <div class="col-sm-12">
@@ -325,32 +334,32 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-sm-4">
+                      <div class="col-sm-3">
                         <div class="form-group">
-                          <label class="form-label" title="required" for="distOneway">Distance oneway</label>
-                          <input type="text" id="distOneway" class="form-control input-sm" ng-model="lane.route.DISTANCE" placeholder="Enter distance" />
+                          <label class="form-label" title="required" for="distOneway">Distance oneway (km)</label>
+                          <input type="number" id="distOneway" class="form-control input-sm" ng-model="lane.route.DISTANCE" placeholder="Enter distance" />
                         </div>
                       </div>
-                      <div class="col-sm-4">
+                      <div class="col-sm-3">
                         <div class="form-group">
-                          <label class="form-label" title="required" for="loadUnloadTime">Loading unloading time </label>
-                          <input type="text" id="loadUnloadTime" class="form-control input-sm" ng-model="lane.route.LOADINGUNLOADINGTIME" placeholder="Enter Loading unloading time" />
+                          <label class="form-label" title="required" for="loadUnloadTime">Loading / Unloading time (days) </label>
+                          <input type="number" id="loadUnloadTime" class="form-control input-sm" ng-model="lane.route.LOADINGUNLOADINGTIME" placeholder="Enter Loading unloading time" />
                         </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-4">
+                    <!-- </div>
+                    <div class="row"> -->
+                      <div class="col-sm-3">
                         <div class="form-group">
                           <label class="form-label" title="required" for="noofTrips">No of trips
                           </label>
-                          <input type="text" id="noofTrips" class="form-control input-sm" ng-model="lane.route.NOOFTRIPS" placeholder="Enter no of trips" />
+                          <input type="number" id="noofTrips" class="form-control input-sm" ng-model="lane.route.NOOFTRIPS" placeholder="Enter no of trips" />
                         </div>
                       </div>
-                      <div class="col-sm-4">
+                      <div class="col-sm-3">
                         <div class="form-group">
-                          <label class="form-label" title="required" for="backhaul">Backhaul(%)
+                          <label class="form-label" title="required" for="backhaul">Backhaul (%)
                           </label>
-                          <input type="text" id="backhaul" class="form-control input-sm" ng-model="lane.route.BACKHAUL" placeholder="Enter Backhaul %" />
+                          <input type="number" id="backhaul" class="form-control input-sm" ng-model="lane.route.BACKHAUL" placeholder="Enter Backhaul %" />
                         </div>
                       </div>
                     </div>
