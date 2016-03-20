@@ -59,40 +59,49 @@ export class LanesController {
   }
 
   adjustScrollableTable() {
-    let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.offsetWidth));
-    let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 td'), (td) => (td.offsetWidth));
+    let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.innerText.length * 10));
+    let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 tr')[0].getElementsByTagName('td'), (td) => (td.innerText.length * 7));
+    let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.innerText.length * 10));
+    let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 tr')[0].getElementsByTagName('td'), (td) => (td.innerText.length * 7));
 
     let finalFrozenWidth = _.chain(div3BodyWidth)
-      .map((item, i) => Math.min(item, div1HeadWidth[i]))
+      .map((item, i) => Math.max(item, div1HeadWidth[i]))
       .reject((item) => (_.isNaN(item)))
       .value();
 
-    //Fix width for div1 (left head) & div3 (left body)
-    let div1Head = document.querySelectorAll('.thead-div1 th');
-    let div3Body = document.querySelectorAll('.tbody-div3 td');
-
-    _.each(finalFrozenWidth, (list, key) => {
-      div1Head[key].children[0].style.width = finalFrozenWidth[key] + 'px';
-      div3Body[key].children[0].style.width = finalFrozenWidth[key] + 'px';
-    });
-
-
-    let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth));
-    let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 td'), (td) => (td.offsetWidth));
     let finalWidth = _.chain(div4BodyWidth)
       .map((item, i) => Math.max(item, div2HeadWidth[i]))
       .reject((item) => (_.isNaN(item)))
       .value();
 
+    console.log(div1HeadWidth);
+    console.log(div3BodyWidth);
+    console.log(div2HeadWidth);
+    console.log(div4BodyWidth);
+
+    console.log(document.querySelectorAll('.tbody-div4 tr')[0].getElementsByTagName('td')[2]);
+
+
+    //Fix width for div1 (left head) & div3 (left body)
+    let div1Head = document.querySelectorAll('.thead-div1 th');
+    let div3Body = document.querySelectorAll('.tbody-div3 td');
 
     //Fix width for div2 (right head) & div4 (right body)
     let div2Head = document.querySelectorAll('.thead-div2 th');
     let div4Body = document.querySelectorAll('.tbody-div4 td');
 
+    //-----------------------------
+    _.each(finalFrozenWidth, (list, key) => {
+      div1Head[key].children[0].style.width = finalFrozenWidth[key] + 'px';
+      div3Body[key].children[0].style.width = finalFrozenWidth[key] + 'px';
+    });
+
     _.each(finalWidth, (list, key) => {
+      //console.log(div2Head[key].children[0]);
       div2Head[key].children[0].style.width = finalWidth[key] + 'px';
       div4Body[key].children[0].style.width = finalWidth[key] + 'px';
     });
+    //-----------------------------
   }
 
   prepareForDropdown(list) {
