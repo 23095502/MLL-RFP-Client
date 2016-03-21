@@ -1,7 +1,10 @@
 export class OverallController {
-  constructor($state, masterService, apiService, toaster) {
+
+  constructor($state, $filter, masterService, apiService, toaster) {
+
     'ngInject';
 
+    this.$filter = $filter;
     this.$state = $state;
     this._master = masterService;
     this._api = apiService;
@@ -11,14 +14,14 @@ export class OverallController {
 
     this.customer = {
       "CUSTOMERID": 0,
-      "CUSTOMERCODE": null,
-      "CUSTOMERNAME": null,
-      "ADDRESS": null,
-      "CONTACTPERSON": null,
-      "CONTACTNO": null,
-      "CASHACCOUNTID": null,
+      "CUSTOMERCODE": '',
+      "CUSTOMERNAME": '',
+      "ADDRESS": '',
+      "CONTACTPERSON": '',
+      "CONTACTNO": 0,
+      "CASHACCOUNTID": '',
       "TOTALSPEND": null,
-      "EMAIL": null,
+      "EMAIL": '',
       "ACTIVE": "A",
       "MODE": "INSERT",
       "CREATEDBY": 0,
@@ -135,6 +138,26 @@ export class OverallController {
     };
   }
 
+  resetcustomer() {
+    this.customer = {
+      "cust": {
+        "CUSTOMERID": 0,
+        "CUSTOMERCODE": '',
+        "CUSTOMERNAME": '',
+        "ADDRESS": '',
+        "CONTACTPERSON": '',
+        "CONTACTNO": 0,
+        "CASHACCOUNTID": '',
+        "TOTALSPEND": '',
+        "EMAIL": '',
+        "ACTIVE": "A",
+        "MODE": "INSERT",
+        "CREATEDBY": 5,
+        "CREATEDON": new Date()
+      }
+    }
+  }
+
   addCustomer() {
 
     var customer = {
@@ -152,7 +175,9 @@ export class OverallController {
         "MODE": "INSERT",
         "CREATEDBY": 5,
         "CREATEDON": new Date()
+
       }
+
 
     };
 
@@ -164,7 +189,11 @@ export class OverallController {
       this._master.refreshPromise().then((response) => {
         this._master.refresh(response);
         this.CUSTOMERNAME_option = this._master.getCustomers();
+
+        this.resetcustomer();
+
         this.toaster.success('Customer ' + this.newCustomer.CUSTOMERNAME + ' added successfully');
+
       }, (error) => {
         console.error(error);
 
@@ -179,22 +208,21 @@ export class OverallController {
   }
 
   addRfpHeader() {
-
     var rfpHeader = {
       "rfpupdt": {
         "RFPID": 0,
         "RFPCODE": this.overall.RFPCODE,
-        "RFPDATE": "2016-01-01 00:00:00", //this.overall.RFPDATE,
+        "RFPDATE": this.$filter('date')(new Date(this.overall.RFPDATE), 'yyyy-MM-dd 00:00:00'), //"2016-01-01 00:00:00", //this.overall.RFPDATE,
         "CUSTOMERID": this.customer.CUSTOMERID,
         "INDUSTRYTYPEID": this.overall.INDUSTRYTYPEID,
         "RFPAMOUNT": this.overall.RFPAMOUNT,
-        "STARTDATE": "2016-01-01 00:00:00",
+        "STARTDATE": this.$filter('date')(new Date(), 'yyyy-MM-dd 00:00:00'),
         "RFPOWNER": this.overall.RFPOWNER,
         "CURRENTSTAGINGOWNER": this.overall.CURRENTSTAGINGOWNER,
         "DIESELRATE": this.overall.DIESELRATE,
         "AGEOFTRUCK": this.overall.AGEOFTRUCK,
         "RFPDESC": this.overall.RFPDESC,
-        "DUEDATE": "2016-01-01 00:00:00", //this.overall.DUEDATE,
+        "DUEDATE": this.$filter('date')(new Date(this.overall.DUEDATE), 'yyyy-MM-dd 00:00:00'), // "2016-01-01 00:00:00", //this.overall.DUEDATE,
         "PRODUCTDESC": this.overall.PRODUCTDESC,
         "CASHOPPID": this.overall.CASHOPPID,
         "OPPRDOMAIN": this.overall.OPPRDOMAIN,
@@ -212,7 +240,7 @@ export class OverallController {
         "ESCCLAUSE": "6",
         "ACTIVE": "A",
         "CREATEDBY": "1",
-        "CREATEDON": "2016-01-01 00:00:00",
+        "CREATEDON": this.$filter('date')(new Date(), 'yyyy-MM-dd 00:00:00'),
         "ADDRESS": this.customer.ADDRESS,
         "CONTACTPERSON": this.customer.CONTACTPERSON,
         "CONTACTNO": this.customer.CONTACTNO,
@@ -221,6 +249,8 @@ export class OverallController {
         "PROXIDISTANCE": this.overall.PROXIDISTANCE
       }
     };
+
+
 
 
     var rfpHeaderURL = 'rfp/INSERT';

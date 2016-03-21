@@ -2,6 +2,8 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
   'ngInject';
   $stateProvider
 
+
+
   .state('overall', {
     url: '/create/overall',
     templateUrl: 'app/overall/overall.html',
@@ -9,12 +11,12 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     controllerAs: 'overall'
   })
 
-  .state('customer', {
-    url: '/customer',
-    templateUrl: 'app/customer/customer.html',
-    controller: 'CustomerController',
-    controllerAs: 'cust'
-  })
+  // .state('customer', {
+  //   url: '/customer',
+  //   templateUrl: 'app/customer/customer.html',
+  //   controller: 'CustomerController',
+  //   controllerAs: 'cust'
+  // })
 
   .state('lanes', {
     url: '/create/lanes/:rfpid/:iswarehousing',
@@ -28,6 +30,9 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     templateUrl: 'app/dashboard/dashboard.html',
     controller: 'DashboardController',
     controllerAs: 'dash'
+
+
+
   })
 
   .state('login', {
