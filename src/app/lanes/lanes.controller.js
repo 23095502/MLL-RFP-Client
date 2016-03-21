@@ -66,10 +66,10 @@ export class LanesController {
   }
 
   adjustScrollableTable() {
-    let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.innerText.length * 10));
-    let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 tr')[0].getElementsByTagName('td'), (td) => (td.innerText.length * 7));
-    let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.innerText.length * 10));
-    let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 tr')[0].getElementsByTagName('td'), (td) => (td.innerText.length * 7));
+    let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.offsetWidth));
+    let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 tr')[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
+    let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth));
+    let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 tr')[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
 
     let finalFrozenWidth = _.chain(div3BodyWidth)
       .map((item, i) => Math.max(item, div1HeadWidth[i]))
@@ -286,6 +286,12 @@ export class LanesController {
         //===========================
         //Get all RFP routes by RFP ID
         this.getRPFRoutes();
+        //===========================
+        this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
+          this.$state.go('dashboard');
+        }, (err) => {
+          console.error(err);
+        });
         //===========================
         $('#myModalBrowse').modal('hide');
       }
