@@ -1,5 +1,5 @@
 export class LanesController {
-  constructor($state, $stateParams, $timeout, Upload, masterService, apiService) {
+  constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster) {
 
     'ngInject';
 
@@ -13,6 +13,7 @@ export class LanesController {
     this.isSERVICETYPE_option = [];
     this._api = apiService;
     this.$state = $state;
+    this.toaster = toaster;
 
     this.locationname_option = [];
     this.vehicletype = {
@@ -66,10 +67,10 @@ export class LanesController {
   }
 
   adjustScrollableTable() {
-    let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.innerText.length * 10));
-    let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 tr')[0].getElementsByTagName('td'), (td) => (td.innerText.length * 7));
-    let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.innerText.length * 10));
-    let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 tr')[0].getElementsByTagName('td'), (td) => (td.innerText.length * 7));
+    let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.offsetWidth));
+    let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 tr')[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
+    let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth));
+    let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 tr')[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
 
     let finalFrozenWidth = _.chain(div3BodyWidth)
       .map((item, i) => Math.max(item, div1HeadWidth[i]))
@@ -183,6 +184,7 @@ export class LanesController {
     this.resetRoute();
     this.editingIndex = null;
 
+    this.toaster.success('Lane added successfully');
     //---------------------
     //set width to route grid columns
     this.$timeout(this.adjustScrollableTable);
@@ -201,11 +203,13 @@ export class LanesController {
     this.route.CREATEDON = '2016-03-01';
     this.editingIndex = index;
     $('#myModal').modal();
+    //this.toaster.success('Lane updated successfully');
   }
 
   save() {
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
+    this.toaster.success('Lane updated successfully');
     //---------------------
     //set width to route grid columns
     this.$timeout(this.adjustScrollableTable);
@@ -218,6 +222,7 @@ export class LanesController {
     this.route.MODE = 'DELETE';
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
+    this.toaster.success('Lane deleted successfully');
     //---------------------
     //set width to route grid columns
     this.$timeout(this.adjustScrollableTable);
@@ -256,6 +261,8 @@ export class LanesController {
       data: newfilterRoutes
     };*/
 
+    this.toaster.success('Lanes saved successfully');
+
     this._api.post('routeupdate', newfilterRoutes).then((r) => {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
         this.$state.go('dashboard');
@@ -287,9 +294,16 @@ export class LanesController {
         //Get all RFP routes by RFP ID
         this.getRPFRoutes();
         //===========================
+        this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
+          this.$state.go('dashboard');
+        }, (err) => {
+          console.error(err);
+        });
+        //===========================
         $('#myModalBrowse').modal('hide');
       }
     }
+    this.toaster.success('no of lanes added successfully');
 
     /* Send to server */
     client.send(blobOrFile);
