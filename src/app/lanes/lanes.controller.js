@@ -303,8 +303,8 @@ export class LanesController {
         $('#myModalBrowse').modal('hide');
       }
     }
-    this.toaster.success('no of lanes added successfully');
 
+    this.toaster.success('no of lanes added successfully');
     /* Send to server */
     client.send(blobOrFile);
   }
