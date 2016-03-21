@@ -41,7 +41,7 @@ export class OutputController {
     this.responseKeys = {
       'CONTRACTRATE': 'getproximitybadataResult',
       'PVSRFPRATE': 'rfphistoryResult',
-      'BACKHAULAVL': 'dvprdataResult'
+      'NOOFTRIPS': 'dvprdataResult'
     };
 
     this.getTransactionData();
@@ -51,7 +51,7 @@ export class OutputController {
 
     this._api.get(`gettrans/${this.$stateParams.rfpId}`).then((res) => {
       this.outputdata = res.data;
-      //console.log(this.outputdata);
+      console.log(this.outputdata);
 
       var newOutputData = _.each(this.outputdata, (key, value) => {
         var L1RATE = this.outputdata[value].L1RATE;
@@ -78,7 +78,7 @@ export class OutputController {
       })
 
       //this.nameoutputdata = this.outputdata[0];
-      this.nameoutputdata = newOutputData;
+      this.nameoutputdata = newOutputData[0];
       this.fromLocationOptions = _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
       this.routesGroupByLocation = _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
 
@@ -114,18 +114,6 @@ export class OutputController {
     this.selectedLane = table;
     this.rowClickedColName = clickedColName;
 
-    /*
-    this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
-    this.inproxiparam.ORIGINSTATE = this.outputdata[index].FROMSTATE;
-    this.inproxiparam.DESTINATION = this.outputdata[index].TOLOCATIONNAME;
-    this.inproxiparam.DESTINATIONSTATE = this.outputdata[index].TOSTATE;
-    this.inproxiparam.VEHICLETYPE = this.filterOption.VEHICLETYPENAME;
-    this.inproxiparam.DISTANCE = this.outputdata[index].PROXIDISTANCE;
-    this.inproxiparam.NOOFTRIPS = this.outputdata[index].NOOFTRIPS;
-    */
-
-    //console.log(table.DISTANCE);
-
     this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
     this.inproxiparam.ORIGINSTATE = table.FROMSTATE;
     this.inproxiparam.DESTINATION = table.TOLOCATIONNAME;
@@ -146,11 +134,24 @@ export class OutputController {
 
     this._api.post(this.urlMaps[colname], newfilterRoutes, true).then((res) => {
       this.gridData = res.data[this.responseKeys[clickedColName]];
+      console.log(this.gridData);
+      //this.nooftrips = this.gridData[0].NOOFTRIPS;
+
     }, (err) => {
       console.error(err);
     });
 
-    $('#myModalOutputDetails').modal();
+
+    if (clickedColName == 'NOOFTRIPS') {
+
+      $('#myModalOutputDetailsForBackHaul').modal();
+    } else {
+
+      $('#myModalOutputDetails').modal();
+    }
+
+
+
   }
 
   submit() {
@@ -162,11 +163,6 @@ export class OutputController {
       output.L3RATE = output.L3RATE * 1000;
       output.L4RATE = output.L4RATE * 1000;
       output.L5RATE = output.L5RATE * 1000;
-      //output.CONTRACTRATE = output.CONTRACTRATE * 1000;
-      //output.CLEANSHEETRATE = output.CLEANSHEETRATE * 1000;
-      //output.PVSRFPRATE = output.PVSRFPRATE * 1000;
-      //output.MARKETRATE = output.MARKETRATE * 1000;
-      //output.SHIPXRATE = output.SHIPXRATE * 1000;
 
       output.MODE = 'APIRATE';
 
@@ -233,10 +229,17 @@ export class OutputController {
   }
 
 
-  updateContractRate(popupGridData) {
+  updateContractRate(popupGridData, colName) {
     this.CONTRACTRATE = popupGridData.FREIGHTRATE;
     this.selectedLane[this.rowClickedColName] = popupGridData.FREIGHTRATE;
-    $('#myModalOutputDetails').modal('hide');
+
+    if (colName == 'REGULAR') {
+      $('#myModalOutputDetails').modal('hide');
+    } else {
+      $('#myModalOutputDetailsForBackHaul').modal('hide');
+    }
+
+
   }
 
   changecolor(toMatch, approvedRate) {
@@ -269,6 +272,15 @@ export class OutputController {
 
   closeModal() {
     $('#myModalOutputDetails').modal('hide');
+  }
+
+  showColumn(colName) {
+
+    if (colName == 'BACKHAULAVL') {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
