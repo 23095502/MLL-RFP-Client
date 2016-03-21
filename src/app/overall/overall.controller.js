@@ -10,14 +10,14 @@ export class OverallController {
 
     this.customer = {
       "CUSTOMERID": 0,
-      "CUSTOMERCODE": null,
-      "CUSTOMERNAME": null,
-      "ADDRESS": null,
-      "CONTACTPERSON": null,
-      "CONTACTNO": null,
-      "CASHACCOUNTID": null,
+      "CUSTOMERCODE": '',
+      "CUSTOMERNAME": '',
+      "ADDRESS": '',
+      "CONTACTPERSON": '',
+      "CONTACTNO": 0,
+      "CASHACCOUNTID": '',
       "TOTALSPEND": null,
-      "EMAIL": null,
+      "EMAIL": '',
       "ACTIVE": "A",
       "MODE": "INSERT",
       "CREATEDBY": 0,
@@ -134,6 +134,26 @@ export class OverallController {
     };
   }
 
+  resetcustomer() {
+    this.customer = {
+      "cust": {
+        "CUSTOMERID": 0,
+        "CUSTOMERCODE": '',
+        "CUSTOMERNAME": '',
+        "ADDRESS": '',
+        "CONTACTPERSON": '',
+        "CONTACTNO": 0,
+        "CASHACCOUNTID": '',
+        "TOTALSPEND": '',
+        "EMAIL": '',
+        "ACTIVE": "A",
+        "MODE": "INSERT",
+        "CREATEDBY": 5,
+        "CREATEDON": new Date()
+      }
+    }
+  }
+
   addCustomer() {
 
     var customer = {
@@ -151,7 +171,9 @@ export class OverallController {
         "MODE": "INSERT",
         "CREATEDBY": 5,
         "CREATEDON": new Date()
+
       }
+
 
     };
 
@@ -163,6 +185,7 @@ export class OverallController {
       this._master.refreshPromise().then((response) => {
         this._master.refresh(response);
         this.CUSTOMERNAME_option = this._master.getCustomers();
+        this.resetcustomer();
 
       }, (error) => {
         console.error(error);

@@ -11,12 +11,12 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     controllerAs: 'overall'
   })
 
-  .state('customer', {
-    url: '/customer',
-    templateUrl: 'app/customer/customer.html',
-    controller: 'CustomerController',
-    controllerAs: 'cust'
-  })
+  // .state('customer', {
+  //   url: '/customer',
+  //   templateUrl: 'app/customer/customer.html',
+  //   controller: 'CustomerController',
+  //   controllerAs: 'cust'
+  // })
 
   .state('lanes', {
     url: '/create/lanes/:rfpid/:iswarehousing',

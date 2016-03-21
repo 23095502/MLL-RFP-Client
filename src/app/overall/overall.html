@@ -164,8 +164,8 @@
                 </div>
                 <div class="col-sm-3 col-md-3">
                   <div class="form-group">
-                    <label class="form-label" for="warehousingrequirment">Warehousing requirment <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                    <select class="form-control input-sm" id="warehousingrequirment" ng-required="true" ng-model="overall.overall.ISHUBORWHREQ" ng-options="ISHUB.val as ISHUB.name for ISHUB in overall.ISHUBORWHREQ_option">
+                    <label class="form-label" for="warehousingrequirment">Warehousing requirement <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                    <select class="form-control input-sm" id="warehousingrequirment" ng-required="true" ng-model="overall.overall.ISHUBORWHREQ" ng-disabled="true" ng-options="ISHUB.val as ISHUB.name for ISHUB in overall.ISHUBORWHREQ_option">
                     </select>
                   </div>
                 </div>
@@ -181,7 +181,7 @@
                 </div>
                 <div class="col-sm-3 col-md-3">
                   <div class="form-group">
-                    <label class="form-label" for="distance">Proximity (%)</label>
+                    <label class="form-label" for="distance">Proximity (km)</label>
                     <input t ype="number" min="0" max="100" maxlength="3" class="form-control input-sm" id="distance" placeholder="Distance" ng-model="overall.overall.PROXIDISTANCE">
                   </div>
                 </div>

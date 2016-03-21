@@ -4,7 +4,7 @@ import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
 import { OverallController } from './overall/overall.controller';
-import { CustomerController } from './customer/customer.controller';
+// import { CustomerController } from './customer/customer.controller';
 import { LoginController } from './login/login.controller';
 import { DashboardController } from './dashboard/dashboard.controller';
 import { OutputController } from './output/output.controller';
@@ -18,7 +18,7 @@ angular.module('mllRfpClient', ['ui.router', 'ngFileUpload'])
   .config(routerConfig)
   .run(runBlock)
   .controller('OverallController', OverallController)
-  .controller('CustomerController', CustomerController)
+  // .controller('CustomerController', CustomerController)
   .controller('LoginController', LoginController)
   .controller('DashboardController', DashboardController)
   .controller('OutputController', OutputController)
