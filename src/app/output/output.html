@@ -118,13 +118,13 @@
             <td ng-click="output.showModal('rfphistory', outputdata, 'PVSRFPRATE', 'RFP Rate')" ng-class="output.changecolor(outputdata.PVSRFPRATE,outputdata.APPROVEDAMOUNT)" class="number-center">{{outputdata.PVSRFPRATE/1000 | number : 2}}</td>
             <td ng-class="output.changecolor(outputdata.MARKETRATE,outputdata.APPROVEDAMOUNT)" class="number-center">{{outputdata.MARKETRATE/1000 | number : 2}}</td>
             <td ng-click="output.showModal('backhaul', outputdata, 'BACKHAULAVL', 'Backhaul')" class="number-center">{{outputdata.BACKHAULAVL}}</td>
-            <td class="table-colspan-header" colspan="1"><input type="number" class="form-control" id="approvedAmount" ng-model="outputdata.L1RATE" value="{{outputdata.L1RATE}}"/></td>
-            <td class="number-center"><input type="number" class="form-control" id="approvedAmount" ng-model="outputdata.L2RATE" value="{{outputdata.L2RATE}}"/></td>
-            <td class="number-center"><input type="number" class="form-control" id="approvedAmount" ng-model="outputdata.L3RATE" value="{{outputdata.L3RATE}}"/></td>
-            <td class="number-center"><input type="number" class="form-control" id="approvedAmount" ng-model="outputdata.L4RATE" value="{{outputdata.L4RATE}}"/></td>
-            <td class="number-center"><input type="number" class="form-control" id="approvedAmount" ng-model="outputdata.L5RATE" value="{{outputdata.L5RATE}}"/></td>
-            <td class="whitecol-sm">
-              <input type="number" class="form-control" id="approvedAmount" ng-model="outputdata.APPROVEDAMOUNT" value="{{outputdata.APPROVEDAMOUNT}}" style="background: white; border : 0; box-shadow :none;height: 1.5em;"/>
+            <td><input type="number" class="form-control mll-table-input" id="l1rate" ng-model="outputdata.L1RATE" value="{{outputdata.L1RATE}}"/><hr/><span class="mll-table-label">{{outputdata.L1BANAME}}</span></td>
+            <td><input type="number" class="form-control mll-table-input" id="l2rate" ng-model="outputdata.L2RATE" value="{{outputdata.L2RATE}}"/><hr/><span class="mll-table-label">{{outputdata.L2BANAME}}</span></td>
+            <td><input type="number" class="form-control mll-table-input" id="l3rate" ng-model="outputdata.L3RATE" value="{{outputdata.L3RATE}}"/><hr/><span class="mll-table-label">{{outputdata.L3BANAME}}</span></td>
+            <td><input type="number" class="form-control mll-table-input" id="l4rate" ng-model="outputdata.L4RATE" value="{{outputdata.L4RATE}}"/><hr/><span class="mll-table-label">{{outputdata.L4BANAME}}</span></td>
+            <td><input type="number" class="form-control mll-table-input" id="l5rate" ng-model="outputdata.L5RATE" value="{{outputdata.L5RATE}}"/><hr/><span class="mll-table-label">{{outputdata.L5BANAME}}</span></td>
+            <td>
+              <input class="form-control mll-table-input" type="number" id="approvedAmount" ng-model="outputdata.APPROVEDAMOUNT" value="{{outputdata.APPROVEDAMOUNT}}"/>
             </td>
           </tr>
         </tbody>
@@ -181,7 +181,7 @@
                         <td>
                           <span class="mll-table-label" ng-hide="true">Unit</span>
                           <br>
-                          <span class="mll-table-value text-right">Pricing in ('000 INR)</span>
+                          <span class="unit pull-right">Pricing in ('000 INR)</span>
                         </td>
                       </tr>
                       <tr>
