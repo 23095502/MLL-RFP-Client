@@ -58,6 +58,13 @@ export class OutputController {
 
       _.each(this.routesGroupByLocation, (vehiclelist, key) => {
         this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+
+        /*
+        _.each(this.outputdata, (key, value) =>{
+          var l1ratevalue = this.outputdata[value].L1RATE;
+          console.log(l1ratevalue);
+        })
+        */
       });
 
       this.filterOption = {
@@ -80,12 +87,10 @@ export class OutputController {
     return _.map(this.outputdata, (v) => (_.pick(v, ['CUSTOMERNAME', 'CASHACCOUNTID', 'FROMLOCATIONNAME'])));
   }
 
-  showModal(colname, table, clickedColName, index) {
+  showModal(colname, table, clickedColName, headerColName, modalHeaderName) {
 
     this.selectedLane = table;
     this.rowClickedColName = clickedColName;
-
-    console.log(table.TOLOCATIONNAME);
 
     /*
     this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
@@ -106,22 +111,17 @@ export class OutputController {
     this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;
 
     this.gridData = [];
-
-
-
     var newfilterRoutes = {
       inproxiparam: this.inproxiparam
     };
 
-    console.log(newfilterRoutes);
-
     this.TOLOCATIONNAME = table.TOLOCATIONNAME;
     this.CONTRACTRATE = table[clickedColName];
-    console.log(this.CONTRACTRATE, this.urlMaps[colname]);
+    this.colName = headerColName;
+    this.modalHeaderName = modalHeaderName;
 
     this._api.post(this.urlMaps[colname], newfilterRoutes, true).then((res) => {
       this.gridData = res.data[this.responseKeys[clickedColName]];
-      console.log(res.data[this.responseKeys[clickedColName]]);
     }, (err) => {
       console.error(err);
     });
@@ -171,10 +171,10 @@ export class OutputController {
       return output;
     }).value();
 
+
     var newOutputDetails = {
       apptrans: revisedOutput
     };
-
 
     this._api.post('apptrans', newOutputDetails).then((res) => {
       this.getTransactionData();
@@ -183,11 +183,14 @@ export class OutputController {
     });
 
     this.toaster.success('Changes saved successfully');
+
   }
+
 
   updateContractRate(popupGridData) {
     this.CONTRACTRATE = popupGridData.FREIGHTRATE;
     this.selectedLane[this.rowClickedColName] = popupGridData.FREIGHTRATE;
+    $('#myModalOutputDetails').modal('hide');
   }
 
   changecolor(toMatch, approvedRate) {
@@ -203,6 +206,7 @@ export class OutputController {
     this.filterOption.VEHICLETYPENAME = this.vehicleTypeOptions[0].VEHICLETYPENAME;
     this.outputdata[0].CLEANSHEETRATE = this.outputdata[0].CLEANSHEETRATE / 1000;
   }
+
 
   export () {
     this._api.get('exportrfpout/1').then((res) => {
