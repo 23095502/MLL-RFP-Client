@@ -1,9 +1,7 @@
 export class OverallController {
-<<<<<<< HEAD
-  constructor($state, $filter, masterService, apiService) {
-=======
-  constructor($state, masterService, apiService, toaster) {
->>>>>>> develop
+
+  constructor($state, $filter, masterService, apiService, toaster) {
+
     'ngInject';
 
     this.$filter = $filter;
@@ -191,12 +189,11 @@ export class OverallController {
       this._master.refreshPromise().then((response) => {
         this._master.refresh(response);
         this.CUSTOMERNAME_option = this._master.getCustomers();
-<<<<<<< HEAD
+
         this.resetcustomer();
 
-=======
         this.toaster.success('Customer ' + this.newCustomer.CUSTOMERNAME + ' added successfully');
->>>>>>> develop
+
       }, (error) => {
         console.error(error);
 
