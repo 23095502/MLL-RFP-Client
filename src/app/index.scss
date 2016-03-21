@@ -185,6 +185,45 @@ h1 {
 .above {
   color: green;
 }
+.loginbody
+{
+  background: url(../images/login.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.loginboxBody
+{
+    background: #fefefe;
+    border-top: 1px solid #dde0e8;
+    padding: 10px 0 5px 40px;
+    border: none;
+}
+.loginbox-footer
+{
+    border-top: 1px solid #fff;
+    padding: 0 96px 15px 125px;
+    overflow: hidden;
+    height: 32px;
+}
+
+.button-login
+{
+    background-color:#00AEEF;
+    border: 1px solid #00AEEF;
+    padding: 3px 6px;
+    font: bold 20px Arial;
+    cursor: pointer;
+    margin: 3px 45px 4px;
+    -moz-border-radius: 10px;
+    border-radius: 5px;
+    width: 315px;
+    height: 40px;
+    color:#fff;
+    text-transform:uppercase;
+}
+
 .filter-details {
   background-color: $mll-darkgrey;
   color: $mll-white;
