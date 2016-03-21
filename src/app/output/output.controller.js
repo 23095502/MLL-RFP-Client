@@ -201,6 +201,15 @@ export class OutputController {
     this.outputdata[0].CLEANSHEETRATE = this.outputdata[0].CLEANSHEETRATE / 1000;
   }
 
+  exportBAQuote () {
+    this._api.get('expbaquote/1').then((res) => {
+      window.open(res.data);
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+
   export () {
     this._api.get('exportrfpout/1').then((res) => {
       window.open(res.data);
@@ -208,6 +217,7 @@ export class OutputController {
       console.error(err);
     });
   }
+
 
   checkBackhaul() {
 
