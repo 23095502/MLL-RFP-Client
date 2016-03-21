@@ -184,7 +184,7 @@ export class LanesController {
     this.resetRoute();
     this.editingIndex = null;
 
-    this.toaster.success('Lane added successfully');
+    this.toaster.success('Lane saved successfully');
     //---------------------
     //set width to route grid columns
     this.$timeout(this.adjustScrollableTable);
