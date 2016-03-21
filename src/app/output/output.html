@@ -123,17 +123,18 @@
         <tbody>
           <tr ng-repeat="outputdata in output.outputdata | filter:{FROMLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
             <td class="whitecol">{{outputdata.TOLOCATIONNAME}} <br>{{outputdata.TOSTATECODE}}</td>
-            <td ng-class="output.changecolor(outputdata.CLEANSHEETRATE,outputdata.APPROVEDAMOUNT)" class="number-center">{{outputdata.CLEANSHEETRATE/1000 | number : 2}}<span class="label label-sticky">Px</span></td>
+            <td ng-class="output.changecolor(outputdata.CLEANSHEETRATE,outputdata.APPROVEDAMOUNT)" class="number-center">{{outputdata.CLEANSHEETRATE/1000 | number : 2}}<!--<span class="label label-sticky">Px</span>--></td>
             <td ng-class="output.changecolor(outputdata.MARKETRATE,outputdata.APPROVEDAMOUNT)" class="number-center">{{outputdata.MARKETRATE/1000 | number : 2}}</td>
             <td ng-click="output.showModal('rfphistory', outputdata, 'PVSRFPRATE', 'RFP Rate', 'RFP RATES')" ng-class="output.changecolor(outputdata.PVSRFPRATE,outputdata.APPROVEDAMOUNT)" class="number-center">{{outputdata.PVSRFPRATE/1000 | number : 2}}</td>
             <td ng-click="output.showModal('contract', outputdata, 'CONTRACTRATE', 'Contract Rate', 'CONTRACT RATES')" ng-class="output.changecolor(outputdata.CONTRACTRATE,outputdata.APPROVEDAMOUNT)" class="number-center">{{outputdata.CONTRACTRATE/1000 | number : 2}}</td>
             <td ng-class="output.changecolor(outputdata.SHIPXRATE,outputdata.APPROVEDAMOUNT)" class="number-center">{{outputdata.SHIPXRATE/1000}}</td>
             <td ng-click="output.showModal('backhaul', outputdata, 'NOOFTRIPS', 'Backhaul', 'BACKHAUL RATES')" class="number-center">{{outputdata.BACKHAULAVL}}</td>
-            <td><input type="number" class="form-control mll-table-input" id="l1rate" ng-model="outputdata.L1RATE" value="{{outputdata.L1RATE/1000 | number : 1}}"/><hr/><span class="mll-table-label">{{outputdata.L1BANAME}}</span></td>
-            <td><input type="number" class="form-control mll-table-input" id="l2rate" ng-model="outputdata.L2RATE" value="{{outputdata.L2RATE/1000 | number : 1}}"/><hr/><span class="mll-table-label">{{outputdata.L2BANAME}}</span></td>
-            <td><input type="number" class="form-control mll-table-input" id="l3rate" ng-model="outputdata.L3RATE" value="{{outputdata.L3RATE/1000 | number : 1}}"/><hr/><span class="mll-table-label">{{outputdata.L3BANAME}}</span></td>
-            <td><input type="number" class="form-control mll-table-input" id="l4rate" ng-model="outputdata.L4RATE"/><hr/><span class="mll-table-label">{{outputdata.L4BANAME}}</span></td>
-            <td><input type="number" class="form-control mll-table-input" id="l5rate" ng-model="outputdata.L5RATE" value="{{outputdata.L5RATE/10000000}}"/><hr/><span class="mll-table-label">{{outputdata.L5BANAME}}</span></td>
+            <td class="input-text-center" ><input type="number" style="text-align: center;" class="form-control mll-table-input" id="l1rate" ng-model="outputdata.L1RATE" /><hr/><span class="mll-table-label">{{outputdata.L1BANAME}}</span></td>
+            <td class="input-text-center"><input type="number" style="text-align: center;" class="form-control mll-table-input" id="l2rate" ng-model="outputdata.L2RATE" /><hr/><span class="mll-table-label">{{outputdata.L2BANAME}}</span></td>
+            <td class="input-text-center"><input type="number" style="text-align: center;" class="form-control mll-table-input" id="l3rate" ng-model="outputdata.L3RATE"/>
+            <hr/><span class="mll-table-label">{{outputdata.L3BANAME}}</span></td>
+            <td class="input-text-center"><input type="number" style="text-align: center;" class="form-control mll-table-input" id="l4rate" ng-model="outputdata.L4RATE"/><hr/><span class="mll-table-label">{{outputdata.L4BANAME}}</span></td>
+            <td class="input-text-center"><input type="number" style="text-align: center;" class="form-control mll-table-input" id="l5rate" ng-model="outputdata.L5RATE" /><hr/><span class="mll-table-label">{{outputdata.L5BANAME}}</span></td>
             <td class="whitecol">
               <input class="form-control mll-table-input" type="number" id="approvedAmount" ng-model="outputdata.APPROVEDAMOUNT" value="{{outputdata.APPROVEDAMOUNT}}"/>
             </td>
