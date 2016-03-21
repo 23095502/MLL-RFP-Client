@@ -1,0 +1,17 @@
+{
+  "local": {
+    "_baseURL": "localhost:80"
+  },
+  "dev" : {
+    "_baseURL": "172.32.0.101"
+  },
+  "stage": {
+    "_baseURL": "59.160.18.222"
+  },
+  "production": {
+    "_baseURL": "172.32.0.101"
+  }
+}
+
+
+

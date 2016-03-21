@@ -11,6 +11,24 @@ var _ = require('lodash');
 
 var browserSync = require('browser-sync');
 
+var args = require('yargs').argv;
+var gulpif = require('gulp-if');
+var ngConstant = require('gulp-ng-constant');
+
+if (!args.env) {
+  args.env = 'dev';
+}
+
+gulp.task('constants', function () {
+  var myConfig = require('../src/app/config.json');
+  return ngConstant({
+    name: 'mllRfpClient',
+    constants: myConfig[args.env],
+    deps: false,
+    stream: true
+  }).pipe(gulp.dest(path.join(conf.paths.src, '/app')));
+});
+
 gulp.task('inject-reload', ['inject'], function() {
   browserSync.reload();
 });
@@ -22,7 +40,8 @@ gulp.task('inject', ['scripts', 'styles'], function () {
   ], { read: false });
 
   var injectScripts = gulp.src([
-    path.join(conf.paths.tmp, '/serve/app/**/*.module.js')
+    path.join(conf.paths.tmp, '/serve/app/**/*.module.js'),
+    path.join(conf.paths.src, '/serve/app/ngConstant.js'),
   ], { read: false });
 
   var injectOptions = {
