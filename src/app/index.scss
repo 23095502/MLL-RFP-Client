@@ -78,6 +78,10 @@ body {
   color: $mll-grey;
 }
 
+form{
+  margin-bottom: 3em;
+}
+
 h1 {
   font-weight: bold;
   font-style: normal;
@@ -118,6 +122,11 @@ h1 {
   border-bottom: solid 1px lighten($mll-grey, 50);
 }
 
+.navbar-default {
+  border-bottom: 2px solid $mll-red;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
 /* grid css */
 .mll-table {
   &.frozen {
@@ -151,7 +160,7 @@ h1 {
       span {
         display: inline-block;
       }
-      &:not(:nth-last-child(-n+2))::after {
+      &:not(:nth-last-child(-n+1))::after {
         content: '';
         position: absolute;
         right: 0;
@@ -189,7 +198,7 @@ h1 {
         span {
           display: inline-block;
         }
-        &:not(:nth-last-child(-n+2))::after {
+        &:not(:nth-last-child(-n+1))::after {
           content: '';
           position: absolute;
           right: 0;
@@ -211,9 +220,9 @@ h1 {
         }
         &.fixed-width-col {
           text-align: center;
-          width:60px;
+          width: 60px;
           font-weight: 700;
-          &.open-popup:hover{
+          &.open-popup:hover {
             font-size: 1.2em;
           }
         }
