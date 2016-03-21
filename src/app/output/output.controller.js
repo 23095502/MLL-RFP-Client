@@ -57,6 +57,7 @@ export class OutputController {
 
       _.each(this.routesGroupByLocation, (vehiclelist, key) => {
         this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+        console.log(this.outputdata);
       });
 
       this.filterOption = {
@@ -79,12 +80,10 @@ export class OutputController {
     return _.map(this.outputdata, (v) => (_.pick(v, ['CUSTOMERNAME', 'CASHACCOUNTID', 'FROMLOCATIONNAME'])));
   }
 
-  showModal(colname, table, clickedColName, index) {
+  showModal(colname, table, clickedColName, headerColName) {
 
     this.selectedLane = table;
     this.rowClickedColName = clickedColName;
-
-    console.log(table.TOLOCATIONNAME);
 
     /*
     this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
@@ -105,22 +104,16 @@ export class OutputController {
     this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;
 
     this.gridData = [];
-
-
-
     var newfilterRoutes = {
       inproxiparam: this.inproxiparam
     };
 
-    console.log(newfilterRoutes);
-
     this.TOLOCATIONNAME = table.TOLOCATIONNAME;
     this.CONTRACTRATE = table[clickedColName];
-    console.log(this.CONTRACTRATE, this.urlMaps[colname]);
+    this.colName = headerColName;
 
     this._api.post(this.urlMaps[colname], newfilterRoutes, true).then((res) => {
       this.gridData = res.data[this.responseKeys[clickedColName]];
-      console.log(res.data[this.responseKeys[clickedColName]]);
     }, (err) => {
       console.error(err);
     });
@@ -185,6 +178,7 @@ export class OutputController {
   updateContractRate(popupGridData) {
     this.CONTRACTRATE = popupGridData.FREIGHTRATE;
     this.selectedLane[this.rowClickedColName] = popupGridData.FREIGHTRATE;
+    $('#myModalOutputDetails').modal('hide');
   }
 
   changecolor(toMatch, approvedRate) {
