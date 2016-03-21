@@ -109,6 +109,7 @@
           </tr>
         </thead>
         <tbody>
+
           <tr ng-repeat="outputdata in output.outputdata | filter:{FROMLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
             <td class="whitecol">{{outputdata.TOLOCATIONNAME}} <br>{{outputdata.TOSTATECODE}}</td>
 
@@ -137,7 +138,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">
+
         <b>VARIABLE CONTRACT RATES FOR</b>
+
         </h4>
       </div>
       <div class="modal-body">

@@ -235,11 +235,9 @@
                     </div>
                   </div>
                 </fieldset>
-<<<<<<< HEAD
-                <fieldset ng-hide="true" class="fieldset">
-=======
+
                 <fieldset class="fieldset" ng-hide="true">
->>>>>>> develop
+
                   <div class="container-fluid">
                     <div class="row">
                       <div class="col-sm-12">
@@ -255,7 +253,7 @@
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
-                          <label class="form-label" title="required" for="name">Loading / Unloading Charges<i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
+                          <label class="form-label" for="name">Loading / Unloading Charges<i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
                           <br/>
                           <label class="radio-inline">
                             <input type="radio" ng-model="lane.route.ISLOADUNLOADCHARG" name="optradio" value="Y" /> Yes
@@ -268,7 +266,7 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="stackingNorms">Stacking Norms<i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
-                          <input type="text" id="stackingNorms" class="form-control input-sm" ng-model="lane.route.STACKINGNORMS" placeholder="Enter Stacking Norms"  ng-required="lane.iswarehousing"/>
+                          <input type="text" id="stackingNorms" class="form-control input-sm" ng-model="lane.route.STACKINGNORMS" placeholder="Enter Stacking Norms" />
                         </div>
                       </div>
                     </div>
@@ -276,7 +274,7 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="desc">Description <i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
-                          <input type="text" id="desc" class="form-control input-sm" placeholder="Enter Description" ng-required="lane.iswarehousing" />
+                          <input type="text" id="desc" class="form-control input-sm" placeholder="Enter Description" />
                         </div>
                       </div>
                       <div class="col-sm-4">
@@ -288,7 +286,7 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="packType">Packaging Type <i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
-                          <select class="form-control input-sm" id="packType" ng-model="lane.route.PACKAGETYPEID" ng-options="packType.name as packType.val for packType in lane.isPACKAGETYPEID_option" ng-required="lane.iswarehousing">
+                          <select class="form-control input-sm" id="packType" ng-model="lane.route.PACKAGETYPEID" ng-options="packType.name as packType.val for packType in lane.isPACKAGETYPEID_option">
                           </select>
                         </div>
                       </div>
@@ -297,7 +295,7 @@
                       <div class="col-sm-4">
                         <div class="form-group">
                           <label class="form-label" title="required" for="mheReq">MHE requirement <i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
-                          <input type="text" id="mheReq" class="form-control input-sm" ng-model="lane.route.MHEREQUIREMENT" placeholder="Enter MHE requirement" ng-required="lane.iswarehousing" />
+                          <input type="text" id="mheReq" class="form-control input-sm" ng-model="lane.route.MHEREQUIREMENT" placeholder="Enter MHE requirement" />
                         </div>
                       </div>
                       <div class="col-sm-4">

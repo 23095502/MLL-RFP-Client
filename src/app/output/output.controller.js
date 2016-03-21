@@ -79,24 +79,40 @@ export class OutputController {
     return _.map(this.outputdata, (v) => (_.pick(v, ['CUSTOMERNAME', 'CASHACCOUNTID', 'FROMLOCATIONNAME'])));
   }
 
-  showModal(colname, table, clickedColName) {
+  showModal(colname, table, clickedColName, index) {
 
     this.selectedLane = table;
     this.rowClickedColName = clickedColName;
 
+    console.log(table.TOLOCATIONNAME);
+
+    /*
     this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
-    this.inproxiparam.ORIGINSTATE = this.outputdata[0].FROMSTATE;
-    this.inproxiparam.DESTINATION = this.outputdata[0].TOLOCATIONNAME;
-    this.inproxiparam.DESTINATIONSTATE = this.outputdata[0].TOSTATE;
+    this.inproxiparam.ORIGINSTATE = this.outputdata[index].FROMSTATE;
+    this.inproxiparam.DESTINATION = this.outputdata[index].TOLOCATIONNAME;
+    this.inproxiparam.DESTINATIONSTATE = this.outputdata[index].TOSTATE;
     this.inproxiparam.VEHICLETYPE = this.filterOption.VEHICLETYPENAME;
-    this.inproxiparam.DISTANCE = this.outputdata[0].PROXIDISTANCE;
-    this.inproxiparam.NOOFTRIPS = this.outputdata[0].NOOFTRIPS;
+    this.inproxiparam.DISTANCE = this.outputdata[index].PROXIDISTANCE;
+    this.inproxiparam.NOOFTRIPS = this.outputdata[index].NOOFTRIPS;
+    */
+
+    this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
+    this.inproxiparam.ORIGINSTATE = table.FROMSTATE;
+    this.inproxiparam.DESTINATION = table.TOLOCATIONNAME;
+    this.inproxiparam.DESTINATIONSTATE = table.TOSTATE;
+    this.inproxiparam.VEHICLETYPE = this.filterOption.VEHICLETYPENAME;
+    this.inproxiparam.DISTANCE = 10;
+    this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;
 
     this.gridData = [];
+
+
 
     var newfilterRoutes = {
       inproxiparam: this.inproxiparam
     };
+
+    console.log(newfilterRoutes);
 
     this.TOLOCATIONNAME = table.TOLOCATIONNAME;
     this.CONTRACTRATE = table[clickedColName];
@@ -104,6 +120,7 @@ export class OutputController {
 
     this._api.post(this.urlMaps[colname], newfilterRoutes, true).then((res) => {
       this.gridData = res.data[this.responseKeys[clickedColName]];
+      console.log(res.data[this.responseKeys[clickedColName]]);
     }, (err) => {
       console.error(err);
     });

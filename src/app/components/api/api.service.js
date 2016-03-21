@@ -3,7 +3,7 @@ export class apiService {
     'ngInject';
 
     this.$http = $http;
-    this._host = 'http://59.160.18.222';
+    this._host = 'http://172.32.0.101';
     this._baseURL = `${this._host}/RFPRest/RFPRestService.svc`;
 
     this._requestTemplate = {
