@@ -262,7 +262,11 @@ h1 {
   font-size: 12px;
 }
 .filter-margin {
-  margin: 10px 0;
+  //margin-right: 10px 0;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+
 }
 .btn-rounded {
   border-radius: 20px;
@@ -339,6 +343,11 @@ left: -12px;
 .unit {
   position: relative;
   top: 15px;
+  font-size: 12px;
+  color: $mll-grey;
+}
+.unit-modal {
+  top: 30px;
   font-size: 12px;
   color: $mll-grey;
 }
@@ -610,6 +619,37 @@ left: -12px;
   background-color: $mll-red !important;
   color: $mll-white !important;
   margin-bottom: 30px;
+}
+
+.mll-table-input{
+
+  background: white;
+  border : 0;
+  box-shadow :none;
+  height: 2.0em;
+}
+
+.badge {
+
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border-radius: 0px;
+    background-color: #e6e6e6;
+    border: 1px;
+    text-color : mll-black;
+}
+
+.label-sticky {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $mll-black;
+    border-radius: 0;
+    background-color: #e6e6e6;
+    border: 2px;
+
 }
 
 /* login page  */

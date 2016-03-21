@@ -32,7 +32,7 @@
                 <div class="col-sm-12 col-md-12">
                   <legend class="legend top-legend">
                     CUSTOMER DETAILS
-                    <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">Add Customer</button>
+                    <button class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#myModal">Add Customer</button>
                   </legend>
                 </div>
               </div>
@@ -76,7 +76,6 @@
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
                     <label class="form-label" title="required" for="cashaccountid">CA$$H Account ID <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-
                     <input type="text" class="form-control input-sm" id="cashaccountid" placeholder="CA$$H account id" ng-required="true" ng-model="overall.customer.CASHACCOUNTID" ng-disabled="true">
                   </div>
                 </div>
@@ -165,7 +164,7 @@
                 <div class="col-sm-3 col-md-3">
                   <div class="form-group">
                     <label class="form-label" for="warehousingrequirment">Warehousing requirment <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                    <select class="form-control input-sm" id="warehousingrequirment" ng-required="true" ng-model="overall.overall.ISHUBORWHREQ" ng-options="ISHUB.val as ISHUB.name for ISHUB in overall.ISHUBORWHREQ_option">
+                    <select class="form-control input-sm" id="warehousingrequirment" ng-disabled="true" ng-required="true" ng-model="overall.overall.ISHUBORWHREQ" ng-options="ISHUB.val as ISHUB.name for ISHUB in overall.ISHUBORWHREQ_option">
                     </select>
                   </div>
                 </div>
@@ -181,7 +180,7 @@
                 </div>
                 <div class="col-sm-3 col-md-3">
                   <div class="form-group">
-                    <label class="form-label" for="distance">Proximity (%)</label>
+                    <label class="form-label" for="distance">Proximity (in KMs)</label>
                     <input t ype="number" min="0" max="100" maxlength="3" class="form-control input-sm" id="distance" placeholder="Distance" ng-model="overall.overall.PROXIDISTANCE">
                   </div>
                 </div>
@@ -307,7 +306,7 @@
                 </div>
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
-                    <label class="form-label" for="email">Email</label>
+                    <label class="form-label" for="email">Email <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                     <input type="email" class="form-control input-sm" id="email" placeholder="Email" ng-model="overall.newCustomer.EMAIL" ng-required="true">
                   </div>
                 </div>
