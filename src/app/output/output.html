@@ -120,48 +120,53 @@
         <tr
           ng-repeat="outputdata in output.outputdata | filter:{FROMLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
           <td class="whitecol"><strong>{{outputdata.TOLOCATIONNAME}},</strong> <br>{{outputdata.TOSTATECODE}}</td>
-          <td ng-class="output.changecolor(outputdata.CLEANSHEETRATE,outputdata.APPROVEDAMOUNT)" class="text-center fixed-width-col">
+          <td ng-class="output.changecolor(outputdata.CLEANSHEETRATE,outputdata.APPROVEDAMOUNT)"
+              class="text-center fixed-width-col">
             {{outputdata.CLEANSHEETRATE/1000 | number : 2}}<!--<span class="label label-sticky">Px</span>--></td>
-          <td ng-class="output.changecolor(outputdata.MARKETRATE,outputdata.APPROVEDAMOUNT)" class="text-center fixed-width-col">
+          <td ng-class="output.changecolor(outputdata.MARKETRATE,outputdata.APPROVEDAMOUNT)"
+              class="text-center fixed-width-col">
             {{outputdata.MARKETRATE/1000 | number : 2}}
           </td>
           <td ng-click="output.showModal('rfphistory', outputdata, 'PVSRFPRATE', 'RFP Rate', 'RFP RATES')"
-              ng-class="output.changecolor(outputdata.PVSRFPRATE,outputdata.APPROVEDAMOUNT)" class="text-center fixed-width-col open-popup">
+              ng-class="output.changecolor(outputdata.PVSRFPRATE,outputdata.APPROVEDAMOUNT)"
+              class="text-center fixed-width-col open-popup">
             {{outputdata.PVSRFPRATE/1000 | number : 2}}
           </td>
           <td ng-click="output.showModal('contract', outputdata, 'CONTRACTRATE', 'Contract Rate', 'CONTRACT RATES')"
-              ng-class="output.changecolor(outputdata.CONTRACTRATE,outputdata.APPROVEDAMOUNT)" class="text-center fixed-width-col open-popup">
+              ng-class="output.changecolor(outputdata.CONTRACTRATE,outputdata.APPROVEDAMOUNT)"
+              class="text-center fixed-width-col open-popup">
             {{outputdata.CONTRACTRATE/1000 | number : 2}}
           </td>
-          <td ng-class="output.changecolor(outputdata.SHIPXRATE,outputdata.APPROVEDAMOUNT)" class="text-center fixed-width-col">
+          <td ng-class="output.changecolor(outputdata.SHIPXRATE,outputdata.APPROVEDAMOUNT)"
+              class="text-center fixed-width-col">
             {{outputdata.SHIPXRATE/1000}}
           </td>
           <td ng-click="output.showModal('backhaul', outputdata, 'NOOFTRIPS', 'Backhaul', 'BACKHAUL RATES')"
               class="text-center fixed-width-col open-popup">{{outputdata.BACKHAULAVL}}
           </td>
           <td class="text-center"><input type="number"
-                                               class="form-control mll-table-input" id="l1rate"
-                                               ng-model="outputdata.L1RATE"/>
+                                         class="form-control mll-table-input" id="l1rate"
+                                         ng-model="outputdata.L1RATE"/>
             <hr/>
             <span class="mll-table-label">{{outputdata.L1BANAME}}</span></td>
           <td class="text-center"><input type="number"
-                                               class="form-control mll-table-input" id="l2rate"
-                                               ng-model="outputdata.L2RATE"/>
+                                         class="form-control mll-table-input" id="l2rate"
+                                         ng-model="outputdata.L2RATE"/>
             <hr/>
             <span class="mll-table-label">{{outputdata.L2BANAME}}</span></td>
           <td class="text-center"><input type="number"
-                                               class="form-control mll-table-input" id="l3rate"
-                                               ng-model="outputdata.L3RATE"/>
+                                         class="form-control mll-table-input" id="l3rate"
+                                         ng-model="outputdata.L3RATE"/>
             <hr/>
             <span class="mll-table-label">{{outputdata.L3BANAME}}</span></td>
           <td class="text-center"><input type="number"
-                                               class="form-control mll-table-input" id="l4rate"
-                                               ng-model="outputdata.L4RATE"/>
+                                         class="form-control mll-table-input" id="l4rate"
+                                         ng-model="outputdata.L4RATE"/>
             <hr/>
             <span class="mll-table-label">{{outputdata.L4BANAME}}</span></td>
           <td class="text-center"><input type="number"
-                                               class="form-control mll-table-input" id="l5rate"
-                                               ng-model="outputdata.L5RATE"/>
+                                         class="form-control mll-table-input" id="l5rate"
+                                         ng-model="outputdata.L5RATE"/>
             <hr/>
             <span class="mll-table-label">{{outputdata.L5BANAME}}</span></td>
           <td class="whitecol">
@@ -179,7 +184,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">
-          <b>{{output.modalHeaderName}}</b>
+          {{output.modalHeaderName}}
         </h4>
       </div>
       <div class="modal-body">
@@ -239,7 +244,7 @@
                     <tr class="rate-details" ng-repeat="griddata in output.gridData | orderBy : 'FREIGHTRATE'">
                       <td>
                         <div class="form-inline">
-                          <input type="radio" ng-click="output.updateContractRate(griddata)" name="optradio"
+                          <input type="radio" ng-click="output.updateContractRate(griddata, 'REGULAR')" name="optradio"
                                  class="radio-rate">
                           <div class="form-group">
                             <span> {{griddata.ORIGIN}}</span>
@@ -251,6 +256,106 @@
                         <br> {{griddata.DESTINATIONSTATE}}
                       </td>
                       <td class="highlight number-center">{{griddata.FREIGHTRATE/1000 | number : 2}}</td>
+                      <td class="highlight number-center" ng-show="showColumn('PVSRFPRATE')">{{griddata.FREIGHTRATE/1000
+                        | number : 2}}
+                      </td>
+                      <td>{{griddata.NOOFTRIPS}}</td>
+                      <td>{{griddata.BANAME}}</td>
+                      <td>{{griddata.CUSTOMERNAME}}</td>
+                      <td>{{griddata.CONTRACTID}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="closeModal()" class="btn btn-default" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModalOutputDetailsForBackHaul" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">
+          <b>{{output.modalHeaderName}}</b>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div style="overflow: auto; height: 60vh">
+          <form>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-12">
+                  <table class="table mll-table">
+                    <thead>
+                    <tr class="mll-table-rate">
+                      <td>
+                        <span class="mll-table-label">From</span>
+                        <br>
+                        <span class="mll-table-value">{{output.filterOption.FROMLOCATIONNAME}}</span>
+                      </td>
+                      <td>
+                        <span class="mll-table-label">To</span>
+                        <br>
+                        <span class="mll-table-value">{{output.TOLOCATIONNAME}}</span>
+                      </td>
+                      <td>
+                        <div class="highlight-rate">
+                          <div class="form-group">
+                            <span class="mll-table-label exclude">{{output.colName}}</span>
+                            <br>
+                            <span class="mll-table-value exclude"></span>
+                          </div>
+                        </div>
+                        <div class="arrow-down"></div>
+                      </td>
+                      <td>
+                        <span class="mll-table-label">Vehicle Type</span>
+                        <br>
+                        <span class="mll-table-value">{{output.filterOption.VEHICLETYPENAME}}</span>
+                      </td>
+                      <td>
+                        <span class="mll-table-label"></span>
+                        <span class="mll-table-value"></span>
+                      </td>
+                      <td>
+                        <span class="mll-table-label" ng-hide="true">Unit</span>
+                        <br>
+                        <span class="unit pull-right">Pricing in ('000 INR)</span>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>From</th>
+                      <th>To</th>
+                      <th class="highlight">{{output.colName}}</th>
+                      <th>BA Name</th>
+                      <th>Customer Name</th>
+                      <th>Contract No./ID</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="rate-details" ng-repeat="griddata in output.gridData | orderBy : 'FREIGHTRATE'">
+                      <td>
+                        <div class="form-inline">
+
+                          <div class="form-group">
+                            <span> {{griddata.ORIGIN}}</span>
+                            <br><span> {{griddata.ORIGINSTATE}}</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td>{{griddata.DESTINATION}}
+                        <br> {{griddata.DESTINATIONSTATE}}
+                      </td>
+                      <td>{{griddata.NOOFTRIPS}}</td>
                       <td>{{griddata.BANAME}}</td>
                       <td>{{griddata.CUSTOMERNAME}}</td>
                       <td>{{griddata.CONTRACTID}}</td>
