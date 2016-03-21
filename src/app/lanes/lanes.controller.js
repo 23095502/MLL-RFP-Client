@@ -1,5 +1,5 @@
 export class LanesController {
-  constructor($state, $stateParams, $timeout, Upload, masterService, apiService) {
+  constructor($state, $stateParams, $timeout, masterService, apiService) {
 
     'ngInject';
 
@@ -7,7 +7,6 @@ export class LanesController {
     this.routes = [];
     this.$timeout = $timeout;
     this.$stateParams = $stateParams;
-    this.Upload = Upload;
     this.isServiceTypeODC;
     this.statename_option = [];
     this.isSERVICETYPE_option = [];
@@ -25,7 +24,7 @@ export class LanesController {
     };
 
     this.iswarehousing = $stateParams.iswarehousing;
-    (this.iswarehousing === 'Y') ? this.iswarehousing = true: this.iswarehousing = false;
+    (this.iswarehousing === 'Y') ? this.iswarehousing = true : this.iswarehousing = false;
 
     //===========================
     //Get all RFP routes by RFP ID
@@ -44,7 +43,7 @@ export class LanesController {
     this.isPACKAGETYPEID_option = this.prepareForDropdown(['', 'Pallet', 'Corrugated Boxes', 'Bags', 'Trolley', 'Loose']);
     this.isSERVICETYPE_option = this.prepareForDropdown(['FTL', 'ODC', 'Surface Exp', 'PTL Conventional', 'Fixed Vehicle', 'Air Express']);
 
-    document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function(e) {
+    document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function (e) {
       document.querySelector('.tbody-div3 table').style.top = `-${e.target.scrollTop}px`;
       document.querySelector('.thead-div2 table').style.left = `-${e.target.scrollLeft}px`;
     });
@@ -243,18 +242,17 @@ export class LanesController {
       return route;
     }).value();
 
-
     var newfilterRoutes = {
       rfproute: filterRoutes
     };
     /*var req = {
-      method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/routeupdate',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: newfilterRoutes
-    };*/
+     method: 'POST',
+     url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/routeupdate',
+     headers: {
+     'Content-Type': 'application/json'
+     },
+     data: newfilterRoutes
+     };*/
 
     this._api.post('routeupdate', newfilterRoutes).then((r) => {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
@@ -297,20 +295,20 @@ export class LanesController {
 
   /*  uploadFile(file) {
 
-      this.Upload.upload({
-        //url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`,
-        url: `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`,
-        data: {},
-        file: file
-      }).then(function(resp) {
-        console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-      }, function(resp) {
-        console.log('Error status: ' + resp.status);
-      }, function(evt) {
-        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-      });
-    }*/
+   this.Upload.upload({
+   //url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`,
+   url: `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`,
+   data: {},
+   file: file
+   }).then(function(resp) {
+   console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+   }, function(resp) {
+   console.log('Error status: ' + resp.status);
+   }, function(evt) {
+   var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+   console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+   });
+   }*/
 
   map(id, list, idMatcher, nameKey) {
     if (_.isInteger(id) && list.length > 0) {

@@ -1,11 +1,15 @@
 export class LoginController {
-  constructor($state) {
+  constructor($state, authService) {
     'ngInject';
     this.$state = $state;
+    this.auth = authService;
   }
 
-  gotoDashboard() {
-    this.$state.go('dashboard');
+  authenticate() {
+    this.auth.login().then((r)=>{
+      console.log(r);
+    });
+    //this.$state.go('dashboard');
   }
 
   isLogin(){
