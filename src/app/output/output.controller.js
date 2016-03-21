@@ -1,11 +1,12 @@
 export class OutputController {
-  constructor($stateParams, $state, apiService) {
+  constructor($stateParams, $state, apiService, toaster) {
     'ngInject';
 
     this.$stateParams = $stateParams;
     this._api = apiService;
     this.gridData = [];
     this.outputdata = [];
+    this.toaster = toaster;
 
     this.inproxiparam = {
       "ORIGIN": '',
@@ -180,6 +181,8 @@ export class OutputController {
     }, (err) => {
       console.error(err);
     });
+
+    this.toaster.success('Changes saved successfully');
   }
 
   updateContractRate(popupGridData) {
