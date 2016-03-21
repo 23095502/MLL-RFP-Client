@@ -24,14 +24,14 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
   })
 
   .state('dashboard', {
-    url: '/',
+    url: '/dashboard',
     templateUrl: 'app/dashboard/dashboard.html',
     controller: 'DashboardController',
     controllerAs: 'dash'
   })
 
   .state('login', {
-    url: '/login',
+    url: '/',
     templateUrl: 'app/login/login.html',
     controller: 'LoginController',
     controllerAs: 'login'
