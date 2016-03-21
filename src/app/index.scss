@@ -185,6 +185,7 @@ h1 {
         &.highlight {
           background-color: rgb(243, 249, 235);
           text-align: center !important;
+          width: 110px;
         }
         &.whitecol {
           background-color: $mll-white;
