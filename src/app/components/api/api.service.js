@@ -10,9 +10,9 @@ export class apiService {
       method: '',
       url: '',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      data: {}
+      data: {},
     };
   }
 

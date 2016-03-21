@@ -8,7 +8,7 @@ export class LoginController {
     this.$state.go('dashboard');
   }
 
-  isLogin(){
+  isLogin() {
     return 'loginbody';
   }
 }

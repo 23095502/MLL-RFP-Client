@@ -6,30 +6,25 @@ export class DashboardController {
     this.rfps = [];
     this._api = apiService;
     this._master = masterService;
-
   }
 
   init() {
-
     this._api.get('getrfplist/getall').then((res) => {
-      var rfps = res.data;
-      console.log(rfps);
+      let rfps = res.data;
       rfps = _.map(rfps, (rfp) => {
         rfp.RFPDATE = new Date(rfp.RFPDATE);
         rfp.DUEDATE = new Date(rfp.DUEDATE);
         return rfp;
-
-      })
+      });
       this.rfps = rfps;
     }, (err) => {
       console.error(err);
     });
-
   }
 
   click(id) {
     this.$state.go('output', {
-      rfpId: id
+      rfpId: id,
     });
   }
 

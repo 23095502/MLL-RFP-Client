@@ -1,5 +1,3 @@
-/* global malarkey:false, moment:false */
-
 import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
@@ -13,7 +11,7 @@ import { apiService } from '../app/components/api/api.service';
 import { masterService } from '../app/components/master/master.service';
 
 
-angular.module('mllRfpClient', ['ui.router', 'ngFileUpload'])
+angular.module('mllRfpClient', ['ui.router'])
   .config(config)
   .config(routerConfig)
   .run(runBlock)
