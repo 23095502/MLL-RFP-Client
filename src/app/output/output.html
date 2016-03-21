@@ -200,7 +200,6 @@
                         <th>From</th>
                         <th>To</th>
                         <th class="highlight">{{output.colName}}</th>
-                        <th ng-show="showColumn('BACKHAULAVL')" class="highlight">New</th>
                         <th>BA Name</th>
                         <th>Customer Name</th>
                         <th>Contract No./ID</th>
@@ -220,7 +219,6 @@
                         <td>{{griddata.DESTINATION}}
                         <br> {{griddata.DESTINATIONSTATE}}</td>
                         <td class="highlight number-center">{{griddata.FREIGHTRATE/1000 | number : 2}}</td>
-                        <td class="highlight number-center" ng-show="showColumn('PVSRFPRATE')">{{griddata.FREIGHTRATE/1000 | number : 2}}</td>
                         <td>{{griddata.NOOFTRIPS}}</td>
                         <td>{{griddata.BANAME}}</td>
                         <td>{{griddata.CUSTOMERNAME}}</td>
