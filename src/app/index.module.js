@@ -13,7 +13,7 @@ import { apiService } from '../app/components/api/api.service';
 import { masterService } from '../app/components/master/master.service';
 
 
-angular.module('mllRfpClient', ['ui.router', 'ngFileUpload'])
+angular.module('mllRfpClient', ['ui.router', 'ngFileUpload','toaster'])
   .config(config)
   .config(routerConfig)
   .run(runBlock)
