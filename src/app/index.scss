@@ -1,7 +1,7 @@
 /**
- *  If you want to override some bootstrap variables, you have to change values here.
- *  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
- */
+*  If you want to override some bootstrap variables, you have to change values here.
+*  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
+*/
 $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";/* colors swatch */
 $mll-red: rgb(227, 24, 55);
 $mll-white: rgb(255, 255, 255);
@@ -15,12 +15,11 @@ $btn-primary-border: $mll-red;
 $btn-font-weight: bold;/* font */
 $navbar-inverse-link-color: $mll-white;
 $navbar-inverse-bg: $mll-red;/**
- *  Do not remove the comments below. It's the markers used by wiredep to inject
- *  sass dependencies when defined in the bower.json of your dependencies
- */
+*  Do not remove the comments below. It's the markers used by wiredep to inject
+*  sass dependencies when defined in the bower.json of your dependencies
+*/
 // bower:scss
 // endbower
-
 @font-face {
   font-family: "Helvetica Neue";
   src: local('Arial');
@@ -133,6 +132,8 @@ h1 {
       font-size: 86%;
       color: rgba(255, 255, 255, .7);
       white-space: nowrap;
+      text-align: center;
+      vertical-align: middle !important;
 
       span {
         display: inline-block;
@@ -146,6 +147,15 @@ h1 {
         width: 1px;
         border-left: 1px solid lighten($mll-grey, 20);
       }
+      &.highlight {
+        background-color: rgb(110, 116, 104);
+      }
+      &.whitecol {
+        background-color: $mll-white;
+        color: $mll-grey;
+        vertical-align: middle;
+        border-top: 2px solid lighten($mll-grey, 40) !important;
+      }
     }
   }
   tbody {
@@ -158,6 +168,7 @@ h1 {
         position: relative;
         white-space: nowrap;
         font-size: 86%;
+        vertical-align: middle;
 
         span {
           display: inline-block;
@@ -171,10 +182,28 @@ h1 {
           width: 1px;
           border-left: 1px solid lighten($mll-grey, 40);
         }
+        &.highlight {
+          background-color: rgb(243, 249, 235);
+          text-align: center !important;
+        }
+        &.whitecol {
+          background-color: $mll-white;
+        }
+        &.number-center {
+          text-align: center !important;
+        }
+        &.number-right {
+          text-align: right !important;
+          padding-right: 35px;
+        }
       }
       &:hover {
-        background-color: lighten($mll-red, 45);
+        background-color: lighten($mll-darkgrey, 70);
         cursor: pointer;
+      }
+      &.rate-details {
+        background-color: $mll-white;
+        color: $mll-darkgrey;
       }
     }
   }
@@ -236,11 +265,76 @@ h1 {
 }
 .btn-rounded {
   border-radius: 20px;
+  width: 160px;
 }
-.active {
-  background-color: $mll-darkgrey !important;
-  color: $mll-white !important;
+
+/* .radio-input:checked  ~ .switch-handle{
+content: "";
+display: block;
+background: $mll-darkgrey;
+position: absolute;
+top: 0px;
+left: -12px;
+width: 29px;
+height: 29px;
+border-radius: 100px;
+background: $mll-darkgrey !important;
+color: $mll-white !important;
+border-radius: 20px !important;
+left: -12px;
+} */
+
+/* Top toggle switch */
+.switch-field {
+  //padding: 40px;
+  overflow: hidden;
+  font-weight: bold;
+  margin-top: -8px;
 }
+.switch-field input {
+  display: none;
+}
+.switch-field label {
+  float: left;
+}
+.switch-field label {
+  display: inline-block;
+  width: 160px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: none;
+  padding: 6px 14px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+.switch-field label:hover {
+  cursor: pointer;
+}
+.switch-field input:checked + label {
+  background-color: lighten($mll-darkgrey, 10);
+  color: $mll-white;
+  z-index: 1;
+}
+.switch-field label:first-of-type {
+  border-radius: 16px 16px 16px 16px;
+  position: relative;
+  left: 10px;
+  z-index: 0;
+}
+.switch-field label:last-of-type {
+  border-radius: 16px 16px 16px 16px;
+  position: relative;
+  left: -10px;
+  z-index: 0;
+}
+
+/* Top toggle switch */
 .unit {
   position: relative;
   top: 15px;
@@ -275,40 +369,167 @@ h1 {
   margin-bottom: 20px;
 }
 .thead-div1 {
-  width: 400px;
+  width: 440px;
   height: 32px;
   top: 0;
   left: 0;
-  border-top: 1px solid lighten($mll-darkgrey, 60);
-}
-.thead-div2 {
-  height: 32px;
-  top: 0;
-  left: 400px;
-  right: 0;
   border-top: 1px solid lighten($mll-darkgrey, 60);
 }
 .tbody-div3 {
   top: 32px;
   bottom: 0;
-  width: 400px;
+  width: 440px;
   left: 0;
   border-bottom: 1px solid lighten($mll-darkgrey, 60);
+}
+.thead-div2 {
+  height: 32px;
+  top: 0;
+  left: 440px;
+  right: 0;
+  border-top: 1px solid lighten($mll-darkgrey, 60);
+  box-shadow: -10px 5px 10px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 7px 0 0 0;
 }
 .tbody-div4 {
   top: 32px;
   bottom: 0;
   right: 0;
-  left: 400px;
+  left: 440px;
   overflow: auto;
   border-bottom: 1px solid lighten($mll-darkgrey, 60);
+  box-shadow: -10px 0px 10px 1px rgba(0, 0, 0, 0.25);
+}
+.highlight-rate {
+  background-color: rgb(141, 199, 63);
+  margin-bottom: -10px;
+  margin-top: -20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 20px;
+  color: $mll-white;
+  text-align: center;
+}
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgb(141, 199, 63);
+  margin-left: 4%;
+  position: absolute;
+  margin-top: -5px;
+}
+.mll-table-rate {
+  background-color: $mll-white;
+  color: $mll-darkgrey;
+}
+.mll-table-label {
+  font-size: 12px;
+  display: inline-block;
+  margin-bottom: 5px;
+
+  &:not(.exclude) {
+    color: $mll-grey;
+  }
+}
+.mll-table-value {
+  font-size: 14px;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 5px;
+
+  &:not(.exclude) {
+    color: $mll-grey;
+  }
+}
+.radio-rate {
+  transform: scale(2.5);
+  width: 30px;
+  vertical-align: middle;
+}
+.radio-rate:checked {
+  outline: none !important;
+}
+.tbody-div4::-webkit-scrollbar {
+  height: 8px;
+  background-color: lighter($mll-darkgrey, 90);
+}
+.tbody-div4::-webkit-scrollbar-thumb {
+  width: 10px;
+  border-radius: 10px;
+  background-color: $mll-red;
+}
+.tbody-div4::-webkit-scrollbar-thumb:hover {
+  background-color: $mll-red;
+}
+.tbody-div4::-webkit-scrollbar-thumb:active {
+  background-color: $mll-red;
+}
+.tbody-div4::-webkit-scrollbar-track {
+  //-webkit-box-shadow: 0 0 2px gray inset;
 }
 
-/* grid scoll css */
+/* Let's get this party started */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: $mll-red;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: $mll-red;
+}
+.dashboard-buttons {
+  margin-top: -8px !important;
+}
+
+/* .box {
+background: #b2b2b2;
+margin: 25px;
+padding: 20px;
+position: relative;
+overflow: hidden;
+}
+.box:before {
+content: "";
+display: block;
+background: #fff;
+position: absolute;
+top: 0px;
+left: 10px;
+width: 50px;
+height: 50px;
+border-radius: 100px;
+} */
+
+/* .box:after{
+content: "";
+display: block;
+background: #fff;
+position: absolute;
+top: -9px;
+right: -9px;
+width: 50px;
+height: 50px;
+border-radius: 100px;
+} */
 
 /**
- *  Do not remove the comments below. It's the markers used by gulp-inject to inject
- *  all your sass files automatically
- */
+*  Do not remove the comments below. It's the markers used by gulp-inject to inject
+*  all your sass files automatically
+*/
 // injector
 // endinjector

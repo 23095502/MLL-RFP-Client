@@ -23,27 +23,13 @@ export class OverallController {
       "CREATEDBY": 0,
       "CREATEDON": null
     };
-    this.newCustomer = {
-      "CUSTOMERID": 0,
-      "CUSTOMERCODE": null,
-      "CUSTOMERNAME": null,
-      "ADDRESS": null,
-      "CONTACTPERSON": null,
-      "CONTACTNO": null,
-      "CASHACCOUNTID": null,
-      "TOTALSPEND": null,
-      "EMAIL": null,
-      "ACTIVE": "A",
-      "MODE": "INSERT",
-      "CREATEDBY": 0,
-      "CREATEDON": null
-    };
+
   }
+
 
   init() {
 
     this.CUSTOMERNAME_option = this._master.getCustomers();
-    console.log(this._master.getCustomers());
 
     this.AGEOFTRUCK_option = _.times(10, (i) => ({
       name: i,
@@ -128,6 +114,24 @@ export class OverallController {
       "TOTALSPEND": 0,
       "PROXIDISTANCE": 10
     };
+
+    this.customer = {
+      "cust": {
+        "CUSTOMERID": 0,
+        "CUSTOMERCODE": '',
+        "CUSTOMERNAME": '',
+        "ADDRESS": '',
+        "CONTACTPERSON": '',
+        "CONTACTNO": 0,
+        "CASHACCOUNTID": '',
+        "TOTALSPEND": '',
+        "EMAIL": '',
+        "ACTIVE": "A",
+        "MODE": "INSERT",
+        "CREATEDBY": 5,
+        "CREATEDON": new Date()
+      }
+    };
   }
 
   addCustomer() {
@@ -140,7 +144,7 @@ export class OverallController {
         "ADDRESS": this.newCustomer.ADDRESS,
         "CONTACTPERSON": this.newCustomer.CONTACTPERSON,
         "CONTACTNO": this.newCustomer.CONTACTNO,
-        "CASHACCOUNTID": this.newCustomer.CASHACCOUNTID,
+        "CASHACCOUNTID": this.newoppCustomer.CASHACCOUNTID,
         "TOTALSPEND": this.newCustomer.TOTALSPEND,
         "EMAIL": this.newCustomer.EMAIL,
         "ACTIVE": "A",
@@ -148,21 +152,28 @@ export class OverallController {
         "CREATEDBY": 5,
         "CREATEDON": new Date()
       }
+
     };
 
     var customerURL = 'updtcustomer';
+
+    console.log(customer);
 
     this._api.post(customerURL, customer).then((response) => {
       this._master.refreshPromise().then((response) => {
         this._master.refresh(response);
         this.CUSTOMERNAME_option = this._master.getCustomers();
+
       }, (error) => {
         console.error(error);
+
       });
 
     }, (error) => {
       console.error(error)
     });
+
+    $('#myModal').modal('hide');
 
   }
 
@@ -206,12 +217,13 @@ export class OverallController {
         "CONTACTNO": this.customer.CONTACTNO,
         "CASHACCOUNTID": this.customer.CASHACCOUNTID,
         "TOTALSPEND": this.customer.TOTALSPEND,
-        "PROXIDISTANCE": this.customer.PROXIDISTANCE
+        "PROXIDISTANCE": this.overall.PROXIDISTANCE
       }
     };
 
     var rfpHeaderURL = 'rfp/INSERT';
 
+    console.log(rfpHeader);
     this._api.post(rfpHeaderURL, rfpHeader).then((response) => {
       this.$state.go('lanes', {
         rfpid: response.data.rfpResult[0].RFPID,
