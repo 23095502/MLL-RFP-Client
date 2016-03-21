@@ -109,6 +109,7 @@
           </tr>
         </thead>
         <tbody>
+
           <tr ng-repeat="outputdata in output.outputdata | filter:{FROMLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
             <td class="whitecol">{{outputdata.TOLOCATIONNAME}} <br>{{outputdata.TOSTATECODE}}</td>
 
