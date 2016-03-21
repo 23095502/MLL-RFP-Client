@@ -2,13 +2,21 @@
   <div class="row">
     <div class="col-sm-4"><h1>Create new <abbr title="Request for praposal">RFP</abbr> </h1></div>
     <div class="col-sm-4 text-center">
-      <div class="btn-group" data-toggle="buttons" >
+      <!-- <div class="btn-group" data-toggle="buttons" >
+        <input name="togglebutton" type="radio" autocomplete="off" class="radio-input">
         <label class="btn btn-default btn-rounded">
-          <input name="togglebutton" type="checkbox" autocomplete="off">Overall Details
+          Overall Details
         </label>
-        <label class="btn btn-default btn-rounded active">
-          <input name="togglebutton" type="checkbox" autocomplete="off" checked> Lane Details
+        <input name="togglebutton" type="radio" autocomplete="off" class="radio-input" checked>
+        <label class="btn btn-default btn-rounded">
+          Lane Details
         </label>
+      </div> -->
+      <div class="switch-field">
+        <input type="radio" id="switch_left" name="switch_2" value="yes" />
+        <label for="switch_left">Overall Details</label>
+        <input type="radio" id="switch_right" name="switch_2" value="no" checked/>
+        <label for="switch_right">Lane Details</label>
       </div>
     </div>
     <div class="col-md-4 text-right">
@@ -20,7 +28,8 @@
       </button>
     </div>
   </div>
-  <div class="form-divider"></div>
+  <!-- <div>&nbsp;</div> -->
+  <!-- <div class="form-divider"></div> -->
 </div>
 <div class="output-table">
   <div class="thead-div1">
@@ -60,7 +69,7 @@
             <span>Distance oneway</span>
           </th>
           <th>
-            <span>Loading unloading time</span>
+            <span>Loading / Unloading time</span>
           </th>
           <th>
             <span>No. of Trips</span>
@@ -96,7 +105,7 @@
     <table class="mll-table table">
       <tbody>
         <tr ng-dblclick="lane.edit(route, $index)" ng-repeat="route in lane.routes">
-          <td>
+          <td >
             <span>{{route.ISROUNDTRIP}}</span>
           </td>
           <td>
@@ -105,16 +114,16 @@
           <td>
             <span>{{lane.map(route.VEHICLETYPEID, lane.vehicletypename_option, 'VEHICLETYPEID', 'VEHICLETYPENAME')}}</span>
           </td>
-          <td>
+          <td class="number-center">
             <span>{{route.DISTANCE}}</span>
           </td>
-          <td>
+          <td class="number-center">
             <span>{{route.LOADINGUNLOADINGTIME}}</span>
           </td>
-          <td>
+          <td class="number-center">
             <span>{{route.NOOFTRIPS}}</span>
           </td>
-          <td>
+          <td class="number-center">
             <span>{{route.BACKHAUL}}</span>
           </td>
         </tr>
@@ -325,32 +334,32 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-sm-4">
+                      <div class="col-sm-3">
                         <div class="form-group">
-                          <label class="form-label" title="required" for="distOneway">Distance oneway</label>
-                          <input type="text" id="distOneway" class="form-control input-sm" ng-model="lane.route.DISTANCE" placeholder="Enter distance" />
+                          <label class="form-label" title="required" for="distOneway">Distance oneway (km)</label>
+                          <input type="number" id="distOneway" class="form-control input-sm" ng-model="lane.route.DISTANCE" placeholder="Enter distance" />
                         </div>
                       </div>
-                      <div class="col-sm-4">
+                      <div class="col-sm-3">
                         <div class="form-group">
-                          <label class="form-label" title="required" for="loadUnloadTime">Loading unloading time </label>
-                          <input type="text" id="loadUnloadTime" class="form-control input-sm" ng-model="lane.route.LOADINGUNLOADINGTIME" placeholder="Enter Loading unloading time" />
+                          <label class="form-label" title="required" for="loadUnloadTime">Loading / Unloading time (days) </label>
+                          <input type="number" id="loadUnloadTime" class="form-control input-sm" ng-model="lane.route.LOADINGUNLOADINGTIME" placeholder="Enter Loading unloading time" />
                         </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-4">
+                    <!-- </div>
+                    <div class="row"> -->
+                      <div class="col-sm-3">
                         <div class="form-group">
                           <label class="form-label" title="required" for="noofTrips">No of trips
                           </label>
-                          <input type="text" id="noofTrips" class="form-control input-sm" ng-model="lane.route.NOOFTRIPS" placeholder="Enter no of trips" />
+                          <input type="number" id="noofTrips" class="form-control input-sm" ng-model="lane.route.NOOFTRIPS" placeholder="Enter no of trips" />
                         </div>
                       </div>
-                      <div class="col-sm-4">
+                      <div class="col-sm-3">
                         <div class="form-group">
-                          <label class="form-label" title="required" for="backhaul">Backhaul(%)
+                          <label class="form-label" title="required" for="backhaul">Backhaul (%)
                           </label>
-                          <input type="text" id="backhaul" class="form-control input-sm" ng-model="lane.route.BACKHAUL" placeholder="Enter Backhaul %" />
+                          <input type="number" id="backhaul" class="form-control input-sm" ng-model="lane.route.BACKHAUL" placeholder="Enter Backhaul %" />
                         </div>
                       </div>
                     </div>
@@ -378,74 +387,36 @@
     </div>
   </div>
 </form>
-<div class="modal fade" id="myModalBrowse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="myModalBrowse" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">
-        Import Routes
-        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Import Routes</h4>
       </div>
       <div class="modal-body">
-        <fieldset>
-          <legend>Upload on form submit</legend>
-          <input type="file" ngf-select ng-model="lane.file" name="file"
-          accept="excel/*" ngf-max-size="2MB" required
-          ngf-model-invalid="lane.errorFile">
-          <i ng-show="myForm.file.$error.required">*required</i><br>
-          <i ng-show="myForm.file.$error.maxSize">File too large
-          {{lane.errorFile.size / 1000000|number:1}}MB: max 2M</i>
-          <button
-          ng-click="lane.uploadFile(lane.file)">Submit</button>
-          <!-- <button
-          ng-click="lane.uploadBlobOrFile(file.files[0])">Submit</button> -->
-          <span class="progress" ng-show="lane.file.progress >= 0">
-            <div style="width:{{lane.file.progress}}%"
-            ng-bind="lane.file.progress + '%'"></div>
-          </span>
-          <span ng-show="lane.file.result">Upload Successful</span>
-          <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
-        </fieldset>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <input type="file" ngf-select ng-model="lane.file" name="file"
+            accept="excel/*" ngf-max-size="2MB" required
+            ngf-model-invalid="lane.errorFile">
+            <i ng-show="lane.file.$error.required">*required</i><br>
+            <i ng-show="lane.file.$error.maxSize">File too large
+            {{lane.errorFile.size / 1000000|number:1}}MB: max 2M</i>
+            <!-- <button ng-click="lane.uploadBlobOrFile(lane.file)">Submit</button> -->
+            <span class="progress" ng-show="lane.file.progress >= 0">
+              <div style="width:{{lane.file.progress}}%"
+              ng-bind="lane.file.progress + '%'"></div>
+            </span>
+            <span ng-show="lane.file.result">Upload Successful</span>
+            <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
+          </div>
+        </div>
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">
-        Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="myModalBrowse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">
-        Import Routes
-        </h4>
-      </div>
-      <div class="modal-body">
-        <fieldset>
-          <legend>Upload on form submit</legend>
-          <input type="file" ngf-select ng-model="lane.file" name="file"
-          accept="excel/*" ngf-max-size="2MB" required
-          ngf-model-invalid="lane.errorFile">
-          <i ng-show="myForm.file.$error.required">*required</i><br>
-          <i ng-show="myForm.file.$error.maxSize">File too large
-          {{lane.errorFile.size / 1000000|number:1}}MB: max 2M</i>
-          <button
-          ng-click="lane.uploadFile(lane.file)">Submit</button>
-          <span class="progress" ng-show="lane.file.progress >= 0">
-            <div style="width:{{lane.file.progress}}%"
-            ng-bind="lane.file.progress + '%'"></div>
-          </span>
-          <span ng-show="lane.file.result">Upload Successful</span>
-          <span class="err" ng-show="errorMsg">{{lane.errorMsg}}</span>
-        </fieldset>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">
-        Close
-        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="lane.uploadBlobOrFile(lane.file)">Import Routes</button>
       </div>
     </div>
   </div>

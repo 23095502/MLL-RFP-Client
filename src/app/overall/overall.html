@@ -3,14 +3,20 @@
     <div class="row">
       <div class="col-sm-4">
       <h1>Create new <abbr title="Request for praposal">RFP</abbr></h1></div>
-      <div class="col-sm-4 text-center">
-        <div class="btn-group" data-toggle="buttons">
+      <div class="col-sm-6 text-center">
+        <!-- <div class="btn-group"data-toggle="buttons">
           <label class="btn btn-default btn-rounded active">
-            <input name="togglebutton" disabled="true" type="checkbox" autocomplete="off" checked>Overall Details
+            <input name="togglebutton"disabled="true"type="checkbox"autocomplete="off"checked>Overall Details
           </label>
           <label class="btn btn-default btn-rounded">
-            <input name="togglebutton" disabled="true" type="checkbox" autocomplete="off"> Lane Details
+            <input name="togglebutton"disabled="true"type="checkbox"autocomplete="off"> Lane Details
           </label>
+        </div> -->
+        <div class="switch-field">
+          <input type="radio" id="switch_left" name="switch_2" value="yes" checked/>
+          <label for="switch_left">Overall Details</label>
+          <input type="radio" id="switch_right" name="switch_2" value="no" />
+          <label for="switch_right">Lane Details</label>
         </div>
       </div>
     </div>
@@ -70,6 +76,7 @@
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
                     <label class="form-label" title="required" for="cashaccountid">CA$$H Account ID <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+
                     <input type="text" class="form-control input-sm" id="cashaccountid" placeholder="CA$$H account id" ng-required="true" ng-model="overall.customer.CASHACCOUNTID" ng-disabled="true">
                   </div>
                 </div>
@@ -175,8 +182,7 @@
                 <div class="col-sm-3 col-md-3">
                   <div class="form-group">
                     <label class="form-label" for="distance">Proximity (%)</label>
-                    <input t
-                    ype="number" min="0" max="100" maxlength="3" class="form-control input-sm" id="distance" placeholder="Distance" ng-model="overall.overall.PROXIDISTANCE">
+                    <input t ype="number" min="0" max="100" maxlength="3" class="form-control input-sm" id="distance" placeholder="Distance" ng-model="overall.overall.PROXIDISTANCE">
                   </div>
                 </div>
               </div>
@@ -194,7 +200,7 @@
                   <div class="form-group">
                     <label class="form-label" title="required" for="paymentterms">Payment terms (days) <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
                   <select class="form-control input-sm" id="paymentterms" ng-model="overall.overall.PAYMENTTERM" ng-options="payment.name as payment.val for payment in overall.PAYMENTTERM_option"></select>
-                  <!--  <input type="number" class="form-control input-sm" id="paymentterms" placeholder="Payment terms" ng-model="overall.overall.PAYMENTTERM"> -->
+                  <!--  <input type="number"class="form-control input-sm"id="paymentterms"placeholder="Payment terms"ng-model="overall.overall.PAYMENTTERM"> -->
                 </div>
               </div>
               <div class="col-sm-3 col-md-3">
@@ -211,9 +217,9 @@
             </div>
             <!-- <div class="col-sm-3 col-md-3">
               <div class="form-group">
-                <label class="form-label" for="distance">Proximity distance (%)</label>
+                <label class="form-label"for="distance">Proximity distance (%)</label>
                 <input t
-                ype="number" min="0" max="100" maxlength="3" class="form-control input-sm" id="distance" placeholder="Distance" ng-model="overall.overall.PROXIDISTANCE">
+                ype="number"min="0"max="100"maxlength="3"class="form-control input-sm"id="distance"placeholder="Distance"ng-model="overall.overall.PROXIDISTANCE">
               </div>
             </div> -->
           </div>
@@ -267,15 +273,15 @@
 </form>
 <!-- Add Cusomer -->
 <form ng-submit="overall.addCustomer()">
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add Customer</h4>
-      </div>
-      <div class="modal-body">
-
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;
+          </span></button>
+          <h4 class="modal-title" id="myModalLabel">Add Customer</h4>
+        </div>
+        <div class="modal-body">
           <div class="fieldset" class="form-group">
             <div class="container-fluid">
               <div class="row">
@@ -323,7 +329,8 @@
               <div class="row">
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
-                    <label class="form-label" title="required" for="casshaccountid">CA$$H Account ID <i class="glyphicon glyphicon-asterisk icon-required"></i></i></label>
+                    <label class="form-label" title="required" for="casshaccountid">CA$$H Account ID <i class="glyphicon glyphicon-asterisk icon-required"></i></i>
+                    </label>
                     <input type="text" class="form-control input-sm" id="cashaccid" placeholder="CA$$H Account ID" ng-model="overall.newoppCustomer.CASHACCOUNTID" ng-required="true">
                   </div>
                 </div>
@@ -336,13 +343,13 @@
               </div>
             </div>
           </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" ng-if="overall.editingIndex==null" class="btn btn-primary">Add</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" ng-if="overall.editingIndex==null" class="btn btn-primary">Add</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </form>
 <!-- Add Cusomer -->
