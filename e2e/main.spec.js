@@ -4,12 +4,15 @@ describe('The main view', function() {
   var page;
 
   beforeEach(function() {
-    browser.get('/#/create/overall');
+    browser.get('/');
+    //browser.get('/#/create/overall');
     // page = require('./main.po');
-    browser.waitForAngular();
+    /*browser.waitForAngular();
     browser.sleep(2000);
     var contact = element(by.model('overall.customer.CONTACTNO'));
-    contact.sendKeys('1234567890');
+    contact.sendKeys('1234567890');*/
+    //element(by.model('overall.customer.CONTACTNO'));
+    //.sendKeys('1234567');
   });
 
   /* it('should include jumbotron with correct data', function() {

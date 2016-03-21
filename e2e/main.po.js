@@ -9,7 +9,8 @@ var MainPage = function() {
   // this.jumbEl = element(by.css('.jumbotron'));
   // this.h1El = this.jumbEl.element(by.css('h1'));
   // this.imgEl = this.jumbEl.element(by.css('img'));
-  this.data = element(by.css('body')).all(by.repeater('rfp in dash.rfps'));
+  //this.data = element(by.css('body')).all(by.repeater('rfp in dash.rfps'));
+  //console.log(this.data);
 };
 
 module.exports = new MainPage();
