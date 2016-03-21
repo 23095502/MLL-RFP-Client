@@ -1,10 +1,11 @@
 export class OverallController {
-  constructor($state, masterService, apiService) {
+  constructor($state, masterService, apiService, toaster) {
     'ngInject';
 
     this.$state = $state;
     this._master = masterService;
     this._api = apiService;
+    this.toaster = toaster;
 
     this.CUSTOMERNAME_option = [];
 
@@ -163,7 +164,7 @@ export class OverallController {
       this._master.refreshPromise().then((response) => {
         this._master.refresh(response);
         this.CUSTOMERNAME_option = this._master.getCustomers();
-
+        this.toaster.success('Customer ' + this.newCustomer.CUSTOMERNAME + ' added successfully');
       }, (error) => {
         console.error(error);
 
@@ -223,6 +224,8 @@ export class OverallController {
 
 
     var rfpHeaderURL = 'rfp/INSERT';
+    this.toaster.success('RFP details for ' + this.customer.CUSTOMERNAME + ' added successfully');
+    //console.log(this.customer.CUSTOMERNAME);
 
     console.log(rfpHeader);
     this._api.post(rfpHeaderURL, rfpHeader).then((response) => {
