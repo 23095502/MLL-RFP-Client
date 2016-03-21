@@ -2,6 +2,8 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
   'ngInject';
   $stateProvider
 
+
+
   .state('overall', {
     url: '/create/overall',
     templateUrl: 'app/overall/overall.html',
@@ -28,6 +30,9 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     templateUrl: 'app/dashboard/dashboard.html',
     controller: 'DashboardController',
     controllerAs: 'dash'
+
+
+
   })
 
   .state('login', {
