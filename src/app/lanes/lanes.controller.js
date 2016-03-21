@@ -287,6 +287,12 @@ export class LanesController {
         //Get all RFP routes by RFP ID
         this.getRPFRoutes();
         //===========================
+        this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
+          this.$state.go('dashboard');
+        }, (err) => {
+          console.error(err);
+        });
+        //===========================
         $('#myModalBrowse').modal('hide');
       }
     }
