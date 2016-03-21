@@ -114,13 +114,13 @@
                 <div class="col-sm-3 col-md-3">
                   <div class="form-group">
                     <label class="form-label" title="required" for="recivedate">Receive date <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                    <input type="date" class="form-control input-sm" id="recivedate" placeholder="yyyy-MM-dd" ng-required="true" ng-model="overall.overall.STARTDATE">
+                    <input type="date" class="form-control input-sm" id="recivedate" placeholder="yyyy-MM-dd" pattern="dd/MM/YYYY" ng-required="true" ng-model="overall.overall.STARTDATE">
                   </div>
                 </div>
                 <div class="col-sm-3 col-md-3">
                   <div class="form-group">
                     <label class="form-label" title="required" for="duedate">Due date <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                    <input type="date" class="form-control input-sm" id="duedate" placeholder="Due date" ng-required="true" ng-model="overall.overall.DUEDATE">
+                    <input type="date" class="form-control input-sm" id="duedate" placeholder="Due date" pattern="dd/MM/YYYY" ng-required="true" ng-model="overall.overall.DUEDATE">
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-6">

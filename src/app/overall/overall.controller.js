@@ -1,7 +1,8 @@
 export class OverallController {
-  constructor($state, masterService, apiService) {
+  constructor($state, $filter, masterService, apiService) {
     'ngInject';
 
+    this.$filter = $filter;
     this.$state = $state;
     this._master = masterService;
     this._api = apiService;
@@ -201,22 +202,21 @@ export class OverallController {
   }
 
   addRfpHeader() {
-
     var rfpHeader = {
       "rfpupdt": {
         "RFPID": 0,
         "RFPCODE": this.overall.RFPCODE,
-        "RFPDATE": "2016-01-01 00:00:00", //this.overall.RFPDATE,
+        "RFPDATE": this.$filter('date')(new Date(this.overall.RFPDATE), 'yyyy-MM-dd 00:00:00'), //"2016-01-01 00:00:00", //this.overall.RFPDATE,
         "CUSTOMERID": this.customer.CUSTOMERID,
         "INDUSTRYTYPEID": this.overall.INDUSTRYTYPEID,
         "RFPAMOUNT": this.overall.RFPAMOUNT,
-        "STARTDATE": "2016-01-01 00:00:00",
+        "STARTDATE": this.$filter('date')(new Date(), 'yyyy-MM-dd 00:00:00'),
         "RFPOWNER": this.overall.RFPOWNER,
         "CURRENTSTAGINGOWNER": this.overall.CURRENTSTAGINGOWNER,
         "DIESELRATE": this.overall.DIESELRATE,
         "AGEOFTRUCK": this.overall.AGEOFTRUCK,
         "RFPDESC": this.overall.RFPDESC,
-        "DUEDATE": "2016-01-01 00:00:00", //this.overall.DUEDATE,
+        "DUEDATE": this.$filter('date')(new Date(this.overall.DUEDATE), 'yyyy-MM-dd 00:00:00'), // "2016-01-01 00:00:00", //this.overall.DUEDATE,
         "PRODUCTDESC": this.overall.PRODUCTDESC,
         "CASHOPPID": this.overall.CASHOPPID,
         "OPPRDOMAIN": this.overall.OPPRDOMAIN,
@@ -234,7 +234,7 @@ export class OverallController {
         "ESCCLAUSE": "6",
         "ACTIVE": "A",
         "CREATEDBY": "1",
-        "CREATEDON": "2016-01-01 00:00:00",
+        "CREATEDON": this.$filter('date')(new Date(), 'yyyy-MM-dd 00:00:00'),
         "ADDRESS": this.customer.ADDRESS,
         "CONTACTPERSON": this.customer.CONTACTPERSON,
         "CONTACTNO": this.customer.CONTACTNO,
@@ -243,6 +243,8 @@ export class OverallController {
         "PROXIDISTANCE": this.overall.PROXIDISTANCE
       }
     };
+
+
 
 
     var rfpHeaderURL = 'rfp/INSERT';
