@@ -1,5 +1,5 @@
 export class LanesController {
-  constructor($state, $stateParams, $timeout, Upload, masterService, apiService) {
+  constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster) {
 
     'ngInject';
 
@@ -13,6 +13,7 @@ export class LanesController {
     this.isSERVICETYPE_option = [];
     this._api = apiService;
     this.$state = $state;
+    this.toaster = toaster;
 
     this.locationname_option = [];
     this.vehicletype = {
@@ -183,6 +184,7 @@ export class LanesController {
     this.resetRoute();
     this.editingIndex = null;
 
+    this.toaster.success('Lane added successfully');
     //---------------------
     //set width to route grid columns
     this.$timeout(this.adjustScrollableTable);
@@ -201,11 +203,13 @@ export class LanesController {
     this.route.CREATEDON = '2016-03-01';
     this.editingIndex = index;
     $('#myModal').modal();
+    //this.toaster.success('Lane updated successfully');
   }
 
   save() {
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
+    this.toaster.success('Lane updated successfully');
     //---------------------
     //set width to route grid columns
     this.$timeout(this.adjustScrollableTable);
@@ -218,6 +222,7 @@ export class LanesController {
     this.route.MODE = 'DELETE';
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
+    this.toaster.success('Lane deleted successfully');
     //---------------------
     //set width to route grid columns
     this.$timeout(this.adjustScrollableTable);
@@ -255,6 +260,8 @@ export class LanesController {
       },
       data: newfilterRoutes
     };*/
+
+    this.toaster.success('Lanes saved successfully');
 
     this._api.post('routeupdate', newfilterRoutes).then((r) => {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
@@ -296,6 +303,7 @@ export class LanesController {
         $('#myModalBrowse').modal('hide');
       }
     }
+    this.toaster.success('no of lanes added successfully');
 
     /* Send to server */
     client.send(blobOrFile);
