@@ -16,6 +16,7 @@ export class authService {
       this.authenticated = true;
       this.userInfo = result.data[0];
       this.$window.sessionStorage.userInfo = JSON.stringify(this.userInfo);
+      //console.log(this.$window.sessionStorage.userInfo);
       deferred.resolve(this.userInfo);
 
     }, (error)=> {
@@ -30,12 +31,20 @@ export class authService {
   }
 
   isAuthenticated() {
-    return this.authenticated;
+
+    //console.log(this.$window.sessionStorage.userInfo.length);
+    if(this.$window.sessionStorage.userInfo.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+
+    //return this.authenticated;
   }
 
   signout() {
     this.authenticated = false;
-    this.$window.sessionStorage.userInfo = {};
+    this.$window.sessionStorage.userInfo = null;
     this.$state.go('login');
   }
 }
