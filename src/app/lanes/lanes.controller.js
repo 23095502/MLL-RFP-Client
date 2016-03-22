@@ -54,11 +54,12 @@ export class LanesController {
   }
 
   getRPFRoutes() {
-    this._api.get(`getrfproutebyid/${this.$stateParams.rfpidt}`).then((res) => {
+    this._api.get(`getrfproutebyid/${this.$stateParams.rfpid}`).then((res) => {
       this.routes = res.data;
       this.$timeout(this.adjustScrollableTable);
     }, (err) => {
-      console.error(err);
+      //console.error(err);
+        this.toaster.error(`${err.status} : ${err.statusText}`);
     });
   }
 
@@ -254,7 +255,7 @@ export class LanesController {
     };
     /*var req = {
       method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/routeupdate',
+      url: 'http://115.113.135.239/RFPRest/RFPRestService.svc/routeupdate',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -263,7 +264,7 @@ export class LanesController {
 
 
 
-    this._api.post('routeupdate', newfilterRoutes).then((r) => {
+    /*this._api.post('routeupdate', newfilterRoutes).then((r) => {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
         this.$state.go('dashboard');
       }, (err) => {
@@ -272,14 +273,14 @@ export class LanesController {
 
     }, (e) => {
       console.error(e);
-    });
+    });*/
     this.toaster.success('Lanes saved successfully');
   }
 
   uploadBlobOrFile(blobOrFile) {
 
     var client = new XMLHttpRequest();
-    client.open('POST', `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
+    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
     //client.open('POST', `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`, false);
     //client.setRequestHeader('Content-length', blobOrFile.length);
     client.setRequestHeader("Content-Type", "multipart/form-data");
@@ -295,16 +296,17 @@ export class LanesController {
         this.getRPFRoutes();
         //===========================
         this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
-          this.$state.go('dashboard');
+        //  this.$state.go('dashboard');
         }, (err) => {
-          console.error(err);
+          //console.error(err);
+          this.toaster.error(`${err.status} : ${err.statusText}`);
         });
         //===========================
         $('#myModalBrowse').modal('hide');
       }
     }
 
-    this.toaster.success('no of lanes added successfully');
+    this.toaster.success('Lanes saved successfully');
     /* Send to server */
     client.send(blobOrFile);
   }
@@ -312,7 +314,7 @@ export class LanesController {
   /*  uploadFile(file) {
 
       this.Upload.upload({
-        //url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`,
+        //url: `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`,
         url: `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`,
         data: {},
         file: file

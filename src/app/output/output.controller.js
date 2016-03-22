@@ -76,6 +76,10 @@ export class OutputController {
         L5RATE = Math.round(L5RATE / 1000 * 100) / 100;
         this.outputdata[value].L5RATE = L5RATE;
 
+        var APPROVEDAMOUNT = this.outputdata[value].APPROVEDAMOUNT;
+        APPROVEDAMOUNT = Math.round(APPROVEDAMOUNT / 1000 * 100) / 100;
+        this.outputdata[value].APPROVEDAMOUNT = APPROVEDAMOUNT;
+
       })
 
       //this.nameoutputdata = this.outputdata[0];
@@ -98,7 +102,8 @@ export class OutputController {
       this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
 
     }, (err) => {
-      console.error(err);
+      //console.error(err);
+      this.toaster.error(`${err.status} : ${err.statusText}`);
     });
   }
 
@@ -121,12 +126,15 @@ export class OutputController {
     this.inproxiparam.DESTINATIONSTATE = table.TOSTATE;
     this.inproxiparam.VEHICLETYPE = this.filterOption.VEHICLETYPENAME;
     this.inproxiparam.DISTANCE = table.PROXIDISTANCE;
-    this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;
+    //this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;
+    this.inproxiparam.NOOFTRIPS = table.PROXIDISTANCE;
 
     this.gridData = [];
     var newfilterRoutes = {
       inproxiparam: this.inproxiparam
     };
+
+    console.log(newfilterRoutes);
 
     this.TOLOCATIONNAME = table.TOLOCATIONNAME;
     this.CONTRACTRATE = table[clickedColName];
@@ -139,7 +147,8 @@ export class OutputController {
       //this.nooftrips = this.gridData[0].NOOFTRIPS;
 
     }, (err) => {
-      console.error(err);
+      //console.error(err);
+      this.toaster.error(`${err.status} : ${err.statusText}`);
     });
 
 
@@ -164,6 +173,7 @@ export class OutputController {
       output.L3RATE = output.L3RATE * 1000;
       output.L4RATE = output.L4RATE * 1000;
       output.L5RATE = output.L5RATE * 1000;
+      output.APPROVEDAMOUNT = output.APPROVEDAMOUNT * 1000;
 
       output.MODE = 'APIRATE';
 
@@ -224,7 +234,8 @@ export class OutputController {
       this.getTransactionData();
       console.log(res.data);
     }, (err) => {
-      console.error(err);
+      //console.error(err);
+      this.toaster.error(`${err.status} : ${err.statusText}`);
     });
 
     this.toaster.success('Changes saved successfully');
@@ -265,7 +276,8 @@ export class OutputController {
     this._api.get('exportrfpout/1').then((res) => {
       window.open(res.data);
     }, (err) => {
-      console.error(err);
+      //console.error(err);
+      this.toaster.error(`${err.status} : ${err.statusText}`);
     });
   }
 

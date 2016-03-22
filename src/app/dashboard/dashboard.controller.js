@@ -21,7 +21,8 @@ export class DashboardController {
       });
       this.rfps = rfps;
     }, (err) => {
-      this.toaster.Error('Error Connection time out');
+       // console.log(err);
+        this.toaster.error(`${err.status} : ${err.statusText}`);
     });
 
   }
