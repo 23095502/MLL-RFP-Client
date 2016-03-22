@@ -42,7 +42,7 @@ export class OutputController {
     this.responseKeys = {
       'CONTRACTRATE': 'getproximitybadataResult',
       'PVSRFPRATE': 'rfphistoryResult',
-      'BACKHAULAVL': 'dvprdataResult'
+      'NOOFTRIPS': 'dvprdataResult'
     };
 
     this.getTransactionData();
@@ -52,19 +52,42 @@ export class OutputController {
 
     this._api.get(`gettrans/${this.$stateParams.rfpId}`).then((res) => {
       this.outputdata = res.data;
-      this.nameoutputdata = this.outputdata[0];
+      console.log(this.outputdata);
+
+      var newOutputData = _.each(this.outputdata, (key, value) => {
+        var L1RATE = this.outputdata[value].L1RATE;
+        L1RATE = Math.round(L1RATE / 1000 * 100) / 100;
+        this.outputdata[value].L1RATE = L1RATE;
+
+        var L2RATE = this.outputdata[value].L2RATE;
+        L2RATE = Math.round(L2RATE / 1000 * 100) / 100;
+        this.outputdata[value].L2RATE = L2RATE;
+
+
+        var L3RATE = this.outputdata[value].L3RATE;
+        L3RATE = Math.round(L3RATE / 1000 * 100) / 100;
+        this.outputdata[value].L3RATE = L3RATE;
+
+        var L4RATE = this.outputdata[value].L4RATE;
+        L4RATE = Math.round(L4RATE / 1000 * 100) / 100;
+        this.outputdata[value].L4RATE = L4RATE;
+
+        var L5RATE = this.outputdata[value].L5RATE;
+        L5RATE = Math.round(L5RATE / 1000 * 100) / 100;
+        this.outputdata[value].L5RATE = L5RATE;
+
+      })
+
+      //this.nameoutputdata = this.outputdata[0];
+      this.nameoutputdata = newOutputData[0];
       this.fromLocationOptions = _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
       this.routesGroupByLocation = _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
 
       _.each(this.routesGroupByLocation, (vehiclelist, key) => {
         this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
 
-        /*
-        _.each(this.outputdata, (key, value) =>{
-          var l1ratevalue = this.outputdata[value].L1RATE;
-          console.log(l1ratevalue);
-        })
-        */
+
+
       });
 
       this.filterOption = {
@@ -92,22 +115,12 @@ export class OutputController {
     this.selectedLane = table;
     this.rowClickedColName = clickedColName;
 
-    /*
-    this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
-    this.inproxiparam.ORIGINSTATE = this.outputdata[index].FROMSTATE;
-    this.inproxiparam.DESTINATION = this.outputdata[index].TOLOCATIONNAME;
-    this.inproxiparam.DESTINATIONSTATE = this.outputdata[index].TOSTATE;
-    this.inproxiparam.VEHICLETYPE = this.filterOption.VEHICLETYPENAME;
-    this.inproxiparam.DISTANCE = this.outputdata[index].PROXIDISTANCE;
-    this.inproxiparam.NOOFTRIPS = this.outputdata[index].NOOFTRIPS;
-    */
-
     this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
     this.inproxiparam.ORIGINSTATE = table.FROMSTATE;
     this.inproxiparam.DESTINATION = table.TOLOCATIONNAME;
     this.inproxiparam.DESTINATIONSTATE = table.TOSTATE;
     this.inproxiparam.VEHICLETYPE = this.filterOption.VEHICLETYPENAME;
-    this.inproxiparam.DISTANCE = 10;
+    this.inproxiparam.DISTANCE = table.PROXIDISTANCE;
     this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;
 
     this.gridData = [];
@@ -122,24 +135,46 @@ export class OutputController {
 
     this._api.post(this.urlMaps[colname], newfilterRoutes, true).then((res) => {
       this.gridData = res.data[this.responseKeys[clickedColName]];
+      console.log(this.gridData);
+      //this.nooftrips = this.gridData[0].NOOFTRIPS;
+
     }, (err) => {
       console.error(err);
     });
 
-    $('#myModalOutputDetails').modal();
+
+    if (clickedColName == 'NOOFTRIPS') {
+
+      $('#myModalOutputDetailsForBackHaul').modal();
+    } else {
+
+      $('#myModalOutputDetails').modal();
+    }
+
+
+
   }
 
   submit() {
 
     var revisedOutput = _.chain(this.outputdata).map((output) => {
 
+      output.L1RATE = output.L1RATE * 1000;
+      output.L2RATE = output.L2RATE * 1000;
+      output.L3RATE = output.L3RATE * 1000;
+      output.L4RATE = output.L4RATE * 1000;
+      output.L5RATE = output.L5RATE * 1000;
+
       output.MODE = 'APIRATE';
+
       output.CREATEDBY = 1;
       output.CREATEDON = '2016-03-01';
       delete output.$$hashKey;
       delete output.ADDRESS;
       delete output.AVERAGELOAD;
       delete output.BACKHAUL;
+      delete output.BAQUOTE;
+      delete output.BACKHAULPERCENT;
       delete output.CASHACCOUNTID;
       delete output.CONTACTNO;
       delete output.CONTACTPERSON;
@@ -152,16 +187,24 @@ export class OutputController {
       delete output.FROMSTATECODE;
       delete output.ISLOADUNLOADCHARG;
       delete output.ISROUNDTRIP;
+      delete output.L1BANAME;
+      delete output.L2BANAME;
+      delete output.L3BANAME;
+      delete output.L4BANAME;
+      delete output.L5BANAME;
       delete output.LOADINGUNLOADINGTIME;
       delete output.MHEREQUIREMENT;
+      delete output.MODE;
       delete output.NOOFTRIPS;
       delete output.OTHERREQUIREMENT;
       delete output.PACKAGETYPEID;
       delete output.PACKAGETYPENAME;
       delete output.PACKDIMENSION;
+      delete output.PROXIDISTANCE;
       delete output.RESULT;
       delete output.RFPDURATION;
       delete output.RFPVOLUME;
+      delete output.SERVICETYPE;
       delete output.STACKINGNORMS;
       delete output.TOLOCATIONNAME;
       delete output.TOSTATE;
@@ -171,13 +214,15 @@ export class OutputController {
       return output;
     }).value();
 
-
     var newOutputDetails = {
       apptrans: revisedOutput
     };
 
+    console.log(newOutputDetails);
+
     this._api.post('apptrans', newOutputDetails).then((res) => {
       this.getTransactionData();
+      console.log(res.data);
     }, (err) => {
       console.error(err);
     });
@@ -187,10 +232,17 @@ export class OutputController {
   }
 
 
-  updateContractRate(popupGridData) {
+  updateContractRate(popupGridData, colName) {
     this.CONTRACTRATE = popupGridData.FREIGHTRATE;
     this.selectedLane[this.rowClickedColName] = popupGridData.FREIGHTRATE;
-    $('#myModalOutputDetails').modal('hide');
+
+    if (colName == 'REGULAR') {
+      $('#myModalOutputDetails').modal('hide');
+    } else {
+      $('#myModalOutputDetailsForBackHaul').modal('hide');
+    }
+
+
   }
 
   changecolor(toMatch, approvedRate) {
@@ -202,6 +254,7 @@ export class OutputController {
   }
 
   changeLocation() {
+
     this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
     this.filterOption.VEHICLETYPENAME = this.vehicleTypeOptions[0].VEHICLETYPENAME;
     this.outputdata[0].CLEANSHEETRATE = this.outputdata[0].CLEANSHEETRATE / 1000;
@@ -222,6 +275,15 @@ export class OutputController {
 
   closeModal() {
     $('#myModalOutputDetails').modal('hide');
+  }
+
+  showColumn(colName) {
+
+    if (colName == 'BACKHAULAVL') {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }

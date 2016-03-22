@@ -2,20 +2,10 @@
   <div class="row">
     <div class="col-sm-4"><h1>Create new <abbr title="Request for praposal">RFP</abbr> </h1></div>
     <div class="col-sm-4 text-center">
-      <!-- <div class="btn-group" data-toggle="buttons" >
-        <input name="togglebutton" type="radio" autocomplete="off" class="radio-input">
-        <label class="btn btn-default btn-rounded">
-          Overall Details
-        </label>
-        <input name="togglebutton" type="radio" autocomplete="off" class="radio-input" checked>
-        <label class="btn btn-default btn-rounded">
-          Lane Details
-        </label>
-      </div> -->
       <div class="switch-field">
-        <input type="radio" id="switch_left" name="switch_2" value="yes" />
+        <input type="radio" id="switch_left" name="switch_2" value="yes" disabled />
         <label for="switch_left">Overall Details</label>
-        <input type="radio" id="switch_right" name="switch_2" value="no" checked/>
+        <input type="radio" id="switch_right" name="switch_2" value="no" checked disabled/>
         <label for="switch_right">Lane Details</label>
       </div>
     </div>
@@ -28,8 +18,7 @@
       </button>
     </div>
   </div>
-  <!-- <div>&nbsp;</div> -->
-  <!-- <div class="form-divider"></div> -->
+</div>
 </div>
 <div class="output-table">
   <div class="thead-div1">
@@ -155,7 +144,7 @@
           </h4>
         </div>
         <div class="modal-body">
-          <div style="overflow: auto; height: 60vh">
+          <div>
             <div class="fieldset" class="form-group">
               <div class="container-fluid">
                 <fieldset class="fieldset">

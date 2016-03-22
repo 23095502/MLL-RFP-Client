@@ -13,13 +13,12 @@ export class DashboardController {
 
     this._api.get('getrfplist/getall').then((res) => {
       var rfps = res.data;
-      console.log(rfps);
       rfps = _.map(rfps, (rfp) => {
         rfp.RFPDATE = new Date(rfp.RFPDATE);
         rfp.DUEDATE = new Date(rfp.DUEDATE);
         return rfp;
 
-      })
+      });
       this.rfps = rfps;
     }, (err) => {
       this.toaster.Error('Error Connection time out');
