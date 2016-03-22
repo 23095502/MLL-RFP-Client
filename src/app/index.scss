@@ -40,6 +40,12 @@ $navbar-inverse-bg: $mll-red;/**
 body {
   padding-top: 70px;
   font-size: 14px;
+  background-image: url(../assets/images/login_bg.png);
+
+  &.isloggedin {
+    //padding-top: 70px;
+    background-image: none;
+  }
 }
 .btn-primary {
   font-weight: bold;

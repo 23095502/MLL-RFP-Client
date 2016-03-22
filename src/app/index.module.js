@@ -10,6 +10,7 @@ import { LanesController } from './lanes/lanes.controller';
 import { apiService } from '../app/components/api/api.service';
 import { masterService } from '../app/components/master/master.service';
 import { authService } from '../app/login/auth.service';
+import { AppController } from '../app/components/app/app.controller';
 
 angular.module('mllRfpClient', ['ui.router'])
   .config(config)
@@ -23,4 +24,5 @@ angular.module('mllRfpClient', ['ui.router'])
   .controller('LanesController', LanesController)
   .service('apiService', apiService)
   .service('masterService', masterService)
-  .service('authService', authService);
+  .service('authService', authService)
+  .controller('AppController', AppController);
