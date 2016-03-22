@@ -7,6 +7,7 @@ export class DashboardController {
     this._api = apiService;
     this._master = masterService;
     this.toaster = toaster;
+
   }
 
   init() {
@@ -21,10 +22,14 @@ export class DashboardController {
       });
       this.rfps = rfps;
     }, (err) => {
-       // console.log(err);
-        this.toaster.error(`${err.status} : ${err.statusText}`);
+      // console.log(err);
+      this.toaster.error(`${err.status} : ${err.statusText}`);
     });
 
+  }
+
+  isDataAvailable() {
+    return !_.isEmpty(this.rfps);
   }
 
   click(id) {

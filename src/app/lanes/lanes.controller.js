@@ -264,8 +264,7 @@ export class LanesController {
     };*/
 
 
-
-    /*this._api.post('routeupdate', newfilterRoutes).then((r) => {
+    this._api.post('routeupdate', newfilterRoutes).then((r) => {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
         this.$state.go('dashboard');
       }, (err) => {
@@ -274,7 +273,7 @@ export class LanesController {
 
     }, (e) => {
       console.error(e);
-    });*/
+    });
     this.toaster.success('Lanes saved successfully');
   }
 
@@ -297,7 +296,7 @@ export class LanesController {
         this.getRPFRoutes();
         //===========================
         this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
-        //  this.$state.go('dashboard');
+          //this.$state.go('dashboard');
         }, (err) => {
           //console.error(err);
           this.toaster.error(`${err.status} : ${err.statusText}`);
