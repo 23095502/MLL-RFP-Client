@@ -41,16 +41,13 @@ $navbar-inverse-bg: $mll-red;
 body {
   padding-top: 70px;
   font-size: 14px;
-<<<<<<< HEAD
   background-image: url(../assets/images/login_bg.png);
 
   &.isloggedin {
     //padding-top: 70px;
     background-image: none;
   }
-=======
   font-family: 'Open Sans', sans-serif;
->>>>>>> develop
 }
 
 .btn-primary {
@@ -601,13 +598,9 @@ h1 {
   padding-top: 40px;
   padding-bottom: 115px;
 }
-<<<<<<< HEAD
 .form-signout {
   cursor: pointer;
 }
-=======
-
->>>>>>> develop
 .form-signin {
   max-width: 300px;
   max-height: 300px;
