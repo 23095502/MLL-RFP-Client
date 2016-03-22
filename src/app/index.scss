@@ -41,6 +41,12 @@ $navbar-inverse-bg: $mll-red;
 body {
   padding-top: 70px;
   font-size: 14px;
+  background-image: url(../assets/images/login_bg.png);
+
+  &.isloggedin {
+    //padding-top: 70px;
+    background-image: none;
+  }
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -578,6 +584,7 @@ h1 {
 
 .dashboard-buttons {
   margin-top: -8px !important;
+
 }
 
 /* login page  */
@@ -591,7 +598,9 @@ h1 {
   padding-top: 40px;
   padding-bottom: 115px;
 }
-
+.form-signout {
+  cursor: pointer;
+}
 .form-signin {
   max-width: 300px;
   max-height: 300px;
