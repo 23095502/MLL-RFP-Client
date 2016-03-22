@@ -1,7 +1,8 @@
 export class authService {
-  constructor($q, apiService, $window) {
+  constructor($q, $state, apiService, $window) {
     'ngInject';
     this.$q = $q;
+    this.$state = $state;
     this._api = apiService;
     this.$window = $window;
     this.userInfo = {};
@@ -12,8 +13,6 @@ export class authService {
     var deferred = this.$q.defer();
 
     this._api.get(`login/${username}/${password}`).then((result) => {
-      //console.log('Name: ' + username);
-      //console.log(username);
       this.authenticated = true;
       this.userInfo = result.data[0];
       this.$window.sessionStorage.userInfo = JSON.stringify(this.userInfo);
@@ -32,5 +31,11 @@ export class authService {
 
   isAuthenticated() {
     return this.authenticated;
+  }
+
+  signout() {
+    this.authenticated = false;
+    this.$window.sessionStorage.userInfo = {};
+    this.$state.go('login');
   }
 }

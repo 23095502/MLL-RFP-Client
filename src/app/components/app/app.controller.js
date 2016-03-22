@@ -15,4 +15,9 @@ export class AppController {
       return 'isloggedin';
     }
   }
+
+  signOutUser(){
+    this.auth.signout();
+  }
+
 }
