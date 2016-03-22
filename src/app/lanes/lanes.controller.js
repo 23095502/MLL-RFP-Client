@@ -1,5 +1,5 @@
 export class LanesController {
-  constructor($state, $stateParams, $timeout, masterService, apiService) {
+  constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster) {
 
     'ngInject';
 
@@ -12,6 +12,7 @@ export class LanesController {
     this.isSERVICETYPE_option = [];
     this._api = apiService;
     this.$state = $state;
+    this.toaster = toaster;
 
     this.locationname_option = [];
     this.vehicletype = {
@@ -56,7 +57,8 @@ export class LanesController {
       this.routes = res.data;
       this.$timeout(this.adjustScrollableTable);
     }, (err) => {
-      console.error(err);
+      //console.error(err);
+        this.toaster.error(`${err.status} : ${err.statusText}`);
     });
   }
 
@@ -65,10 +67,10 @@ export class LanesController {
   }
 
   adjustScrollableTable() {
-    let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.innerText.length * 10));
-    let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 tr')[0].getElementsByTagName('td'), (td) => (td.innerText.length * 7));
-    let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.innerText.length * 10));
-    let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 tr')[0].getElementsByTagName('td'), (td) => (td.innerText.length * 7));
+    let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.offsetWidth));
+    let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 tr')[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
+    let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth));
+    let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 tr')[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
 
     let finalFrozenWidth = _.chain(div3BodyWidth)
       .map((item, i) => Math.max(item, div1HeadWidth[i]))
@@ -182,6 +184,7 @@ export class LanesController {
     this.resetRoute();
     this.editingIndex = null;
 
+    this.toaster.success('Lane saved successfully');
     //---------------------
     //set width to route grid columns
     this.$timeout(this.adjustScrollableTable);
@@ -200,11 +203,13 @@ export class LanesController {
     this.route.CREATEDON = '2016-03-01';
     this.editingIndex = index;
     $('#myModal').modal();
+    //this.toaster.success('Lane updated successfully');
   }
 
   save() {
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
+    this.toaster.success('Lane updated successfully');
     //---------------------
     //set width to route grid columns
     this.$timeout(this.adjustScrollableTable);
@@ -217,6 +222,7 @@ export class LanesController {
     this.route.MODE = 'DELETE';
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
+    this.toaster.success('Lane deleted successfully');
     //---------------------
     //set width to route grid columns
     this.$timeout(this.adjustScrollableTable);
@@ -245,14 +251,7 @@ export class LanesController {
     var newfilterRoutes = {
       rfproute: filterRoutes
     };
-    /*var req = {
-     method: 'POST',
-     url: 'http://115.113.135.239/RFPRest/RFPRestService.svc/routeupdate',
-     headers: {
-     'Content-Type': 'application/json'
-     },
-     data: newfilterRoutes
-     };*/
+
 
     this._api.post('routeupdate', newfilterRoutes).then((r) => {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
@@ -264,7 +263,7 @@ export class LanesController {
     }, (e) => {
       console.error(e);
     });
-
+    this.toaster.success('Lanes saved successfully');
   }
 
   uploadBlobOrFile(blobOrFile) {
@@ -285,30 +284,21 @@ export class LanesController {
         //Get all RFP routes by RFP ID
         this.getRPFRoutes();
         //===========================
+        this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
+        //  this.$state.go('dashboard');
+        }, (err) => {
+          //console.error(err);
+          this.toaster.error(`${err.status} : ${err.statusText}`);
+        });
+        //===========================
         $('#myModalBrowse').modal('hide');
       }
     }
 
+    this.toaster.success('Lanes saved successfully');
     /* Send to server */
     client.send(blobOrFile);
   }
-
-  /*  uploadFile(file) {
-
-   this.Upload.upload({
-   //url: `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`,
-   url: `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`,
-   data: {},
-   file: file
-   }).then(function(resp) {
-   console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-   }, function(resp) {
-   console.log('Error status: ' + resp.status);
-   }, function(evt) {
-   var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-   console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-   });
-   }*/
 
   map(id, list, idMatcher, nameKey) {
     if (_.isInteger(id) && list.length > 0) {
