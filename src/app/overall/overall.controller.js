@@ -167,12 +167,13 @@ export class OverallController {
         this.CUSTOMERNAME_option = this._master.getCustomers();
         this.toaster.success('Customer ' + this.newCustomer.CUSTOMERNAME + ' added successfully');
       }, (error) => {
-        console.error(error);
-
+        //console.error(error);
+        this.toaster.error(`${error.status} : ${error.statusText}`);
       });
 
     }, (error) => {
-      console.error(error)
+      //console.error(error);
+      this.toaster.error(`${error.status} : ${error.statusText}`);
     });
 
     $('#myModal').modal('hide');
@@ -236,7 +237,8 @@ export class OverallController {
       });
 
     }, (error) => {
-      console.log(error)
+      //console.log(error);
+      this.toaster.error(`${error.status} : ${error.statusText}`);
     });
   }
 }

@@ -103,7 +103,8 @@ export class OutputController {
       this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
 
     }, (err) => {
-      console.error(err);
+      //console.error(err);
+      this.toaster.error(`${err.status} : ${err.statusText}`);
     });
   }
 
@@ -126,12 +127,15 @@ export class OutputController {
     this.inproxiparam.DESTINATIONSTATE = table.TOSTATE;
     this.inproxiparam.VEHICLETYPE = this.filterOption.VEHICLETYPENAME;
     this.inproxiparam.DISTANCE = table.PROXIDISTANCE;
-    this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;
+    //this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;
+    this.inproxiparam.NOOFTRIPS = table.PROXIDISTANCE;
 
     this.gridData = [];
     var newfilterRoutes = {
       inproxiparam: this.inproxiparam
     };
+
+    console.log(newfilterRoutes);
 
     this.TOLOCATIONNAME = table.TOLOCATIONNAME;
     this.CONTRACTRATE = table[clickedColName];
@@ -142,7 +146,8 @@ export class OutputController {
       this.gridData = res.data[this.responseKeys[clickedColName]];
 
     }, (err) => {
-      console.error(err);
+      //console.error(err);
+      this.toaster.error(`${err.status} : ${err.statusText}`);
     });
 
 
@@ -226,7 +231,8 @@ export class OutputController {
       this.getTransactionData();
       console.log(res.data);
     }, (err) => {
-      console.error(err);
+      //console.error(err);
+      this.toaster.error(`${err.status} : ${err.statusText}`);
     });
 
     this.toaster.success('Changes saved successfully');
@@ -266,7 +272,8 @@ export class OutputController {
     this._api.get('exportrfpout/1').then((res) => {
       window.open(res.data);
     }, (err) => {
-      console.error(err);
+      //console.error(err);
+      this.toaster.error(`${err.status} : ${err.statusText}`);
     });
   }
 

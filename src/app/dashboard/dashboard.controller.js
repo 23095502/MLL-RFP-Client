@@ -1,12 +1,12 @@
 export class DashboardController {
-  constructor($http, $state, apiService, masterService) {
+  constructor($http, $state, apiService, masterService, toaster) {
     'ngInject';
     this.$http = $http;
     this.$state = $state;
     this.rfps = [];
     this._api = apiService;
     this._master = masterService;
-
+    this.toaster = toaster;
   }
 
   init() {
@@ -21,7 +21,8 @@ export class DashboardController {
       });
       this.rfps = rfps;
     }, (err) => {
-      console.error(err);
+       // console.log(err);
+        this.toaster.error(`${err.status} : ${err.statusText}`);
     });
 
   }
