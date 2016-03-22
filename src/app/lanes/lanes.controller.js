@@ -252,7 +252,6 @@ export class LanesController {
       rfproute: filterRoutes
     };
 
-
     this._api.post('routeupdate', newfilterRoutes).then((r) => {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
         this.$state.go('dashboard');
@@ -263,6 +262,7 @@ export class LanesController {
     }, (e) => {
       console.error(e);
     });
+
     this.toaster.success('Lanes saved successfully');
   }
 

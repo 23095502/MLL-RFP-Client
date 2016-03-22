@@ -1,5 +1,4 @@
 export class LoginController {
-
   constructor($state, $rootScope, authService, toaster) {
     'ngInject';
     this.$state = $state;

@@ -4,6 +4,7 @@ export class apiService {
 
     this.$http = $http;
     this._host = 'http://115.113.135.239';
+
     this._baseURL = `${this._host}/RFPRest/RFPRestService.svc`;
 
     this._requestTemplate = {
@@ -17,6 +18,7 @@ export class apiService {
   }
 
   get(url) {
+
     this._requestTemplate.method = 'GET';
     this._requestTemplate.url = `${this._baseURL}/${url}`;
     return this.$http(this._requestTemplate);

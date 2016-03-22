@@ -12,7 +12,8 @@ import { masterService } from '../app/components/master/master.service';
 import { authService } from '../app/login/auth.service';
 import { AppController } from '../app/components/app/app.controller';
 
-angular.module('mllRfpClient', ['ui.router'])
+
+angular.module('mllRfpClient', ['ui.router', 'ngFileUpload','toaster'])
   .config(config)
   .config(routerConfig)
   .run(runBlock)
