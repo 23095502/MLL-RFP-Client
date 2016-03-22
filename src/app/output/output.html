@@ -131,16 +131,16 @@
             </td>
             <td ng-click="output.showModal('contract', route, 'CONTRACTRATE', 'Contract Rate', 'CONTRACT RATES')" ng-class="output.changecolor(route.CONTRACTRATE,route.APPROVEDAMOUNT)" class="text-center fixed-width-col open-popup">
               <span class="mll-table-label">{{route.CONTRACTRATE/1000 | number : 2}}</span>
-              <i ng-show="(route.ISBAPROXIMITY === 'Y') ? false : true" class="label-sticky">Px
-              </i>
+              <!--<i ng-show="(route.ISBAPROXIMITY === 'N') ? false : true" class="label-sticky">Px
+              </i>-->
             </td>
             <td ng-class="output.changecolor(route.SHIPXRATE,route.APPROVEDAMOUNT)" class="text-center fixed-width-col">
               <span class="mll-table-label">{{route.SHIPXRATE/1000 | number : 2}}</span>
             </td>
             <td ng-click="output.showModal('backhaul', route, 'NOOFTRIPS', 'Backhaul', 'BACKHAUL RATES')" class="text-center fixed-width-col open-popup">
               <span ng-class="{'Y' : 'glyphicon glyphicon-ok' ,  'N' : ''}[route.BACKHAULAVL]" title="{{route.BACKHAULAVL}}"></span>
-              <i ng-show="(route.ISBACKHAULPROXIMITY === 'Y') ? false : true" class="label-sticky">Px
-              </i>
+              <!--<i ng-show="(route.ISBACKHAULPROXIMITY === 'N') ? false : true" class="label-sticky">Px
+              </i>-->
             </td>
             <td class="text-center">
               <input type="number" class="form-control mll-table-input" id="l1rate" ng-model="route.L1RATE" />
@@ -274,9 +274,10 @@
                         <td>{{griddata.DESTINATION}}
                           <br> {{griddata.DESTINATIONSTATE}}
                         </td>
-                        <td class="highlight number-center">{{griddata.FREIGHTRATE/1000 | number : 2}}
-                          <i ng-show="(route.ISBAPROXIMITY === 'N') ? false : true" class="label-sticky">Px
-                          </i>
+                        <td class="highlight number-center">
+                          <span class="mll-table-label">{{griddata.FREIGHTRATE/1000 | number : 2}}</span>
+                          <!--<i ng-show="(route.ISBAPROXIMITY === 'N') ? false : true" class="label-sticky">Px
+                          </i>-->
                         </td>
                         <td>{{griddata.BANAME}}</td>
                         <td>{{griddata.CUSTOMERNAME}}</td>
@@ -373,8 +374,8 @@
                           <br> {{griddata.DESTINATIONSTATE}}
                         </td>
                         <td>{{griddata.NOOFTRIPS}}
-                          <i ng-show="(route.ISBACKHAULPROXIMITY === 'Y') ? false : true" class="label-sticky">Px
-                          </i>
+                          <!--<i ng-show="(route.ISBACKHAULPROXIMITY === 'N') ? false : true" class="label-sticky">Px
+                          </i>-->
                         </td>
                         <td>{{griddata.BANAME}}</td>
                         <td>{{griddata.CUSTOMERNAME}}</td>
