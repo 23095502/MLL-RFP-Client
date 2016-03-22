@@ -1,6 +1,5 @@
 export class LanesController {
   constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster) {
-
     'ngInject';
 
     this.routes = [];

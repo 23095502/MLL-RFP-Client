@@ -18,7 +18,6 @@ export class apiService {
   }
 
   get(url) {
-
     this._requestTemplate.method = 'GET';
     this._requestTemplate.url = `${this._baseURL}/${url}`;
     return this.$http(this._requestTemplate);
