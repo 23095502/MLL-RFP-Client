@@ -252,6 +252,7 @@ export class LanesController {
       rfproute: filterRoutes
     };
 
+
     this._api.post('routeupdate', newfilterRoutes).then((r) => {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
         this.$state.go('dashboard');
@@ -285,7 +286,7 @@ export class LanesController {
         this.getRPFRoutes();
         //===========================
         this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
-        //  this.$state.go('dashboard');
+          //this.$state.go('dashboard');
         }, (err) => {
           //console.error(err);
           this.toaster.error(`${err.status} : ${err.statusText}`);

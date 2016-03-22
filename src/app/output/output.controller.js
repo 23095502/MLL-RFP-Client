@@ -73,7 +73,10 @@ export class OutputController {
 
         var L5RATE = this.outputdata[value].L5RATE;
         L5RATE = Math.round(L5RATE / 1000 * 100) / 100;
+        //var total = 55;
+        //alert( L5RATE.toFixed(1) );
         this.outputdata[value].L5RATE = L5RATE;
+
 
         var APPROVEDAMOUNT = this.outputdata[value].APPROVEDAMOUNT;
         APPROVEDAMOUNT = Math.round(APPROVEDAMOUNT / 1000 * 100) / 100;
@@ -89,8 +92,7 @@ export class OutputController {
       _.each(this.routesGroupByLocation, (vehiclelist, key) => {
         this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
 
-
-
+        console.log(this.outputdata);
       });
 
       this.filterOption = {
@@ -293,11 +295,15 @@ export class OutputController {
   }
 
   updateProposedRate(route, key, value){
-    console.log(route[key]);
-    console.log(route[value]);
-
-    route.APPROVEDAMOUNT = route[key];
-    route.BANAME = route[value];
+    if(key == 'CONTRACTRATE' || key == 'SHIPXRATE' || key == "PVSRFPRATE")
+    {
+      route.APPROVEDAMOUNT = route[key]/1000;
+      route.BANAME = '';
+    }
+    else {
+      route.APPROVEDAMOUNT = route[key];
+      route.BANAME = route[value];
+    }
   }
 
 }

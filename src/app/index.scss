@@ -228,9 +228,9 @@ h1 {
           text-align: center;
           width: 60px;
           font-weight: 700;
-          &.open-popup:hover {
-            font-size: 1.2em;
-          }
+        }
+        &.open-popup:hover span {
+          font-size: 1.2em;
         }
         &.number-right {
           text-align: right;
@@ -719,15 +719,13 @@ h1 {
 }
 
 .label-sticky {
-
   position: absolute;
   top: 0;
-  right: 0;
-  color: $mll-black;
-  border-radius: 0;
-  background-color: #e6e6e6;
-  border: 2px;
-
+  right: 5px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.8em;
+  color: $mll-red;
 }
 
 .input-text-center {
