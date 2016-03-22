@@ -54,7 +54,7 @@ export class LanesController {
   }
 
   getRPFRoutes() {
-    this._api.get(`getrfproutebyid/${this.$stateParams.rfpid}`).then((res) => {
+    this._api.get(`getrfproutebyid/${this.$stateParams.rfpidt}`).then((res) => {
       this.routes = res.data;
       this.$timeout(this.adjustScrollableTable);
     }, (err) => {
@@ -261,7 +261,7 @@ export class LanesController {
       data: newfilterRoutes
     };*/
 
-    this.toaster.success('Lanes saved successfully');
+
 
     this._api.post('routeupdate', newfilterRoutes).then((r) => {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
@@ -273,7 +273,7 @@ export class LanesController {
     }, (e) => {
       console.error(e);
     });
-
+    this.toaster.success('Lanes saved successfully');
   }
 
   uploadBlobOrFile(blobOrFile) {
