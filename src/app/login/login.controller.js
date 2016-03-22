@@ -1,7 +1,10 @@
 export class LoginController {
-  constructor($state) {
+  constructor($state, toaster) {
     'ngInject';
     this.$state = $state;
+   // toaster.info('Hi');
+   // console.log(toaster);
+
   }
 
   gotoDashboard() {

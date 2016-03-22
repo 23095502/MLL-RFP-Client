@@ -1,5 +1,5 @@
 export class LanesController {
-  constructor($state, $stateParams, $timeout, Upload, masterService, apiService) {
+  constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster) {
 
     'ngInject';
 
@@ -13,6 +13,7 @@ export class LanesController {
     this.isSERVICETYPE_option = [];
     this._api = apiService;
     this.$state = $state;
+    this.toaster = toaster;
 
     this.locationname_option = [];
     this.vehicletype = {
@@ -57,7 +58,8 @@ export class LanesController {
       this.routes = res.data;
       this.$timeout(this.adjustScrollableTable);
     }, (err) => {
-      console.error(err);
+      //console.error(err);
+        this.toaster.error(`${err.status} : ${err.statusText}`);
     });
   }
 
@@ -183,6 +185,7 @@ export class LanesController {
     this.resetRoute();
     this.editingIndex = null;
 
+    this.toaster.success('Lane saved successfully');
     //---------------------
     //set width to route grid columns
     this.$timeout(this.adjustScrollableTable);
@@ -201,11 +204,13 @@ export class LanesController {
     this.route.CREATEDON = '2016-03-01';
     this.editingIndex = index;
     $('#myModal').modal();
+    //this.toaster.success('Lane updated successfully');
   }
 
   save() {
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
+    this.toaster.success('Lane updated successfully');
     //---------------------
     //set width to route grid columns
     this.$timeout(this.adjustScrollableTable);
@@ -218,6 +223,7 @@ export class LanesController {
     this.route.MODE = 'DELETE';
     this.routes[this.editingIndex] = this.route;
     this.editingIndex = null;
+    this.toaster.success('Lane deleted successfully');
     //---------------------
     //set width to route grid columns
     this.$timeout(this.adjustScrollableTable);
@@ -247,16 +253,19 @@ export class LanesController {
     var newfilterRoutes = {
       rfproute: filterRoutes
     };
+
     /*var req = {
       method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/routeupdate',
+      url: 'http://115.113.135.239/RFPRest/RFPRestService.svc/routeupdate',
       headers: {
         'Content-Type': 'application/json'
       },
       data: newfilterRoutes
     };*/
 
-    this._api.post('routeupdate', newfilterRoutes).then((r) => {
+
+
+    /*this._api.post('routeupdate', newfilterRoutes).then((r) => {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
         this.$state.go('dashboard');
       }, (err) => {
@@ -265,14 +274,14 @@ export class LanesController {
 
     }, (e) => {
       console.error(e);
-    });
-
+    });*/
+    this.toaster.success('Lanes saved successfully');
   }
 
   uploadBlobOrFile(blobOrFile) {
 
     var client = new XMLHttpRequest();
-    client.open('POST', `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
+    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
     //client.open('POST', `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`, false);
     //client.setRequestHeader('Content-length', blobOrFile.length);
     client.setRequestHeader("Content-Type", "multipart/form-data");
@@ -288,15 +297,17 @@ export class LanesController {
         this.getRPFRoutes();
         //===========================
         this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
-          this.$state.go('dashboard');
+        //  this.$state.go('dashboard');
         }, (err) => {
-          console.error(err);
+          //console.error(err);
+          this.toaster.error(`${err.status} : ${err.statusText}`);
         });
         //===========================
         $('#myModalBrowse').modal('hide');
       }
     }
 
+    this.toaster.success('Lanes saved successfully');
     /* Send to server */
     client.send(blobOrFile);
   }
@@ -304,7 +315,7 @@ export class LanesController {
   /*  uploadFile(file) {
 
       this.Upload.upload({
-        //url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`,
+        //url: `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`,
         url: `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`,
         data: {},
         file: file

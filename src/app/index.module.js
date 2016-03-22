@@ -12,7 +12,7 @@ import { LanesController } from './lanes/lanes.controller';
 import { apiService } from '../app/components/api/api.service';
 import { masterService } from '../app/components/master/master.service';
 
-angular.module('mllRfpClient', ['ui.router'])
+angular.module('mllRfpClient', ['ui.router','toaster'])
   .config(config)
   .config(routerConfig)
   .run(runBlock)

@@ -18,12 +18,12 @@
       <table class="table mll-table">
         <thead>
           <tr>
-            <th>Client Name</th>
-            <th>Received Date</th>
-            <th>Due Date</th>
-            <th>RFP Value (In Lakhs)</th>
-            <th>Status</th>
-            <th>RFP ID</th>
+            <th class="text-left">Client name</th>
+            <th class="text-left">RFP received on</th>
+            <th class="text-left">RFP due on</th>
+            <th class="text-right">RFP value (in Lakhs)</th>
+            <th class="text-left">Status</th>
+            <th class="text-left">RFP ID</th>
           </tr>
         </thead>
         <tbody>
@@ -31,7 +31,7 @@
             <td>{{rfp.CUSTOMERNAME}}</td>
             <td>{{rfp.RFPDATE  |  date:"dd-MMM-yyyy"}}</td>
             <td>{{rfp.DUEDATE | date: 'dd-MMM-yyyy'}}</td>
-            <td class="number-right">{{rfp.RFPAMOUNT / 1000 | number:1 }}</td>
+            <td class="number-right">{{rfp.RFPAMOUNT  | number:1 }}</td>
             <td>{{rfp.ACTIVE}}</td>
             <td>{{rfp.RFPCODE}}</td>
           </tr>
