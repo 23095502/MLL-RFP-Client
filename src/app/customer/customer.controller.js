@@ -7,7 +7,7 @@ export class CustomerController {
     this.resetCustomer();
 
 
-    $http.get('http://59.160.18.222/RFPRest/RFPRestService.svc/customer/0')
+    $http.get('http://115.113.135.239/RFPRest/RFPRestService.svc/customer/0')
       .then((res) => {
         this.customer = res.data;
       }, (err) => {
@@ -34,7 +34,7 @@ export class CustomerController {
 
     var req = {
       method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/customer/1',
+      url: 'http://115.113.135.239/RFPRest/RFPRestService.svc/customer/1',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -67,7 +67,7 @@ export class CustomerController {
 
     var req = {
       method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/customer/1',
+      url: 'http://115.113.135.239/RFPRest/RFPRestService.svc/customer/1',
       headers: {
         'Content-Type': 'application/json'
       },

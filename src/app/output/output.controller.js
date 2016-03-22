@@ -52,7 +52,6 @@ export class OutputController {
 
     this._api.get(`gettrans/${this.$stateParams.rfpId}`).then((res) => {
       this.outputdata = res.data;
-      console.log(this.outputdata);
 
       var newOutputData = _.each(this.outputdata, (key, value) => {
         var L1RATE = this.outputdata[value].L1RATE;
@@ -75,6 +74,10 @@ export class OutputController {
         var L5RATE = this.outputdata[value].L5RATE;
         L5RATE = Math.round(L5RATE / 1000 * 100) / 100;
         this.outputdata[value].L5RATE = L5RATE;
+
+        var APPROVEDAMOUNT = this.outputdata[value].APPROVEDAMOUNT;
+        APPROVEDAMOUNT = Math.round(APPROVEDAMOUNT / 1000 * 100) / 100;
+        this.outputdata[value].APPROVEDAMOUNT = APPROVEDAMOUNT;
 
       })
 
@@ -135,8 +138,6 @@ export class OutputController {
 
     this._api.post(this.urlMaps[colname], newfilterRoutes, true).then((res) => {
       this.gridData = res.data[this.responseKeys[clickedColName]];
-      console.log(this.gridData);
-      //this.nooftrips = this.gridData[0].NOOFTRIPS;
 
     }, (err) => {
       console.error(err);
@@ -151,8 +152,6 @@ export class OutputController {
       $('#myModalOutputDetails').modal();
     }
 
-
-
   }
 
   submit() {
@@ -164,6 +163,7 @@ export class OutputController {
       output.L3RATE = output.L3RATE * 1000;
       output.L4RATE = output.L4RATE * 1000;
       output.L5RATE = output.L5RATE * 1000;
+      output.APPROVEDAMOUNT = output.APPROVEDAMOUNT * 1000;
 
       output.MODE = 'APIRATE';
 
@@ -242,7 +242,6 @@ export class OutputController {
       $('#myModalOutputDetailsForBackHaul').modal('hide');
     }
 
-
   }
 
   changecolor(toMatch, approvedRate) {
@@ -284,6 +283,14 @@ export class OutputController {
     } else {
       return false;
     }
+  }
+
+  updateProposedRate(route, key, value){
+    console.log(route[key]);
+    console.log(route[value]);
+
+    route.APPROVEDAMOUNT = route[key];
+    route.BANAME = route[value];
   }
 
 }

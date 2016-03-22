@@ -252,9 +252,10 @@ export class LanesController {
     var newfilterRoutes = {
       rfproute: filterRoutes
     };
+
     /*var req = {
       method: 'POST',
-      url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/routeupdate',
+      url: 'http://115.113.135.239/RFPRest/RFPRestService.svc/routeupdate',
       headers: {
         'Content-Type': 'application/json'
       },
