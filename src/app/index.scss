@@ -477,6 +477,7 @@ h1 {
   font-size: 12px;
   display: inline-block;
   margin-bottom: 5px;
+  text-align: center;
 
   &:not(.exclude) {
     color: $mll-grey;
@@ -722,6 +723,10 @@ h1 {
 
 .input-text-center {
   text-align: center;
+}
+
+.label-thin{
+  font-weight: 300;
 }
 
 /* login page  */
