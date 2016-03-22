@@ -32,8 +32,8 @@ export class authService {
 
   isAuthenticated() {
 
-    //console.log(this.$window.sessionStorage.userInfo.length);
-    if(this.$window.sessionStorage.userInfo.length > 0) {
+    //console.log(this.$window.sessionStorage.userInfo);
+    if(this.$window.sessionStorage.userInfo != undefined && this.$window.sessionStorage.userInfo != '') {
       return true;
     } else {
       return false;
@@ -44,7 +44,7 @@ export class authService {
 
   signout() {
     this.authenticated = false;
-    this.$window.sessionStorage.userInfo = null;
+    this.$window.sessionStorage.userInfo = '';
     this.$state.go('login');
   }
 }

@@ -6,7 +6,6 @@ export class CustomerController {
     this.customer = []
     this.resetCustomer();
 
-
     $http.get('http://115.113.135.239/RFPRest/RFPRestService.svc/customer/0')
       .then((res) => {
         this.customer = res.data;
