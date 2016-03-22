@@ -8,20 +8,17 @@ export class authService {
     this.authenticated = true;
   }
 
-  login() {
+  login(username, password) {
     var deferred = this.$q.defer();
 
-    console.log('login');
+    this._api.get(`login/${username}/${password}`).then((result) => {
+      //console.log('Name: ' + username);
+      //console.log(username);
+      this.userInfo = result.data[0];
+      this.$window.sessionStorage.userInfo = JSON.stringify(this.userInfo);
+      deferred.resolve(this.userInfo);
 
-    this._api.get('login/ADMIN/pass,123').then(function (result) {
-      console.log(result);
-      this.userInfo = {
-        accessToken: result.data.access_token,
-        userName: result.data.userName
-      };
-      this.$window.sessionStorage.userInfo = JSON.stringify(userInfo);
-      deferred.resolve(userInfo);
-    }, function (error) {
+    }, (error)=> {
       deferred.reject(error);
     });
 

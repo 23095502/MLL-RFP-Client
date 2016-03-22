@@ -247,7 +247,7 @@ export class LanesController {
     };
     /*var req = {
      method: 'POST',
-     url: 'http://59.160.18.222/RFPRest/RFPRestService.svc/routeupdate',
+     url: 'http://115.113.135.239/RFPRest/RFPRestService.svc/routeupdate',
      headers: {
      'Content-Type': 'application/json'
      },
@@ -270,7 +270,7 @@ export class LanesController {
   uploadBlobOrFile(blobOrFile) {
 
     var client = new XMLHttpRequest();
-    client.open('POST', `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
+    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
     //client.open('POST', `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`, false);
     //client.setRequestHeader('Content-length', blobOrFile.length);
     client.setRequestHeader("Content-Type", "multipart/form-data");
@@ -296,7 +296,7 @@ export class LanesController {
   /*  uploadFile(file) {
 
    this.Upload.upload({
-   //url: `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`,
+   //url: `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`,
    url: `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`,
    data: {},
    file: file
