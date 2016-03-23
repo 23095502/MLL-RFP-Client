@@ -269,13 +269,24 @@ export class OutputController {
 
 
   export () {
-    this._api.get('exportrfpout/1').then((res) => {
+    //this._api.get('exportrfpout/1').then((res) => {
+    this._api.get(`exportrfpout/${this.$stateParams.rfpId}`).then((res) => {
       window.open(res.data);
     }, (err) => {
       //console.error(err);
       this.toaster.error(`${err.status} : ${err.statusText}`);
     });
   }
+
+  exportBAQuote () {
+    //this._api.get('expbaquote/1').then((res) => {
+    this._api.get(`expbaquote/${this.$stateParams.rfpId}`).then((res) => {
+      window.open(res.data);
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
 
   checkBackhaul() {
 
