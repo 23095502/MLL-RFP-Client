@@ -3,8 +3,11 @@
     <div class="col-sm-6">
       <h1><abbr title="Request for praposal">RFP</abbr> output details</h1></div>
     <div class="col-md-6 text-right">
-      <button class="btn btn-default btn-xs" ng-click="output.uploadBlobOrFile(output.file)">Import BA Quote</button>
       <button class="btn btn-default btn-xs" ng-click="output.exportBAQuote()"> <i class="glyphicon glyphicon-export"></i> Export BA QUOTE Template
+      </button>
+      <!--<button class="btn btn-default btn-xs" ng-click="output.uploadBlobOrFile(output.file)">Import BA Quote</button>-->
+      <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalBrowse">
+        <i class="glyphicon glyphicon-import"></i>  Import BA Quotes
       </button>
       <button class="btn btn-default btn-xs" ng-click="output.export()"><i class="glyphicon glyphicon-export"></i> Export
       </button>
@@ -413,18 +416,18 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-6 col-md-offset-3">
-            <input type="file" ngf-select ng-model="lane.file" name="file"
+            <input type="file" ngf-select ng-model="output.file" name="file"
             accept="excel/*" ngf-max-size="2MB" required
-            ngf-model-invalid="lane.errorFile">
-            <i ng-show="lane.file.$error.required">*required</i><br>
-            <i ng-show="lane.file.$error.maxSize">File too large
+            ngf-model-invalid="output.errorFile">
+            <i ng-show="output.file.$error.required">*required</i><br>
+            <i ng-show="output.file.$error.maxSize">File too large
             {{lane.errorFile.size / 1000000|number:1}}MB: max 2M</i>
             <!-- <button ng-click="lane.uploadBlobOrFile(lane.file)">Submit</button> -->
-            <span class="progress" ng-show="lane.file.progress >= 0">
-              <div style="width:{{lane.file.progress}}%"
-              ng-bind="lane.file.progress + '%'"></div>
+            <span class="progress" ng-show="output.file.progress >= 0">
+              <div style="width:{{output.file.progress}}%"
+              ng-bind="output.file.progress + '%'"></div>
             </span>
-            <span ng-show="lane.file.result">Upload Successful</span>
+            <span ng-show="output.file.result">Upload Successful</span>
             <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
           </div>
         </div>
@@ -432,7 +435,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" ng-click="lane.uploadBlobOrFile(lane.file)">Import BA Quote</button>
+        <button type="button" class="btn btn-primary" ng-click="output.uploadBlobOrFile(output.file)">Import BA Quote</button>
       </div>
     </div>
   </div>

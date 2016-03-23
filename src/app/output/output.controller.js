@@ -292,7 +292,7 @@ export class OutputController {
  uploadBlobOrFile(blobOrFile) {
 
     var client = new XMLHttpRequest();
-    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
+    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/baquote/${this.$stateParams.rfpid}/baquote/1`, false);
     //client.open('POST', `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`, false);
     //client.setRequestHeader('Content-length', blobOrFile.length);
     client.setRequestHeader("Content-Type", "multipart/form-data");
@@ -305,14 +305,14 @@ export class OutputController {
         console.log(client.responseText);
         //===========================
         //Get all RFP routes by RFP ID
-        this.getRPFRoutes();
+        /*this.getRPFRoutes();
         //===========================
         this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
           //this.$state.go('dashboard');
         }, (err) => {
           //console.error(err);
           this.toaster.error(`${err.status} : ${err.statusText}`);
-        });
+        });*/
         //===========================
         $('#myModalBrowse').modal('hide');
       }
