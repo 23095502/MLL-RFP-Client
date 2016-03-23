@@ -73,8 +73,6 @@ export class OutputController {
 
         var L5RATE = this.outputdata[value].L5RATE;
         L5RATE = Math.round(L5RATE / 1000 * 100) / 100;
-        //var total = 55;
-        //alert( L5RATE.toFixed(1) );
         this.outputdata[value].L5RATE = L5RATE;
 
 
@@ -91,8 +89,6 @@ export class OutputController {
 
       _.each(this.routesGroupByLocation, (vehiclelist, key) => {
         this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
-
-        console.log(this.outputdata);
       });
 
       this.filterOption = {
@@ -135,16 +131,19 @@ export class OutputController {
       inproxiparam: this.inproxiparam
     };
 
-    console.log(newfilterRoutes);
+    //console.log(newfilterRoutes);
+    //console.log(table.ISBAPROXIMITY);
 
     this.TOLOCATIONNAME = table.TOLOCATIONNAME;
     this.CONTRACTRATE = table[clickedColName];
     this.colName = headerColName;
     this.modalHeaderName = modalHeaderName;
+    this.ISBAPROX = table.ISBAPROXIMITY;
+    this.ISBACKHAULPROX = table.ISBACKHAULPROXIMITY;
 
     this._api.post(this.urlMaps[colname], newfilterRoutes, true).then((res) => {
-      this.gridData = res.data[this.responseKeys[clickedColName]];
 
+      this.gridData = res.data[this.responseKeys[clickedColName]];
     }, (err) => {
       //console.error(err);
       this.toaster.error(`${err.status} : ${err.statusText}`);
@@ -272,7 +271,6 @@ export class OutputController {
     this._api.get('exportrfpout/1').then((res) => {
       window.open(res.data);
     }, (err) => {
-      //console.error(err);
       this.toaster.error(`${err.status} : ${err.statusText}`);
     });
   }
