@@ -10,9 +10,6 @@ export class AppController {
   }
 
   loginBody () {
-
-    //console.log('authenticated: ' + this.auth.authenticated);
-
     if(this.auth.authenticated){
       return 'isloggedin';
     }

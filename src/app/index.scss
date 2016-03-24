@@ -41,13 +41,13 @@ $navbar-inverse-bg: $mll-red;
 body {
   padding-top: 70px;
   font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
   background-image: url(../assets/images/login_bg.png);
 
   &.isloggedin {
-    //padding-top: 70px;
     background-image: none;
   }
-  font-family: 'Open Sans', sans-serif;
+
 }
 
 .btn-primary {
@@ -690,11 +690,12 @@ h1 {
   margin-top: 10px;
 }
 
-.btn-block {
+.btn-signin {
   border-radius: 20px;
   background-color: $mll-red !important;
   color: $mll-white !important;
   margin-bottom: 30px;
+  outline: none !important;
 }
 
 .mll-table-input {
