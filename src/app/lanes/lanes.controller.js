@@ -24,7 +24,7 @@ export class LanesController {
     };
 
     this.iswarehousing = $stateParams.iswarehousing;
-    (this.iswarehousing === 'Y') ? this.iswarehousing = true : this.iswarehousing = false;
+    (this.iswarehousing === 'Y') ? this.iswarehousing = true: this.iswarehousing = false;
 
     //===========================
     //Get all RFP routes by RFP ID
@@ -43,7 +43,7 @@ export class LanesController {
     this.isPACKAGETYPEID_option = this.prepareForDropdown(['', 'Pallet', 'Corrugated Boxes', 'Bags', 'Trolley', 'Loose']);
     this.isSERVICETYPE_option = this.prepareForDropdown(['FTL', 'ODC', 'Surface Exp', 'PTL Conventional', 'Fixed Vehicle', 'Air Express']);
 
-    document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function (e) {
+    document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function(e) {
       document.querySelector('.tbody-div3 table').style.top = `-${e.target.scrollTop}px`;
       document.querySelector('.thead-div2 table').style.left = `-${e.target.scrollLeft}px`;
     });
@@ -57,7 +57,7 @@ export class LanesController {
       this.$timeout(this.adjustScrollableTable);
     }, (err) => {
       //console.error(err);
-        this.toaster.error(`${err.status} : ${err.statusText}`);
+      this.toaster.error(`${err.status} : ${err.statusText}`);
     });
   }
 
@@ -66,41 +66,50 @@ export class LanesController {
   }
 
   adjustScrollableTable() {
-    let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.offsetWidth));
-    let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 tr')[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
-    let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth));
-    let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 tr')[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
 
-    let finalFrozenWidth = _.chain(div3BodyWidth)
-      .map((item, i) => Math.max(item, div1HeadWidth[i]))
-      .reject((item) => (_.isNaN(item)))
-      .value();
+    var $div1HeadAll = document.querySelectorAll('.thead-div1 th');
+    var $div2HeadAll = document.querySelectorAll('.thead-div2 th');
+    var $div3BodyAll = document.querySelectorAll('.tbody-div3 tr');
+    var $div4BodyAll = document.querySelectorAll('.tbody-div4 tr');
 
-    let finalWidth = _.chain(div4BodyWidth)
-      .map((item, i) => Math.max(item, div2HeadWidth[i]))
-      .reject((item) => (_.isNaN(item)))
-      .value();
+    if ($div3BodyAll.length > 0 && $div4BodyAll.length > 0) {
 
-    //Fix width for div1 (left head) & div3 (left body)
-    let div1Head = document.querySelectorAll('.thead-div1 th');
-    let div3Body = document.querySelectorAll('.tbody-div3 td');
+      let div1HeadWidth = _.map($div1HeadAll, (th) => (th.offsetWidth));
+      let div3BodyWidth = _.map($div3BodyAll[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
+      let div2HeadWidth = _.map($div2HeadAll, (th) => (th.offsetWidth));
+      let div4BodyWidth = _.map($div4BodyAll[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
 
-    //Fix width for div2 (right head) & div4 (right body)
-    let div2Head = document.querySelectorAll('.thead-div2 th');
-    let div4Body = document.querySelectorAll('.tbody-div4 td');
+      let finalFrozenWidth = _.chain(div3BodyWidth)
+        .map((item, i) => Math.max(item, div1HeadWidth[i]))
+        .reject((item) => (_.isNaN(item)))
+        .value();
 
-    //-----------------------------
-    _.each(finalFrozenWidth, (list, key) => {
-      div1Head[key].children[0].style.width = finalFrozenWidth[key] + 'px';
-      div3Body[key].children[0].style.width = finalFrozenWidth[key] + 'px';
-    });
+      let finalWidth = _.chain(div4BodyWidth)
+        .map((item, i) => Math.max(item, div2HeadWidth[i]))
+        .reject((item) => (_.isNaN(item)))
+        .value();
 
-    _.each(finalWidth, (list, key) => {
-      //console.log(div2Head[key].children[0]);
-      div2Head[key].children[0].style.width = finalWidth[key] + 'px';
-      div4Body[key].children[0].style.width = finalWidth[key] + 'px';
-    });
-    //-----------------------------
+      //Fix width for div1 (left head) & div3 (left body)
+      let div1Head = document.querySelectorAll('.thead-div1 th');
+      let div3Body = document.querySelectorAll('.tbody-div3 td');
+
+      //Fix width for div2 (right head) & div4 (right body)
+      let div2Head = document.querySelectorAll('.thead-div2 th');
+      let div4Body = document.querySelectorAll('.tbody-div4 td');
+
+      //-----------------------------
+      _.each(finalFrozenWidth, (list, key) => {
+        div1Head[key].children[0].style.width = finalFrozenWidth[key] + 'px';
+        div3Body[key].children[0].style.width = finalFrozenWidth[key] + 'px';
+      });
+
+      _.each(finalWidth, (list, key) => {
+        //console.log(div2Head[key].children[0]);
+        div2Head[key].children[0].style.width = finalWidth[key] + 'px';
+        div4Body[key].children[0].style.width = finalWidth[key] + 'px';
+      });
+      //-----------------------------
+    }
   }
 
   prepareForDropdown(list) {
@@ -269,17 +278,29 @@ export class LanesController {
   uploadBlobOrFile(blobOrFile) {
 
     var client = new XMLHttpRequest();
-    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
-    //client.open('POST', `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`, false);
-    //client.setRequestHeader('Content-length', blobOrFile.length);
+    //client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
+    client.open('POST', `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`, false);
     client.setRequestHeader("Content-Type", "multipart/form-data");
 
     /* Check the response status */
     client.onreadystatechange = () => {
-      //console.log(document.readyState);
-      console.log("rdystate: " + client.readyState + " status: " + client.status + " Text: " + client.statusText);
+      //console.log("rdystate: " + client.readyState + " status: " + client.status + " Text: " + client.statusText);
       if (client.readyState == 4 && client.status == 200) {
-        console.log(client.responseText);
+
+
+        var response = JSON.parse(client.responseText);
+        console.log(`FilePath: ${response.FilePath}`);
+        //console.log(`FileLength: ${response.FileLength}`);
+        console.log(`FileName: ${response.FileName}`);
+
+        if (response.ErrorMessage != '') {
+          console.log(`ErrorMessage: ${response.ErrorMessage}`);
+        } else {
+          console.log(`SuccessMessage: ${response.SuccessMessage}`);
+        }
+        console.log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
+        console.log(response.ErrorData);
+        //this.toaster.success(response.SuccessMessage);
         //===========================
         //Get all RFP routes by RFP ID
         this.getRPFRoutes();
@@ -295,9 +316,10 @@ export class LanesController {
       }
     }
 
-    this.toaster.success('Lanes saved successfully');
     /* Send to server */
     client.send(blobOrFile);
+
+    this.toaster.success("Data imported");
   }
 
   map(id, list, idMatcher, nameKey) {
