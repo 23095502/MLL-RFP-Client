@@ -7,12 +7,13 @@ export class LoginController {
   }
 
   authenticate() {
+
     this.auth.login(this.username, this.password).then((res) => {
-      //console.log(!!res);
+
       if (!!res) {
 
-        console.log(this.$rootScope.returnToState);
-        console.log(this.$rootScope.returnToStateParams);
+        //console.log(this.$rootScope.returnToState);
+        //console.log(this.$rootScope.returnToStateParams);
 
         if (this.$rootScope.returnToState === '/create/overall') {
           this.$state.transitionTo('overall');
@@ -32,13 +33,15 @@ export class LoginController {
         } else {
           this.$state.transitionTo('dashboard');
         }
-
       }
     });
-    //this.$state.go('dashboard');
   }
 
-  isLogin() {
-    return 'loginbody';
+  resetMsg(){
+      this.auth.authFailedMsg = '';
   }
+
+  // isLogin() {
+  //   return 'loginbody';
+  // }
 }

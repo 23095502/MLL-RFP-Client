@@ -7,11 +7,12 @@
         <img class="profile-img" src="assets/images/login_logo.png"
         alt="">
         <form class="form-signin" ng-submit="login.authenticate();">
-          <input type="text" class="form-control" placeholder="Username" ng-model="login.username" required autofocus>
-          <input type="password" class="form-control" placeholder="Password" ng-model="login.password" required>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
+          <input type="text" class="form-control" placeholder="Username" ng-model="login.username" ng-click="login.resetMsg()" required autofocus>
+          <input type="password" class="form-control" placeholder="Password" ng-model="login.password" ng-click="login.resetMsg()" required>
+          <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">
           Sign in
           </button>
+          {{login.auth.authFailedMsg}}
         </form>
       </div>
     </div>

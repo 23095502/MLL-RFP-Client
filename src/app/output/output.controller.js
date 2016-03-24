@@ -92,7 +92,7 @@ export class OutputController {
       _.each(this.routesGroupByLocation, (vehiclelist, key) => {
         this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
 
-        console.log(this.outputdata);
+        //console.log(this.outputdata);
       });
 
       this.filterOption = {
@@ -135,7 +135,7 @@ export class OutputController {
       inproxiparam: this.inproxiparam
     };
 
-    console.log(newfilterRoutes);
+    //console.log(newfilterRoutes);
 
     this.TOLOCATIONNAME = table.TOLOCATIONNAME;
     this.CONTRACTRATE = table[clickedColName];
@@ -225,11 +225,11 @@ export class OutputController {
       apptrans: revisedOutput
     };
 
-    console.log(newOutputDetails);
+    //console.log(newOutputDetails);
 
     this._api.post('apptrans', newOutputDetails).then((res) => {
       this.getTransactionData();
-      console.log(res.data);
+      //console.log(res.data);
     }, (err) => {
       //console.error(err);
       this.toaster.error(`${err.status} : ${err.statusText}`);

@@ -7,19 +7,25 @@ export class authService {
     this.$window = $window;
     this.userInfo = {};
     this.authenticated = false;
+    this.authFailedMsg = '';
   }
 
   login(username, password) {
     var deferred = this.$q.defer();
 
     this._api.get(`login/${username}/${password}`).then((result) => {
-      this.authenticated = true;
-      this.userInfo = result.data[0];
-      this.$window.sessionStorage.userInfo = JSON.stringify(this.userInfo);
-      //console.log(this.$window.sessionStorage.userInfo);
-      deferred.resolve(this.userInfo);
 
-    }, (error)=> {
+      if (result.data.length > 0) {
+        this.authenticated = true;
+        this.userInfo = result.data[0];
+        this.$window.sessionStorage.userInfo = JSON.stringify(this.userInfo);
+        deferred.resolve(this.userInfo);
+      }
+      else {
+        this.authFailedMsg = 'Username or Password is incorrect.';
+      }
+
+    }, (error) => {
       deferred.reject(error);
     });
 
@@ -33,13 +39,13 @@ export class authService {
   isAuthenticated() {
 
     //console.log(this.$window.sessionStorage.userInfo);
-    if(this.$window.sessionStorage.userInfo != undefined && this.$window.sessionStorage.userInfo != '') {
-      return true;
+    if (this.$window.sessionStorage.userInfo != undefined && this.$window.sessionStorage.userInfo != '') {
+      this.authenticated = true;
     } else {
-      return false;
+      this.authenticated = false;
     }
 
-    //return this.authenticated;
+    return this.authenticated;
   }
 
   signout() {
