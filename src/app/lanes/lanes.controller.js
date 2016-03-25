@@ -278,8 +278,8 @@ export class LanesController {
   uploadBlobOrFile(blobOrFile) {
 
     var client = new XMLHttpRequest();
-    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
-    //client.open('POST', `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`, false);
+    //client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
+    client.open('POST', `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`, false);
     client.setRequestHeader("Content-Type", "multipart/form-data");
 
     /* Check the response status */
@@ -300,7 +300,9 @@ export class LanesController {
         }
         console.log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
         console.log(response.ErrorData);
-        //this.toaster.success(response.SuccessMessage);
+
+        this.gridData = response.ErrorData;
+        $('#myModalErrorList').modal();
         //===========================
         //Get all RFP routes by RFP ID
         this.getRPFRoutes();
@@ -336,6 +338,10 @@ export class LanesController {
     this.editingIndex = null;
     $('#myModal').modal();
 
+  }
+
+  closeModal() {
+    $('#myModalErrorList').modal('hide');
   }
 
 }
