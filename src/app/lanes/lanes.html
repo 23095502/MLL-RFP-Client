@@ -9,7 +9,7 @@
         <label for="switch_right">Lane Details</label>
       </div>
     </div>
-    <div class="col-md-4 text-right">
+    <div class="col-sm-4 text-right">
       <button class="btn btn-default btn-xs" ng-click="lane.showModal()">
       <i class="glyphicon glyphicon-plus"></i>  Add Route
       </button>
@@ -403,11 +403,61 @@
             <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
           </div>
         </div>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" ng-click="lane.uploadBlobOrFile(lane.file)">Import Routes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModalErrorList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">
+          Imported error route list
+          </h4>
+      </div>
+      <div class="modal-body">
+        <div style="overflow: auto; height: 60vh">
+          <form>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-12">
+                  <table class="table mll-table">
+                    <thead>
+                      <tr>
+                        <th class="text-left">From City</th>
+                        <th>From State</th>
+                        <th>To City</th>
+                        <th>To State</th>
+                        <th>Vehicle Type</th>
+                        <th>Remark</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="rate-details" ng-repeat="griddata in lane.gridData">
+                        <td>{{griddata.OriginCity}}</td>
+                        <td>{{griddata.OriginState}}</td>
+                        <td>{{griddata.DestinationCity}}</td>
+                        <td>{{griddata.DestinationState}}</td>
+                        <td>{{griddata.VehicleType}}</td>
+                        <td>{{griddata.Remark}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="closeModal()" class="btn btn-default" data-dismiss="modal">
+          Close
+        </button>
       </div>
     </div>
   </div>

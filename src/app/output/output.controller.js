@@ -89,9 +89,6 @@ export class OutputController {
 
       _.each(this.routesGroupByLocation, (vehiclelist, key) => {
         this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
-
-
-
       });
 
       this.filterOption = {
@@ -223,11 +220,8 @@ export class OutputController {
       apptrans: revisedOutput
     };
 
-    console.log(newOutputDetails);
-
     this._api.post('apptrans', newOutputDetails).then((res) => {
       this.getTransactionData();
-      console.log(res.data);
     }, (err) => {
       console.error(err);
     });
@@ -235,7 +229,6 @@ export class OutputController {
     this.toaster.success('Changes saved successfully');
 
   }
-
 
   updateContractRate(popupGridData, colName) {
     this.CONTRACTRATE = popupGridData.FREIGHTRATE;
@@ -246,8 +239,6 @@ export class OutputController {
     } else {
       $('#myModalOutputDetailsForBackHaul').modal('hide');
     }
-
-
   }
 
   changecolor(toMatch, approvedRate) {
@@ -267,11 +258,54 @@ export class OutputController {
 
 
   export () {
-    this._api.get('exportrfpout/1').then((res) => {
+    //this._api.get('exportrfpout/1').then((res) => {
+    this._api.get(`exportrfpout/${this.$stateParams.rfpId}`).then((res) => {
       window.open(res.data);
     }, (err) => {
       console.error(err);
     });
+  }
+
+  exportBAQuote () {
+    //this._api.get('expbaquote/1').then((res) => {
+    this._api.get(`expbaquote/${this.$stateParams.rfpId}`).then((res) => {
+      window.open(res.data);
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+ uploadBlobOrFile(blobOrFile) {
+
+    var client = new XMLHttpRequest();
+    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/baquote/${this.$stateParams.rfpid}/baquote/1`, false);
+    //client.open('POST', `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`, false);
+    //client.setRequestHeader('Content-length', blobOrFile.length);
+    client.setRequestHeader("Content-Type", "multipart/form-data");
+
+    /* Check the response status */
+    client.onreadystatechange = () => {
+      console.log("rdystate: " + client.readyState + " status: " + client.status + " Text: " + client.statusText);
+      if (client.readyState == 4 && client.status == 200) {
+        console.log(client.responseText);
+        //===========================
+        //Get all RFP routes by RFP ID
+        /*this.getRPFRoutes();
+        //===========================
+        this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
+          //this.$state.go('dashboard');
+        }, (err) => {
+          //console.error(err);
+          this.toaster.error(`${err.status} : ${err.statusText}`);
+        });*/
+        //===========================
+        $('#myModalBrowse').modal('hide');
+      }
+    }
+
+    //this.toaster.success('Lanes saved successfully');
+    /* Send to server */
+    client.send(blobOrFile);
   }
 
   checkBackhaul() {
@@ -283,18 +317,10 @@ export class OutputController {
   }
 
   showColumn(colName) {
-
     if (colName == 'BACKHAULAVL') {
       return true;
     } else {
       return false;
     }
   }
-
-  status(){
-
-    //console.log(this.outputdata);
-
-  }
-
 }

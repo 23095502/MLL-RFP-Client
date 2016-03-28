@@ -1,13 +1,11 @@
 export class LanesController {
   constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster) {
-
     'ngInject';
 
     this.routes = [];
     this.routes = [];
     this.$timeout = $timeout;
     this.$stateParams = $stateParams;
-    this.Upload = Upload;
     this.isServiceTypeODC;
     this.statename_option = [];
     this.isSERVICETYPE_option = [];
@@ -59,7 +57,7 @@ export class LanesController {
       this.$timeout(this.adjustScrollableTable);
     }, (err) => {
       //console.error(err);
-        this.toaster.error(`${err.status} : ${err.statusText}`);
+      this.toaster.error(`${err.status} : ${err.statusText}`);
     });
   }
 
@@ -68,41 +66,50 @@ export class LanesController {
   }
 
   adjustScrollableTable() {
-    let div1HeadWidth = _.map(document.querySelectorAll('.thead-div1 th'), (th) => (th.offsetWidth));
-    let div3BodyWidth = _.map(document.querySelectorAll('.tbody-div3 tr')[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
-    let div2HeadWidth = _.map(document.querySelectorAll('.thead-div2 th'), (th) => (th.offsetWidth));
-    let div4BodyWidth = _.map(document.querySelectorAll('.tbody-div4 tr')[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
 
-    let finalFrozenWidth = _.chain(div3BodyWidth)
-      .map((item, i) => Math.max(item, div1HeadWidth[i]))
-      .reject((item) => (_.isNaN(item)))
-      .value();
+    var $div1HeadAll = document.querySelectorAll('.thead-div1 th');
+    var $div2HeadAll = document.querySelectorAll('.thead-div2 th');
+    var $div3BodyAll = document.querySelectorAll('.tbody-div3 tr');
+    var $div4BodyAll = document.querySelectorAll('.tbody-div4 tr');
 
-    let finalWidth = _.chain(div4BodyWidth)
-      .map((item, i) => Math.max(item, div2HeadWidth[i]))
-      .reject((item) => (_.isNaN(item)))
-      .value();
+    if ($div3BodyAll.length > 0 && $div4BodyAll.length > 0) {
 
-    //Fix width for div1 (left head) & div3 (left body)
-    let div1Head = document.querySelectorAll('.thead-div1 th');
-    let div3Body = document.querySelectorAll('.tbody-div3 td');
+      let div1HeadWidth = _.map($div1HeadAll, (th) => (th.offsetWidth));
+      let div3BodyWidth = _.map($div3BodyAll[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
+      let div2HeadWidth = _.map($div2HeadAll, (th) => (th.offsetWidth));
+      let div4BodyWidth = _.map($div4BodyAll[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
 
-    //Fix width for div2 (right head) & div4 (right body)
-    let div2Head = document.querySelectorAll('.thead-div2 th');
-    let div4Body = document.querySelectorAll('.tbody-div4 td');
+      let finalFrozenWidth = _.chain(div3BodyWidth)
+        .map((item, i) => Math.max(item, div1HeadWidth[i]))
+        .reject((item) => (_.isNaN(item)))
+        .value();
 
-    //-----------------------------
-    _.each(finalFrozenWidth, (list, key) => {
-      div1Head[key].children[0].style.width = finalFrozenWidth[key] + 'px';
-      div3Body[key].children[0].style.width = finalFrozenWidth[key] + 'px';
-    });
+      let finalWidth = _.chain(div4BodyWidth)
+        .map((item, i) => Math.max(item, div2HeadWidth[i]))
+        .reject((item) => (_.isNaN(item)))
+        .value();
 
-    _.each(finalWidth, (list, key) => {
-      //console.log(div2Head[key].children[0]);
-      div2Head[key].children[0].style.width = finalWidth[key] + 'px';
-      div4Body[key].children[0].style.width = finalWidth[key] + 'px';
-    });
-    //-----------------------------
+      //Fix width for div1 (left head) & div3 (left body)
+      let div1Head = document.querySelectorAll('.thead-div1 th');
+      let div3Body = document.querySelectorAll('.tbody-div3 td');
+
+      //Fix width for div2 (right head) & div4 (right body)
+      let div2Head = document.querySelectorAll('.thead-div2 th');
+      let div4Body = document.querySelectorAll('.tbody-div4 td');
+
+      //-----------------------------
+      _.each(finalFrozenWidth, (list, key) => {
+        div1Head[key].children[0].style.width = finalFrozenWidth[key] + 'px';
+        div3Body[key].children[0].style.width = finalFrozenWidth[key] + 'px';
+      });
+
+      _.each(finalWidth, (list, key) => {
+        //console.log(div2Head[key].children[0]);
+        div2Head[key].children[0].style.width = finalWidth[key] + 'px';
+        div4Body[key].children[0].style.width = finalWidth[key] + 'px';
+      });
+      //-----------------------------
+    }
   }
 
   prepareForDropdown(list) {
@@ -249,23 +256,12 @@ export class LanesController {
       return route;
     }).value();
 
-
     var newfilterRoutes = {
       rfproute: filterRoutes
     };
 
-    /*var req = {
-      method: 'POST',
-      url: 'http://115.113.135.239/RFPRest/RFPRestService.svc/routeupdate',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      data: newfilterRoutes
-    };*/
 
-
-
-    /*this._api.post('routeupdate', newfilterRoutes).then((r) => {
+    this._api.post('routeupdate', newfilterRoutes).then((r) => {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
         this.$state.go('dashboard');
       }, (err) => {
@@ -274,30 +270,45 @@ export class LanesController {
 
     }, (e) => {
       console.error(e);
-    });*/
+    });
+
     this.toaster.success('Lanes saved successfully');
   }
 
   uploadBlobOrFile(blobOrFile) {
 
     var client = new XMLHttpRequest();
-    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
-    //client.open('POST', `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`, false);
-    //client.setRequestHeader('Content-length', blobOrFile.length);
+    //client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
+    client.open('POST', `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`, false);
     client.setRequestHeader("Content-Type", "multipart/form-data");
 
     /* Check the response status */
     client.onreadystatechange = () => {
-      //console.log(document.readyState);
-      console.log("rdystate: " + client.readyState + " status: " + client.status + " Text: " + client.statusText);
+      //console.log("rdystate: " + client.readyState + " status: " + client.status + " Text: " + client.statusText);
       if (client.readyState == 4 && client.status == 200) {
-        console.log(client.responseText);
+
+
+        var response = JSON.parse(client.responseText);
+        console.log(`FilePath: ${response.FilePath}`);
+        //console.log(`FileLength: ${response.FileLength}`);
+        console.log(`FileName: ${response.FileName}`);
+
+        if (response.ErrorMessage != '') {
+          console.log(`ErrorMessage: ${response.ErrorMessage}`);
+        } else {
+          console.log(`SuccessMessage: ${response.SuccessMessage}`);
+        }
+        console.log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
+        console.log(response.ErrorData);
+
+        this.gridData = response.ErrorData;
+        $('#myModalErrorList').modal();
         //===========================
         //Get all RFP routes by RFP ID
         this.getRPFRoutes();
         //===========================
         this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
-        //  this.$state.go('dashboard');
+          //this.$state.go('dashboard');
         }, (err) => {
           //console.error(err);
           this.toaster.error(`${err.status} : ${err.statusText}`);
@@ -307,27 +318,11 @@ export class LanesController {
       }
     }
 
-    this.toaster.success('Lanes saved successfully');
     /* Send to server */
     client.send(blobOrFile);
+
+    this.toaster.success("Data imported");
   }
-
-  /*  uploadFile(file) {
-
-      this.Upload.upload({
-        //url: `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`,
-        url: `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`,
-        data: {},
-        file: file
-      }).then(function(resp) {
-        console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-      }, function(resp) {
-        console.log('Error status: ' + resp.status);
-      }, function(evt) {
-        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-        console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-      });
-    }*/
 
   map(id, list, idMatcher, nameKey) {
     if (_.isInteger(id) && list.length > 0) {
@@ -343,6 +338,10 @@ export class LanesController {
     this.editingIndex = null;
     $('#myModal').modal();
 
+  }
+
+  closeModal() {
+    $('#myModalErrorList').modal('hide');
   }
 
 }

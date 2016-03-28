@@ -1,5 +1,3 @@
-/* global malarkey:false, moment:false */
-
 import { config } from './index.config';
 import { routerConfig } from './index.route';
 import { runBlock } from './index.run';
@@ -11,6 +9,8 @@ import { OutputController } from './output/output.controller';
 import { LanesController } from './lanes/lanes.controller';
 import { apiService } from '../app/components/api/api.service';
 import { masterService } from '../app/components/master/master.service';
+import { authService } from '../app/login/auth.service';
+import { AppController } from '../app/components/app/app.controller';
 
 
 angular.module('mllRfpClient', ['ui.router', 'ngFileUpload','toaster'])
@@ -24,4 +24,6 @@ angular.module('mllRfpClient', ['ui.router', 'ngFileUpload','toaster'])
   .controller('OutputController', OutputController)
   .controller('LanesController', LanesController)
   .service('apiService', apiService)
-  .service('masterService', masterService);
+  .service('masterService', masterService)
+  .service('authService', authService)
+  .controller('AppController', AppController);
