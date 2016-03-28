@@ -52,7 +52,9 @@ export class OutputController {
 
     this._api.get(`gettrans/${this.$stateParams.rfpId}`).then((res) => {
       this.outputdata = res.data;
-      console.log(this.outputdata);
+
+      //this.outputdata.selectedOption = $scope.options[1];
+      //console.log(this.outputdata);
 
       var newOutputData = _.each(this.outputdata, (key, value) => {
         var L1RATE = this.outputdata[value].L1RATE;
@@ -62,7 +64,6 @@ export class OutputController {
         var L2RATE = this.outputdata[value].L2RATE;
         L2RATE = Math.round(L2RATE / 1000 * 100) / 100;
         this.outputdata[value].L2RATE = L2RATE;
-
 
         var L3RATE = this.outputdata[value].L3RATE;
         L3RATE = Math.round(L3RATE / 1000 * 100) / 100;
@@ -82,21 +83,47 @@ export class OutputController {
 
       })
 
-      //this.nameoutputdata = this.outputdata[0];
-      this.nameoutputdata = newOutputData[0];
-      this.fromLocationOptions = _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
-      this.routesGroupByLocation = _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
+      if(this.outputdata[0].OPPRDOMAIN == 'Inbound')
+      {
+        //this.nameoutputdata = this.outputdata[0];
+        this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
+        this.nameoutputdata = newOutputData[0];
+        this.fromLocationOptions = _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
+        this.routesGroupByLocation = _.groupBy(this.outputdata, 'TOLOCATIONNAME');
 
-      _.each(this.routesGroupByLocation, (vehiclelist, key) => {
-        this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
-      });
+        _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+          this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+        });
 
-      this.filterOption = {
-        FROMLOCATIONNAME: this.fromLocationOptions[0].FROMLOCATIONNAME,
-        VEHICLETYPENAME: this.fromLocationOptions[0].VEHICLETYPENAME
-      };
+        this.filterOption = {
+          FROMLOCATIONNAME: this.fromLocationOptions[0].TOLOCATIONNAME,
+          VEHICLETYPENAME: this.fromLocationOptions[0].VEHICLETYPENAME
+        };
 
-      this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+        this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+      }
+
+      else {
+
+        //this.nameoutputdata = this.outputdata[0];
+        this.nameoutputdata = newOutputData[0];
+        this.fromLocationOptions = _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
+        this.routesGroupByLocation = _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
+
+        _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+          this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+        });
+
+        this.filterOption = {
+          FROMLOCATIONNAME: this.fromLocationOptions[0].FROMLOCATIONNAME,
+          VEHICLETYPENAME: this.fromLocationOptions[0].VEHICLETYPENAME
+        };
+
+        this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+
+      }
+
+      //console.log(this.outputdata);
 
     }, (err) => {
       console.error(err);
@@ -117,9 +144,18 @@ export class OutputController {
     this.rowClickedColName = clickedColName;
 
     this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
-    this.inproxiparam.ORIGINSTATE = table.FROMSTATE;
-    this.inproxiparam.DESTINATION = table.TOLOCATIONNAME;
-    this.inproxiparam.DESTINATIONSTATE = table.TOSTATE;
+
+    if(this.outputdata[0].OPPRDOMAIN == 'Inbound'){
+      this.inproxiparam.DESTINATION = table.FROMLOCATIONNAME;
+      this.inproxiparam.DESTINATIONSTATE = table.FROMSTATE;
+      this.inproxiparam.ORIGINSTATE = table.TOSTATE;
+    }
+    else {
+      this.inproxiparam.ORIGINSTATE = table.FROMSTATE;
+      this.inproxiparam.DESTINATION = table.TOLOCATIONNAME;
+      this.inproxiparam.DESTINATIONSTATE = table.TOSTATE;
+    }
+
     this.inproxiparam.VEHICLETYPE = this.filterOption.VEHICLETYPENAME;
     this.inproxiparam.DISTANCE = table.PROXIDISTANCE;
     this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;
@@ -129,7 +165,15 @@ export class OutputController {
       inproxiparam: this.inproxiparam
     };
 
-    this.TOLOCATIONNAME = table.TOLOCATIONNAME;
+    console.log(newfilterRoutes);
+
+    if(this.outputdata[0].OPPRDOMAIN == 'Inbound'){
+      this.TOLOCATIONNAME = table.FROMLOCATIONNAME;
+    }
+    else {
+      this.TOLOCATIONNAME = table.TOLOCATIONNAME;
+      //this.TOLOCATIONNAME = this.filterOption.FROMLOCATIONNAME;
+    }
     this.CONTRACTRATE = table[clickedColName];
     this.colName = headerColName;
     this.modalHeaderName = modalHeaderName;
@@ -151,9 +195,6 @@ export class OutputController {
 
       $('#myModalOutputDetails').modal();
     }
-
-
-
   }
 
   submit() {
@@ -256,9 +297,7 @@ export class OutputController {
     this.outputdata[0].CLEANSHEETRATE = this.outputdata[0].CLEANSHEETRATE / 1000;
   }
 
-
-  export () {
-    //this._api.get('exportrfpout/1').then((res) => {
+  exportNormal(){
     this._api.get(`exportrfpout/${this.$stateParams.rfpId}`).then((res) => {
       window.open(res.data);
     }, (err) => {
@@ -267,7 +306,6 @@ export class OutputController {
   }
 
   exportBAQuote () {
-    //this._api.get('expbaquote/1').then((res) => {
     this._api.get(`expbaquote/${this.$stateParams.rfpId}`).then((res) => {
       window.open(res.data);
     }, (err) => {
@@ -277,6 +315,7 @@ export class OutputController {
 
  uploadBlobOrFile(blobOrFile) {
 
+    console.log(blobOrFile.length);
     var client = new XMLHttpRequest();
     client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/baquote/${this.$stateParams.rfpid}/baquote/1`, false);
     //client.open('POST', `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`, false);
@@ -289,7 +328,6 @@ export class OutputController {
       if (client.readyState == 4 && client.status == 200) {
         console.log(client.responseText);
         //===========================
-        //Get all RFP routes by RFP ID
         /*this.getRPFRoutes();
         //===========================
         this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
@@ -306,6 +344,7 @@ export class OutputController {
     //this.toaster.success('Lanes saved successfully');
     /* Send to server */
     client.send(blobOrFile);
+
   }
 
   checkBackhaul() {
@@ -322,5 +361,23 @@ export class OutputController {
     } else {
       return false;
     }
+  }
+
+  updateProposedRate(route, key, value){
+    if(key == 'CONTRACTRATE' || key == 'SHIPXRATE' || key == "PVSRFPRATE")
+    {
+      route.APPROVEDAMOUNT = route[key]/1000;
+      route.BANAME = '';
+    }
+    else {
+      route.APPROVEDAMOUNT = route[key];
+      route.BANAME = route[value];
+    }
+  }
+
+  locationFlag()
+  {
+    return TOLOCATIONNAME;
+
   }
 }
