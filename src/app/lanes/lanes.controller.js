@@ -302,7 +302,10 @@ export class LanesController {
         console.log(response.ErrorData);
 
         this.gridData = response.ErrorData;
-        $('#myModalErrorList').modal();
+
+        if (this.gridData != null) {
+          $('#myModalErrorList').modal();
+        }
         //===========================
         //Get all RFP routes by RFP ID
         this.getRPFRoutes();
