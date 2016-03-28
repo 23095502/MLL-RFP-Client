@@ -22,7 +22,6 @@ export class DashboardController {
       });
       this.rfps = rfps;
     }, (err) => {
-      // console.log(err);
       this.toaster.error(`${err.status} : ${err.statusText}`);
     });
 

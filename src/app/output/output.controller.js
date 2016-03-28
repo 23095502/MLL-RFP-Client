@@ -52,6 +52,7 @@ export class OutputController {
 
     this._api.get(`gettrans/${this.$stateParams.rfpId}`).then((res) => {
       this.outputdata = res.data;
+      console.log(this.outputdata);
 
       var newOutputData = _.each(this.outputdata, (key, value) => {
         var L1RATE = this.outputdata[value].L1RATE;
@@ -73,10 +74,7 @@ export class OutputController {
 
         var L5RATE = this.outputdata[value].L5RATE;
         L5RATE = Math.round(L5RATE / 1000 * 100) / 100;
-        //var total = 55;
-        //alert( L5RATE.toFixed(1) );
         this.outputdata[value].L5RATE = L5RATE;
-
 
         var APPROVEDAMOUNT = this.outputdata[value].APPROVEDAMOUNT;
         APPROVEDAMOUNT = Math.round(APPROVEDAMOUNT / 1000 * 100) / 100;
@@ -91,8 +89,6 @@ export class OutputController {
 
       _.each(this.routesGroupByLocation, (vehiclelist, key) => {
         this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
-
-        //console.log(this.outputdata);
       });
 
       this.filterOption = {
@@ -103,8 +99,7 @@ export class OutputController {
       this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
 
     }, (err) => {
-      //console.error(err);
-      this.toaster.error(`${err.status} : ${err.statusText}`);
+      console.error(err);
     });
   }
 
@@ -127,15 +122,12 @@ export class OutputController {
     this.inproxiparam.DESTINATIONSTATE = table.TOSTATE;
     this.inproxiparam.VEHICLETYPE = this.filterOption.VEHICLETYPENAME;
     this.inproxiparam.DISTANCE = table.PROXIDISTANCE;
-    //this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;
-    this.inproxiparam.NOOFTRIPS = table.PROXIDISTANCE;
+    this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;
 
     this.gridData = [];
     var newfilterRoutes = {
       inproxiparam: this.inproxiparam
     };
-
-    //console.log(newfilterRoutes);
 
     this.TOLOCATIONNAME = table.TOLOCATIONNAME;
     this.CONTRACTRATE = table[clickedColName];
@@ -144,10 +136,11 @@ export class OutputController {
 
     this._api.post(this.urlMaps[colname], newfilterRoutes, true).then((res) => {
       this.gridData = res.data[this.responseKeys[clickedColName]];
+      console.log(this.gridData);
+      //this.nooftrips = this.gridData[0].NOOFTRIPS;
 
     }, (err) => {
-      //console.error(err);
-      this.toaster.error(`${err.status} : ${err.statusText}`);
+      console.error(err);
     });
 
 
@@ -158,6 +151,8 @@ export class OutputController {
 
       $('#myModalOutputDetails').modal();
     }
+
+
 
   }
 
@@ -225,20 +220,15 @@ export class OutputController {
       apptrans: revisedOutput
     };
 
-    //console.log(newOutputDetails);
-
     this._api.post('apptrans', newOutputDetails).then((res) => {
       this.getTransactionData();
-      //console.log(res.data);
     }, (err) => {
-      //console.error(err);
-      this.toaster.error(`${err.status} : ${err.statusText}`);
+      console.error(err);
     });
 
     this.toaster.success('Changes saved successfully');
 
   }
-
 
   updateContractRate(popupGridData, colName) {
     this.CONTRACTRATE = popupGridData.FREIGHTRATE;
@@ -249,7 +239,6 @@ export class OutputController {
     } else {
       $('#myModalOutputDetailsForBackHaul').modal('hide');
     }
-
   }
 
   changecolor(toMatch, approvedRate) {
@@ -273,8 +262,7 @@ export class OutputController {
     this._api.get(`exportrfpout/${this.$stateParams.rfpId}`).then((res) => {
       window.open(res.data);
     }, (err) => {
-      //console.error(err);
-      this.toaster.error(`${err.status} : ${err.statusText}`);
+      console.error(err);
     });
   }
 
@@ -287,8 +275,6 @@ export class OutputController {
     });
   }
 
- //added by yogini
-
  uploadBlobOrFile(blobOrFile) {
 
     var client = new XMLHttpRequest();
@@ -299,7 +285,6 @@ export class OutputController {
 
     /* Check the response status */
     client.onreadystatechange = () => {
-      //console.log(document.readyState);
       console.log("rdystate: " + client.readyState + " status: " + client.status + " Text: " + client.statusText);
       if (client.readyState == 4 && client.status == 200) {
         console.log(client.responseText);
@@ -322,7 +307,6 @@ export class OutputController {
     /* Send to server */
     client.send(blobOrFile);
   }
-//added by yogini
 
   checkBackhaul() {
 
@@ -333,24 +317,10 @@ export class OutputController {
   }
 
   showColumn(colName) {
-
     if (colName == 'BACKHAULAVL') {
       return true;
     } else {
       return false;
     }
   }
-
-  updateProposedRate(route, key, value){
-    if(key == 'CONTRACTRATE' || key == 'SHIPXRATE' || key == "PVSRFPRATE")
-    {
-      route.APPROVEDAMOUNT = route[key]/1000;
-      route.BANAME = '';
-    }
-    else {
-      route.APPROVEDAMOUNT = route[key];
-      route.BANAME = route[value];
-    }
-  }
-
 }
