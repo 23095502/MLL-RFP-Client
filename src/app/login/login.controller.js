@@ -19,20 +19,19 @@ export class LoginController {
 
         if (this.$rootScope.returnToState === '/create/overall') {
           this.$state.transitionTo('overall');
-        } else if (this.$rootScope.returnToState === '/create/lanes/:rfpid/:iswarehousing') {
-
+        }
+        else if (this.$rootScope.returnToState === '/create/lanes/:rfpid/:iswarehousing') {
           this.$state.go('lanes', {
             rfpid: this.$rootScope.returnToStateParams.rfpid,
             iswarehousing: this.$rootScope.returnToStateParams.iswarehousing
           });
-
-        } else if (this.$rootScope.returnToState === '/output/:rfpId') {
-
+        }
+        else if (this.$rootScope.returnToState === '/output/:rfpId') {
           this.$state.go('output', {
             rfpid: this.$rootScope.returnToStateParams.rfpid
           });
-
-        } else {
+        }
+        else {
           this.$state.transitionTo('dashboard');
         }
       }
