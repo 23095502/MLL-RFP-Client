@@ -52,6 +52,7 @@ export class OutputController {
 
     this._api.get(`gettrans/${this.$stateParams.rfpId}`).then((res) => {
       this.outputdata = res.data;
+      console.log(this.outputdata);
 
       var newOutputData = _.each(this.outputdata, (key, value) => {
         var L1RATE = this.outputdata[value].L1RATE;
@@ -75,7 +76,6 @@ export class OutputController {
         L5RATE = Math.round(L5RATE / 1000 * 100) / 100;
         this.outputdata[value].L5RATE = L5RATE;
 
-
         var APPROVEDAMOUNT = this.outputdata[value].APPROVEDAMOUNT;
         APPROVEDAMOUNT = Math.round(APPROVEDAMOUNT / 1000 * 100) / 100;
         this.outputdata[value].APPROVEDAMOUNT = APPROVEDAMOUNT;
@@ -89,6 +89,9 @@ export class OutputController {
 
       _.each(this.routesGroupByLocation, (vehiclelist, key) => {
         this.routesGroupByLocation[key] = _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+
+
+
       });
 
       this.filterOption = {
@@ -99,8 +102,7 @@ export class OutputController {
       this.vehicleTypeOptions = this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
 
     }, (err) => {
-      //console.error(err);
-      this.toaster.error(`${err.status} : ${err.statusText}`);
+      console.error(err);
     });
   }
 
@@ -123,30 +125,25 @@ export class OutputController {
     this.inproxiparam.DESTINATIONSTATE = table.TOSTATE;
     this.inproxiparam.VEHICLETYPE = this.filterOption.VEHICLETYPENAME;
     this.inproxiparam.DISTANCE = table.PROXIDISTANCE;
-    //this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;
-    this.inproxiparam.NOOFTRIPS = table.PROXIDISTANCE;
+    this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;
 
     this.gridData = [];
     var newfilterRoutes = {
       inproxiparam: this.inproxiparam
     };
 
-    //console.log(newfilterRoutes);
-    //console.log(table.ISBAPROXIMITY);
-
     this.TOLOCATIONNAME = table.TOLOCATIONNAME;
     this.CONTRACTRATE = table[clickedColName];
     this.colName = headerColName;
     this.modalHeaderName = modalHeaderName;
-    this.ISBAPROX = table.ISBAPROXIMITY;
-    this.ISBACKHAULPROX = table.ISBACKHAULPROXIMITY;
 
     this._api.post(this.urlMaps[colname], newfilterRoutes, true).then((res) => {
-
       this.gridData = res.data[this.responseKeys[clickedColName]];
+      console.log(this.gridData);
+      //this.nooftrips = this.gridData[0].NOOFTRIPS;
+
     }, (err) => {
-      //console.error(err);
-      this.toaster.error(`${err.status} : ${err.statusText}`);
+      console.error(err);
     });
 
 
@@ -157,6 +154,8 @@ export class OutputController {
 
       $('#myModalOutputDetails').modal();
     }
+
+
 
   }
 
@@ -230,8 +229,7 @@ export class OutputController {
       this.getTransactionData();
       console.log(res.data);
     }, (err) => {
-      //console.error(err);
-      this.toaster.error(`${err.status} : ${err.statusText}`);
+      console.error(err);
     });
 
     this.toaster.success('Changes saved successfully');
@@ -248,6 +246,7 @@ export class OutputController {
     } else {
       $('#myModalOutputDetailsForBackHaul').modal('hide');
     }
+
 
   }
 
@@ -271,7 +270,7 @@ export class OutputController {
     this._api.get('exportrfpout/1').then((res) => {
       window.open(res.data);
     }, (err) => {
-      this.toaster.error(`${err.status} : ${err.statusText}`);
+      console.error(err);
     });
   }
 
@@ -292,16 +291,10 @@ export class OutputController {
     }
   }
 
-  updateProposedRate(route, key, value){
-    if(key == 'CONTRACTRATE' || key == 'SHIPXRATE' || key == "PVSRFPRATE")
-    {
-      route.APPROVEDAMOUNT = route[key]/1000;
-      route.BANAME = '';
-    }
-    else {
-      route.APPROVEDAMOUNT = route[key];
-      route.BANAME = route[value];
-    }
+  status(){
+
+    //console.log(this.outputdata);
+
   }
 
 }
