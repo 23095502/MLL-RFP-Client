@@ -328,18 +328,7 @@ export class OutputController {
       if (client.readyState == 4 && client.status == 200) {
         console.log(client.responseText);
         //===========================
-<<<<<<< HEAD
-        /*this.getRPFRoutes();
-        //===========================
-        this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
-          //this.$state.go('dashboard');
-        }, (err) => {
-          //console.error(err);
-          this.toaster.error(`${err.status} : ${err.statusText}`);
-        });*/
-=======
           this.getTransactionData();
->>>>>>> develop
         //===========================
         $('#myModalBrowse').modal('hide');
       }
