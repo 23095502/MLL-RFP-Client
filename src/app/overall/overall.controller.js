@@ -25,9 +25,7 @@ export class OverallController {
       "CREATEDBY": 0,
       "CREATEDON": null
     };
-
   }
-
 
   init() {
 

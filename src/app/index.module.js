@@ -6,6 +6,7 @@ import { CustomerController } from './customer/customer.controller';
 import { LoginController } from './login/login.controller';
 import { DashboardController } from './dashboard/dashboard.controller';
 import { OutputController } from './output/output.controller';
+import { MarketRateController } from './marketrate/marketrate.controller';
 import { LanesController } from './lanes/lanes.controller';
 import { apiService } from '../app/components/api/api.service';
 import { masterService } from '../app/components/master/master.service';
@@ -23,6 +24,7 @@ angular.module('mllRfpClient', ['ui.router', 'ngFileUpload','toaster'])
   .controller('DashboardController', DashboardController)
   .controller('OutputController', OutputController)
   .controller('LanesController', LanesController)
+  .controller('MarketRateController', MarketRateController)
   .service('apiService', apiService)
   .service('masterService', masterService)
   .service('authService', authService)
