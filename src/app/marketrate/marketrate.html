@@ -1,0 +1,80 @@
+<div ng-init="overall.add()">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4">
+            <h1>Market Rate Details</h1>
+        </div>
+    </div>
+    <div class="form-divider"></div>
+</div>
+<!-- <form ng-submit="marketrate.addMarketRate()"> -->
+<form ng-submit="marketrate.addMarketRate()">
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="form-label" title="required" for="fromCityName">From city<i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                <select class="form-control input-sm" id="fromCityName" ng-model="marketrate.marketrate.OriginCity" ng-options="location.LOCATIONNAME as location.LOCATIONNAME for location in marketrate.locationname_option" required>
+                  <option value="">Select</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="form-label" title="required" for="fromState">From state<i class="glyphicon glyphicon-asterisk icon-required"></i> </label>
+                <select class="form-control input-sm" id="fromState" ng-model="marketrate.marketrate.OriginState" ng-options="state.STATENAME as state.STATENAME for state in marketrate.statename_option">
+                  <option value="" required>Select</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="form-label" title="required" for="toCity">To city<i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                <select class="form-control input-sm" id="toCity" ng-model="marketrate.marketrate.DestinationCity" ng-options="location.LOCATIONNAME as location.LOCATIONNAME for location in marketrate.locationname_option" required>
+                  <option value="">Select</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="form-label" title="required" for="toState">To state<i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                <select class="form-control input-sm" id="toState" ng-model="marketrate.marketrate.DestinationState" ng-options="state.STATENAME as state.STATENAME for state in marketrate.statename_option" required>
+                  <option value="">Select</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="form-label" title="required" for="vehType">Vehicle Type<i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                <select class="form-control input-sm" id="vehType" ng-model="marketrate.marketrate.VehicleType" ng-options="vehicletype.VEHICLETYPENAME as vehicletype.VEHICLETYPENAME for vehicletype in marketrate.vehicletypename_option" required>
+                  <option value="">Select</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="form-label" title="required" for="rate">Rate </label>
+                <input type="number" step="0.01" maxlength="5" class="form-control input-sm" id="rate" placeholder="Rate " ng-model="marketrate.marketrate.Rate" required>
+            </div>
+        </div>
+        <!-- <div class="col-sm-4 col-md-4">
+            <div class="form-group">
+                <label class="form-label" for="rate">Remarks</label>
+                <input type="text" class="form-control input-sm" id="rate" placeholder="Remarks" >
+            </div>
+        </div> -->
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+        <!-- </div> -->
+  </div>
+</form>
+</div>
+

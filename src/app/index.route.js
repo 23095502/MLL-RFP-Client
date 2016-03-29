@@ -43,6 +43,14 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
       controller: 'OutputController',
       controllerAs: 'output',
       authenticate: true
+    })
+
+    .state('marketrate', {
+      url: '/marketrate/:rfpId',
+      templateUrl: 'app/marketrate/marketrate.html',
+      controller: 'MarketRateController',
+      controllerAs: 'marketrate',
+      authenticate: true
     });
 
   $urlRouterProvider.otherwise('/');
