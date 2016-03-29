@@ -9,7 +9,7 @@
       <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalBrowse">
         <i class="glyphicon glyphicon-import"></i>  Import BA Quotes
       </button>
-      <button class="btn btn-default btn-xs" ng-click="output.export()"><i class="glyphicon glyphicon-export"></i> Export
+      <button class="btn btn-default btn-xs" ng-click="output.exportNormal()"><i class="glyphicon glyphicon-export"></i> Export
       </button>
     </div>
   </div>
@@ -72,8 +72,10 @@
       <div class="form-inline">
         <div class="form-group">
           <label class="form-label" for="from">From&nbsp;</label>
-          <select class="form-control input-sm" id="from" ng-model="output.filterOption.FROMLOCATIONNAME" ng-options="from.FROMLOCATIONNAME as from.FROMLOCATIONNAME for from in output.fromLocationOptions" ng-change="output.changeLocation()">
-          </select>
+            <select ng-show="(output.outputdata[0].OPPRDOMAIN === 'Outbound') ? true : false" class="form-control input-sm" id="from" ng-model="output.filterOption.FROMLOCATIONNAME" ng-options="from.FROMLOCATIONNAME as from.FROMLOCATIONNAME for from in output.fromLocationOptions" ng-change="output.changeLocation()">
+            </select>
+            <select ng-show="(output.outputdata[0].OPPRDOMAIN === 'Inbound') ? true : false" class="form-control input-sm" id="from" ng-model="output.filterOption.FROMLOCATIONNAME" ng-options="from.TOLOCATIONNAME as from.TOLOCATIONNAME for from in output.fromLocationOptions" ng-change="output.changeLocation()">
+            </select>
         </div>
         <div class="form-group">
           <label class="form-label" for="trucktype">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Truck Type&nbsp;
@@ -121,9 +123,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="route in output.outputdata | filter:{FROMLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
+
+          <tr ng-show="(output.outputdata[0].OPPRDOMAIN === 'Outbound') ? true : false" ng-repeat="route in output.outputdata | filter: {FROMLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
             <td class="whitecol">
-              <strong>{{route.TOLOCATIONNAME}}</strong>
+                <strong ng-show="(output.outputdata[0].OPPRDOMAIN === 'Outbound') ? true : false">{{route.TOLOCATIONNAME}}</strong>
+                <strong ng-show="(output.outputdata[0].OPPRDOMAIN === 'Inbound') ? true : false">{{route.FROMLOCATIONNAME}}</strong>
               <br>{{route.TOSTATECODE}}
             </td>
             <td ng-class="output.changecolor(route.CLEANSHEETRATE,route.APPROVEDAMOUNT)" class="text-center fixed-width-col">
@@ -158,7 +162,6 @@
               <hr/>
               <span title="{{route.L2BANAME}}" class="mll-table-label">{{route.L2BANAME | limitTo:10}}</span>
             </td>
-
             <td class="text-center">
               <input type="number" class="form-control mll-table-input" id="l3rate" ng-model="route.L3RATE" />
               <hr/>
@@ -185,7 +188,7 @@
               <div class="btn-group dropup">
                 <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu dropdown-menu-right">
+                <ul class="dropdown-menu dropdown-menu-right" ng-model="output.selectedOption">
                   <li><a ng-click="output.updateProposedRate(route, 'CONTRACTRATE', '')"><span class="label label-default label-thin">{{route.CONTRACTRATE/1000 | number : 2}}</span>&nbsp;<small>DB, {{}}</small></a></li>
                   <li><a ng-click="output.updateProposedRate(route, 'SHIPXRATE', '')"><span class="label label-default label-thin">{{route.SHIPXRATE/1000 | number : 2}}</span>&nbsp;<small>ShipX, {{}}</small></a></li>
                   <li><a ng-click="output.updateProposedRate(route, 'PVSRFPRATE', '')"><span class="label label-default label-thin">{{route.PVSRFPRATE/1000 | number : 2}}</span>&nbsp;<small>RFP, {{}}</small></a></li>
@@ -193,7 +196,85 @@
                   <li><a ng-click="output.updateProposedRate(route, 'L1RATE', 'L1BANAME')"><span class="label label-default label-thin">{{route.L1RATE}}</span>&nbsp;<small>L1, {{route.L1BANAME}}</small></a></li>
                   <li><a ng-click="output.updateProposedRate(route, 'L2RATE', 'L2BANAME')"><span class="label label-default label-thin">{{route.L2RATE}}</span>&nbsp;<small>L2, {{route.L2BANAME}}</small></a></li>
                   <li><a ng-click="output.updateProposedRate(route, 'L3RATE', 'L3BANAME')"><span class="label label-default label-thin">{{route.L3RATE}}</span>&nbsp;<small>L3, {{route.L3BANAME}}</small></a></li>
-                  <li><a ng-click="output.updateProposedRate(route, 'L4RATE', 'L4BANAME')"><span class="label label-default label-thin">{{route.L4RATE}}</span>&nbsp;<small>L4, {{route.L4BANAME}}</small></a></li>
+                  <li><a ng-selected="true" ng-click="output.updateProposedRate(route, 'L4RATE', 'L4BANAME')"><span class="label label-default label-thin">{{route.L4RATE}}</span>&nbsp;<small>L4, {{route.L4BANAME}}</small></a></li>
+                  <li><a ng-click="output.updateProposedRate(route, 'L5RATE', 'L5BANAME')"><span class="label label-default label-thin">{{route.L5RATE}}</span>&nbsp;<small>L5, {{route.L5BANAME}}</small></a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+          <tr ng-show="(output.outputdata[0].OPPRDOMAIN === 'Inbound') ? true : false" ng-repeat="route in output.outputdata | filter: {TOLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
+            <td class="whitecol">
+                <strong ng-show="(output.outputdata[0].OPPRDOMAIN === 'Outbound') ? true : false">{{route.TOLOCATIONNAME}}</strong>
+                <strong ng-show="(output.outputdata[0].OPPRDOMAIN === 'Inbound') ? true : false">{{route.FROMLOCATIONNAME}}</strong>
+              <br>{{route.TOSTATECODE}}
+            </td>
+            <td ng-class="output.changecolor(route.CLEANSHEETRATE,route.APPROVEDAMOUNT)" class="text-center fixed-width-col">
+              <span>{{route.CLEANSHEETRATE/1000 | number : 2}}</span>
+            </td>
+            <td ng-class="output.changecolor(route.MARKETRATE,route.APPROVEDAMOUNT)" class="text-center fixed-width-col">
+              <span>{{route.MARKETRATE/1000 | number : 2}}</span>
+            </td>
+            <td ng-click="output.showModal('rfphistory', route, 'PVSRFPRATE', 'RFP Rate', 'RFP RATES')" ng-class="output.changecolor(route.PVSRFPRATE,route.APPROVEDAMOUNT)" class="text-center fixed-width-col open-popup">
+              <span>{{route.PVSRFPRATE/1000 | number : 2}}</span>
+            </td>
+            <td ng-click="output.showModal('contract', route, 'CONTRACTRATE', 'Contract Rate', 'CONTRACT RATES')" ng-class="output.changecolor(route.CONTRACTRATE,route.APPROVEDAMOUNT)" class="text-center fixed-width-col open-popup">
+              <span class="mll-table-label">{{route.CONTRACTRATE/1000 | number : 2}}</span>
+              <i ng-show="(route.ISBAPROXIMITY === 'N') ? false : true" class="label-sticky">Px
+              </i>
+            </td>
+            <td ng-class="output.changecolor(route.SHIPXRATE,route.APPROVEDAMOUNT)" class="text-center fixed-width-col">
+              <span class="mll-table-label">{{route.SHIPXRATE/1000 | number : 2}}</span>
+            </td>
+            <td ng-click="output.showModal('backhaul', route, 'NOOFTRIPS', 'Backhaul', 'BACKHAUL RATES')" class="text-center fixed-width-col open-popup">
+              <span ng-class="{'Y' : 'glyphicon glyphicon-ok' ,  'N' : ''}[route.BACKHAULAVL]" title="{{route.BACKHAULAVL}}"></span>
+              <i ng-show="(route.ISBACKHAULPROXIMITY === 'N') ? false : true" class="label-sticky">Px
+              </i>
+            </td>
+            <td class="text-center">
+              <input type="number" class="form-control mll-table-input" id="l1rate" ng-model="route.L1RATE" />
+              <hr/>
+              <span title="{{route.L1BANAME}}" class="mll-table-label">{{route.L1BANAME | limitTo:10}}</span>
+            </td>
+            <td class="text-center">
+              <input type="number" class="form-control mll-table-input" id="l2rate" ng-model="route.L2RATE" />
+              <hr/>
+              <span title="{{route.L2BANAME}}" class="mll-table-label">{{route.L2BANAME | limitTo:10}}</span>
+            </td>
+            <td class="text-center">
+              <input type="number" class="form-control mll-table-input" id="l3rate" ng-model="route.L3RATE" />
+              <hr/>
+              <span title="{{route.L3BANAME}}" class="mll-table-label">{{route.L3BANAME | limitTo:10}}</span>
+            </td>
+            <td class="text-center">
+              <input type="number" class="form-control mll-table-input" id="l4rate" ng-model="route.L4RATE" />
+              <hr/>
+              <span title="{{route.L4BANAME}}" class="mll-table-label">{{route.L4BANAME | limitTo:10}}</span>
+            </td>
+            <td class="text-center">
+              <input type="number" class="form-control mll-table-input" id="l5rate" ng-model="route.L5RATE" />
+              <hr/>
+              <span title="{{route.L5BANAME}}" class="mll-table-label">{{route.L5BANAME | limitTo:10}}</span>
+            </td>
+            <td class="whitecol">
+              <span ng-bind="route.APPROVEDAMOUNT|number : 2"></span>
+              <hr/>
+              <span ng-bind="route.BANAME" class="mll-table-label"></span>
+            </td>
+            <td class="whitecol">
+              <!--<input class="form-control mll-table-input" type="number" id="approvedAmount"
+                ng-model="route.APPROVEDAMOUNT" value="{{route.APPROVEDAMOUNT}}"/>-->
+              <div class="btn-group dropup">
+                <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" ng-model="output.selectedOption">
+                  <li><a ng-click="output.updateProposedRate(route, 'CONTRACTRATE', '')"><span class="label label-default label-thin">{{route.CONTRACTRATE/1000 | number : 2}}</span>&nbsp;<small>DB, {{}}</small></a></li>
+                  <li><a ng-click="output.updateProposedRate(route, 'SHIPXRATE', '')"><span class="label label-default label-thin">{{route.SHIPXRATE/1000 | number : 2}}</span>&nbsp;<small>ShipX, {{}}</small></a></li>
+                  <li><a ng-click="output.updateProposedRate(route, 'PVSRFPRATE', '')"><span class="label label-default label-thin">{{route.PVSRFPRATE/1000 | number : 2}}</span>&nbsp;<small>RFP, {{}}</small></a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a ng-click="output.updateProposedRate(route, 'L1RATE', 'L1BANAME')"><span class="label label-default label-thin">{{route.L1RATE}}</span>&nbsp;<small>L1, {{route.L1BANAME}}</small></a></li>
+                  <li><a ng-click="output.updateProposedRate(route, 'L2RATE', 'L2BANAME')"><span class="label label-default label-thin">{{route.L2RATE}}</span>&nbsp;<small>L2, {{route.L2BANAME}}</small></a></li>
+                  <li><a ng-click="output.updateProposedRate(route, 'L3RATE', 'L3BANAME')"><span class="label label-default label-thin">{{route.L3RATE}}</span>&nbsp;<small>L3, {{route.L3BANAME}}</small></a></li>
+                  <li><a ng-selected="true" ng-click="output.updateProposedRate(route, 'L4RATE', 'L4BANAME')"><span class="label label-default label-thin">{{route.L4RATE}}</span>&nbsp;<small>L4, {{route.L4BANAME}}</small></a></li>
                   <li><a ng-click="output.updateProposedRate(route, 'L5RATE', 'L5BANAME')"><span class="label label-default label-thin">{{route.L5RATE}}</span>&nbsp;<small>L5, {{route.L5BANAME}}</small></a></li>
                 </ul>
               </div>
@@ -404,7 +485,7 @@
     </div>
   </div>
 </div>
-<!--added by yogini-->
+
 <div class="modal fade" id="myModalBrowse" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -417,8 +498,9 @@
           <div class="col-md-6 col-md-offset-3">
             <input type="file" ngf-select ng-model="output.file" name="file"
             accept="excel/*" ngf-max-size="2MB" required
-            ngf-model-invalid="output.errorFile">
-            <i ng-show="output.file.$error.required">*required</i><br>
+            ngf-model-invalid="output.errorFile" >
+            <i ng-show="output.file.$error.required">*required</i>
+            <br>
             <i ng-show="output.file.$error.maxSize">File too large
             {{lane.errorFile.size / 1000000|number:1}}MB: max 2M</i>
             <!-- <button ng-click="lane.uploadBlobOrFile(lane.file)">Submit</button> -->
@@ -430,7 +512,6 @@
             <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
           </div>
         </div>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -439,4 +520,3 @@
     </div>
   </div>
 </div>
-<!--added by yogini-->
