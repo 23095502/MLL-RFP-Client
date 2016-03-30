@@ -31,75 +31,9 @@ export class MarketRateController {
     this.statename_option = masterService.getStates();
     this.vehicletypename_option = masterService.getVehicleTypes();
 
-      // document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function(e) {
-      // document.querySelector('.tbody-div3 table').style.top = `-${e.target.scrollTop}px`;
-      // document.querySelector('.thead-div2 table').style.left = `-${e.target.scrollLeft}px`;
-    // });
-
     this.add();
   }
 
-  /*adjustScrollableTable() {
-
-    var $div1HeadAll = document.querySelectorAll('.thead-div1 th');
-    var $div2HeadAll = document.querySelectorAll('.thead-div2 th');
-    var $div3BodyAll = document.querySelectorAll('.tbody-div3 tr');
-    var $div4BodyAll = document.querySelectorAll('.tbody-div4 tr');
-
-    if ($div3BodyAll.length > 0 && $div4BodyAll.length > 0) {
-
-      let div1HeadWidth = _.map($div1HeadAll, (th) => (th.offsetWidth));
-      let div3BodyWidth = _.map($div3BodyAll[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
-      let div2HeadWidth = _.map($div2HeadAll, (th) => (th.offsetWidth));
-      let div4BodyWidth = _.map($div4BodyAll[0].getElementsByTagName('td'), (td) => (td.offsetWidth));
-
-      let finalFrozenWidth = _.chain(div3BodyWidth)
-        .map((item, i) => Math.max(item, div1HeadWidth[i]))
-        .reject((item) => (_.isNaN(item)))
-        .value();
-
-      let finalWidth = _.chain(div4BodyWidth)
-        .map((item, i) => Math.max(item, div2HeadWidth[i]))
-        .reject((item) => (_.isNaN(item)))
-        .value();
-
-      //Fix width for div1 (left head) & div3 (left body)
-      let div1Head = document.querySelectorAll('.thead-div1 th');
-      let div3Body = document.querySelectorAll('.tbody-div3 td');
-
-      //Fix width for div2 (right head) & div4 (right body)
-      let div2Head = document.querySelectorAll('.thead-div2 th');
-      let div4Body = document.querySelectorAll('.tbody-div4 td');
-
-      //-----------------------------
-      _.each(finalFrozenWidth, (list, key) => {
-        div1Head[key].children[0].style.width = finalFrozenWidth[key] + 'px';
-        div3Body[key].children[0].style.width = finalFrozenWidth[key] + 'px';
-      });
-
-      _.each(finalWidth, (list, key) => {
-        //console.log(div2Head[key].children[0]);
-        div2Head[key].children[0].style.width = finalWidth[key] + 'px';
-        div4Body[key].children[0].style.width = finalWidth[key] + 'px';
-      });
-      //-----------------------------
-    }
-  }
-
-  prepareForDropdown(list) {
-    return _.map(list, (i) => ({
-      name: i,
-      val: i
-    }));
-  }
-
-  changePackageDimension() {
-    if (this.route.SERVICETYPE == 'ODC') {
-      this.isServiceTypeODC = true;
-    } else {
-      this.isServiceTypeODC = false;
-    }
-  }*/
 
   add() {
     this.marketrate = {
@@ -107,10 +41,10 @@ export class MarketRateController {
         "OriginState": '',
         "DestinationCity": '',
         "DestinationState": '',
-        "vehicletype": '',
+        "VehicleType": '',
         "Rate": 0,
-        "Remarks" : '',
-        "CREATEDBY": 1
+        "CreatedBy": 1,
+        "RateDate" : new Date()
     }
 
   }
@@ -133,8 +67,8 @@ export class MarketRateController {
         "DestinationState": this.marketrate.DestinationState,
         "VehicleType": this.marketrate.VehicleType,
         "Rate": this.marketrate.Rate,
-        "Remarks" : '',
-        "CreatedBy": 1
+        "CreatedBy": 1,
+        "RateDate" : this.$filter('date')(new Date(this.marketrate.RateDate), 'yyyy-MM-dd 00:00:00')
       }
     };
 
@@ -142,7 +76,7 @@ export class MarketRateController {
     console.log(marketRateData);
 
     this._api.post('marketrate', marketRateData).then((response) => {
-      // console.log(response);
+       console.log(response);
       this.toaster.success('Market Rate saved successfully');
       this.add();
     }, (error) => {
@@ -150,4 +84,39 @@ export class MarketRateController {
       // this.toaster.error(`${error.status} : ${error.statusText}`);
     });
   }
+
+  //import file market rate
+
+  uploadBlobOrFile(blobOrFile) {
+
+    console.log(blobOrFile.length);
+    var client = new XMLHttpRequest();
+    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/marketrate/mrate/1`, false);
+    //client.open('POST', `http://localhost:52019/RFPImport/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1}`, false);
+    //client.setRequestHeader('Content-length', blobOrFile.length);
+    client.setRequestHeader("Content-Type", "multipart/form-data");
+
+    /* Check the response status */
+    client.onreadystatechange = () => {
+      console.log("rdystate: " + client.readyState + " status: " + client.status + " Text: " + client.statusText);
+      if (client.readyState == 4 && client.status == 200) {
+        console.log(client.responseText);
+        //===========================
+         // this.getMarketRateData();
+        //===========================
+        $('#myModalBrowse').modal('hide');
+      }
+    }
+
+    //this.toaster.success('Lanes saved successfully');
+    /* Send to server */
+    client.send(blobOrFile);
+
+  }
+
+  /*getMarketRateData(){
+
+  }*/
+
 }
+
