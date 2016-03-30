@@ -46,7 +46,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
     })
 
     .state('marketrate', {
-      url: '/marketrate/:rfpId',
+      url: '/marketrate',
       templateUrl: 'app/marketrate/marketrate.html',
       controller: 'MarketRateController',
       controllerAs: 'marketrate',
