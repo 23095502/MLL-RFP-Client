@@ -123,7 +123,9 @@
           </tr>
         </thead>
         <tbody>
-
+          <!--
+          <tr ng-repeat="route in output.outputdata | filter:{FROMLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
+          -->
           <tr ng-show="(output.outputdata[0].OPPRDOMAIN === 'Outbound') ? true : false" ng-repeat="route in output.outputdata | filter: {FROMLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
             <td class="whitecol">
                 <strong ng-show="(output.outputdata[0].OPPRDOMAIN === 'Outbound') ? true : false">{{route.TOLOCATIONNAME}}</strong>
@@ -193,7 +195,7 @@
                   <li><a ng-click="output.updateProposedRate(route, 'SHIPXRATE', '')"><span class="label label-default label-thin">{{route.SHIPXRATE/1000 | number : 2}}</span>&nbsp;<small>ShipX, {{}}</small></a></li>
                   <li><a ng-click="output.updateProposedRate(route, 'PVSRFPRATE', '')"><span class="label label-default label-thin">{{route.PVSRFPRATE/1000 | number : 2}}</span>&nbsp;<small>RFP, {{}}</small></a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a ng-click="output.updateProposedRate(route, 'L1RATE', 'L1BANAME')"><span class="label label-default label-thin">{{route.L1RATE}}</span>&nbsp;<small>L1, {{route.L1BANAME}}</small></a></li>
+                  <li class="active"><a ng-click="output.updateProposedRate(route, 'L1RATE', 'L1BANAME')"><span class="label label-default label-thin">{{route.L1RATE}}</span>&nbsp;<small>L1, {{route.L1BANAME}}</small></a></li>
                   <li><a ng-click="output.updateProposedRate(route, 'L2RATE', 'L2BANAME')"><span class="label label-default label-thin">{{route.L2RATE}}</span>&nbsp;<small>L2, {{route.L2BANAME}}</small></a></li>
                   <li><a ng-click="output.updateProposedRate(route, 'L3RATE', 'L3BANAME')"><span class="label label-default label-thin">{{route.L3RATE}}</span>&nbsp;<small>L3, {{route.L3BANAME}}</small></a></li>
                   <li><a ng-selected="true" ng-click="output.updateProposedRate(route, 'L4RATE', 'L4BANAME')"><span class="label label-default label-thin">{{route.L4RATE}}</span>&nbsp;<small>L4, {{route.L4BANAME}}</small></a></li>
@@ -271,7 +273,7 @@
                   <li><a ng-click="output.updateProposedRate(route, 'SHIPXRATE', '')"><span class="label label-default label-thin">{{route.SHIPXRATE/1000 | number : 2}}</span>&nbsp;<small>ShipX, {{}}</small></a></li>
                   <li><a ng-click="output.updateProposedRate(route, 'PVSRFPRATE', '')"><span class="label label-default label-thin">{{route.PVSRFPRATE/1000 | number : 2}}</span>&nbsp;<small>RFP, {{}}</small></a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a ng-click="output.updateProposedRate(route, 'L1RATE', 'L1BANAME')"><span class="label label-default label-thin">{{route.L1RATE}}</span>&nbsp;<small>L1, {{route.L1BANAME}}</small></a></li>
+                  <li class="active"><a ng-click="output.updateProposedRate(route, 'L1RATE', 'L1BANAME')"><span class="label label-default label-thin">{{route.L1RATE}}</span>&nbsp;<small>L1, {{route.L1BANAME}}</small></a></li>
                   <li><a ng-click="output.updateProposedRate(route, 'L2RATE', 'L2BANAME')"><span class="label label-default label-thin">{{route.L2RATE}}</span>&nbsp;<small>L2, {{route.L2BANAME}}</small></a></li>
                   <li><a ng-click="output.updateProposedRate(route, 'L3RATE', 'L3BANAME')"><span class="label label-default label-thin">{{route.L3RATE}}</span>&nbsp;<small>L3, {{route.L3BANAME}}</small></a></li>
                   <li><a ng-selected="true" ng-click="output.updateProposedRate(route, 'L4RATE', 'L4BANAME')"><span class="label label-default label-thin">{{route.L4RATE}}</span>&nbsp;<small>L4, {{route.L4BANAME}}</small></a></li>
@@ -348,27 +350,27 @@
                     </thead>
                     <tbody>
                       <tr class="rate-details" ng-repeat="griddata in output.gridData | orderBy : 'FREIGHTRATE'">
-                        <td>
+                        <td ng-class="{ 'statusavailable': griddata.ORIGIN==output.filterOption.FROMLOCATIONNAME && griddata.DESTINATION==output.TOLOCATIONNAME}">
                           <div class="form-inline">
                             <input type="radio" ng-click="output.updateContractRate(griddata, 'REGULAR')" name="optradio" class="radio-rate">
                             <div class="form-group">
-                              <span> {{griddata.ORIGIN}}</span>
-                              <br><span> {{griddata.ORIGINSTATE}}</span>
+                              <span>{{griddata.ORIGIN}}</span>
+                              <br><span>{{griddata.ORIGINSTATE}}</span>
                             </div>
                           </div>
-
                         </td>
-                        <td>{{griddata.DESTINATION}}
-                          <br> {{griddata.DESTINATIONSTATE}}
+                        <td ng-class="{ 'statusavailable': griddata.ORIGIN==output.filterOption.FROMLOCATIONNAME && griddata.DESTINATION==output.TOLOCATIONNAME}">
+                          {{griddata.DESTINATION}}
+                          <br>{{griddata.DESTINATIONSTATE}}
                         </td>
                         <td class="highlight number-center">
                           <span class="mll-table-label">{{griddata.FREIGHTRATE/1000 | number : 2}}</span>
                           <i ng-show="(output.ISBAPROX === 'N') ? false : true" class="label-sticky">Px
                           </i>
                         </td>
-                        <td>{{griddata.BANAME}}</td>
-                        <td>{{griddata.CUSTOMERNAME}}</td>
-                        <td>{{griddata.CONTRACTID}}</td>
+                        <td ng-class="{ 'statusavailable': griddata.ORIGIN==output.filterOption.FROMLOCATIONNAME && griddata.DESTINATION==output.TOLOCATIONNAME}">{{griddata.BANAME}}</td>
+                        <td ng-class="{ 'statusavailable': griddata.ORIGIN==output.filterOption.FROMLOCATIONNAME && griddata.DESTINATION==output.TOLOCATIONNAME}">{{griddata.CUSTOMERNAME}}</td>
+                        <td ng-class="{ 'statusavailable': griddata.ORIGIN==output.filterOption.FROMLOCATIONNAME && griddata.DESTINATION==output.TOLOCATIONNAME}">{{griddata.CONTRACTID}}</td>
                       </tr>
 
                     </tbody>
@@ -496,20 +498,19 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-6 col-md-offset-3">
-            <input type="file" ngf-select ng-model="output.file" name="file"
-            accept="excel/*" ngf-max-size="2MB" required
-            ngf-model-invalid="output.errorFile" >
-            <i ng-show="output.file.$error.required">*required</i>
+            <input type="file" class="form-control" ngf-select ng-model="output.file" name="file"
+            accept="excel/*" ngf-max-size="2MB" ngf-model-invalid="output.errorFile" required>
+            <i ng-show="output.$error.required">*</i>
             <br>
-            <i ng-show="output.file.$error.maxSize">File too large
-            {{lane.errorFile.size / 1000000|number:1}}MB: max 2M</i>
+            <i ng-show="output.$error.maxSize">File too large
+            {{output.file.size / 1000000|number:1}}MB: max 2M</i>
             <!-- <button ng-click="lane.uploadBlobOrFile(lane.file)">Submit</button> -->
-            <span class="progress" ng-show="output.file.progress >= 0">
+            <!--<div class="progress">
               <div style="width:{{output.file.progress}}%"
               ng-bind="output.file.progress + '%'"></div>
-            </span>
-            <span ng-show="output.file.result">Upload Successful</span>
-            <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
+            </div>
+            <div class="alert alert-danger" role="alert">{{output.errmsg}}</div>
+            <span ng-show="output.file.result">Upload Successful</span>-->
           </div>
         </div>
       </div>
