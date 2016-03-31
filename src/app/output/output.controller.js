@@ -60,7 +60,6 @@ export class OutputController {
         .then((res) => {
           this.outputdata = res.data;
           // this.outputdata.selectedOption = $scope.options[1];
-          //console.log(this.outputdata);
           var newOutputData =
               _.each(this.outputdata,
                      (key, value) => {
@@ -163,7 +162,21 @@ export class OutputController {
       this.inproxiparam.DESTINATION = table.FROMLOCATIONNAME;
       this.inproxiparam.DESTINATIONSTATE = table.FROMSTATE;
       this.inproxiparam.ORIGINSTATE = table.TOSTATE;
+
+      var sourcecityid = table.TOLOCATION;
+      var destcityid = table.FROMLOCATION;
+      var sourcestateid = table.TOSTATEID;
+      var deststateid = table.FROMSTATEID;
+      var vehtypeid = table.VEHICLETYPEID;
+
     } else {
+
+      var sourcecityid = table.FROMLOCATION;
+      var destcityid = table.TOLOCATION;
+      var sourcestateid = table.FROMSTATEID;
+      var deststateid = table.TOSTATEID;
+      var vehtypeid = table.VEHICLETYPEID;
+
       this.inproxiparam.ORIGINSTATE = table.FROMSTATE;
       this.inproxiparam.DESTINATION = table.TOLOCATIONNAME;
       this.inproxiparam.DESTINATIONSTATE = table.TOSTATE;
@@ -176,7 +189,7 @@ export class OutputController {
     this.gridData = [];
     var newfilterRoutes = {inproxiparam : this.inproxiparam};
 
-    console.log(newfilterRoutes);
+
 
     if (this.outputdata[0].OPPRDOMAIN == 'Inbound') {
       this.TOLOCATIONNAME = table.FROMLOCATIONNAME;
@@ -188,16 +201,34 @@ export class OutputController {
     this.colName = headerColName;
     this.modalHeaderName = modalHeaderName;
 
-    this._api.post(this.urlMaps[colname], newfilterRoutes, true)
+
+    if(headerColName == 'Market Rate')
+    {
+    this._api.get(`toptenmarketrates/${sourcecityid}/${sourcestateid}/${destcityid}/${deststateid}/${vehtypeid}`)
         .then((res) => {
-          this.gridData = res.data[this.responseKeys[clickedColName]];
-          // this.nooftrips = this.gridData[0].NOOFTRIPS;
-          console.log(this.gridData);
+          this.marketData = res.data.toptenmarketratesResult;
+          //console.log(this.marketData);
         }, (err) => { console.error(err); });
+    }
+    else {
+
+      this._api.post(this.urlMaps[colname], newfilterRoutes, true)
+          .then((res) => {
+            this.gridData = res.data[this.responseKeys[clickedColName]];
+            //console.log(this.gridData);
+          }, (err) => { console.error(err); });
+
+    }
 
     if (clickedColName == 'NOOFTRIPS') {
       $('#myModalOutputDetailsForBackHaul').modal();
-    } else {
+    } else if (clickedColName == 'PVSRFPRATE') {
+      $('#myModalOutputDetailsForRFP').modal();
+    }
+    else if(clickedColName == 'MARKETRATE'){
+      $('#myModalOutputDetailsForMarket').modal();
+    }
+    else {
       $('#myModalOutputDetails').modal();
     }
   }
@@ -212,11 +243,8 @@ export class OutputController {
                               output.L3RATE = output.L3RATE * 1000;
                               output.L4RATE = output.L4RATE * 1000;
                               output.L5RATE = output.L5RATE * 1000;
-                              output.APPROVEDAMOUNT =
-                                  output.APPROVEDAMOUNT * 1000;
-
+                              output.APPROVEDAMOUNT = output.APPROVEDAMOUNT * 1000;
                               output.MODE = 'APIRATE';
-
                               output.CREATEDBY = 1;
                               output.CREATEDON = '2016-03-01';
                               delete output.$$hashKey;
@@ -267,6 +295,8 @@ export class OutputController {
 
     var newOutputDetails = {apptrans : revisedOutput};
 
+    console.log(newOutputDetails);
+
     this._api.post('apptrans', newOutputDetails)
         .then((res) => { this.getTransactionData(); },
               (err) => { console.error(err); });
@@ -275,12 +305,31 @@ export class OutputController {
   }
 
   updateContractRate(popupGridData, colName) {
-    this.CONTRACTRATE = popupGridData.FREIGHTRATE;
-    this.selectedLane[this.rowClickedColName] = popupGridData.FREIGHTRATE;
+
+    console.log(popupGridData);
+
+    if(colName == 'MARKET')
+    {
+      this.CONTRACTRATE = popupGridData.Rate;
+      this.selectedLane[this.rowClickedColName] = popupGridData.Rate;
+    }
+    else {
+        this.CONTRACTRATE = popupGridData.FREIGHTRATE;
+        this.selectedLane[this.rowClickedColName] = popupGridData.FREIGHTRATE;
+    }
+
+
 
     if (colName == 'REGULAR') {
       $('#myModalOutputDetails').modal('hide');
-    } else {
+    }
+    else if (colName == 'MARKET') {
+      $('#myModalOutputDetailsForMarket').modal('hide');
+    }
+    else if (colName == 'RFP') {
+      $('#myModalOutputDetailsForRFP').modal('hide');
+    }
+    else {
       $('#myModalOutputDetailsForBackHaul').modal('hide');
     }
   }
@@ -294,7 +343,6 @@ export class OutputController {
   }
 
   changeLocation() {
-
     this.vehicleTypeOptions =
         this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
     this.filterOption.VEHICLETYPENAME =
@@ -406,6 +454,7 @@ export class OutputController {
         /*
   }
   */
+
   closeModal() { $('#myModalOutputDetails').modal('hide'); }
 
   showColumn(colName) {
