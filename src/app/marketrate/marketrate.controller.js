@@ -138,8 +138,8 @@ export class MarketRateController {
   exportMarketRate() {
     this._api.get(`expmarketrate`)
         .then((res) => {
-          // window.open(res.data);
-          console.log(res.data);
+           window.open(res.data);
+          //console.log(res.data);
            },
               (err) => { console.error(err); });
   }
