@@ -1,0 +1,122 @@
+<div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4">
+            <h1>Market Rate Details</h1>
+        </div>
+        <div class="col-md-6 text-right">
+          <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalBrowse">
+              Import Market Rates
+          </button>
+        </div>
+    </div>
+    <div class="form-divider"></div>
+</div>
+<form ng-submit="marketrate.addMarketRate()">
+  <div class="container">
+    <div class="row">
+       <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="form-label" title="required" for="date">Date <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                <input type="date" class="form-control input-sm" id="date" placeholder="Date" ng-required="true" ng-model="marketrate.marketrate.RateDate">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="form-label" title="required" for="fromCityName">From city<i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                <select class="form-control input-sm" id="fromCityName" ng-model="marketrate.marketrate.OriginCity" ng-options="location.LOCATIONNAME as location.LOCATIONNAME for location in marketrate.locationname_option" required>
+                  <option value="">Select</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="form-label" title="required" for="fromState">From state<i class="glyphicon glyphicon-asterisk icon-required"></i> </label>
+                <select class="form-control input-sm" id="fromState" ng-model="marketrate.marketrate.OriginState" ng-options="state.STATENAME as state.STATENAME for state in marketrate.statename_option">
+                  <option value="" required>Select</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="form-label" title="required" for="toCity">To city<i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                <select class="form-control input-sm" id="toCity" ng-model="marketrate.marketrate.DestinationCity" ng-options="location.LOCATIONNAME as location.LOCATIONNAME for location in marketrate.locationname_option" required>
+                  <option value="">Select</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="form-label" title="required" for="toState">To state<i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                <select class="form-control input-sm" id="toState" ng-model="marketrate.marketrate.DestinationState" ng-options="state.STATENAME as state.STATENAME for state in marketrate.statename_option" required>
+                  <option value="">Select</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="form-label" title="required" for="vehType">Vehicle Type<i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                <select class="form-control input-sm" id="vehType" ng-model="marketrate.marketrate.VehicleType" ng-options="vehicletype.VEHICLETYPENAME as vehicletype.VEHICLETYPENAME for vehicletype in marketrate.vehicletypename_option" required>
+                  <option value="">Select</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <div class="form-group">
+                <label class="form-label" title="required" for="rate">Rate </label>
+                <input type="number" step="0.01" maxlength="5" class="form-control input-sm" id="rate" placeholder="Rate " ng-model="marketrate.marketrate.Rate" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+        <!-- </div> -->
+  </div>
+</form>
+</div>
+
+<div class="modal fade" id="myModalBrowse" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Import Market rates</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3">
+            <input type="file" ngf-select ng-model="marketrate.file" name="file"
+            accept="excel/*" ngf-max-size="2MB" required
+            ngf-model-invalid="marketrate.errorFile" >
+            <i ng-show="marketrate.file.$error.required">*required</i>
+            <br>
+            <i ng-show="marketrate.file.$error.maxSize">File too large
+            {{lane.errorFile.size / 1000000|number:1}}MB: max 2M</i>
+            <!-- <button ng-click="lane.uploadBlobOrFile(lane.file)">Submit</button> -->
+            <span class="progress" ng-show="marketrate.file.progress >= 0">
+              <div style="width:{{output.file.progress}}%"
+              ng-bind="marketrate.file.progress + '%'"></div>
+            </span>
+            <span ng-show="marketrate.file.result">Upload Successful</span>
+            <span class="err" ng-show="errorMsg">{{marketrate.errorMsg}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="marketrate.uploadBlobOrFile(marketrate.file)">Import Market rates</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

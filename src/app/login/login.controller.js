@@ -4,7 +4,8 @@ export class LoginController {
     this.$state = $state;
     this.$rootScope = $rootScope;
     this.auth = authService;
-    //toaster.info('Hi');
+    this.toaster = toaster;
+    toaster.info('Hi');
     //console.log(toaster);
   }
 
