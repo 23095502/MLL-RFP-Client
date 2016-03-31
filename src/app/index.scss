@@ -737,6 +737,33 @@ h1 {
   font-weight: 300;
 }
 
+.thumb {
+    width: 24px;
+    height: 24px;
+    float: none;
+    position: relative;
+    top: 7px;
+}
+
+form .progressbar {
+    line-height: 300px;
+}
+
+.progress div {
+    font-size: smaller;
+    background: aqua;
+    width: 0;
+}
+
+.statusavailable{
+    background-color: #ccccff;
+}
+
+.statustaken{
+    background-color:red;
+    width:10px;
+    height:100%;
+}
 /* login page  */
 
 /**
