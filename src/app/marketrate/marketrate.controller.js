@@ -1,16 +1,13 @@
 export class MarketRateController {
-  constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster, $filter) {
+  constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster, $filter, $http) {
     'ngInject';
 
-    this.routes = [];
-    this.$timeout = $timeout;
-    this.$stateParams = $stateParams;
-    this.statename_option = [];
+    this.$http = $http;
     this._api = apiService;
-    this.$state = $state;
     this.toaster = toaster;
     this.$filter = $filter;
 
+    this.statename_option = [];
     this.locationname_option = [];
     this.vehicletype = {
       "VEHICLETYPEID": null,
@@ -43,6 +40,16 @@ export class MarketRateController {
         "DestinationState": '',
         "VehicleType": '',
         "Rate": 0,
+        "VehicleType1": '',
+        "Rate1": 0,
+        "VehicleType2": '',
+        "Rate2": 0,
+        "VehicleType3": '',
+        "Rate3": 0,
+        "VehicleType4": '',
+        "Rate4": 0,
+        "VehicleType5": '',
+        "Rate5": 0,
         "CreatedBy": 1,
         "RateDate" : new Date()
     }
@@ -65,8 +72,18 @@ export class MarketRateController {
         "OriginState": this.marketrate.OriginState,
         "DestinationCity": this.marketrate.DestinationCity,
         "DestinationState": this.marketrate.DestinationState,
-        "VehicleType": this.marketrate.VehicleType,
-        "Rate": this.marketrate.Rate,
+        "VehicleType": '',
+        "Rate": 0,
+        "VehicleType1": this.marketrate.VehicleType1,
+        "Rate1": this.marketrate.Rate1,
+        "VehicleType2": this.marketrate.VehicleType2,
+        "Rate2": this.marketrate.Rate2,
+        "VehicleType3": this.marketrate.VehicleType3,
+        "Rate3": this.marketrate.Rate3,
+        "VehicleType4": this.marketrate.VehicleType4,
+        "Rate4": this.marketrate.Rate4,
+        "VehicleType5": this.marketrate.VehicleType5,
+        "Rate5": this.marketrate.Rate5,
         "CreatedBy": 1,
         "RateDate" : this.$filter('date')(new Date(this.marketrate.RateDate), 'yyyy-MM-dd 00:00:00')
       }
@@ -75,7 +92,7 @@ export class MarketRateController {
     //console.log('Hi');
     console.log(marketRateData);
 
-    this._api.post('marketrate', marketRateData).then((response) => {
+     this._api.post('marketrate', marketRateData).then((response) => {
        console.log(response);
       this.toaster.success('Market Rate saved successfully');
       this.add();
@@ -91,8 +108,8 @@ export class MarketRateController {
 
     console.log(blobOrFile.length);
     var client = new XMLHttpRequest();
-    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/marketrate/mrate/1`, false);
-    //client.open('POST', `http://localhost:52019/RFPImport/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1}`, false);
+    //client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/marketrate/mrate/1`, false);
+    client.open('POST', `http://localhost:64760/RFPROUTE/RFPImportRoute.svc/marketrate/mrate/1`, false);
     //client.setRequestHeader('Content-length', blobOrFile.length);
     client.setRequestHeader("Content-Type", "multipart/form-data");
 
