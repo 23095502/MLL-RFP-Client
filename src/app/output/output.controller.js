@@ -390,14 +390,16 @@ export class OutputController {
             if (response.ErrorMessage != '') {
               this.er = response.ErrorMessage;
               //console.log(`ErrorMessage: ${response.ErrorMessage}`);
+              alert(`${response.ErrorMessage}`);
             } else {
               this.suc = response.SuccessMessage;
               //console.log(`SuccessMessage: ${response.SuccessMessage}`);
+              alert(`${response.SuccessMessage}`);
             }
             //console.log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
 
             this.getTransactionData();
-            //$('#myModalBrowse').modal('hide');
+            $('#myModalBrowse').modal('hide');
           }
         }
         // this.toaster.success('Lanes saved successfully');
