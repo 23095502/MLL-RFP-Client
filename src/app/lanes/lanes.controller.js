@@ -289,9 +289,9 @@ export class LanesController {
 
 
         var response = JSON.parse(client.responseText);
-        console.log(`FilePath: ${response.FilePath}`);
+        //console.log(`FilePath: ${response.FilePath}`);
         //console.log(`FileLength: ${response.FileLength}`);
-        console.log(`FileName: ${response.FileName}`);
+        //console.log(`FileName: ${response.FileName}`);
 
         if (response.ErrorMessage != '') {
           console.log(`ErrorMessage: ${response.ErrorMessage}`);
@@ -303,7 +303,9 @@ export class LanesController {
 
         this.gridData = response.ErrorData;
 
-        if (this.gridData != null) {
+        //console.log(this.gridData.length);
+
+        if (this.gridData != null && this.gridData.length != 0) {
           $('#myModalErrorList').modal();
         }
         //===========================
