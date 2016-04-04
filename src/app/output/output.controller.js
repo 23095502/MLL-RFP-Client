@@ -334,11 +334,11 @@ export class OutputController {
     }
   }
 
-  changecolor(toMatch, approvedRate) {
+  changecolor(toMatch, approvedRate, flag) {
 
     let css = '';
 
-    if(toMatch > 0) {
+    if(toMatch > 0 && flag === true) {
       css = 'value-available ';
     }
 
