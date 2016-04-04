@@ -89,7 +89,7 @@
       <span class="unit">All pricing in ('000 INR)</span>
     </div>
     <div class="col-md-3 text-right">
-      <button class="btn btn-primary" ng-click="output.submit()"> Submit for approval
+      <button class="btn btn-primary" ng-click="output.submitForAprroval()"> Submit for approval
       </button>
     </div>
   </div>
@@ -454,7 +454,7 @@
                     </thead>
                     <tbody>
                       <tr class="rate-details" ng-repeat="griddata in output.gridData | orderBy : 'FREIGHTRATE'">
-                        <td>
+                        <td ng-class="{ 'statusavailable': griddata.ORIGIN==output.TOLOCATIONNAME && griddata.DESTINATION==output.filterOption.FROMLOCATIONNAME}">
                           <div class="form-inline">
                             <div class="form-group">
                               <span> {{griddata.ORIGIN}}</span>
@@ -462,16 +462,17 @@
                             </div>
                           </div>
                         </td>
-                        <td>{{griddata.DESTINATION}}
+                        <td ng-class="{ 'statusavailable': griddata.ORIGIN==output.TOLOCATIONNAME && griddata.DESTINATION==output.filterOption.FROMLOCATIONNAME}">
+                          {{griddata.DESTINATION}}
                           <br> {{griddata.DESTINATIONSTATE}}
                         </td>
                         <td class="highlight number-center">{{griddata.NOOFTRIPS}}
                           <!--<i ng-show="(output.ISBACKHAULPROX === 'N') ? false : true" class="label-sticky">Px
                           </i>-->
                         </td>
-                        <td>{{griddata.BANAME}}</td>
-                        <td>{{griddata.CUSTOMERNAME}}</td>
-                        <td>{{griddata.CONTRACTID}}</td>
+                        <td ng-class="{ 'statusavailable': griddata.ORIGIN==output.TOLOCATIONNAME && griddata.DESTINATION==output.filterOption.FROMLOCATIONNAME}">{{griddata.BANAME}}</td>
+                        <td ng-class="{ 'statusavailable': griddata.ORIGIN==output.TOLOCATIONNAME && griddata.DESTINATION==output.filterOption.FROMLOCATIONNAME}">{{griddata.CUSTOMERNAME}}</td>
+                        <td ng-class="{ 'statusavailable': griddata.ORIGIN==output.TOLOCATIONNAME && griddata.DESTINATION==output.filterOption.FROMLOCATIONNAME}">{{griddata.CONTRACTID}}</td>
                       </tr>
                     </tbody>
                   </table>

@@ -51,15 +51,15 @@ export class OutputController {
       'NOOFTRIPS' : 'dvprdataResult'
     };
 
-    this.getTransactionData();
+    this.getTransactionData(0, null, null);
   }
 
-  getTransactionData() {
+  getTransactionData(isFlag, fromLoc, vehTypeName) {
 
     this._api.get(`gettrans/${this.$stateParams.rfpId}`)
         .then((res) => {
           this.outputdata = res.data;
-          // this.outputdata.selectedOption = $scope.options[1];
+          //this.outputdata.selectedOption = $scope.options[1];
           var newOutputData =
               _.each(this.outputdata,
                      (key, value) => {
@@ -91,31 +91,65 @@ export class OutputController {
 
                      })
 
+
+
                   if (this.outputdata[0].OPPRDOMAIN == 'Inbound') {
-            // this.nameoutputdata = this.outputdata[0];
-            this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
-            this.nameoutputdata = newOutputData[0];
-            this.fromLocationOptions =
-                _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
-            this.routesGroupByLocation =
-                _.groupBy(this.outputdata, 'TOLOCATIONNAME');
 
-            _.each(this.routesGroupByLocation, (vehiclelist, key) => {
-              this.routesGroupByLocation[key] =
-                  _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
-            });
+                  if(isFlag == 0)
+                  {
+                      // this.nameoutputdata = this.outputdata[0];
+                      this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
+                      this.nameoutputdata = newOutputData[0];
+                      this.fromLocationOptions =
+                          _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
+                      this.routesGroupByLocation =
+                          _.groupBy(this.outputdata, 'TOLOCATIONNAME');
 
-            this.filterOption = {
-              FROMLOCATIONNAME : this.fromLocationOptions[0].TOLOCATIONNAME,
-              VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
-            };
+                      _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+                        this.routesGroupByLocation[key] =
+                            _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+                      });
 
-            this.vehicleTypeOptions =
-                this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
-          }
+                      this.filterOption = {
+                        FROMLOCATIONNAME : this.fromLocationOptions[0].TOLOCATIONNAME,
+                        VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
+                      };
+
+                      this.vehicleTypeOptions =
+                          this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+                        }
+                  else {
+
+                    //this.nameoutputdata = this.outputdata[0];
+                    this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
+                    this.nameoutputdata = newOutputData[0];
+                    this.fromLocationOptions =
+                        _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
+                    this.routesGroupByLocation =
+                        _.groupBy(this.outputdata, 'TOLOCATIONNAME');
+
+                    _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+                      this.routesGroupByLocation[key] =
+                          _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+                    });
+
+                    this.filterOption = {
+                      //FROMLOCATIONNAME : this.fromLocationOptions[0].TOLOCATIONNAME,
+                      //VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
+                      FROMLOCATIONNAME : fromLoc,
+                      VEHICLETYPENAME : vehTypeName
+                    };
+
+                    this.vehicleTypeOptions =
+                        this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+
+                    }
+                }
 
           else {
 
+            if(isFlag == 0)
+            {
             // this.nameoutputdata = this.outputdata[0];
             this.nameoutputdata = newOutputData[0];
             this.fromLocationOptions =
@@ -135,9 +169,31 @@ export class OutputController {
 
             this.vehicleTypeOptions =
                 this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
-          }
+            }
+            else{
 
-          // console.log(this.outputdata);
+              // this.nameoutputdata = this.outputdata[0];
+              this.nameoutputdata = newOutputData[0];
+              this.fromLocationOptions =
+                  _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
+              this.routesGroupByLocation =
+                  _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
+
+              _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+                this.routesGroupByLocation[key] =
+                    _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+              });
+
+              this.filterOption = {
+                FROMLOCATIONNAME : fromLoc,
+                VEHICLETYPENAME : vehTypeName
+              };
+
+              this.vehicleTypeOptions =
+                  this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+
+            }
+        }
 
         }, (err) => { console.error(err); });
   }
@@ -157,6 +213,8 @@ export class OutputController {
     this.rowClickedColName = clickedColName;
 
     this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
+
+    console.log(this.outputdata[0].OPPRDOMAIN);
 
     if (this.outputdata[0].OPPRDOMAIN == 'Inbound') {
       this.inproxiparam.DESTINATION = table.FROMLOCATIONNAME;
@@ -189,8 +247,6 @@ export class OutputController {
     this.gridData = [];
     var newfilterRoutes = {inproxiparam : this.inproxiparam};
 
-
-
     if (this.outputdata[0].OPPRDOMAIN == 'Inbound') {
       this.TOLOCATIONNAME = table.FROMLOCATIONNAME;
     } else {
@@ -201,13 +257,13 @@ export class OutputController {
     this.colName = headerColName;
     this.modalHeaderName = modalHeaderName;
 
+    console.log(newfilterRoutes);
 
     if(headerColName == 'Market Rate')
     {
     this._api.get(`toptenmarketrates/${sourcecityid}/${sourcestateid}/${destcityid}/${deststateid}/${vehtypeid}`)
         .then((res) => {
           this.marketData = res.data.toptenmarketratesResult;
-          //console.log(this.marketData);
         }, (err) => { console.error(err); });
     }
     else {
@@ -215,7 +271,7 @@ export class OutputController {
       this._api.post(this.urlMaps[colname], newfilterRoutes, true)
           .then((res) => {
             this.gridData = res.data[this.responseKeys[clickedColName]];
-            //console.log(this.gridData);
+            console.log(this.gridData);
           }, (err) => { console.error(err); });
 
     }
@@ -233,7 +289,10 @@ export class OutputController {
     }
   }
 
-  submit() {
+  submitForAprroval() {
+
+    var FromLocName = this.filterOption.FROMLOCATIONNAME;
+    var VehTypeName = this.filterOption.VEHICLETYPENAME;
 
     var revisedOutput = _.chain(this.outputdata)
                             .map((output) => {
@@ -295,10 +354,8 @@ export class OutputController {
 
     var newOutputDetails = {apptrans : revisedOutput};
 
-    console.log(newOutputDetails);
-
     this._api.post('apptrans', newOutputDetails)
-        .then((res) => { this.getTransactionData(); },
+        .then((res) => { this.getTransactionData(1, FromLocName, VehTypeName);},
               (err) => { console.error(err); });
 
     this.toaster.success('Changes saved successfully');
@@ -317,8 +374,6 @@ export class OutputController {
         this.CONTRACTRATE = popupGridData.FREIGHTRATE;
         this.selectedLane[this.rowClickedColName] = popupGridData.FREIGHTRATE;
     }
-
-
 
     if (colName == 'REGULAR') {
       $('#myModalOutputDetails').modal('hide');
@@ -343,12 +398,19 @@ export class OutputController {
   }
 
   changeLocation() {
+
     this.vehicleTypeOptions =
         this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
-    this.filterOption.VEHICLETYPENAME =
-        this.vehicleTypeOptions[0].VEHICLETYPENAME;
-    this.outputdata[0].CLEANSHEETRATE =
-        this.outputdata[0].CLEANSHEETRATE / 1000;
+
+    if(this.vehicleTypeOptions ==  undefined || this.vehicleTypeOptions == null){
+
+    }
+    else {
+      this.filterOption.VEHICLETYPENAME =
+          this.vehicleTypeOptions[0].VEHICLETYPENAME;
+      this.outputdata[0].CLEANSHEETRATE =
+          this.outputdata[0].CLEANSHEETRATE / 1000;
+    }
   }
 
   exportNormal() {
@@ -396,7 +458,7 @@ export class OutputController {
             }
             //console.log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
 
-            this.getTransactionData();
+            this.getTransactionData(0, null, null);
             //$('#myModalBrowse').modal('hide');
           }
         }
