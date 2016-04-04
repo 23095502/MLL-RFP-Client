@@ -132,22 +132,22 @@
                 <strong ng-show="(output.outputdata[0].OPPRDOMAIN === 'Inbound') ? true : false">{{route.FROMLOCATIONNAME}}</strong>
                 <br>{{route.TOSTATECODE}}
               </td>
-              <td ng-class="output.changecolor(route.CLEANSHEETRATE/1000,route.APPROVEDAMOUNT)" class="text-center fixed-width-col">
+              <td ng-class="output.changecolor(route.CLEANSHEETRATE/1000,route.APPROVEDAMOUNT, false)" class="text-center fixed-width-col">
                 <span>{{route.CLEANSHEETRATE/1000 | number : 2}}</span>
               </td>
               <td ng-click="output.showModal('market', route, 'MARKETRATE', 'Market Rate', 'MARKET RATES')"
-                ng-class="output.changecolor(route.MARKETRATE/1000,route.APPROVEDAMOUNT)" class="text-center fixed-width-col">
+                ng-class="output.changecolor(route.MARKETRATE/1000,route.APPROVEDAMOUNT, true)" class="text-center fixed-width-col">
                 <span>{{route.MARKETRATE/1000 | number : 2}}</span>
               </td>
-              <td ng-click="output.showModal('rfphistory', route, 'PVSRFPRATE', 'RFP Rate', 'RFP RATES')" ng-class="output.changecolor(route.PVSRFPRATE/1000,route.APPROVEDAMOUNT)" class="text-center fixed-width-col open-popup">
+              <td ng-click="output.showModal('rfphistory', route, 'PVSRFPRATE', 'RFP Rate', 'RFP RATES')" ng-class="output.changecolor(route.PVSRFPRATE/1000,route.APPROVEDAMOUNT, true)" class="text-center fixed-width-col open-popup">
                 <span>{{route.PVSRFPRATE/1000 | number : 2}}</span>
               </td>
-              <td ng-click="output.showModal('contract', route, 'CONTRACTRATE', 'Contract Rate', 'CONTRACT RATES')" ng-class="output.changecolor(route.CONTRACTRATE/1000,route.APPROVEDAMOUNT)" class="text-center fixed-width-col open-popup">
+              <td ng-click="output.showModal('contract', route, 'CONTRACTRATE', 'Contract Rate', 'CONTRACT RATES')" ng-class="output.changecolor(route.CONTRACTRATE/1000,route.APPROVEDAMOUNT, true)" class="text-center fixed-width-col open-popup">
                 <span class="mll-table-label">{{route.CONTRACTRATE/1000 | number : 2}}</span>
                 <i ng-show="(route.ISBAPROXIMITY === 'N') ? false : true" class="label-sticky">Px
                 </i>
               </td>
-              <td ng-class="output.changecolor(route.SHIPXRATE/1000,route.APPROVEDAMOUNT)" class="text-center fixed-width-col">
+              <td ng-class="output.changecolor(route.SHIPXRATE/1000,route.APPROVEDAMOUNT, false)" class="text-center fixed-width-col">
                 <span class="mll-table-label">{{route.SHIPXRATE/1000 | number : 2}}</span>
               </td>
               <td ng-click="output.showModal('backhaul', route, 'NOOFTRIPS', 'No of trips', 'BACKHAUL RATES')" class="text-center fixed-width-col open-popup">
@@ -210,22 +210,22 @@
                 <strong>{{route.FROMLOCATIONNAME}}</strong>
                 <br>{{route.FROMSTATECODE}}
               </td>
-              <td ng-class="output.changecolor(route.CLEANSHEETRATE/1000,route.APPROVEDAMOUNT)" class="text-center fixed-width-col">
+              <td ng-class="output.changecolor(route.CLEANSHEETRATE/1000,route.APPROVEDAMOUNT, false)" class="text-center fixed-width-col">
                 <span>{{route.CLEANSHEETRATE/1000 | number : 2}}</span>
               </td>
               <td ng-click="output.showModal('market', route, 'MARKETRATE', 'Market Rate', 'MARKET RATES')"
-                ng-class="output.changecolor(route.MARKETRATE/1000,route.APPROVEDAMOUNT)" class="text-center fixed-width-col">
+                ng-class="output.changecolor(route.MARKETRATE/1000,route.APPROVEDAMOUNT, true)" class="text-center fixed-width-col">
                 <span>{{route.MARKETRATE/1000 | number : 2}}</span>
               </td>
-              <td ng-click="output.showModal('rfphistory', route, 'PVSRFPRATE', 'RFP Rate', 'RFP RATES')" ng-class="output.changecolor(route.PVSRFPRATE/1000,route.APPROVEDAMOUNT)" class="text-center fixed-width-col open-popup">
+              <td ng-click="output.showModal('rfphistory', route, 'PVSRFPRATE', 'RFP Rate', 'RFP RATES')" ng-class="output.changecolor(route.PVSRFPRATE/1000,route.APPROVEDAMOUNT, true)" class="text-center fixed-width-col open-popup">
                 <span>{{route.PVSRFPRATE/1000 | number : 2}}</span>
               </td>
-              <td ng-click="output.showModal('contract', route, 'CONTRACTRATE', 'Contract Rate', 'CONTRACT RATES')" ng-class="output.changecolor(route.CONTRACTRATE/1000,route.APPROVEDAMOUNT)" class="text-center fixed-width-col open-popup">
+              <td ng-click="output.showModal('contract', route, 'CONTRACTRATE', 'Contract Rate', 'CONTRACT RATES')" ng-class="output.changecolor(route.CONTRACTRATE/1000,route.APPROVEDAMOUNT, true)" class="text-center fixed-width-col open-popup">
                 <span class="mll-table-label">{{route.CONTRACTRATE/1000 | number : 2}}</span>
                 <i ng-show="(route.ISBAPROXIMITY === 'N') ? false : true" class="label-sticky">Px
                 </i>
               </td>
-              <td ng-class="output.changecolor(route.SHIPXRATE/1000,route.APPROVEDAMOUNT)" class="text-center fixed-width-col">
+              <td ng-class="output.changecolor(route.SHIPXRATE/1000,route.APPROVEDAMOUNT, false)" class="text-center fixed-width-col">
                 <span class="mll-table-label">{{route.SHIPXRATE/1000 | number : 2}}</span>
               </td>
               <td ng-click="output.showModal('backhaul', route, 'NOOFTRIPS', 'No of trips', 'BACKHAUL RATES')" class="text-center fixed-width-col open-popup">
