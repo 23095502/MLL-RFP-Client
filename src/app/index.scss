@@ -262,6 +262,10 @@ h1 {
   color: green;
 }
 
+.value-available {
+  background-color: rgb(183,230,174);
+}
+
 .loginbody {
   background: url(../images/login.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -379,6 +383,10 @@ h1 {
   top: 15px;
   font-size: 12px;
   color: $mll-grey;
+
+  &.unitlegend {
+    top: 0px;
+  }
 }
 
 .unit-modal {
@@ -763,6 +771,11 @@ form .progressbar {
     background-color:red;
     width:10px;
     height:100%;
+}
+.legend-color {
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #b3c6ff;
 }
 /* login page  */
 

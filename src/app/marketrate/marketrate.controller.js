@@ -108,8 +108,8 @@ export class MarketRateController {
 
     console.log(blobOrFile.length);
     var client = new XMLHttpRequest();
-    //client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/marketrate/mrate/1`, false);
-    client.open('POST', `http://localhost:64760/RFPROUTE/RFPImportRoute.svc/marketrate/mrate/1`, false);
+    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/marketrate/mrate/1`, false);
+    //client.open('POST', `http://localhost:64760/RFPROUTE/RFPImportRoute.svc/marketrate/mrate/1`, false);
     //client.setRequestHeader('Content-length', blobOrFile.length);
     client.setRequestHeader("Content-Type", "multipart/form-data");
 
@@ -134,6 +134,16 @@ export class MarketRateController {
   /*getMarketRateData(){
 
   }*/
+
+  exportMarketRate() {
+    this._api.get(`expmarketrate`)
+        .then((res) => {
+           window.open(res.data);
+          //console.log(res.data);
+           },
+              (err) => { console.error(err); });
+  }
+
 
 }
 

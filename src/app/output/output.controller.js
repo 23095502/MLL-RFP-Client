@@ -389,12 +389,21 @@ export class OutputController {
     }
   }
 
-  changecolor(toMatch, approvedRate) {
-    if (toMatch >= approvedRate) {
-      return 'below';
-    } else {
-      return 'above';
+  changecolor(toMatch, approvedRate, flag) {
+
+    let css = '';
+
+    if(toMatch > 0 && flag === true) {
+      css = 'value-available ';
     }
+
+    if (toMatch >= approvedRate) {
+      css = css + 'below';
+    } else {
+      css = css + 'above';
+    }
+
+    return css;
   }
 
   changeLocation() {
@@ -446,18 +455,16 @@ export class OutputController {
           {
             var response = JSON.parse(client.responseText);
 
-            //console.log(blobOrFile.size);
-
-
             if (response.ErrorMessage != '') {
               this.er = response.ErrorMessage;
               //console.log(`ErrorMessage: ${response.ErrorMessage}`);
+              alert(`${response.ErrorMessage}`);
             } else {
               this.suc = response.SuccessMessage;
               //console.log(`SuccessMessage: ${response.SuccessMessage}`);
+              alert(`${response.SuccessMessage}`);
             }
             //console.log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
-
             this.getTransactionData(0, null, null);
             //$('#myModalBrowse').modal('hide');
           }
@@ -466,56 +473,6 @@ export class OutputController {
 
         client.send(blobOrFile);
   }
-
-  /*
-  uploadBlobOrFile(blobOrFile){
-        this.f = blobOrFile;
-        if (blobOrFile) {
-            blobOrFile.upload = this.Upload.upload({
-              //url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-              url: `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1`,
-              data: {file: blobOrFile}
-            });
-
-            blobOrFile.upload.then(function (response) {
-                blobOrFile.result = response.data;
-                er = blobOrFile.result.ErrorMessage;
-                console.log(blobOrFile.result);
-            }, function (response) {
-                if (response.status > 0)
-                    var errorMsg = response.status + ': ' + response.data;
-            }, function (evt) {
-                blobOrFile.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-            });
-        }
-        /*
-    this.uploadProgress(blobOrFile, blobOrFile.size);
-    var client = new XMLHttpRequest();
-    client.open(
-        'POST',
-        `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1`,
-        false);
-    client.setRequestHeader("Content-Type", "multipart/form-data");
-
-    client.onreadystatechange =
-        () => {
-
-          if (client.readyState == 4 && client.status == 200)
-          {
-            var response = JSON.parse(client.responseText);
-            if (response.ErrorMessage != '') {
-              this.er = response.ErrorMessage;
-            } else {
-              this.suc = response.SuccessMessage;
-            }
-            this.getTransactionData();
-          }
-        }
-        client.send(blobOrFile);
-        */
-        /*
-  }
-  */
 
   closeModal() { $('#myModalOutputDetails').modal('hide'); }
 
