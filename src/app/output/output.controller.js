@@ -335,11 +335,20 @@ export class OutputController {
   }
 
   changecolor(toMatch, approvedRate) {
-    if (toMatch >= approvedRate) {
-      return 'below';
-    } else {
-      return 'above';
+
+    let css = '';
+
+    if(toMatch > 0) {
+      css = 'value-available ';
     }
+
+    if (toMatch >= approvedRate) {
+      css = css + 'below';
+    } else {
+      css = css + 'above';
+    }
+
+    return css;
   }
 
   changeLocation() {
