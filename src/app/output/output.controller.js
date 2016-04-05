@@ -62,7 +62,6 @@ export class OutputController {
     this._api.get(`gettrans/${this.$stateParams.rfpId}`)
         .then((res) => {
           this.outputdata = res.data;
-          //this.outputdata.selectedOption = $scope.options[1];
           var newOutputData =
               _.each(this.outputdata,
                      (key, value) => {
@@ -102,7 +101,6 @@ export class OutputController {
 
                   if(isFlag == 0)
                   {
-                      // this.nameoutputdata = this.outputdata[0];
                       this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
                       this.nameoutputdata = newOutputData[0];
                       this.fromLocationOptions =
@@ -124,8 +122,6 @@ export class OutputController {
                           this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
                         }
                   else {
-
-                    //this.nameoutputdata = this.outputdata[0];
                     this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
                     this.nameoutputdata = newOutputData[0];
                     this.fromLocationOptions =
