@@ -463,7 +463,7 @@ export class OutputController {
             }
             //console.log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
             this.getTransactionData(0, null, null);
-            //$('#myModalBrowse').modal('hide');
+            $('#myModalBrowse').modal('hide');
           }
         }
         // this.toaster.success('Lanes saved successfully');
