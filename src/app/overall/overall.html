@@ -32,7 +32,8 @@
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
                     <label class="form-label" title="required" for="name">Customer <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                    <select class="form-control input-sm" id="name" ng-model="overall.customer" ng-options="CUSTOMER as CUSTOMER.CUSTOMERNAME for CUSTOMER in overall.CUSTOMERNAME_option  | orderBy: 'CUSTOMERNAME' " required>
+                    <!--<select class="form-control input-sm" id="name" ng-model="overall.customer" ng-options="CUSTOMER as CUSTOMER.CUSTOMERNAME for CUSTOMER in overall.CUSTOMERNAME_option  | orderBy: 'CUSTOMERNAME' " required>-->
+                    <select class="form-control input-sm" id="name" ng-model="overall.selectedOption" ng-options="CUSTOMER as CUSTOMER.CUSTOMERNAME for CUSTOMER in overall.CUSTOMERNAME_option  | orderBy: 'CUSTOMERNAME' " required>
                       <option value=""></option>
                     </select>
                   </div>
@@ -40,7 +41,8 @@
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
                     <label class="form-label" for="contact">Contact details</label>
-                    <input type="text" class="form-control input-sm" id="contact" placeholder="Contact" ng-model="overall.customer.CONTACTNO" ng-disabled="true">
+                    <!--<input type="text" class="form-control input-sm" id="contact" placeholder="Contact" ng-model="overall.customer.CONTACTNO" ng-disabled="true">-->
+                    <input type="text" class="form-control input-sm" id="contact" placeholder="Contact" ng-model="overall.selectedOption.CONTACTNO" ng-disabled="true">
                   </div>
                 </div>
               </div>
@@ -48,13 +50,15 @@
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
                     <label class="form-label" for="contactperson">Contact person</label>
-                    <input type="text" class="form-control input-sm" id="contactperson" placeholder="Contact person" ng-model="overall.customer.CONTACTPERSON" ng-disabled="true">
+                    <!--<input type="text" class="form-control input-sm" id="contactperson" placeholder="Contact person" ng-model="overall.customer.CONTACTPERSON" ng-disabled="true">-->
+                    <input type="text" class="form-control input-sm" id="contactperson" placeholder="Contact person" ng-model="overall.selectedOption.CONTACTPERSON" ng-disabled="true">
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
                     <label class="form-label" for="address">Address</label>
-                    <input type="text" class="form-control input-sm" id="address" placeholder="Address" ng-model="overall.customer.ADDRESS" ng-disabled="true">
+                    <!--<input type="text" class="form-control input-sm" id="address" placeholder="Address" ng-model="overall.customer.ADDRESS" ng-disabled="true">-->
+                    <input type="text" class="form-control input-sm" id="address" placeholder="Address" ng-model="overall.selectedOption.ADDRESS" ng-disabled="true">
                   </div>
                 </div>
               </div>
@@ -62,13 +66,15 @@
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
                     <label class="form-label" for="totallogistics">Total logistics spend(In Lakhs)</label>
-                    <input type="text" class="form-control input-sm" id="totallogistics" placeholder="Total logistics spend(In Lakhs)" ng-model="overall.customer.TOTALSPEND" ng-disabled="true">
+                    <!-- <input type="text" class="form-control input-sm" id="totallogistics" placeholder="Total logistics spend(In Lakhs)" ng-model="overall.customer.TOTALSPEND" ng-disabled="true"> -->
+                    <input type="text" class="form-control input-sm" id="totallogistics" placeholder="Total logistics spend(In Lakhs)" ng-model="overall.selectedOption.TOTALSPEND" ng-disabled="true">
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
                     <label class="form-label" title="required" for="cashaccountid">CA$$H Account ID <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                    <input type="text" class="form-control input-sm" id="cashaccountid" placeholder="CA$$H account id" ng-required="true" ng-model="overall.customer.CASHACCOUNTID" ng-disabled="true">
+                    <!-- <input type="text" class="form-control input-sm" id="cashaccountid" placeholder="CA$$H account id" ng-required="true" ng-model="overall.customer.CASHACCOUNTID" ng-disabled="true"> -->
+                    <input type="text" class="form-control input-sm" id="cashaccountid" placeholder="CA$$H account id" ng-required="true" ng-model="overall.selectedOption.CASHACCOUNTID" ng-disabled="true">
                   </div>
                 </div>
               </div>
