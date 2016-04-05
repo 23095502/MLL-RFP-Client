@@ -1,17 +1,19 @@
 <div class="container-fluid">
+
   <div class="row">
     <div class="col-sm-6">
       <h1><abbr title="Request for praposal">RFP</abbr> output details</h1></div>
-    <div class="col-md-6 text-right">
-      <button class="btn btn-default btn-xs" ng-click="output.exportBAQuote()"> <i class="glyphicon glyphicon-export"></i> Export BA QUOTE Template
+    <div class="col-md-6 text-right" >
+      <button class="btn btn-default btn-xs" ng-click="output.exportBAQuote()" > <i class="glyphicon glyphicon-export"></i> Export BA QUOTE Template
       </button>
       <!--<button class="btn btn-default btn-xs" ng-click="output.uploadBlobOrFile(output.file)">Import BA Quote</button>-->
-      <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalBrowse">
+      <button class="btn btn-default btn-xs"  data-toggle="modal" data-target="#myModalBrowse" >
         <i class="glyphicon glyphicon-import"></i>  Import BA Quotes
       </button>
       <button class="btn btn-default btn-xs" ng-click="output.exportNormal()"><i class="glyphicon glyphicon-export"></i> Export
       </button>
     </div>
+
   </div>
   <div class="row filter-details">
     <div class="col-sm-4">
@@ -704,12 +706,14 @@
             </div>
             <div class="alert alert-danger" role="alert">{{output.errmsg}}</div>
             <span ng-show="output.file.result">Upload Successful</span>-->
+            <div ng-show="output.loader">Please wait, importing route details...</div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" ng-click="output.uploadBlobOrFile(output.file)">Import BA Quote</button>
+        <button type="button" class="btn btn-primary"  ng-click="output.uploadBlobOrFile(output.file)">Import BA Quote</button>
+
       </div>
     </div>
   </div>

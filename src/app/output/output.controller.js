@@ -10,6 +10,8 @@ export class OutputController {
     this.toaster = toaster;
     this.Upload =  Upload;
 
+    this.loader = false;
+
     this.inproxiparam =
     {
       "ORIGIN" : '',
@@ -51,10 +53,10 @@ export class OutputController {
       'NOOFTRIPS' : 'dvprdataResult'
     };
 
-    this.getTransactionData();
+    this.getTransactionData(0);
   }
 
-  getTransactionData() {
+  getTransactionData(isFlag) {
 
     this._api.get(`gettrans/${this.$stateParams.rfpId}`)
         .then((res) => {
@@ -91,7 +93,14 @@ export class OutputController {
 
                      })
 
+
+
                   if (this.outputdata[0].OPPRDOMAIN == 'Inbound') {
+
+
+                    if(isFlag == 0){
+
+
             // this.nameoutputdata = this.outputdata[0];
             this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
             this.nameoutputdata = newOutputData[0];
@@ -112,11 +121,40 @@ export class OutputController {
 
             this.vehicleTypeOptions =
                 this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+                }
+
+                else{
+
+                  this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
+            this.nameoutputdata = newOutputData[0];
+            this.fromLocationOptions =
+                _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
+            this.routesGroupByLocation =
+                _.groupBy(this.outputdata, 'TOLOCATIONNAME');
+
+            _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+              this.routesGroupByLocation[key] =
+                  _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+            });
+
+            this.filterOption = {
+              FROMLOCATIONNAME : this.fromLocationOptions[1].TOLOCATIONNAME,
+              VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
+            };
+
+            this.vehicleTypeOptions =
+                this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+                }
+
+
           }
 
           else {
 
             // this.nameoutputdata = this.outputdata[0];
+            if(isFlag == 0){
+
+              console.log('inside loop');
             this.nameoutputdata = newOutputData[0];
             this.fromLocationOptions =
                 _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
@@ -135,6 +173,30 @@ export class OutputController {
 
             this.vehicleTypeOptions =
                 this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+            }
+
+            else{
+
+              this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
+            this.nameoutputdata = newOutputData[0];
+            this.fromLocationOptions =
+                _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
+            this.routesGroupByLocation =
+                _.groupBy(this.outputdata, 'TOLOCATIONNAME');
+
+            _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+              this.routesGroupByLocation[key] =
+                  _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+            });
+
+            this.filterOption = {
+              FROMLOCATIONNAME : this.fromLocationOptions[1].TOLOCATIONNAME,
+              VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
+            };
+
+            this.vehicleTypeOptions =
+                this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+            }
           }
 
           // console.log(this.outputdata);
@@ -298,7 +360,7 @@ export class OutputController {
     console.log(newOutputDetails);
 
     this._api.post('apptrans', newOutputDetails)
-        .then((res) => { this.getTransactionData(); },
+        .then((res) => { this.getTransactionData(1); },
               (err) => { console.error(err); });
 
     this.toaster.success('Changes saved successfully');
@@ -343,12 +405,18 @@ export class OutputController {
   }
 
   changeLocation() {
+
     this.vehicleTypeOptions =
         this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
-    this.filterOption.VEHICLETYPENAME =
+
+    if(this.vehicleTypeOptions == undefined || this.vehicleTypeOptions == null)
+    {}
+    else
+    {this.filterOption.VEHICLETYPENAME =
         this.vehicleTypeOptions[0].VEHICLETYPENAME;
     this.outputdata[0].CLEANSHEETRATE =
-        this.outputdata[0].CLEANSHEETRATE / 1000;
+        this.outputdata[0].CLEANSHEETRATE / 1000;}
+
   }
 
   exportNormal() {
@@ -358,6 +426,7 @@ export class OutputController {
   }
 
   exportBAQuote() {
+     this.uploadProgress(blobOrFile, blobOrFile.size);
     this._api.get(`expbaquote/${this.$stateParams.rfpId}`)
         .then((res) => { window.open(res.data); },
               (err) => { console.error(err); });
@@ -365,8 +434,12 @@ export class OutputController {
 
   uploadBlobOrFile(blobOrFile) {
 
+
     this.uploadProgress(blobOrFile, blobOrFile.size);
     var client = new XMLHttpRequest();
+
+    this.loader = true ;
+
     client.open(
         'POST',
         `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1`,
@@ -375,6 +448,7 @@ export class OutputController {
     // `http://localhost:52019/RFPImport/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1}`,
     // false);
     // client.setRequestHeader('Content-length', blobOrFile.length);
+
     client.setRequestHeader("Content-Type", "multipart/form-data");
     client.onreadystatechange =
         () => {
@@ -395,9 +469,9 @@ export class OutputController {
               //console.log(`SuccessMessage: ${response.SuccessMessage}`);
             }
             //console.log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
-
-            this.getTransactionData();
-            //$('#myModalBrowse').modal('hide');
+            this.loader = false;
+            this.getTransactionData(0);
+            $('#myModalBrowse').modal('hide');
           }
         }
         // this.toaster.success('Lanes saved successfully');
