@@ -53,15 +53,16 @@ export class OutputController {
       'NOOFTRIPS' : 'dvprdataResult'
     };
 
-    this.getTransactionData(0);
+
+    this.getTransactionData(0, null, null);
   }
 
-  getTransactionData(isFlag) {
+  getTransactionData(isFlag, fromLoc, vehTypeName) {
 
     this._api.get(`gettrans/${this.$stateParams.rfpId}`)
         .then((res) => {
           this.outputdata = res.data;
-          // this.outputdata.selectedOption = $scope.options[1];
+          //this.outputdata.selectedOption = $scope.options[1];
           var newOutputData =
               _.each(this.outputdata,
                      (key, value) => {
@@ -95,66 +96,66 @@ export class OutputController {
 
 
 
+
                   if (this.outputdata[0].OPPRDOMAIN == 'Inbound') {
 
 
-                    if(isFlag == 0){
+                  if(isFlag == 0)
+                  {
+                      // this.nameoutputdata = this.outputdata[0];
+                      this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
+                      this.nameoutputdata = newOutputData[0];
+                      this.fromLocationOptions =
+                          _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
+                      this.routesGroupByLocation =
+                          _.groupBy(this.outputdata, 'TOLOCATIONNAME');
 
+                      _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+                        this.routesGroupByLocation[key] =
+                            _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+                      });
 
-            // this.nameoutputdata = this.outputdata[0];
-            this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
-            this.nameoutputdata = newOutputData[0];
-            this.fromLocationOptions =
-                _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
-            this.routesGroupByLocation =
-                _.groupBy(this.outputdata, 'TOLOCATIONNAME');
+                      this.filterOption = {
+                        FROMLOCATIONNAME : this.fromLocationOptions[0].TOLOCATIONNAME,
+                        VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
+                      };
 
-            _.each(this.routesGroupByLocation, (vehiclelist, key) => {
-              this.routesGroupByLocation[key] =
-                  _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
-            });
+                      this.vehicleTypeOptions =
+                          this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+                        }
+                  else {
 
-            this.filterOption = {
-              FROMLOCATIONNAME : this.fromLocationOptions[0].TOLOCATIONNAME,
-              VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
-            };
+                    //this.nameoutputdata = this.outputdata[0];
+                    this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
+                    this.nameoutputdata = newOutputData[0];
+                    this.fromLocationOptions =
+                        _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
+                    this.routesGroupByLocation =
+                        _.groupBy(this.outputdata, 'TOLOCATIONNAME');
 
-            this.vehicleTypeOptions =
-                this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+                    _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+                      this.routesGroupByLocation[key] =
+                          _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+                    });
+
+                    this.filterOption = {
+                      //FROMLOCATIONNAME : this.fromLocationOptions[0].TOLOCATIONNAME,
+                      //VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
+                      FROMLOCATIONNAME : fromLoc,
+                      VEHICLETYPENAME : vehTypeName
+                    };
+
+                    this.vehicleTypeOptions =
+                        this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+
+                    }
                 }
 
-                else{
-
-                  this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
-            this.nameoutputdata = newOutputData[0];
-            this.fromLocationOptions =
-                _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
-            this.routesGroupByLocation =
-                _.groupBy(this.outputdata, 'TOLOCATIONNAME');
-
-            _.each(this.routesGroupByLocation, (vehiclelist, key) => {
-              this.routesGroupByLocation[key] =
-                  _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
-            });
-
-            this.filterOption = {
-              FROMLOCATIONNAME : this.fromLocationOptions[1].TOLOCATIONNAME,
-              VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
-            };
-
-            this.vehicleTypeOptions =
-                this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
-                }
-
-
-          }
 
           else {
 
-            // this.nameoutputdata = this.outputdata[0];
-            if(isFlag == 0){
-
-              console.log('inside loop');
+            if(isFlag == 0)
+            {
             this.nameoutputdata = newOutputData[0];
             this.fromLocationOptions =
                 _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
@@ -174,32 +175,29 @@ export class OutputController {
             this.vehicleTypeOptions =
                 this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
             }
-
             else{
 
-              this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
-            this.nameoutputdata = newOutputData[0];
-            this.fromLocationOptions =
-                _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
-            this.routesGroupByLocation =
-                _.groupBy(this.outputdata, 'TOLOCATIONNAME');
+              // this.nameoutputdata = this.outputdata[0];
+              this.nameoutputdata = newOutputData[0];
+              this.fromLocationOptions =
+                  _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
+              this.routesGroupByLocation =
+                  _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
+              _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+                this.routesGroupByLocation[key] =
+                    _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+              });
 
-            _.each(this.routesGroupByLocation, (vehiclelist, key) => {
-              this.routesGroupByLocation[key] =
-                  _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
-            });
+              this.filterOption = {
+                FROMLOCATIONNAME : fromLoc,
+                VEHICLETYPENAME : vehTypeName
+              };
 
-            this.filterOption = {
-              FROMLOCATIONNAME : this.fromLocationOptions[1].TOLOCATIONNAME,
-              VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
-            };
+              this.vehicleTypeOptions =
+                  this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
 
-            this.vehicleTypeOptions =
-                this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
             }
-          }
-
-          // console.log(this.outputdata);
+        }
 
         }, (err) => { console.error(err); });
   }
@@ -219,6 +217,8 @@ export class OutputController {
     this.rowClickedColName = clickedColName;
 
     this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
+
+    console.log(this.outputdata[0].OPPRDOMAIN);
 
     if (this.outputdata[0].OPPRDOMAIN == 'Inbound') {
       this.inproxiparam.DESTINATION = table.FROMLOCATIONNAME;
@@ -251,8 +251,6 @@ export class OutputController {
     this.gridData = [];
     var newfilterRoutes = {inproxiparam : this.inproxiparam};
 
-
-
     if (this.outputdata[0].OPPRDOMAIN == 'Inbound') {
       this.TOLOCATIONNAME = table.FROMLOCATIONNAME;
     } else {
@@ -263,13 +261,13 @@ export class OutputController {
     this.colName = headerColName;
     this.modalHeaderName = modalHeaderName;
 
+    console.log(newfilterRoutes);
 
     if(headerColName == 'Market Rate')
     {
     this._api.get(`toptenmarketrates/${sourcecityid}/${sourcestateid}/${destcityid}/${deststateid}/${vehtypeid}`)
         .then((res) => {
           this.marketData = res.data.toptenmarketratesResult;
-          //console.log(this.marketData);
         }, (err) => { console.error(err); });
     }
     else {
@@ -277,7 +275,7 @@ export class OutputController {
       this._api.post(this.urlMaps[colname], newfilterRoutes, true)
           .then((res) => {
             this.gridData = res.data[this.responseKeys[clickedColName]];
-            //console.log(this.gridData);
+            console.log(this.gridData);
           }, (err) => { console.error(err); });
 
     }
@@ -295,7 +293,10 @@ export class OutputController {
     }
   }
 
-  submit() {
+  submitForAprroval() {
+
+    var FromLocName = this.filterOption.FROMLOCATIONNAME;
+    var VehTypeName = this.filterOption.VEHICLETYPENAME;
 
     var revisedOutput = _.chain(this.outputdata)
                             .map((output) => {
@@ -357,10 +358,10 @@ export class OutputController {
 
     var newOutputDetails = {apptrans : revisedOutput};
 
-    console.log(newOutputDetails);
-
     this._api.post('apptrans', newOutputDetails)
-        .then((res) => { this.getTransactionData(1); },
+
+        .then((res) => { this.getTransactionData(1, FromLocName, VehTypeName);},
+
               (err) => { console.error(err); });
 
     this.toaster.success('Changes saved successfully');
@@ -380,8 +381,6 @@ export class OutputController {
         this.selectedLane[this.rowClickedColName] = popupGridData.FREIGHTRATE;
     }
 
-
-
     if (colName == 'REGULAR') {
       $('#myModalOutputDetails').modal('hide');
     }
@@ -396,12 +395,21 @@ export class OutputController {
     }
   }
 
-  changecolor(toMatch, approvedRate) {
-    if (toMatch >= approvedRate) {
-      return 'below';
-    } else {
-      return 'above';
+  changecolor(toMatch, approvedRate, flag) {
+
+    let css = '';
+
+    if(toMatch > 0 && flag === true) {
+      css = 'value-available ';
     }
+
+    if (toMatch >= approvedRate) {
+      css = css + 'below';
+    } else {
+      css = css + 'above';
+    }
+
+    return css;
   }
 
   changeLocation() {
@@ -409,13 +417,16 @@ export class OutputController {
     this.vehicleTypeOptions =
         this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
 
-    if(this.vehicleTypeOptions == undefined || this.vehicleTypeOptions == null)
-    {}
-    else
-    {this.filterOption.VEHICLETYPENAME =
-        this.vehicleTypeOptions[0].VEHICLETYPENAME;
-    this.outputdata[0].CLEANSHEETRATE =
-        this.outputdata[0].CLEANSHEETRATE / 1000;}
+
+    if(this.vehicleTypeOptions ==  undefined || this.vehicleTypeOptions == null){
+
+    }
+    else {
+      this.filterOption.VEHICLETYPENAME =
+          this.vehicleTypeOptions[0].VEHICLETYPENAME;
+      this.outputdata[0].CLEANSHEETRATE =
+          this.outputdata[0].CLEANSHEETRATE / 1000;
+    }
 
   }
 
@@ -458,76 +469,27 @@ export class OutputController {
           {
             var response = JSON.parse(client.responseText);
 
-            //console.log(blobOrFile.size);
-
-
             if (response.ErrorMessage != '') {
               this.er = response.ErrorMessage;
               //console.log(`ErrorMessage: ${response.ErrorMessage}`);
+              alert(`${response.ErrorMessage}`);
             } else {
               this.suc = response.SuccessMessage;
               //console.log(`SuccessMessage: ${response.SuccessMessage}`);
+              alert(`${response.SuccessMessage}`);
             }
             //console.log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
+
             this.loader = false;
-            this.getTransactionData(0);
+            this.getTransactionData(0, null, null);
             $('#myModalBrowse').modal('hide');
+
           }
         }
         // this.toaster.success('Lanes saved successfully');
 
         client.send(blobOrFile);
   }
-
-  /*
-  uploadBlobOrFile(blobOrFile){
-        this.f = blobOrFile;
-        if (blobOrFile) {
-            blobOrFile.upload = this.Upload.upload({
-              //url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-              url: `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1`,
-              data: {file: blobOrFile}
-            });
-
-            blobOrFile.upload.then(function (response) {
-                blobOrFile.result = response.data;
-                er = blobOrFile.result.ErrorMessage;
-                console.log(blobOrFile.result);
-            }, function (response) {
-                if (response.status > 0)
-                    var errorMsg = response.status + ': ' + response.data;
-            }, function (evt) {
-                blobOrFile.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-            });
-        }
-        /*
-    this.uploadProgress(blobOrFile, blobOrFile.size);
-    var client = new XMLHttpRequest();
-    client.open(
-        'POST',
-        `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1`,
-        false);
-    client.setRequestHeader("Content-Type", "multipart/form-data");
-
-    client.onreadystatechange =
-        () => {
-
-          if (client.readyState == 4 && client.status == 200)
-          {
-            var response = JSON.parse(client.responseText);
-            if (response.ErrorMessage != '') {
-              this.er = response.ErrorMessage;
-            } else {
-              this.suc = response.SuccessMessage;
-            }
-            this.getTransactionData();
-          }
-        }
-        client.send(blobOrFile);
-        */
-        /*
-  }
-  */
 
   closeModal() { $('#myModalOutputDetails').modal('hide'); }
 

@@ -279,7 +279,7 @@ export class LanesController {
 
     var client = new XMLHttpRequest();
     client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
-    //client.open('POST', `http://localhost:52202/RFPImport/Service.svc/Upload/RFPUpload/${this.$stateParams.rfpid}`, false);
+    //client.open('POST', `http://localhost:64760/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
     client.setRequestHeader("Content-Type", "multipart/form-data");
 
     /* Check the response status */
@@ -289,21 +289,25 @@ export class LanesController {
 
 
         var response = JSON.parse(client.responseText);
-        console.log(`FilePath: ${response.FilePath}`);
+        //console.log(`FilePath: ${response.FilePath}`);
         //console.log(`FileLength: ${response.FileLength}`);
-        console.log(`FileName: ${response.FileName}`);
+        //console.log(`FileName: ${response.FileName}`);
 
         if (response.ErrorMessage != '') {
           console.log(`ErrorMessage: ${response.ErrorMessage}`);
+          alert(`${response.ErrorMessage}`);
         } else {
           console.log(`SuccessMessage: ${response.SuccessMessage}`);
+          alert(`${response.SuccessMessage}`);
         }
         console.log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
         console.log(response.ErrorData);
 
         this.gridData = response.ErrorData;
 
-        if (this.gridData != null) {
+        //console.log(this.gridData.length);
+
+        if (this.gridData != null && this.gridData.length != 0) {
           $('#myModalErrorList').modal();
         }
         //===========================
