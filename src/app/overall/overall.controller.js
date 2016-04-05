@@ -30,6 +30,7 @@ export class OverallController {
   init() {
 
     this.CUSTOMERNAME_option = this._master.getCustomers();
+    //console.log(this.CUSTOMERNAME_option);
 
     this.AGEOFTRUCK_option = _.times(10, (i) => ({
       name: i,
@@ -134,10 +135,26 @@ export class OverallController {
     };
   }
 
+
+  resetNewCustomer(){
+
+        this.newCustomer.CUSTOMERID = 0;
+        this.newCustomer.CUSTOMERCODE = '';
+        this.newCustomer.CUSTOMERNAME = '';
+        this.newCustomer.ADDRESS = '';
+        this.newCustomer.CONTACTPERSON = '';
+        this.newCustomer.CONTACTNO = '';
+        this.newoppCustomer.CASHACCOUNTID = '';
+        this.newCustomer.TOTALSPEND = '';
+        this.newCustomer.EMAIL = '';
+
+  }
+
   addCustomer() {
 
     var customer = {
-      "cust": {
+
+      "cust" : {
         "CUSTOMERID": this.newCustomer.CUSTOMERID,
         "CUSTOMERCODE": this.newCustomer.CUSTOMERCODE,
         "CUSTOMERNAME": this.newCustomer.CUSTOMERNAME,
@@ -157,23 +174,24 @@ export class OverallController {
 
     var customerURL = 'updtcustomer';
 
-    console.log(customer);
-
     this._api.post(customerURL, customer).then((response) => {
-      this._master.refreshPromise().then((response) => {
+
+        var lastID = parseInt(response.data.updtcustomerResult);
+        this._master.refreshPromise().then((response) => {
         this._master.refresh(response);
         this.CUSTOMERNAME_option = this._master.getCustomers();
+        this.selectedOption = _.find(this.CUSTOMERNAME_option, ['CUSTOMERID', lastID]);
+
         this.toaster.success('Customer ' + this.newCustomer.CUSTOMERNAME + ' added successfully');
       }, (error) => {
-        //console.error(error);
         this.toaster.error(`${error.status} : ${error.statusText}`);
       });
 
     }, (error) => {
-      //console.error(error);
       this.toaster.error(`${error.status} : ${error.statusText}`);
     });
 
+    this.resetNewCustomer();
     $('#myModal').modal('hide');
 
   }
@@ -185,7 +203,8 @@ export class OverallController {
         "RFPID": 0,
         "RFPCODE": this.overall.RFPCODE,
         "RFPDATE": this.$filter('date')(new Date(this.overall.RFPDATE), 'yyyy-MM-dd 00:00:00'), //this.overall.RFPDATE,
-        "CUSTOMERID": this.customer.CUSTOMERID,
+        //"CUSTOMERID": this.customer.CUSTOMERID,
+        "CUSTOMERID": this.selectedOption.CUSTOMERID,
         "INDUSTRYTYPEID": this.overall.INDUSTRYTYPEID,
         "RFPAMOUNT": this.overall.RFPAMOUNT,
         "STARTDATE": "2016-01-01 00:00:00",
@@ -213,21 +232,27 @@ export class OverallController {
         "ACTIVE": "A",
         "CREATEDBY": "1",
         "CREATEDON": this.$filter('date')(new Date(this.overall.CREATEDON), 'yyyy-MM-dd 00:00:00'),
-        "ADDRESS": this.customer.ADDRESS,
-        "CONTACTPERSON": this.customer.CONTACTPERSON,
-        "CONTACTNO": this.customer.CONTACTNO,
-        "CASHACCOUNTID": this.customer.CASHACCOUNTID,
-        "TOTALSPEND": this.customer.TOTALSPEND,
+        //"ADDRESS": this.customer.ADDRESS,
+        // "CONTACTPERSON": this.customer.CONTACTPERSON,
+        // "CONTACTNO": this.customer.CONTACTNO,
+        //"CASHACCOUNTID": this.customer.CASHACCOUNTID,
+        //"TOTALSPEND": this.customer.TOTALSPEND,
+        "ADDRESS": this.selectedOption.ADDRESS,
+        "CONTACTPERSON": this.selectedOption.CONTACTPERSON,
+        "CONTACTNO": this.selectedOption.CONTACTNO,
+        "CASHACCOUNTID": this.selectedOption.CASHACCOUNTID,
+        "TOTALSPEND": this.selectedOption.TOTALSPEND,
         "PROXIDISTANCE": this.overall.PROXIDISTANCE
       }
     };
+
+    //console.log(rfpHeader);
 
 
     var rfpHeaderURL = 'rfp/INSERT';
     this.toaster.success('RFP details for ' + this.customer.CUSTOMERNAME + ' added successfully');
     //console.log(this.customer.CUSTOMERNAME);
 
-    console.log(rfpHeader);
     this._api.post(rfpHeaderURL, rfpHeader).then((response) => {
       this.$state.go('lanes', {
         rfpid: response.data.rfpResult[0].RFPID,
@@ -238,5 +263,6 @@ export class OverallController {
       //console.log(error);
       this.toaster.error(`${error.status} : ${error.statusText}`);
     });
+
   }
 }

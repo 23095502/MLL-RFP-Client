@@ -127,9 +127,6 @@
           </tr>
         </thead>
         <tbody>
-          <!--
-          <tr ng-repeat="route in output.outputdata | filter:{FROMLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
-            -->
             <tr ng-show="(output.outputdata[0].OPPRDOMAIN === 'Outbound') ? true : false" ng-repeat="route in output.outputdata | filter: {FROMLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
               <td class="whitecol">
                 <strong ng-show="(output.outputdata[0].OPPRDOMAIN === 'Outbound') ? true : false">{{route.TOLOCATIONNAME}}</strong>
