@@ -2,6 +2,8 @@ export class OutputController {
   constructor($stateParams, $state, apiService, toaster, Upload, $timeout) {
     'ngInject';
 
+    this.loading = true;
+    this.exporting = true;
     this.$stateParams = $stateParams;
     this.$timeout = $timeout;
     this._api = apiService;
@@ -91,69 +93,19 @@ export class OutputController {
 
                      })
 
+
+
                   if (this.outputdata[0].OPPRDOMAIN == 'Inbound') {
 
-                      if(isFlag == 0)
-                      {
-                          // this.nameoutputdata = this.outputdata[0];
-                          this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
-                          this.nameoutputdata = newOutputData[0];
-                          this.fromLocationOptions =
-                              _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
-                          this.routesGroupByLocation =
-                              _.groupBy(this.outputdata, 'TOLOCATIONNAME');
-
-                          _.each(this.routesGroupByLocation, (vehiclelist, key) => {
-                            this.routesGroupByLocation[key] =
-                                _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
-                          });
-
-                          this.filterOption = {
-                            FROMLOCATIONNAME : this.fromLocationOptions[0].TOLOCATIONNAME,
-                            VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
-                          };
-
-                          this.vehicleTypeOptions =
-                              this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
-                      }
-                      else {
-
-                          //this.nameoutputdata = this.outputdata[0];
-                          this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
-                          this.nameoutputdata = newOutputData[0];
-                          this.fromLocationOptions =
-                              _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
-                          this.routesGroupByLocation =
-                              _.groupBy(this.outputdata, 'TOLOCATIONNAME');
-
-                          _.each(this.routesGroupByLocation, (vehiclelist, key) => {
-                            this.routesGroupByLocation[key] =
-                                _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
-                          });
-
-                          this.filterOption = {
-                            //FROMLOCATIONNAME : this.fromLocationOptions[0].TOLOCATIONNAME,
-                            //VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
-                            FROMLOCATIONNAME : fromLoc,
-                            VEHICLETYPENAME : vehTypeName
-                          };
-
-                          this.vehicleTypeOptions =
-                              this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
-
-                      }
-                  }
-
-                    else {
-
-                      if(isFlag == 0)
-                      {
-                      //this.nameoutputdata = this.outputdata[0];
+                  if(isFlag == 0)
+                  {
+                      // this.nameoutputdata = this.outputdata[0];
+                      this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
                       this.nameoutputdata = newOutputData[0];
                       this.fromLocationOptions =
-                          _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
+                          _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
                       this.routesGroupByLocation =
-                          _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
+                          _.groupBy(this.outputdata, 'TOLOCATIONNAME');
 
                       _.each(this.routesGroupByLocation, (vehiclelist, key) => {
                         this.routesGroupByLocation[key] =
@@ -161,38 +113,91 @@ export class OutputController {
                       });
 
                       this.filterOption = {
-                        FROMLOCATIONNAME : this.fromLocationOptions[0].FROMLOCATIONNAME,
+                        FROMLOCATIONNAME : this.fromLocationOptions[0].TOLOCATIONNAME,
                         VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
                       };
 
                       this.vehicleTypeOptions =
                           this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
-                      }
-                      else{
-                        //this.nameoutputdata = this.outputdata[0];
-                        this.nameoutputdata = newOutputData[0];
-                        this.fromLocationOptions =
-                            _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
-                        this.routesGroupByLocation =
-                            _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
+                        }
+                  else {
 
-                        _.each(this.routesGroupByLocation, (vehiclelist, key) => {
-                          this.routesGroupByLocation[key] =
-                              _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
-                        });
+                    //this.nameoutputdata = this.outputdata[0];
+                    this.LOCATIONNAME = this.outputdata.TOLOCATIONNAME;
+                    this.nameoutputdata = newOutputData[0];
+                    this.fromLocationOptions =
+                        _.uniqBy(this.outputdata, 'TOLOCATIONNAME');
+                    this.routesGroupByLocation =
+                        _.groupBy(this.outputdata, 'TOLOCATIONNAME');
 
-                        this.filterOption = {
-                          FROMLOCATIONNAME : fromLoc,
-                          VEHICLETYPENAME : vehTypeName
-                        };
+                    _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+                      this.routesGroupByLocation[key] =
+                          _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+                    });
 
-                        this.vehicleTypeOptions =
-                            this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+                    this.filterOption = {
+                      //FROMLOCATIONNAME : this.fromLocationOptions[0].TOLOCATIONNAME,
+                      //VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
+                      FROMLOCATIONNAME : fromLoc,
+                      VEHICLETYPENAME : vehTypeName
+                    };
 
-                      }
-                  }
+                    this.vehicleTypeOptions =
+                        this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
 
-                  }, (err) => { console.error(err); });
+                    }
+                }
+
+          else {
+
+            if(isFlag == 0)
+            {
+            // this.nameoutputdata = this.outputdata[0];
+            this.nameoutputdata = newOutputData[0];
+            this.fromLocationOptions =
+                _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
+            this.routesGroupByLocation =
+                _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
+
+            _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+              this.routesGroupByLocation[key] =
+                  _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+            });
+
+            this.filterOption = {
+              FROMLOCATIONNAME : this.fromLocationOptions[0].FROMLOCATIONNAME,
+              VEHICLETYPENAME : this.fromLocationOptions[0].VEHICLETYPENAME
+            };
+
+            this.vehicleTypeOptions =
+                this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+            }
+            else{
+
+              // this.nameoutputdata = this.outputdata[0];
+              this.nameoutputdata = newOutputData[0];
+              this.fromLocationOptions =
+                  _.uniqBy(this.outputdata, 'FROMLOCATIONNAME');
+              this.routesGroupByLocation =
+                  _.groupBy(this.outputdata, 'FROMLOCATIONNAME');
+
+              _.each(this.routesGroupByLocation, (vehiclelist, key) => {
+                this.routesGroupByLocation[key] =
+                    _.uniqBy(vehiclelist, 'VEHICLETYPENAME');
+              });
+
+              this.filterOption = {
+                FROMLOCATIONNAME : fromLoc,
+                VEHICLETYPENAME : vehTypeName
+              };
+
+              this.vehicleTypeOptions =
+                  this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
+
+            }
+        }
+
+        }, (err) => { console.error(err); });
   }
 
   ClearFilter() { this.filterOption = undefined; }
@@ -421,18 +426,27 @@ export class OutputController {
 
   exportNormal() {
     this._api.get(`exportrfpout/${this.$stateParams.rfpId}`)
-        .then((res) => { window.open(res.data); },
-              (err) => { console.error(err); });
+        .then((res) => { window.open(res.data);},
+              (err) => { console.error(err);});
   }
 
   exportBAQuote() {
     this._api.get(`expbaquote/${this.$stateParams.rfpId}`)
-        .then((res) => { window.open(res.data); },
+        .then((res) => { window.open(res.data);
+        },
+
               (err) => { console.error(err); });
   }
 
-  uploadBlobOrFile(blobOrFile) {
+  isLoading(){
+    //return _.isEmpty(loadingStatus);
+    console.log(this.loading);
+    return this.loading;
+  }
 
+
+  uploadBlobOrFile(blobOrFile) {
+    this.loading = false;
     this.uploadProgress(blobOrFile, blobOrFile.size);
     var client = new XMLHttpRequest();
     client.open(
@@ -446,28 +460,28 @@ export class OutputController {
     client.setRequestHeader("Content-Type", "multipart/form-data");
     client.onreadystatechange =
         () => {
+
           console.log("rdystate: " + client.readyState + " status: " +
                       client.status + " Text: " + client.statusText);
           if (client.readyState == 4 && client.status == 200)
           {
             var response = JSON.parse(client.responseText);
-
             if (response.ErrorMessage != '') {
               this.er = response.ErrorMessage;
-              //console.log(`ErrorMessage: ${response.ErrorMessage}`);
               alert(`${response.ErrorMessage}`);
+
+
             } else {
               this.suc = response.SuccessMessage;
-              //console.log(`SuccessMessage: ${response.SuccessMessage}`);
               alert(`${response.SuccessMessage}`);
+
             }
-            //console.log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
             this.getTransactionData(0, null, null);
-            $('#myModalBrowse').modal('hide');
+            this.loading = true;
+            //$('#myModalBrowse').modal('hide');
           }
         }
         // this.toaster.success('Lanes saved successfully');
-
         client.send(blobOrFile);
   }
 
