@@ -1,8 +1,7 @@
 export class LanesController {
-  constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster, $log) {
+  constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster) {
     'ngInject';
 
-    this.$log = $log;
     this.routes = [];
     this.routes = [];
     this.$timeout = $timeout;
@@ -257,11 +256,11 @@ export class LanesController {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
         this.$state.go('dashboard');
       }, (err) => {
-        this.$log(err);
+        console.log(err);
       });
 
     }, (e) => {
-      this.$log(e);
+      console.log(e);
     });
 
     this.toaster.success('Lanes saved successfully');
@@ -280,14 +279,14 @@ export class LanesController {
 
         var response = angular.fromJson(client.responseText);
         if (response.ErrorMessage != '') {
-          this.$log(`ErrorMessage: ${response.ErrorMessage}`);
+          console.log(`ErrorMessage: ${response.ErrorMessage}`);
           alert(`${response.ErrorMessage}`);
         } else {
-          this.$log(`SuccessMessage: ${response.SuccessMessage}`);
+          console.log(`SuccessMessage: ${response.SuccessMessage}`);
           alert(`${response.SuccessMessage}`);
         }
-        this.$log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
-        this.$log(response.ErrorData);
+        console.log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
+        //console.log(response.ErrorData);
 
         this.gridData = response.ErrorData;
         if (this.gridData != null && this.gridData.length != 0) {
