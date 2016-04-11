@@ -1,8 +1,10 @@
 export class MarketRateController {
-  constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster, $filter, $http) {
+  constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster, $filter, $http, $log, $window) {
     'ngInject';
 
+    this.$window = $window;
     this.$http = $http;
+    this.$log = $log;
     this._api = apiService;
     this.toaster = toaster;
     this.$filter = $filter;
@@ -89,24 +91,18 @@ export class MarketRateController {
       }
     };
 
-    //console.log('Hi');
-    console.log(marketRateData);
-
      this._api.post('marketrate', marketRateData).then((response) => {
-       console.log(response);
+      this.$log(response);
       this.toaster.success('Market Rate saved successfully');
       this.add();
     }, (error) => {
-      console.log(error);
+      this.$log(error);
       // this.toaster.error(`${error.status} : ${error.statusText}`);
     });
   }
 
-  //import file market rate
-
   uploadBlobOrFile(blobOrFile) {
 
-    console.log(blobOrFile.length);
     var client = new XMLHttpRequest();
     client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/marketrate/mrate/1`, false);
     //client.open('POST', `http://localhost:64760/RFPROUTE/RFPImportRoute.svc/marketrate/mrate/1`, false);
@@ -115,9 +111,9 @@ export class MarketRateController {
 
     /* Check the response status */
     client.onreadystatechange = () => {
-      console.log("rdystate: " + client.readyState + " status: " + client.status + " Text: " + client.statusText);
+      this.$log("rdystate: " + client.readyState + " status: " + client.status + " Text: " + client.statusText);
       if (client.readyState == 4 && client.status == 200) {
-        console.log(client.responseText);
+        this.$log(client.responseText);
         //===========================
          // this.getMarketRateData();
         //===========================
@@ -131,19 +127,17 @@ export class MarketRateController {
 
   }
 
-  /*getMarketRateData(){
-
-  }*/
-
   exportMarketRate() {
     this._api.get(`expmarketrate`)
         .then((res) => {
-           window.open(res.data);
-          //console.log(res.data);
+           //window.open(res.data);
+           this.$window.alert(res.data);
            },
-              (err) => { console.error(err); });
+              (err) => {
+                //console.error(err);
+                this.$log(err);
+              });
   }
 
 
 }
-

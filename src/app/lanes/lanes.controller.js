@@ -1,7 +1,8 @@
 export class LanesController {
-  constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster) {
+  constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster, $log) {
     'ngInject';
 
+    this.$log = $log;
     this.routes = [];
     this.routes = [];
     this.$timeout = $timeout;
@@ -26,10 +27,7 @@ export class LanesController {
     this.iswarehousing = $stateParams.iswarehousing;
     (this.iswarehousing === 'Y') ? this.iswarehousing = true: this.iswarehousing = false;
 
-    //===========================
-    //Get all RFP routes by RFP ID
     this.getRPFRoutes();
-    //===========================
 
     this.state = {
       "STATEID": null,
@@ -43,7 +41,7 @@ export class LanesController {
     this.isPACKAGETYPEID_option = this.prepareForDropdown(['', 'Pallet', 'Corrugated Boxes', 'Bags', 'Trolley', 'Loose']);
     this.isSERVICETYPE_option = this.prepareForDropdown(['FTL', 'ODC', 'Surface Exp', 'PTL Conventional', 'Fixed Vehicle', 'Air Express']);
 
-    document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function(e) {
+      document.getElementsByClassName('tbody-div4')[0].addEventListener('scroll', function(e) {
       document.querySelector('.tbody-div3 table').style.top = `-${e.target.scrollTop}px`;
       document.querySelector('.thead-div2 table').style.left = `-${e.target.scrollLeft}px`;
     });
@@ -56,7 +54,6 @@ export class LanesController {
       this.routes = res.data;
       this.$timeout(this.adjustScrollableTable);
     }, (err) => {
-      //console.error(err);
       this.toaster.error(`${err.status} : ${err.statusText}`);
     });
   }
@@ -104,7 +101,6 @@ export class LanesController {
       });
 
       _.each(finalWidth, (list, key) => {
-        //console.log(div2Head[key].children[0]);
         div2Head[key].children[0].style.width = finalWidth[key] + 'px';
         div4Body[key].children[0].style.width = finalWidth[key] + 'px';
       });
@@ -191,12 +187,9 @@ export class LanesController {
     this.routes.push(angular.copy(this.route));
     this.resetRoute();
     this.editingIndex = null;
-
     this.toaster.success('Lane saved successfully');
-    //---------------------
     //set width to route grid columns
     this.$timeout(this.adjustScrollableTable);
-    //---------------------
     $('#myModal').modal('hide');
   }
 
@@ -243,7 +236,7 @@ export class LanesController {
     var filterRoutes = _.chain(this.routes).filter((o) => {
       return o.DIRTY;
     }).map((route) => {
-      delete route.$$hashKey;
+      //delete route.$$hashKey;
       delete route.DIRTY;
       delete route.FROMLOCATIONNAME;
       delete route.LOCATIONNAME;
@@ -260,16 +253,15 @@ export class LanesController {
       rfproute: filterRoutes
     };
 
-
     this._api.post('routeupdate', newfilterRoutes).then((r) => {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
         this.$state.go('dashboard');
       }, (err) => {
-        console.error(err);
+        this.$log(err);
       });
 
     }, (e) => {
-      console.error(e);
+      this.$log(e);
     });
 
     this.toaster.success('Lanes saved successfully');
@@ -279,7 +271,6 @@ export class LanesController {
 
     var client = new XMLHttpRequest();
     client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
-    //client.open('POST', `http://localhost:64760/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
     client.setRequestHeader("Content-Type", "multipart/form-data");
 
     /* Check the response status */
@@ -287,47 +278,33 @@ export class LanesController {
       //console.log("rdystate: " + client.readyState + " status: " + client.status + " Text: " + client.statusText);
       if (client.readyState == 4 && client.status == 200) {
 
-
-        var response = JSON.parse(client.responseText);
-        //console.log(`FilePath: ${response.FilePath}`);
-        //console.log(`FileLength: ${response.FileLength}`);
-        //console.log(`FileName: ${response.FileName}`);
-
+        var response = angular.fromJson(client.responseText);
         if (response.ErrorMessage != '') {
-          console.log(`ErrorMessage: ${response.ErrorMessage}`);
+          this.$log(`ErrorMessage: ${response.ErrorMessage}`);
           alert(`${response.ErrorMessage}`);
         } else {
-          console.log(`SuccessMessage: ${response.SuccessMessage}`);
+          this.$log(`SuccessMessage: ${response.SuccessMessage}`);
           alert(`${response.SuccessMessage}`);
         }
-        console.log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
-        console.log(response.ErrorData);
+        this.$log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
+        this.$log(response.ErrorData);
 
         this.gridData = response.ErrorData;
-
-        //console.log(this.gridData.length);
-
         if (this.gridData != null && this.gridData.length != 0) {
           $('#myModalErrorList').modal();
         }
-        //===========================
-        //Get all RFP routes by RFP ID
+
         this.getRPFRoutes();
-        //===========================
         this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
-          //this.$state.go('dashboard');
         }, (err) => {
-          //console.error(err);
           this.toaster.error(`${err.status} : ${err.statusText}`);
         });
         //===========================
         $('#myModalBrowse').modal('hide');
       }
     }
-
     /* Send to server */
     client.send(blobOrFile);
-
     this.toaster.success("Data imported");
   }
 

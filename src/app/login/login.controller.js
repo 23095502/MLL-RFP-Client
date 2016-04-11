@@ -6,7 +6,6 @@ export class LoginController {
     this.auth = authService;
     this.toaster = toaster;
     toaster.info('Hi');
-    //console.log(toaster);
   }
 
   authenticate() {
@@ -14,10 +13,6 @@ export class LoginController {
     this.auth.login(this.username, this.password).then((res) => {
 
       if (!!res) {
-
-        //console.log(this.$rootScope.returnToState);
-        //console.log(this.$rootScope.returnToStateParams);
-
         if (this.$rootScope.returnToState === '/create/overall') {
           this.$state.transitionTo('overall');
         }

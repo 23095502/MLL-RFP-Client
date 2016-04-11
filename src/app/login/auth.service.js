@@ -18,7 +18,8 @@ export class authService {
       if (result.data.length > 0) {
         this.authenticated = true;
         this.userInfo = result.data[0];
-        this.$window.sessionStorage.userInfo = JSON.stringify(this.userInfo);
+        //this.$window.sessionStorage.userInfo = JSON.stringify(this.userInfo);
+        this.$window.sessionStorage.userInfo = angular.toJson(this.userInfo);
         deferred.resolve(this.userInfo);
       }
       else {

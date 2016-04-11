@@ -30,7 +30,6 @@ export class OverallController {
   init() {
 
     this.CUSTOMERNAME_option = this._master.getCustomers();
-    //console.log(this.CUSTOMERNAME_option);
 
     this.AGEOFTRUCK_option = _.times(10, (i) => ({
       name: i,
@@ -246,12 +245,8 @@ export class OverallController {
       }
     };
 
-    //console.log(rfpHeader);
-
-
     var rfpHeaderURL = 'rfp/INSERT';
     this.toaster.success('RFP details for ' + this.customer.CUSTOMERNAME + ' added successfully');
-    //console.log(this.customer.CUSTOMERNAME);
 
     this._api.post(rfpHeaderURL, rfpHeader).then((response) => {
       this.$state.go('lanes', {
