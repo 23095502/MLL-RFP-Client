@@ -1,9 +1,8 @@
 export function runBlock($rootScope, $state, authService, masterService) {
   'ngInject';
-  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+  //$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
 
-    //console.log('authenticate:' + toState.authenticate);
-    //console.log('isAuthenticated():' + authService.isAuthenticated());
     if (toState.authenticate && !authService.isAuthenticated()) {
 
       $rootScope.returnToState = toState.url;

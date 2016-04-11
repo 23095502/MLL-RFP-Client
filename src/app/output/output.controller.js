@@ -1,7 +1,9 @@
 export class OutputController {
-  constructor($stateParams, $state, apiService, toaster, Upload, $timeout) {
+  constructor($stateParams, $state, apiService, toaster, Upload, $timeout, $log, $window) {
     'ngInject';
 
+    this.$window = $window;
+    this.$log = $log;
     this.loading = true;
     this.exporting = true;
     this.$stateParams = $stateParams;
@@ -92,8 +94,6 @@ export class OutputController {
                        this.outputdata[value].APPROVEDAMOUNT = APPROVEDAMOUNT;
 
                      })
-
-
 
                   if (this.outputdata[0].OPPRDOMAIN == 'Inbound') {
 
@@ -197,7 +197,7 @@ export class OutputController {
             }
         }
 
-        }, (err) => { console.error(err); });
+      }, (err) => { this.$log(err); });
   }
 
   ClearFilter() { this.filterOption = undefined; }
@@ -211,31 +211,33 @@ export class OutputController {
 
   showModal(colname, table, clickedColName, headerColName, modalHeaderName) {
 
+    var sourcecityid;
+    var destcityid;
+    var sourcestateid;
+    var deststateid;
+    var vehtypeid;
+
     this.selectedLane = table;
     this.rowClickedColName = clickedColName;
-
     this.inproxiparam.ORIGIN = this.filterOption.FROMLOCATIONNAME;
-
-    console.log(this.outputdata[0].OPPRDOMAIN);
-
     if (this.outputdata[0].OPPRDOMAIN == 'Inbound') {
       this.inproxiparam.DESTINATION = table.FROMLOCATIONNAME;
       this.inproxiparam.DESTINATIONSTATE = table.FROMSTATE;
       this.inproxiparam.ORIGINSTATE = table.TOSTATE;
 
-      var sourcecityid = table.TOLOCATION;
-      var destcityid = table.FROMLOCATION;
-      var sourcestateid = table.TOSTATEID;
-      var deststateid = table.FROMSTATEID;
-      var vehtypeid = table.VEHICLETYPEID;
+      sourcecityid = table.TOLOCATION;
+      destcityid = table.FROMLOCATION;
+      sourcestateid = table.TOSTATEID;
+      deststateid = table.FROMSTATEID;
+      vehtypeid = table.VEHICLETYPEID;
 
     } else {
 
-      var sourcecityid = table.FROMLOCATION;
-      var destcityid = table.TOLOCATION;
-      var sourcestateid = table.FROMSTATEID;
-      var deststateid = table.TOSTATEID;
-      var vehtypeid = table.VEHICLETYPEID;
+      sourcecityid = table.FROMLOCATION;
+      destcityid = table.TOLOCATION;
+      sourcestateid = table.FROMSTATEID;
+      deststateid = table.TOSTATEID;
+      vehtypeid = table.VEHICLETYPEID;
 
       this.inproxiparam.ORIGINSTATE = table.FROMSTATE;
       this.inproxiparam.DESTINATION = table.TOLOCATIONNAME;
@@ -259,22 +261,19 @@ export class OutputController {
     this.colName = headerColName;
     this.modalHeaderName = modalHeaderName;
 
-    console.log(newfilterRoutes);
-
     if(headerColName == 'Market Rate')
     {
     this._api.get(`toptenmarketrates/${sourcecityid}/${sourcestateid}/${destcityid}/${deststateid}/${vehtypeid}`)
         .then((res) => {
           this.marketData = res.data.toptenmarketratesResult;
-        }, (err) => { console.error(err); });
+        }, (err) => { this.$log(err); });
     }
     else {
 
       this._api.post(this.urlMaps[colname], newfilterRoutes, true)
           .then((res) => {
             this.gridData = res.data[this.responseKeys[clickedColName]];
-            console.log(this.gridData);
-          }, (err) => { console.error(err); });
+          }, (err) => { this.$log(err); });
 
     }
 
@@ -308,7 +307,7 @@ export class OutputController {
                               output.MODE = 'APIRATE';
                               output.CREATEDBY = 1;
                               output.CREATEDON = '2016-03-01';
-                              delete output.$$hashKey;
+                              //delete output.$$hashKey;
                               delete output.ADDRESS;
                               delete output.AVERAGELOAD;
                               delete output.BACKHAUL;
@@ -355,17 +354,14 @@ export class OutputController {
                             .value();
 
     var newOutputDetails = {apptrans : revisedOutput};
-
     this._api.post('apptrans', newOutputDetails)
         .then((res) => { this.getTransactionData(1, FromLocName, VehTypeName);},
-              (err) => { console.error(err); });
+              (err) => { this.$log(err); });
 
     this.toaster.success('Changes saved successfully');
   }
 
   updateContractRate(popupGridData, colName) {
-
-    console.log(popupGridData);
 
     if(colName == 'MARKET')
     {
@@ -413,10 +409,7 @@ export class OutputController {
     this.vehicleTypeOptions =
         this.routesGroupByLocation[this.filterOption.FROMLOCATIONNAME];
 
-    if(this.vehicleTypeOptions ==  undefined || this.vehicleTypeOptions == null){
-
-    }
-    else {
+    if(this.vehicleTypeOptions !=  undefined || this.vehicleTypeOptions != null){
       this.filterOption.VEHICLETYPENAME =
           this.vehicleTypeOptions[0].VEHICLETYPENAME;
       this.outputdata[0].CLEANSHEETRATE =
@@ -426,24 +419,17 @@ export class OutputController {
 
   exportNormal() {
     this._api.get(`exportrfpout/${this.$stateParams.rfpId}`)
-        .then((res) => { window.open(res.data);},
-              (err) => { console.error(err);});
+        .then((res) => { this.$window.open(res.data);},
+              (err) => { this.$log(err);});
   }
 
   exportBAQuote() {
     this._api.get(`expbaquote/${this.$stateParams.rfpId}`)
-        .then((res) => { window.open(res.data);
+        .then((res) => { this.$window.open(res.data);
         },
 
-              (err) => { console.error(err); });
+              (err) => { this.$log(err); });
   }
-
-  isLoading(){
-    //return _.isEmpty(loadingStatus);
-    console.log(this.loading);
-    return this.loading;
-  }
-
 
   uploadBlobOrFile(blobOrFile) {
     this.loading = false;
@@ -461,20 +447,18 @@ export class OutputController {
     client.onreadystatechange =
         () => {
 
-          console.log("rdystate: " + client.readyState + " status: " +
+          this.$log("rdystate: " + client.readyState + " status: " +
                       client.status + " Text: " + client.statusText);
           if (client.readyState == 4 && client.status == 200)
           {
-            var response = JSON.parse(client.responseText);
+            var response = angular.fromJson(client.responseText);
             if (response.ErrorMessage != '') {
               this.er = response.ErrorMessage;
               alert(`${response.ErrorMessage}`);
-
-
-            } else {
+            }
+            else {
               this.suc = response.SuccessMessage;
               alert(`${response.SuccessMessage}`);
-
             }
             this.getTransactionData(0, null, null);
             this.loading = true;
@@ -506,9 +490,9 @@ export class OutputController {
     }
   }
 
-  locationFlag() { return TOLOCATIONNAME; }
+  //locationFlag() { return TOLOCATIONNAME; }
 
-  uploadProgress(fName, fSize, evt){
+  uploadProgress(fName, fSize){
       this.progressPercentage = Math.min(100, parseInt(100.0 * 677964 / fSize));
   }
 }
