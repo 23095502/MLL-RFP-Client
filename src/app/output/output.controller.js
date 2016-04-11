@@ -1,9 +1,8 @@
 export class OutputController {
-  constructor($stateParams, $state, apiService, toaster, Upload, $timeout, $log, $window) {
+  constructor($stateParams, $state, apiService, toaster, Upload, $timeout, $window) {
     'ngInject';
 
     this.$window = $window;
-    this.$log = $log;
     this.loading = true;
     this.exporting = true;
     this.$stateParams = $stateParams;
@@ -197,7 +196,10 @@ export class OutputController {
             }
         }
 
-      }, (err) => { this.$log(err); });
+      }, (err) => {
+        console.error(err);
+        //console.error(err);
+      });
   }
 
   ClearFilter() { this.filterOption = undefined; }
@@ -266,14 +268,14 @@ export class OutputController {
     this._api.get(`toptenmarketrates/${sourcecityid}/${sourcestateid}/${destcityid}/${deststateid}/${vehtypeid}`)
         .then((res) => {
           this.marketData = res.data.toptenmarketratesResult;
-        }, (err) => { this.$log(err); });
+        }, (err) => { console.error(err); });
     }
     else {
 
       this._api.post(this.urlMaps[colname], newfilterRoutes, true)
           .then((res) => {
             this.gridData = res.data[this.responseKeys[clickedColName]];
-          }, (err) => { this.$log(err); });
+          }, (err) => { console.error(err); });
 
     }
 
@@ -356,7 +358,7 @@ export class OutputController {
     var newOutputDetails = {apptrans : revisedOutput};
     this._api.post('apptrans', newOutputDetails)
         .then((res) => { this.getTransactionData(1, FromLocName, VehTypeName);},
-              (err) => { this.$log(err); });
+              (err) => { console.error(err); });
 
     this.toaster.success('Changes saved successfully');
   }
@@ -420,7 +422,7 @@ export class OutputController {
   exportNormal() {
     this._api.get(`exportrfpout/${this.$stateParams.rfpId}`)
         .then((res) => { this.$window.open(res.data);},
-              (err) => { this.$log(err);});
+              (err) => { console.error(err);});
   }
 
   exportBAQuote() {
@@ -428,7 +430,7 @@ export class OutputController {
         .then((res) => { this.$window.open(res.data);
         },
 
-              (err) => { this.$log(err); });
+              (err) => { console.error(err); });
   }
 
   uploadBlobOrFile(blobOrFile) {
@@ -447,7 +449,7 @@ export class OutputController {
     client.onreadystatechange =
         () => {
 
-          this.$log("rdystate: " + client.readyState + " status: " +
+          console.log("rdystate: " + client.readyState + " status: " +
                       client.status + " Text: " + client.statusText);
           if (client.readyState == 4 && client.status == 200)
           {
