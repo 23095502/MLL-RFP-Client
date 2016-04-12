@@ -1,5 +1,5 @@
 export class OutputController {
-  constructor($stateParams, $state, apiService, toaster, Upload, $timeout) {
+  constructor($stateParams, $state, apiService, toaster, Upload, $timeout, $http) {
     'ngInject';
 
     this.$stateParams = $stateParams;
@@ -9,6 +9,7 @@ export class OutputController {
     this.outputdata = [];
     this.toaster = toaster;
     this.Upload =  Upload;
+    this.$http = $http;
 
     this.inproxiparam =
     {
@@ -422,26 +423,45 @@ export class OutputController {
     }
   }
 
-  exportNormal() {
+ /* exportNormal() {
     this._api.get(`exportrfpout/${this.$stateParams.rfpId}`)
+        .then((res) => { window.open(res.data); },
+              (err) => { console.error(err); });
+  }*/
+
+   exportNormal() {
+    this.$http.get(`http://localhost:51323/DVPRWCFService/RFPRestService.svc/exportrfpout/${this.$stateParams.rfpId}`)
         .then((res) => { window.open(res.data); },
               (err) => { console.error(err); });
   }
 
-  exportBAQuote() {
+  /*exportBAQuote() {
     this._api.get(`expbaquote/${this.$stateParams.rfpId}`)
         .then((res) => { window.open(res.data); },
+              (err) => { console.error(err); });
+  }*/
+
+  exportBAQuote() {
+    this.$http.get(`http://localhost:51323/DVPRWCFService/RFPRestService.svc/expbaquote/${this.$stateParams.rfpId}`)
+        .then((res) => {
+        console.log(res.data);
+          //window.open(res.data);
+        },
               (err) => { console.error(err); });
   }
 
   uploadBlobOrFile(blobOrFile) {
-
+    var testDate = new Date();
+    var previousDay = new Date(testDate);
+    console.log(previousDay);
     this.uploadProgress(blobOrFile, blobOrFile.size);
     var client = new XMLHttpRequest();
-    client.open(
+    /*client.open(
         'POST',
         `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1`,
-        false);
+        false);*/
+    //client.open('POST', `http://localhost:61343/RFPImport/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
+    client.open('POST', `http://localhost:61343/RFPImport/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1`, false);
     // client.open('POST',
     // `http://localhost:52019/RFPImport/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1}`,
     // false);
