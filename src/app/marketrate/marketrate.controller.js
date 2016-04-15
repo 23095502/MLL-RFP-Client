@@ -135,15 +135,24 @@ export class MarketRateController {
 
   }*/
 
-  exportMarketRate() {
+ /* exportMarketRate() {
     this._api.get(`expmarketrate`)
         .then((res) => {
            window.open(res.data);
           //console.log(res.data);
            },
               (err) => { console.error(err); });
-  }
+  }*/
 
+ exportMarketRate() {
+    this.$http.get(`http://localhost:51323/DVPRWCFService/RFPRestService.svc/expmarketrate`)
+   // this._api.get(`expmarketrate`)
+        .then((res) => {
+           window.open(res.data);
+          //console.log(res.data);
+           },
+              (err) => { console.error(err); });
+  }
 
 }
 

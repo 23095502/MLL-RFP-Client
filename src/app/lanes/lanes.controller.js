@@ -263,7 +263,7 @@ export class LanesController {
 
     this._api.post('routeupdate', newfilterRoutes).then((r) => {
       this._api.get(`apiupdate/${this.$stateParams.rfpid}`).then((res) => {
-        this.$state.go('dashboard');
+        this.$state.go('marketrate');
       }, (err) => {
         console.error(err);
       });
