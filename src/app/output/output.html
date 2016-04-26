@@ -1,6 +1,8 @@
 <div class="container-fluid">
+
   <div class="row">
     <div class="col-sm-6">
+
     <h1><abbr title="Request for praposal">RFP</abbr> output details</h1></div>
     <div class="col-md-6 text-right">
       <button class="btn btn-default btn-xs" ng-click="output.exportBAQuote()"> <i class="glyphicon glyphicon-export"></i> Export BA QUOTE Template
@@ -8,10 +10,12 @@
       <!--<button class="btn btn-default btn-xs" ng-click="output.uploadBlobOrFile(output.file)">Import BA Quote</button>-->
       <button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModalBrowse">
       <i class="glyphicon glyphicon-import"></i>  Import BA Quotes
+
       </button>
       <button class="btn btn-default btn-xs" ng-click="output.exportNormal()"><i class="glyphicon glyphicon-export"></i> Export
       </button>
     </div>
+
   </div>
   <div class="row filter-details">
     <div class="col-sm-4">
@@ -123,9 +127,6 @@
           </tr>
         </thead>
         <tbody>
-          <!--
-          <tr ng-repeat="route in output.outputdata | filter:{FROMLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
-            -->
             <tr ng-show="(output.outputdata[0].OPPRDOMAIN === 'Outbound') ? true : false" ng-repeat="route in output.outputdata | filter: {FROMLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
               <td class="whitecol">
                 <strong ng-show="(output.outputdata[0].OPPRDOMAIN === 'Outbound') ? true : false">{{route.TOLOCATIONNAME}}</strong>
@@ -686,7 +687,6 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-md-6 col-md-offset-3">
-              <!--<div ng-show="output.loading" class="loading">LOADING...</div>-->
               <input type="file" class="form-control" ngf-select ng-model="output.file" name="file"
               accept="excel/*" ngf-max-size="2MB" ngf-model-invalid="output.errorFile" required>
               <i ng-show="output.$error.required">*</i>
@@ -701,24 +701,15 @@
               <div class="alert alert-danger" role="alert">{{output.errmsg}}</div>
               <span ng-show="output.file.result">Upload Successful</span>-->
             </div>
-            <!--<div class="col-md-6">
-              <img id="mySpinner" src="assets/images/angular-spinner.jpg" ng-show="output.loading" />
-              <span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1"></span>
-            </div>-->
-          </div>
-          <!-- <div class="row" ng-hide="output.isLoading()"> -->
-          <div class="row" ng-hide="output.loading">
-            <div class="col-md-4 col-md-offset-4">
-              <div class="alert alert-info" role="alert" >
-                  <strong>Uploading data...</strong>
-              </div>
-            </div>
+            <div class="alert alert-danger" role="alert">{{output.errmsg}}</div>
+            <span ng-show="output.file.result">Upload Successful</span>-->
+            <div ng-show="output.loader">Please wait, importing route details...</div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" ng-click="output.uploadBlobOrFile(output.file)">Import BA Quote</button>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"  ng-click="output.uploadBlobOrFile(output.file)">Import BA Quote</button>
       </div>
     </div>
   </div>
