@@ -1,8 +1,7 @@
 export class masterService {
-  constructor(apiService, $log) {
+  constructor(apiService) {
     'ngInject';
 
-    this.$log = $log;
     this._master = {};
     this._api = apiService;
   }
@@ -16,8 +15,8 @@ export class masterService {
         //sessionStorage.master = JSON.stringify(this._master);
         sessionStorage.master = angular.toJson(this._master);
       }, (err) => {
-        //console.error(err);
-        this.$log(err);
+        console.error(err);
+        //this.$log(err);
       });
 
     } else {
@@ -57,8 +56,8 @@ export class masterService {
         //sessionStorage.master = JSON.stringify(this._master);
         sessionStorage.master = angular.toJson(this._master);
       }, (err) => {
-        //console.error(err);
-        this.$log(err);
+        console.error(err);
+        //this.$log(err);
       });
     } else {
 

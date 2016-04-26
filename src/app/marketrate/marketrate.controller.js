@@ -1,10 +1,9 @@
 export class MarketRateController {
-  constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster, $filter, $http, $log, $window) {
+  constructor($state, $stateParams, $timeout, Upload, masterService, apiService, toaster, $filter, $http, $window) {
     'ngInject';
 
     this.$window = $window;
     this.$http = $http;
-    this.$log = $log;
     this._api = apiService;
     this.toaster = toaster;
     this.$filter = $filter;
@@ -92,12 +91,12 @@ export class MarketRateController {
     };
 
      this._api.post('marketrate', marketRateData).then((response) => {
-      this.$log(response);
+      //this.$log(response);
       this.toaster.success('Market Rate saved successfully');
       this.add();
     }, (error) => {
-      this.$log(error);
-      // this.toaster.error(`${error.status} : ${error.statusText}`);
+      //this.$log(error);
+      this.toaster.error(`${error.status} : ${error.statusText}`);
     });
   }
 
@@ -111,9 +110,9 @@ export class MarketRateController {
 
     /* Check the response status */
     client.onreadystatechange = () => {
-      this.$log("rdystate: " + client.readyState + " status: " + client.status + " Text: " + client.statusText);
+      console.log("rdystate: " + client.readyState + " status: " + client.status + " Text: " + client.statusText);
       if (client.readyState == 4 && client.status == 200) {
-        this.$log(client.responseText);
+        console.log(client.responseText);
         //===========================
          // this.getMarketRateData();
         //===========================
@@ -134,8 +133,8 @@ export class MarketRateController {
            this.$window.alert(res.data);
            },
               (err) => {
-                //console.error(err);
-                this.$log(err);
+                console.error(err);
+                //this.$log(err);
               });
   }
 
