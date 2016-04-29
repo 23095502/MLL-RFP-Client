@@ -13,23 +13,18 @@
       </button>
     </div>
   </div>
-
+  <hr>
   <div class="row" style="padding-top: 10px">
   </div>
-
   <div class="row" ng-hide="dash.isDataAvailable()">
     <div class="col-md-4 col-md-offset-4">
       <div class="alert alert-info" role="alert" >
-          <strong>Hi!</strong> Data is fetching...
+        <strong>Hi!</strong> Data is fetching...
       </div>
     </div>
   </div>
-
   <div class="row" style="padding-top: 10px" ng-show="dash.isDataAvailable()">
     <div class="col-md-12">
-      <!--<div class="alert alert-info" role="alert" ng-hide="dash.isDataAvailable()">
-          <strong>Hi!</strong> Data is fetching...
-      </div>-->
       <table class="table mll-table" >
         <thead>
           <tr>
@@ -54,5 +49,4 @@
       </table>
     </div>
   </div>
-
-  </div>
+</div>
