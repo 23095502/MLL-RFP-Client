@@ -23,58 +23,58 @@
               <div class="row">
                 <div class="col-sm-12 col-md-12">
                   <legend class="legend top-legend">
-                    CUSTOMER DETAILS
+                    RFP DETAILS
                     <button class="btn btn-default btn-xs pull-right" data-toggle="modal" data-target="#myModal">Add Customer</button>
                   </legend>
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-6 col-md-6">
+                <div class="col-sm-3 col-md-3">
                   <div class="form-group">
-                    <label class="form-label" title="required" for="name">Customer <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                    <!--<select class="form-control input-sm" id="name" ng-model="overall.customer" ng-options="CUSTOMER as CUSTOMER.CUSTOMERNAME for CUSTOMER in overall.CUSTOMERNAME_option  | orderBy: 'CUSTOMERNAME' " required>-->
-                    <select class="form-control input-sm" id="name" ng-model="overall.selectedOption" ng-options="CUSTOMER as CUSTOMER.CUSTOMERNAME for CUSTOMER in overall.CUSTOMERNAME_option  | orderBy: 'CUSTOMERNAME' " required>
-                      <option value=""></option>
-                    </select>
+                    <label class="form-label" title="required" for="casshopportunityid">CA$$H Opportunity ID <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                    <!-- <input type="text" class="form-control input-sm" id="casshopportunityid" placeholder="CA$$H Opportunity ID" ng-required="true" ng-model="overall.overall.CASHOPPID"> -->
+                    <input type="text" class="form-control input-sm" id="casshopportunityid" placeholder="CA$$H Opportunity ID" ng-required="true" ng-model="overall.CASHOPPID" ng-blur="overall.selectedCasshOpp()">
+                  </div>
+                </div>
+                <!-- <div class="col-sm-1 col-md-1">
+                  <div class="form-group">
+                    <label class="form-label" title="required" for="casshopportunityid"> Text <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                    <input type="text" class="form-control input-sm" id="Autocomplete2" ng-model="autocomplete" ng-autocomplete options="overall.autocompleteOptions" details="details"/>
+                  </div>
+                </div> -->
+                <div class="col-sm-3 col-md-3">
+                  <div class="form-group">
+                    <label class="form-label" title="required" for="rfpvalue">RFP value (In Lakhs)<i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                    <!-- <input type="number" step="0.01" class="form-control input-sm" id="rfpvalue" ng-required="true" placeholder="RFP value(In Lakhs)" ng-model="overall.overall.RFPAMOUNT"> -->
+                    <input type="number" step="0.01" class="form-control input-sm" id="rfpvalue" placeholder="RFP value(In Lakhs)" ng-model="overall.selectedOppOption.EST_OPP_REVENUE" ng-disabled="true" ng-required="true">
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
-                    <label class="form-label" for="contact">Contact details</label>
-                    <!--<input type="text" class="form-control input-sm" id="contact" placeholder="Contact" ng-model="overall.customer.CONTACTNO" ng-disabled="true">-->
-                    <input type="text" class="form-control input-sm" id="contact" placeholder="Contact" ng-model="overall.selectedOption.CONTACTNO" ng-disabled="true">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6 col-md-6">
-                  <div class="form-group">
-                    <label class="form-label" for="contactperson">Contact person</label>
-                    <!--<input type="text" class="form-control input-sm" id="contactperson" placeholder="Contact person" ng-model="overall.customer.CONTACTPERSON" ng-disabled="true">-->
-                    <input type="text" class="form-control input-sm" id="contactperson" placeholder="Contact person" ng-model="overall.selectedOption.CONTACTPERSON" ng-disabled="true">
-                  </div>
-                </div>
-                <div class="col-sm-6 col-md-6">
-                  <div class="form-group">
-                    <label class="form-label" for="address">Address</label>
-                    <!--<input type="text" class="form-control input-sm" id="address" placeholder="Address" ng-model="overall.customer.ADDRESS" ng-disabled="true">-->
-                    <input type="text" class="form-control input-sm" id="address" placeholder="Address" ng-model="overall.selectedOption.ADDRESS" ng-disabled="true">
+                    <label class="form-label" title="required" for="description">Description <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                    <input type="text" class="form-control input-sm" id="description" placeholder="Description" ng-required="true" ng-model="overall.selectedOppOption.OPP_DESC" ng-disabled="true">
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-6 col-md-6">
+                <div class="col-sm-3 col-md-3">
                   <div class="form-group">
-                    <label class="form-label" for="totallogistics">Total logistics spend(In Lakhs)</label>
-                    <!-- <input type="text" class="form-control input-sm" id="totallogistics" placeholder="Total logistics spend(In Lakhs)" ng-model="overall.customer.TOTALSPEND" ng-disabled="true"> -->
-                    <input type="text" class="form-control input-sm" id="totallogistics" placeholder="Total logistics spend(In Lakhs)" ng-model="overall.selectedOption.TOTALSPEND" ng-disabled="true">
+                    <label class="form-label" title="required" for="recivedate">Receive date <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                    <!-- <input type="date" class="form-control input-sm" id="recivedate" placeholder="yyyy-MM-dd" ng-required="true" ng-model="overall.overall.STARTDATE"> -->
+                    <input type="text" class="form-control input-sm" id="recivedate" placeholder="yyyy-MM-dd" ng-required="true" ng-model="overall.selectedOppOption.OPPORTUNITYENTRY_DATE" ng-disabled="true">
+                  </div>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                  <div class="form-group">
+                    <label class="form-label" title="required" for="duedate">Due date <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                    <!-- <input type="date" class="form-control input-sm" id="duedate" placeholder="Due date" ng-required="true" ng-model="overall.overall.DUEDATE"> -->
+                    <input type="text" class="form-control input-sm" id="duedate" placeholder="Due date" ng-required="true" ng-model="overall.selectedOppOption.ESTPROPOSALSUBMISSION_DATE" ng-disabled="true">
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
-                    <label class="form-label" title="required" for="cashaccountid">CA$$H Account ID <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                    <!-- <input type="text" class="form-control input-sm" id="cashaccountid" placeholder="CA$$H account id" ng-required="true" ng-model="overall.customer.CASHACCOUNTID" ng-disabled="true"> -->
-                    <input type="text" class="form-control input-sm" id="cashaccountid" placeholder="CA$$H account id" ng-required="true" ng-model="overall.selectedOption.CASHACCOUNTID" ng-disabled="true">
+                    <label class="form-label" for="productdescription">Product description</label>
+                    <input type="text" class="form-control input-sm" id="productdescription" placeholder="Product description" ng-model="overall.overall.PRODUCTDESC">
                   </div>
                 </div>
               </div>
@@ -84,46 +84,57 @@
             <div class="container">
               <div class="row">
                 <div class="col-sm-12 col-md-12">
-                  <legend class="legend">RFP DETAILS</legend>
+                  <legend class="legend">CUSTOMER DETAILS</legend>
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-3 col-md-3">
+                <div class="col-sm-6 col-md-6">
                   <div class="form-group">
-                    <label class="form-label" title="required" for="casshopportunityid">CA$$H Opportunity ID <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                    <input type="text" class="form-control input-sm" id="casshopportunityid" placeholder="CA$$H Opportunity ID" ng-required="true" ng-model="overall.overall.CASHOPPID">
-                  </div>
-                </div>
-                <div class="col-sm-3 col-md-3">
-                  <div class="form-group">
-                    <label class="form-label" title="required" for="rfpvalue">RFP value (In Lakhs)<i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                    <input type="number" step="0.01" class="form-control input-sm" id="rfpvalue" ng-required="true" placeholder="RFP value(In Lakhs)" ng-model="overall.overall.RFPAMOUNT">
+                    <label class="form-label" title="required" for="cashaccountid">CA$$H Account ID <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                    <!-- <input type="text" class="form-control input-sm" id="cashaccountid" placeholder="CA$$H account id" ng-required="true" ng-model="overall.customer.CASHACCOUNTID" ng-disabled="true"> -->
+                    <input type="text" class="form-control input-sm" id="cashaccountid" placeholder="CA$$H account id" ng-required="true" ng-model="overall.selectedCustOption.CASHACCOUNTID" ng-disabled="true">
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
-                    <label class="form-label" title="required" for="description">Description <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                    <input type="text" class="form-control input-sm" id="description" placeholder="Description" ng-required="true" ng-model="overall.overall.RFPDESC">
+                    <label class="form-label" title="required" for="name">Customer <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                    <!--<select class="form-control input-sm" id="name" ng-model="overall.customer" ng-options="CUSTOMER as CUSTOMER.CUSTOMERNAME for CUSTOMER in overall.CUSTOMERNAME_option  | orderBy: 'CUSTOMERNAME' " required>-->
+                    <!-- <select class="form-control input-sm" id="name" ng-model="overall.selectedOption" ng-options="CUSTOMER as CUSTOMER.CUSTOMERNAME for CUSTOMER in overall.CUSTOMERNAME_option  | orderBy: 'CUSTOMERNAME' " required>
+                      <option value=""></option>
+                    </select> -->
+                    <input type="text" class="form-control input-sm" id="contact" placeholder="Customer name" ng-model="overall.selectedCustOption.CUSTOMERNAME" ng-disabled="true">
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-3 col-md-3">
+                <div class="col-sm-6 col-md-6">
                   <div class="form-group">
-                    <label class="form-label" title="required" for="recivedate">Receive date <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                    <input type="date" class="form-control input-sm" id="recivedate" placeholder="yyyy-MM-dd" ng-required="true" ng-model="overall.overall.STARTDATE">
-                  </div>
-                </div>
-                <div class="col-sm-3 col-md-3">
-                  <div class="form-group">
-                    <label class="form-label" title="required" for="duedate">Due date <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                    <input type="date" class="form-control input-sm" id="duedate" placeholder="Due date" ng-required="true" ng-model="overall.overall.DUEDATE">
+                    <label class="form-label" for="contactperson">Contact person</label>
+                    <!--<input type="text" class="form-control input-sm" id="contactperson" placeholder="Contact person" ng-model="overall.customer.CONTACTPERSON" ng-disabled="true">-->
+                    <input type="text" class="form-control input-sm" id="contactperson" placeholder="Contact person" ng-model="overall.selectedCustOption.CONTACTPERSON" ng-disabled="true">
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-6">
                   <div class="form-group">
-                    <label class="form-label" for="productdescription">Product description</label>
-                    <input type="text" class="form-control input-sm" id="productdescription" placeholder="Product description" ng-model="overall.overall.PRODUCTDESC">
+                    <label class="form-label" for="contact">Contact details</label>
+                    <!--<input type="text" class="form-control input-sm" id="contact" placeholder="Contact" ng-model="overall.customer.CONTACTNO" ng-disabled="true">-->
+                    <input type="text" class="form-control input-sm" id="contact" placeholder="Contact" ng-model="overall.selectedCustOption.CONTACTNO" ng-disabled="true">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 col-md-6">
+                  <div class="form-group">
+                    <label class="form-label" for="address">Address</label>
+                    <!--<input type="text" class="form-control input-sm" id="address" placeholder="Address" ng-model="overall.customer.ADDRESS" ng-disabled="true">-->
+                    <input type="text" class="form-control input-sm" id="address" placeholder="Address" ng-model="overall.selectedCustOption.ADDRESS" ng-disabled="true">
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-6">
+                  <div class="form-group">
+                    <label class="form-label" for="totallogistics">Total logistics spend(In Lakhs)</label>
+                    <!-- <input type="text" class="form-control input-sm" id="totallogistics" placeholder="Total logistics spend(In Lakhs)" ng-model="overall.customer.TOTALSPEND" ng-disabled="true"> -->
+                    <input type="text" class="form-control input-sm" id="totallogistics" placeholder="Total logistics spend(In Lakhs)" ng-model="overall.selectedCustOption.TOTALSPEND" ng-disabled="true">
                   </div>
                 </div>
               </div>

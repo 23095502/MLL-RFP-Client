@@ -21,444 +21,441 @@
 </div>
 </div>
 <div class="output-table">
-  <div class="thead-div1">
-    <table class="table mll-table frozen">
-      <thead>
-        <tr>
-          <th>
-            <span>From City</span>
-          </th>
-          <th>
-            <span>From State</span>
-          </th>
-          <th>
-            <span>To City</span>
-          </th>
-          <th>
-            <span>To State</span>
-          </th>
-        </tr>
-      </thead>
-    </table>
-  </div>
-  <div class="thead-div2">
-    <table class="table mll-table">
-      <thead>
-        <tr>
-          <th>
-            <span>One way / Round trip</span>
-          </th>
-          <th>
-            <span>Service Type</span>
-          </th>
-          <th>
-            <span>Vehicle Type</span>
-          </th>
-          <th>
-            <span>Distance oneway</span>
-          </th>
-          <th>
-            <span>Loading / Unloading time</span>
-          </th>
-          <th>
-            <span>No. of Trips</span>
-          </th>
-          <th>
-            <span>Backhaul (%)</span>
-          </th>
-        </tr>
-      </thead>
-    </table>
-  </div>
-  <div class="tbody-div3">
-    <table class="mll-table table frozen">
-      <tbody>
-        <tr ng-dblclick="lane.edit(route, $index)" ng-repeat="route in lane.routes">
-          <td>
-            <span>{{lane.map(route.FROMLOCATION, lane.locationname_option, 'LOCATIONID', 'LOCATIONNAME')}}</span>
-          </td>
-          <td>
-            <span>{{lane.map(route.FROMSTATEID, lane.statename_option, 'STATEID', 'STATECODE')}}</span>
-          </td>
-          <td>
-            <span>{{lane.map(route.TOLOCATION, lane.locationname_option, 'LOCATIONID','LOCATIONNAME')}}</span>
-          </td>
-          <td>
-            <span>{{lane.map(route.TOSTATEID, lane.statename_option, 'STATEID', 'STATECODE')}}</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="tbody-div4">
-    <table class="mll-table table">
-      <tbody>
-        <tr ng-dblclick="lane.edit(route, $index)" ng-repeat="route in lane.routes">
-          <td >
-            <span>{{route.ISROUNDTRIP}}</span>
-          </td>
-          <td>
-            <span>{{route.SERVICETYPE}}</span>
-          </td>
-          <td>
-            <span>{{lane.map(route.VEHICLETYPEID, lane.vehicletypename_option, 'VEHICLETYPEID', 'VEHICLETYPENAME')}}</span>
-          </td>
-          <td class="number-center">
-            <span>{{route.DISTANCE}}</span>
-          </td>
-          <td class="number-center">
-            <span>{{route.LOADINGUNLOADINGTIME}}</span>
-          </td>
-          <td class="number-center">
-            <span>{{route.NOOFTRIPS}}</span>
-          </td>
-          <td class="number-center">
-            <span>{{route.BACKHAUL}}</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div class="thead-div1">
+  <table class="table mll-table frozen">
+    <thead>
+      <tr>
+        <th>
+          <span>From City</span>
+        </th>
+        <th>
+          <span>From State</span>
+        </th>
+        <th>
+          <span>To City</span>
+        </th>
+        <th>
+          <span>To State</span>
+        </th>
+      </tr>
+    </thead>
+  </table>
+</div>
+<div class="thead-div2">
+  <table class="table mll-table">
+    <thead>
+      <tr>
+        <th>
+          <span>One way / Round trip</span>
+        </th>
+        <th>
+          <span>Service Type</span>
+        </th>
+        <th>
+          <span>Vehicle Type</span>
+        </th>
+        <th>
+          <span>Distance oneway</span>
+        </th>
+        <th>
+          <span>Loading / Unloading time</span>
+        </th>
+        <th>
+          <span>No. of Trips</span>
+        </th>
+        <th>
+          <span>Backhaul (%)</span>
+        </th>
+      </tr>
+    </thead>
+  </table>
+</div>
+<div class="tbody-div3">
+  <table class="mll-table table frozen">
+    <tbody>
+      <tr ng-dblclick="lane.edit(route, $index)" ng-repeat="route in lane.routes">
+        <td>
+          <span>{{lane.map(route.FROMLOCATION, lane.locationname_option, 'LOCATIONID', 'LOCATIONNAME')}}</span>
+        </td>
+        <td>
+          <span>{{lane.map(route.FROMSTATEID, lane.statename_option, 'STATEID', 'STATECODE')}}</span>
+        </td>
+        <td>
+          <span>{{lane.map(route.TOLOCATION, lane.locationname_option, 'LOCATIONID','LOCATIONNAME')}}</span>
+        </td>
+        <td>
+          <span>{{lane.map(route.TOSTATEID, lane.statename_option, 'STATEID', 'STATECODE')}}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="tbody-div4">
+  <table class="mll-table table">
+    <tbody>
+      <tr ng-dblclick="lane.edit(route, $index)" ng-repeat="route in lane.routes">
+        <td >
+          <span>{{route.ISROUNDTRIP}}</span>
+        </td>
+        <td>
+          <span>{{route.SERVICETYPE}}</span>
+        </td>
+        <td>
+          <span>{{lane.map(route.VEHICLETYPEID, lane.vehicletypename_option, 'VEHICLETYPEID', 'VEHICLETYPENAME')}}</span>
+        </td>
+        <td class="number-center">
+          <span>{{route.DISTANCE}}</span>
+        </td>
+        <td class="number-center">
+          <span>{{route.LOADINGUNLOADINGTIME}}</span>
+        </td>
+        <td class="number-center">
+          <span>{{route.NOOFTRIPS}}</span>
+        </td>
+        <td class="number-center">
+          <span>{{route.BACKHAUL}}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 </div>
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12 text-right">
-      <button class="btn btn-primary" ng-click="lane.submitData()">
-      Submit RFP
-      </button>
-    </div>
+<div class="row">
+  <div class="col-md-12 text-right">
+    <button class="btn btn-primary" ng-click="lane.submitData()">
+    Submit RFP
+    </button>
   </div>
+</div>
 </div>
 <form ng-submit="lane.add()">
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">
-            &times;
-          </span>
-          </button>
-          <h4 class="modal-title" id="myModalLabel">
-          Add Route
-          </h4>
-        </div>
-        <div class="modal-body">
-          <div>
-            <div class="fieldset" class="form-group">
-              <div class="container-fluid">
-                <fieldset class="fieldset">
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <legend class="legend top-legend">
-                          Lane Details
-                        </legend>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="fromCity">From city  <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <select class="form-control input-sm" id="fromCity" ng-model="lane.route.FROMLOCATION" ng-options="location.LOCATIONID as location.LOCATIONNAME for location in lane.locationname_option" required>
-                            <option value="">Select</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="fromState">From state  <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <select class="form-control input-sm" id="fromState" ng-model="lane.route.FROMSTATEID" ng-options="state.STATEID as state.STATENAME for state in lane.statename_option" required>
-                            <option value="">Select</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="toCity">To city <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <select class="form-control input-sm" id="toCity" ng-model="lane.route.TOLOCATION" ng-options="location.LOCATIONID as location.LOCATIONNAME for location in lane.locationname_option" required>
-                            <option value="">Select</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="toState">To state <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <select class="form-control input-sm" id="toState" ng-model="lane.route.TOSTATEID " ng-options="state.STATEID as state.STATENAME for state in lane.statename_option" required>
-                            <option value="">Select</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="servicetype">Service Type <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <select class="form-control input-sm" id="servicetype" ng-model="lane.route.SERVICETYPE" ng-options="servicetype.name as servicetype.val for servicetype in lane.isSERVICETYPE_option" ng-change="lane.changePackageDimension()" required>
-                            <option value="">Select</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="vehType">Vehicle Type <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <select class="form-control input-sm" id="vehType" ng-model="lane.route.VEHICLETYPEID" ng-options="vehicletype.VEHICLETYPEID as vehicletype.VEHICLETYPENAME for vehicletype in lane.vehicletypename_option" required>
-                            <option value="">Select</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="name">One way/ Round Trip <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <br/>
-                          <label class="radio-inline">
-                            <input type="radio" ng-model="lane.route.ISROUNDTRIP" name="optradiotype" value="N" /> One way
-                          </label>
-                          <label class="radio-inline">
-                            <input type="radio" ng-model="lane.route.ISROUNDTRIP" name="optradiotype" value="Y" /> Round
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
-
-                <fieldset class="fieldset" ng-hide="true">
-
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <legend class="legend">Solution Design Details</legend>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="packageDimensions">Package Dimension<i ng-show="lane.isServiceTypeODC" class="glyphicon glyphicon-asterisk icon-required"></i></label>
-                          <input type="text" id="packageDimensions" class="form-control input-sm" ng-model="lane.route.PACKDIMENSION" placeholder="Enter Package Dimensions" ng-required="lane.isServiceTypeODC" />
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" for="name">Loading / Unloading Charges<i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
-                          <br/>
-                          <label class="radio-inline">
-                            <input type="radio" ng-model="lane.route.ISLOADUNLOADCHARG" name="optradio" value="Y" /> Yes
-                          </label>
-                          <label class="radio-inline">
-                            <input type="radio" ng-model="lane.route.ISLOADUNLOADCHARG" name="optradio" value="N" /> No
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="stackingNorms">Stacking Norms<i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
-                          <input type="text" id="stackingNorms" class="form-control input-sm" ng-model="lane.route.STACKINGNORMS" placeholder="Enter Stacking Norms" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="desc">Description <i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
-                          <input type="text" id="desc" class="form-control input-sm" placeholder="Enter Description" />
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="transitTime">Transit Time</label>
-                          <input type="text" id="transitTime" class="form-control input-sm" ng-model="lane.route.RFPDURATION" placeholder="Enter Transit Time" />
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="packType">Packaging Type <i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
-                          <select class="form-control input-sm" id="packType" ng-model="lane.route.PACKAGETYPEID" ng-options="packType.name as packType.val for packType in lane.isPACKAGETYPEID_option">
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="mheReq">MHE requirement <i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
-                          <input type="text" id="mheReq" class="form-control input-sm" ng-model="lane.route.MHEREQUIREMENT" placeholder="Enter MHE requirement" />
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="freq">Frequency</label>
-                          <input type="text" id="freq" class="form-control input-sm" ng-model="lane.route.FREQUENCY" placeholder="Enter frequency" />
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="avgLoad">Average Load
-                          </label>
-                          <input type="text" id="avgLoad" class="form-control input-sm" ng-model="lane.route.AVERAGELOAD" placeholder="Enter Average Load" />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="current">Customer Target Rate </label>
-                          <input type="text" id="current" class="form-control input-sm" ng-model="lane.route.CUSTTARGETRATE" placeholder="Enter Current" />
-                        </div>
-                      </div>
-                      <div class="col-sm-8">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="otherReq">Other requirement </label>
-                          <input type="text" id="otherReq" class="form-control input-sm" ng-model="lane.route.OTHERREQUIREMENT" placeholder="Enter description" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
-                <fieldset class="fieldset">
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <legend class="legend">Cleansheet Details</legend>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="distOneway">Distance oneway (km)</label>
-                          <input type="number" id="distOneway" class="form-control input-sm" ng-model="lane.route.DISTANCE" placeholder="Enter distance" />
-                        </div>
-                      </div>
-                      <div class="col-sm-3">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="loadUnloadTime">Loading / Unloading time (days) </label>
-                          <input type="number" id="loadUnloadTime" class="form-control input-sm" ng-model="lane.route.LOADINGUNLOADINGTIME" placeholder="Enter Loading unloading time" />
-                        </div>
-                      </div>
-                    <!-- </div>
-                    <div class="row"> -->
-                      <div class="col-sm-3">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="noofTrips">No of trips
-                          </label>
-                          <input type="number" id="noofTrips" class="form-control input-sm" ng-model="lane.route.NOOFTRIPS" placeholder="Enter no of trips" />
-                        </div>
-                      </div>
-                      <div class="col-sm-3">
-                        <div class="form-group">
-                          <label class="form-label" title="required" for="backhaul">Backhaul (%)
-                          </label>
-                          <input type="number" id="backhaul" class="form-control input-sm" ng-model="lane.route.BACKHAUL" placeholder="Enter Backhaul %" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </fieldset>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" ng-if="lane.editingIndex==null" class="btn btn-primary">
-          Add
-          </button>
-          <button type="button" ng-if="lane.editingIndex!=null" class="btn btn-danger" data-dismiss="modal" ng-click="lane.delete()">
-          Delete
-          </button>
-          <button type="button" ng-if="lane.editingIndex!=null" class="btn btn-primary" data-dismiss="modal" ng-click="lane.save()">
-          Save
-          </button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">
-          Close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</form>
-<div class="modal fade" id="myModalBrowse" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Import Routes</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-6 col-md-offset-3">
-            <input type="file" ngf-select ng-model="lane.file" name="file"
-            accept="excel/*" ngf-max-size="2MB" required
-            ngf-model-invalid="lane.errorFile">
-            <i ng-show="lane.file.$error.required">*required</i><br>
-            <i ng-show="lane.file.$error.maxSize">File too large
-            {{lane.errorFile.size / 1000000|number:1}}MB: max 2M</i>
-            <!-- <button ng-click="lane.uploadBlobOrFile(lane.file)">Submit</button> -->
-            <span class="progress" ng-show="lane.file.progress >= 0">
-              <div style="width:{{lane.file.progress}}%"
-              ng-bind="lane.file.progress + '%'"></div>
-            </span>
-            <span ng-show="lane.file.result">Upload Successful</span>
-            <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" ng-click="lane.uploadBlobOrFile(lane.file)">Import Routes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="myModalErrorList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">
+          &times;
+        </span>
+        </button>
         <h4 class="modal-title" id="myModalLabel">
-          Imported error route list
-          </h4>
+        Add Route
+        </h4>
       </div>
       <div class="modal-body">
-        <div style="overflow: auto; height: 60vh">
-          <form>
+        <div>
+          <div class="fieldset" class="form-group">
             <div class="container-fluid">
-              <div class="row">
-                <div class="col-sm-12">
-                  <table class="table mll-table">
-                    <thead>
-                      <tr>
-                        <th class="text-left">From City</th>
-                        <th>From State</th>
-                        <th>To City</th>
-                        <th>To State</th>
-                        <th>Vehicle Type</th>
-                        <th>Remark</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr class="rate-details" ng-repeat="griddata in lane.gridData">
-                        <td>{{griddata.OriginCity}}</td>
-                        <td>{{griddata.OriginState}}</td>
-                        <td>{{griddata.DestinationCity}}</td>
-                        <td>{{griddata.DestinationState}}</td>
-                        <td>{{griddata.VehicleType}}</td>
-                        <td>{{griddata.Remark}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <fieldset class="fieldset">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <legend class="legend top-legend">
+                        Lane Details
+                      </legend>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="fromCity">From city  <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                        <select class="form-control input-sm" id="fromCity" ng-model="lane.route.FROMLOCATION" ng-options="location.LOCATIONID as location.LOCATIONNAME for location in lane.locationname_option" required>
+                          <option value="">Select</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="fromState">From state  <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                        <select class="form-control input-sm" id="fromState" ng-model="lane.route.FROMSTATEID" ng-options="state.STATEID as state.STATENAME for state in lane.statename_option" required>
+                          <option value="">Select</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="toCity">To city <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                        <select class="form-control input-sm" id="toCity" ng-model="lane.route.TOLOCATION" ng-options="location.LOCATIONID as location.LOCATIONNAME for location in lane.locationname_option" required>
+                          <option value="">Select</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="toState">To state <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                        <select class="form-control input-sm" id="toState" ng-model="lane.route.TOSTATEID " ng-options="state.STATEID as state.STATENAME for state in lane.statename_option" required>
+                          <option value="">Select</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="servicetype">Service Type <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                        <select class="form-control input-sm" id="servicetype" ng-model="lane.route.SERVICETYPE" ng-options="servicetype.name as servicetype.val for servicetype in lane.isSERVICETYPE_option" ng-change="lane.changePackageDimension()" required>
+                          <option value="">Select</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="vehType">Vehicle Type <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                        <select class="form-control input-sm" id="vehType" ng-model="lane.route.VEHICLETYPEID" ng-options="vehicletype.VEHICLETYPEID as vehicletype.VEHICLETYPENAME for vehicletype in lane.vehicletypename_option" required>
+                          <option value="">Select</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="name">One way/ Round Trip <i class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                        <br/>
+                        <label class="radio-inline">
+                          <input type="radio" ng-model="lane.route.ISROUNDTRIP" name="optradiotype" value="N" /> One way
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" ng-model="lane.route.ISROUNDTRIP" name="optradiotype" value="Y" /> Round
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </fieldset>
+              <fieldset class="fieldset" ng-hide="true">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <legend class="legend">Solution Design Details</legend>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="packageDimensions">Package Dimension<i ng-show="lane.isServiceTypeODC" class="glyphicon glyphicon-asterisk icon-required"></i></label>
+                        <input type="text" id="packageDimensions" class="form-control input-sm" ng-model="lane.route.PACKDIMENSION" placeholder="Enter Package Dimensions" ng-required="lane.isServiceTypeODC" />
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" for="name">Loading / Unloading Charges<i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
+                        <br/>
+                        <label class="radio-inline">
+                          <input type="radio" ng-model="lane.route.ISLOADUNLOADCHARG" name="optradio" value="Y" /> Yes
+                        </label>
+                        <label class="radio-inline">
+                          <input type="radio" ng-model="lane.route.ISLOADUNLOADCHARG" name="optradio" value="N" /> No
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="stackingNorms">Stacking Norms<i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
+                        <input type="text" id="stackingNorms" class="form-control input-sm" ng-model="lane.route.STACKINGNORMS" placeholder="Enter Stacking Norms" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="desc">Description <i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
+                        <input type="text" id="desc" class="form-control input-sm" placeholder="Enter Description" />
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="transitTime">Transit Time</label>
+                        <input type="text" id="transitTime" class="form-control input-sm" ng-model="lane.route.RFPDURATION" placeholder="Enter Transit Time" />
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="packType">Packaging Type <i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
+                        <select class="form-control input-sm" id="packType" ng-model="lane.route.PACKAGETYPEID" ng-options="packType.name as packType.val for packType in lane.isPACKAGETYPEID_option">
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="mheReq">MHE requirement <i class="glyphicon glyphicon-asterisk icon-required" ng-show="lane.iswarehousing"></i></label>
+                        <input type="text" id="mheReq" class="form-control input-sm" ng-model="lane.route.MHEREQUIREMENT" placeholder="Enter MHE requirement" />
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="freq">Frequency</label>
+                        <input type="text" id="freq" class="form-control input-sm" ng-model="lane.route.FREQUENCY" placeholder="Enter frequency" />
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="avgLoad">Average Load
+                        </label>
+                        <input type="text" id="avgLoad" class="form-control input-sm" ng-model="lane.route.AVERAGELOAD" placeholder="Enter Average Load" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="current">Customer Target Rate </label>
+                        <input type="text" id="current" class="form-control input-sm" ng-model="lane.route.CUSTTARGETRATE" placeholder="Enter Current" />
+                      </div>
+                    </div>
+                    <div class="col-sm-8">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="otherReq">Other requirement </label>
+                        <input type="text" id="otherReq" class="form-control input-sm" ng-model="lane.route.OTHERREQUIREMENT" placeholder="Enter description" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="fieldset">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <legend class="legend">Cleansheet Details</legend>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="distOneway">Distance oneway (km)</label>
+                        <input type="number" id="distOneway" class="form-control input-sm" ng-model="lane.route.DISTANCE" placeholder="Enter distance" />
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="loadUnloadTime">Loading / Unloading time (days) </label>
+                        <input type="number" id="loadUnloadTime" class="form-control input-sm" ng-model="lane.route.LOADINGUNLOADINGTIME" placeholder="Enter Loading unloading time" />
+                      </div>
+                    </div>
+                  <!-- </div>
+                  <div class="row"> -->
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="noofTrips">No of trips
+                        </label>
+                        <input type="number" id="noofTrips" class="form-control input-sm" ng-model="lane.route.NOOFTRIPS" placeholder="Enter no of trips" />
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label class="form-label" title="required" for="backhaul">Backhaul (%)
+                        </label>
+                        <input type="number" id="backhaul" class="form-control input-sm" ng-model="lane.route.BACKHAUL" placeholder="Enter Backhaul %" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
             </div>
-          </form>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" ng-click="closeModal()" class="btn btn-default" data-dismiss="modal">
-          Close
+        <button type="submit" ng-if="lane.editingIndex==null" class="btn btn-primary">
+        Add
+        </button>
+        <button type="button" ng-if="lane.editingIndex!=null" class="btn btn-danger" data-dismiss="modal" ng-click="lane.delete()">
+        Delete
+        </button>
+        <button type="button" ng-if="lane.editingIndex!=null" class="btn btn-primary" data-dismiss="modal" ng-click="lane.save()">
+        Save
+        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+        Close
         </button>
       </div>
     </div>
   </div>
+</div>
+</form>
+<div class="modal fade" id="myModalBrowse" tabindex="-1" role="dialog">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title">Import Routes</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <input type="file" ngf-select ng-model="lane.file" name="file"
+          accept="excel/*" ngf-max-size="2MB" required
+          ngf-model-invalid="lane.errorFile">
+          <i ng-show="lane.file.$error.required">*required</i><br>
+          <i ng-show="lane.file.$error.maxSize">File too large
+          {{lane.errorFile.size / 1000000|number:1}}MB: max 2M</i>
+          <!-- <button ng-click="lane.uploadBlobOrFile(lane.file)">Submit</button> -->
+          <span class="progress" ng-show="lane.file.progress >= 0">
+            <div style="width:{{lane.file.progress}}%"
+            ng-bind="lane.file.progress + '%'"></div>
+          </span>
+          <span ng-show="lane.file.result">Upload Successful</span>
+          <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary" ng-click="lane.uploadBlobOrFile(lane.file)">Import Routes</button>
+    </div>
+  </div>
+</div>
+</div>
+<div class="modal fade" id="myModalErrorList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">
+      Imported error route list
+      </h4>
+    </div>
+    <div class="modal-body">
+      <div style="overflow: auto; height: 60vh">
+        <form>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <table class="table mll-table">
+                  <thead>
+                    <tr>
+                      <th class="text-left">From City</th>
+                      <th>From State</th>
+                      <th>To City</th>
+                      <th>To State</th>
+                      <th>Vehicle Type</th>
+                      <th>Remark</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="rate-details" ng-repeat="griddata in lane.gridData">
+                      <td>{{griddata.OriginCity}}</td>
+                      <td>{{griddata.OriginState}}</td>
+                      <td>{{griddata.DestinationCity}}</td>
+                      <td>{{griddata.DestinationState}}</td>
+                      <td>{{griddata.VehicleType}}</td>
+                      <td>{{griddata.Remark}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" ng-click="closeModal()" class="btn btn-default" data-dismiss="modal">
+      Close
+      </button>
+    </div>
+  </div>
+</div>
 </div>

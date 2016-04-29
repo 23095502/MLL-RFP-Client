@@ -25,6 +25,7 @@ export class OverallController {
       "CREATEDBY": 0,
       "CREATEDON": null
     };
+
   }
 
   init() {
@@ -135,17 +136,17 @@ export class OverallController {
   }
 
 
-  resetNewCustomer(){
+  resetNewCustomer() {
 
-        this.newCustomer.CUSTOMERID = 0;
-        this.newCustomer.CUSTOMERCODE = '';
-        this.newCustomer.CUSTOMERNAME = '';
-        this.newCustomer.ADDRESS = '';
-        this.newCustomer.CONTACTPERSON = '';
-        this.newCustomer.CONTACTNO = '';
-        this.newoppCustomer.CASHACCOUNTID = '';
-        this.newCustomer.TOTALSPEND = '';
-        this.newCustomer.EMAIL = '';
+    this.newCustomer.CUSTOMERID = 0;
+    this.newCustomer.CUSTOMERCODE = '';
+    this.newCustomer.CUSTOMERNAME = '';
+    this.newCustomer.ADDRESS = '';
+    this.newCustomer.CONTACTPERSON = '';
+    this.newCustomer.CONTACTNO = '';
+    this.newoppCustomer.CASHACCOUNTID = '';
+    this.newCustomer.TOTALSPEND = '';
+    this.newCustomer.EMAIL = '';
 
   }
 
@@ -153,7 +154,7 @@ export class OverallController {
 
     var customer = {
 
-      "cust" : {
+      "cust": {
         "CUSTOMERID": this.newCustomer.CUSTOMERID,
         "CUSTOMERCODE": this.newCustomer.CUSTOMERCODE,
         "CUSTOMERNAME": this.newCustomer.CUSTOMERNAME,
@@ -175,8 +176,8 @@ export class OverallController {
 
     this._api.post(customerURL, customer).then((response) => {
 
-        var lastID = parseInt(response.data.updtcustomerResult);
-        this._master.refreshPromise().then((response) => {
+      var lastID = parseInt(response.data.updtcustomerResult);
+      this._master.refreshPromise().then((response) => {
         this._master.refresh(response);
         this.CUSTOMERNAME_option = this._master.getCustomers();
         this.selectedOption = _.find(this.CUSTOMERNAME_option, ['CUSTOMERID', lastID]);
@@ -201,20 +202,28 @@ export class OverallController {
       "rfpupdt": {
         "RFPID": 0,
         "RFPCODE": this.overall.RFPCODE,
-        "RFPDATE": this.$filter('date')(new Date(this.overall.RFPDATE), 'yyyy-MM-dd 00:00:00'), //this.overall.RFPDATE,
+        //"RFPDATE": this.$filter('date')(new Date(this.overall.RFPDATE), 'yyyy-MM-dd 00:00:00'), //this.overall.RFPDATE,
+        //"RFPDATE": this.$filter('date')(new Date(this.overall.RFPDATE), 'yyyy-MM-dd 00:00:00'),
+        "RFPDATE": this.$filter('date')(new Date(this.selectedOppOption.OPPORTUNITYENTRY_DATE), 'yyyy-MM-dd 00:00:00'),
         //"CUSTOMERID": this.customer.CUSTOMERID,
-        "CUSTOMERID": this.selectedOption.CUSTOMERID,
+        //"CUSTOMERID": this.selectedOption.CUSTOMERID,
+        "CUSTOMERID": this.selectedCustOption.CUSTOMERID,
         "INDUSTRYTYPEID": this.overall.INDUSTRYTYPEID,
-        "RFPAMOUNT": this.overall.RFPAMOUNT,
-        "STARTDATE": "2016-01-01 00:00:00",
+        //"RFPAMOUNT": this.overall.RFPAMOUNT,
+        "RFPAMOUNT": this.selectedOppOption.EST_OPP_REVENUE,
+        //"STARTDATE": "2016-01-01 00:00:00",
+        "STARTDATE": this.$filter('date')(new Date(this.selectedOppOption.OPPORTUNITYENTRY_DATE), 'yyyy-MM-dd 00:00:00'),
         "RFPOWNER": this.overall.RFPOWNER,
         "CURRENTSTAGINGOWNER": this.overall.CURRENTSTAGINGOWNER,
         "DIESELRATE": this.overall.DIESELRATE,
         "AGEOFTRUCK": this.overall.AGEOFTRUCK,
-        "RFPDESC": this.overall.RFPDESC,
-        "DUEDATE": this.$filter('date')(new Date(this.overall.DUEDATE), 'yyyy-MM-dd 00:00:00'), //this.overall.DUEDATE,
+        //"RFPDESC": this.overall.RFPDESC,
+        "RFPDESC": this.selectedOppOption.OPP_DESC,
+        //"DUEDATE": this.$filter('date')(new Date(this.overall.DUEDATE), 'yyyy-MM-dd 00:00:00'), //this.overall.DUEDATE,
+        "DUEDATE": this.$filter('date')(new Date(this.selectedOppOption.ESTPROPOSALSUBMISSION_DATE), 'yyyy-MM-dd 00:00:00'),
         "PRODUCTDESC": this.overall.PRODUCTDESC,
-        "CASHOPPID": this.overall.CASHOPPID,
+        //"CASHOPPID": this.overall.CASHOPPID,
+        "CASHOPPID": this.CASHOPPID,
         "OPPRDOMAIN": this.overall.OPPRDOMAIN,
         "DISTRIBUTIONTYPE": this.overall.DISTRIBUTIONTYPE,
         "ISMULTIDROP": this.overall.ISMULTIDROP,
@@ -236,17 +245,22 @@ export class OverallController {
         // "CONTACTNO": this.customer.CONTACTNO,
         //"CASHACCOUNTID": this.customer.CASHACCOUNTID,
         //"TOTALSPEND": this.customer.TOTALSPEND,
-        "ADDRESS": this.selectedOption.ADDRESS,
+        /*"ADDRESS": this.selectedOption.ADDRESS,
         "CONTACTPERSON": this.selectedOption.CONTACTPERSON,
         "CONTACTNO": this.selectedOption.CONTACTNO,
         "CASHACCOUNTID": this.selectedOption.CASHACCOUNTID,
-        "TOTALSPEND": this.selectedOption.TOTALSPEND,
+        "TOTALSPEND": this.selectedOption.TOTALSPEND,*/
+        "ADDRESS": this.selectedCustOption.ADDRESS,
+        "CONTACTPERSON": this.selectedCustOption.CONTACTPERSON,
+        "CONTACTNO": this.selectedCustOption.CONTACTNO,
+        "CASHACCOUNTID": this.selectedCustOption.CASHACCOUNTID,
+        "TOTALSPEND": this.selectedCustOption.TOTALSPEND,
         "PROXIDISTANCE": this.overall.PROXIDISTANCE
       }
     };
 
     var rfpHeaderURL = 'rfp/INSERT';
-    this.toaster.success('RFP details for ' + this.customer.CUSTOMERNAME + ' added successfully');
+    //this.toaster.success('RFP details for ' + this.customer.CUSTOMERNAME + ' added successfully');
 
     this._api.post(rfpHeaderURL, rfpHeader).then((response) => {
       this.$state.go('lanes', {
@@ -260,4 +274,44 @@ export class OverallController {
     });
 
   }
+
+  selectedCasshAccount() {
+
+    var casshAccID = this.CASHACCOUNTID;
+
+    this._master.refreshPromise().then((response) => {
+      this._master.refresh(response);
+      this.CUSTOMERNAME_option = this._master.getCustomers();
+      this.selectedOption = _.find(this.CUSTOMERNAME_option, ['CASHACCOUNTID', casshAccID]);
+    }, (error) => {
+      this.toaster.error(`${error.status} : ${error.statusText}`);
+    });
+  }
+
+  selectedCasshOpp() {
+
+    var casshOppID = this.CASHOPPID;
+
+    this._master.refreshPromise().then((response) => {
+      this._master.refresh(response);
+      this.Opportunities_option = this._master.getOpportunities();
+      this.Customers_option = this._master.getCustomers();
+
+      this.selectedOppOption = _.find(this.Opportunities_option, ['OPP_ID', casshOppID]);
+      if(this.selectedOppOption !=  undefined || this.selectedOppOption != null)
+      {
+        var casshAccID = this.selectedOppOption.ACC_ID;
+        this.selectedCustOption = _.find(this.Customers_option, ['CASHACCOUNTID', casshAccID]);
+      }
+      else
+      {
+
+      }
+
+
+    }, (error) => {
+      this.toaster.error(`${error.status} : ${error.statusText}`);
+    });
+  }
+
 }

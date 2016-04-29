@@ -29,7 +29,6 @@ export class masterService {
 
   getCustomers() {
     return this._master.CustomerList;
-
   }
 
   getLocations() {
@@ -48,6 +47,10 @@ export class masterService {
     return this._master.VehicleTypeList;
   }
 
+  getOpportunities() {
+    return this._master.OpportunityList;
+  }
+
   refresh(data) {
 
     if (_.isUndefined(data)) {
@@ -62,7 +65,6 @@ export class masterService {
     } else {
 
       this._master = data.data[0];
-      //sessionStorage.master = JSON.stringify(this._master);
       sessionStorage.master = angular.toJson(this._master);
 
     }
