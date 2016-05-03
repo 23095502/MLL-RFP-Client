@@ -811,16 +811,9 @@
             <br>
             <i ng-show="output.$error.maxSize">File too large
             {{output.file.size / 1000000|number:1}}MB: max 2M</i>
-            <!-- <button ng-click="lane.uploadBlobOrFile(lane.file)">Submit</button> -->
-            <!--<div class="progress">
-              <div style="width:{{output.file.progress}}%"
-              ng-bind="output.file.progress + '%'"></div>
-            </div>
-            <div class="alert alert-danger" role="alert">{{output.errmsg}}</div>
-            <span ng-show="output.file.result">Upload Successful</span>-->
           </div>
           <div class="alert alert-danger" role="alert">{{output.errmsg}}</div>
-          <span ng-show="output.file.result">Upload Successful</span>-->
+          <span ng-show="output.file.result">Upload Successful</span>
           <div ng-show="output.loader">Please wait, importing route details...</div>
         </div>
       </div>

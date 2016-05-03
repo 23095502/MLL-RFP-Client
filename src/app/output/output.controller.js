@@ -466,12 +466,8 @@ export class OutputController {
     var client = new XMLHttpRequest();
     client.open(
       'POST',
-      `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1`,
+      `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1`,
       false);
-    // client.open('POST',
-    // `http://localhost:52019/RFPImport/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1}`,
-    // false);
-    // client.setRequestHeader('Content-length', blobOrFile.length);
     client.setRequestHeader("Content-Type", "multipart/form-data");
     client.onreadystatechange =
       () => {
@@ -489,10 +485,8 @@ export class OutputController {
           }
           this.getTransactionData(0, null, null);
           this.loading = true;
-          //$('#myModalBrowse').modal('hide');
         }
       }
-      // this.toaster.success('Lanes saved successfully');
     client.send(blobOrFile);
   }
 

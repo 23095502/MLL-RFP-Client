@@ -269,7 +269,7 @@ export class LanesController {
   uploadBlobOrFile(blobOrFile) {
 
     var client = new XMLHttpRequest();
-    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
+    client.open('POST', `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
     client.setRequestHeader("Content-Type", "multipart/form-data");
 
     /* Check the response status */
@@ -286,7 +286,6 @@ export class LanesController {
           alert(`${response.SuccessMessage}`);
         }
         console.log(`NoOfRecordsUpdated: ${response.NoOfRecordsUpdated}`);
-        //console.log(response.ErrorData);
 
         this.gridData = response.ErrorData;
         if (this.gridData != null && this.gridData.length != 0) {
@@ -302,7 +301,6 @@ export class LanesController {
         $('#myModalBrowse').modal('hide');
       }
     }
-    /* Send to server */
     client.send(blobOrFile);
     this.toaster.success("Data imported");
   }
