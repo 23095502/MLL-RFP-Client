@@ -1,0 +1,27 @@
+<div class="container-fluid" ng-init="loc.init()">
+  <div class="row">
+    <div class="col-sm-6">
+    <h1>Location </h1></div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      Select File :
+      <input type="file" ngf-select ng-model="loc.file" name="file"
+      accept="excel/*" ngf-max-size="2MB" required
+      ngf-model-invalid="loc.errorFile">
+      <i ng-show="loc.file.$error.required">*required</i><br>
+      <i ng-show="loc.file.$error.maxSize">File too large
+      {{loc.errorFile.size / 1000000|number:1}}MB: max 2M</i>
+      <span class="progress" ng-show="loc.file.progress >= 0">
+        <div style="width:{{loc.file.progress}}%"
+        ng-bind="loc.file.progress + '%'"></div>
+      </span>
+      <span ng-show="loc.file.result">Upload Successful</span>
+      <!-- <span class="err" ng-show="errorMsg">{{rfplaanes.errorMsg}}</span> -->
+    </div>
+    <div class="col-md-3 col-md-offset-3">
+      <button type="button" class="btn btn-primary" ng-click="loc.uploadLoc(loc.file)">Upload Locations</button>
+    </div>
+  </div>
+</div>

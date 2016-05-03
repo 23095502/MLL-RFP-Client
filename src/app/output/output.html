@@ -303,7 +303,7 @@
   </div>
 </div>
 <div class="modal fade" id="myModalOutputDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">
@@ -349,6 +349,14 @@
                           <span class="mll-table-value"></span>
                         </td>
                         <td>
+                          <span class="mll-table-label"></span>
+                          <span class="mll-table-value"></span>
+                        </td>
+                        <td>
+                          <span class="mll-table-label"></span>
+                          <span class="mll-table-value"></span>
+                        </td>
+                        <td>
                           <span class="mll-table-label" ng-hide="true">Unit</span>
                           <span class="legend-color">&nbsp;</span><span class="unit unitlegend pull-right">: Exact match</span>
                           <br>
@@ -359,6 +367,9 @@
                         <th>From</th>
                         <th>To</th>
                         <th class="highlight">{{output.colName}}</th>
+                        <th>Rate UOM</th>
+                        <th rowspan="2">One way /
+                        <br> Round trip</th>
                         <th>BA Name</th>
                         <th>Customer Name</th>
                         <th>Contract No./ID</th>
@@ -381,8 +392,13 @@
                         </td>
                         <td class="highlight number-center">
                           <span class="mll-table-label">{{griddata.FREIGHTRATE/1000 | number : 2}}</span>
-                          <!--<i ng-show="(output.ISBAPROX === 'N') ? false : true" class="label-sticky">Px
-                          </i>-->
+                        </td>
+                        <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">{{griddata.RATEUOM}}</td>
+                        <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">
+                        <span ng-show="(output.ISROUNDTRIP === 'Y') ? false : true"> One Way
+                        </span>
+                        <span ng-show="(output.ISROUNDTRIP === 'N') ? false : true" >Round Trip
+                        </span>
                         </td>
                         <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">{{griddata.BANAME}}</td>
                         <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">{{griddata.CUSTOMERNAME}}</td>
@@ -405,7 +421,7 @@
   </div>
 </div>
 <div class="modal fade" id="myModalOutputDetailsForBackHaul" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">
@@ -504,7 +520,7 @@
   </div>
 </div>
 <div class="modal fade" id="myModalOutputDetailsForRFP" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">
@@ -545,11 +561,11 @@
                           <br>
                           <span class="mll-table-value">{{output.filterOption.VEHICLETYPENAME}}</span>
                         </td>
-                        <td>
+                        <td colspan="3">
                           <span class="mll-table-label"></span>
                           <span class="mll-table-value"></span>
                         </td>
-                        <td>
+                        <td colspan="2">
                           <span class="mll-table-label" ng-hide="true">Unit</span>
                           <br>
                           <span class="unit pull-right">Pricing in ('000 INR)</span>
@@ -559,6 +575,9 @@
                         <th>From</th>
                         <th>To</th>
                         <th class="highlight">{{output.colName}}</th>
+                        <th>Rate UOM</th>
+                        <th rowspan="2">One way /
+                        <br> Round trip</th>
                         <th>BA Name</th>
                         <th>Customer Name</th>
                         <th>Contract No./ID</th>
@@ -581,8 +600,13 @@
                         </td>
                         <td class="highlight number-center">
                           <span class="mll-table-label">{{griddata.FREIGHTRATE/1000 | number : 2}}</span>
-                          <!--<i ng-show="(output.ISBAPROX === 'N') ? false : true" class="label-sticky">Px
-                          </i>-->
+                        </td>
+                        <td>{{griddata.RATEUOM}}</td>
+                        <td>
+                        <span ng-show="(output.ISROUNDTRIP === 'Y') ? false : true"> One Way
+                        </span>
+                        <span ng-show="(output.ISROUNDTRIP === 'N') ? false : true" >Round Trip
+                        </span>
                         </td>
                         <td>{{griddata.BANAME}}</td>
                         <td>{{griddata.CUSTOMERNAME}}</td>
@@ -605,7 +629,7 @@
   </div>
 </div>
 <div class="modal fade" id="myModalOutputDetailsForMarket" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">
@@ -691,7 +715,7 @@
   </div>
 </div>
 <div class="modal fade" id="myModalForShipXDetails" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">
@@ -727,7 +751,7 @@
                           </div>
                           <div class="arrow-down"></div>
                         </td>
-                        <td colspan="2">
+                        <td colspan="3">
                           <span class="mll-table-label">Vehicle Type</span>
                           <br>
                           <span class="mll-table-value">{{output.filterOption.VEHICLETYPENAME}}</span>
@@ -749,6 +773,8 @@
                         <th>To</th>
                         <th class="highlight">{{output.colName}}</th>
                         <th>Rate UOM</th>
+                        <th rowspan="2">One way /
+                        <br> Round trip</th>
                         <th>BA Name</th>
                         <th>Customer Name</th>
                         <th>Contract No./ID</th>
@@ -771,10 +797,14 @@
                         </td>
                         <td class="highlight number-center">
                           <span class="mll-table-label">{{griddata.FREIGHTRATE/1000 | number : 2}}</span>
-                          <!--<i ng-show="(output.ISBAPROX === 'N') ? false : true" class="label-sticky">Px
-                          </i>-->
                         </td>
                         <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">{{griddata.RATEUOM}}</td>
+                        <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">
+                        <span ng-show="(output.ISROUNDTRIP === 'Y') ? false : true"> One Way
+                        </span>
+                        <span ng-show="(output.ISROUNDTRIP === 'N') ? false : true" >Round Trip
+                        </span>
+                        </td>
                         <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">{{griddata.BANAME}}</td>
                         <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">{{griddata.CUSTOMERNAME}}</td>
                         <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">{{griddata.CONTRACTID}}</td>
@@ -811,16 +841,9 @@
             <br>
             <i ng-show="output.$error.maxSize">File too large
             {{output.file.size / 1000000|number:1}}MB: max 2M</i>
-            <!-- <button ng-click="lane.uploadBlobOrFile(lane.file)">Submit</button> -->
-            <!--<div class="progress">
-              <div style="width:{{output.file.progress}}%"
-              ng-bind="output.file.progress + '%'"></div>
-            </div>
-            <div class="alert alert-danger" role="alert">{{output.errmsg}}</div>
-            <span ng-show="output.file.result">Upload Successful</span>-->
           </div>
           <div class="alert alert-danger" role="alert">{{output.errmsg}}</div>
-          <span ng-show="output.file.result">Upload Successful</span>-->
+          <span ng-show="output.file.result">Upload Successful</span>
           <div ng-show="output.loader">Please wait, importing route details...</div>
         </div>
       </div>

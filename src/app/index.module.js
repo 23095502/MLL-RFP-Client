@@ -4,6 +4,7 @@ import { runBlock } from './index.run';
 import { OverallController } from './overall/overall.controller';
 import { LoginController } from './login/login.controller';
 import { DashboardController } from './dashboard/dashboard.controller';
+import { LocationController } from './location/location.controller';
 import { OutputController } from './output/output.controller';
 import { MarketRateController } from './marketrate/marketrate.controller';
 import { LanesController } from './lanes/lanes.controller';
@@ -20,6 +21,7 @@ angular.module('mllRfpClient', ['ui.router', 'ngFileUpload','toaster'])
   .controller('OverallController', OverallController)
   .controller('LoginController', LoginController)
   .controller('DashboardController', DashboardController)
+  .controller('LocationController', LocationController)
   .controller('OutputController', OutputController)
   .controller('LanesController', LanesController)
   .controller('MarketRateController', MarketRateController)
