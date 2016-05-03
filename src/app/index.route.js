@@ -30,6 +30,13 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
       controllerAs: 'dash',
       authenticate: true
     })
+    .state('location', {
+      url: '/location',
+      templateUrl: 'app/location/location.html',
+      controller: 'LocationController',
+      controllerAs: 'loc',
+      authenticate: true
+    })
     .state('login', {
       url: '/',
       templateUrl: 'app/login/login.html',

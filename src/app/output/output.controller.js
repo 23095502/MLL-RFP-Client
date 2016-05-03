@@ -277,6 +277,7 @@ export class OutputController {
     this.CONTRACTRATE = table[clickedColName];
     this.colName = headerColName;
     this.modalHeaderName = modalHeaderName;
+    this.ISROUNDTRIP = table.ISROUNDTRIP;
 
     if (headerColName == 'Market Rate') {
       this._api.get(`toptenmarketrates/${sourcecityid}/${sourcestateid}/${destcityid}/${deststateid}/${vehtypeid}`)
@@ -290,6 +291,7 @@ export class OutputController {
       this._api.post(this.urlMaps[colname], newfilterRoutes, true)
         .then((res) => {
           this.gridData = res.data[this.responseKeys[clickedColName]];
+          console.log(this.gridData);
         }, (err) => {
           console.error(err);
         });
