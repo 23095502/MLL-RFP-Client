@@ -384,10 +384,10 @@
                         </td>
                         <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">{{griddata.RATEUOM}}</td>
                         <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">
-                        <span ng-show="(output.ISROUNDTRIP === 'Y') ? false : true"> One Way
-                        </span>
-                        <span ng-show="(output.ISROUNDTRIP === 'N') ? false : true" >Round Trip
-                        </span>
+                          <span ng-show="(output.ISROUNDTRIP === 'Y') ? false : true"> One Way
+                          </span>
+                          <span ng-show="(output.ISROUNDTRIP === 'N') ? false : true" >Round Trip
+                          </span>
                         </td>
                         <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">{{griddata.BANAME}}</td>
                         <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">{{griddata.CUSTOMERNAME}}</td>
@@ -588,10 +588,10 @@
                         </td>
                         <td>{{griddata.RATEUOM}}</td>
                         <td>
-                        <span ng-show="(output.ISROUNDTRIP === 'Y') ? false : true"> One Way
-                        </span>
-                        <span ng-show="(output.ISROUNDTRIP === 'N') ? false : true" >Round Trip
-                        </span>
+                          <span ng-show="(output.ISROUNDTRIP === 'Y') ? false : true"> One Way
+                          </span>
+                          <span ng-show="(output.ISROUNDTRIP === 'N') ? false : true" >Round Trip
+                          </span>
                         </td>
                         <td>{{griddata.BANAME}}</td>
                         <td>{{griddata.CUSTOMERNAME}}</td>
@@ -789,10 +789,10 @@
                         </td>
                         <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">{{griddata.RATEUOM}}</td>
                         <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">
-                        <span ng-show="(output.ISROUNDTRIP === 'Y') ? false : true"> One Way
-                        </span>
-                        <span ng-show="(output.ISROUNDTRIP === 'N') ? false : true" >Round Trip
-                        </span>
+                          <span ng-show="(output.ISROUNDTRIP === 'Y') ? false : true"> One Way
+                          </span>
+                          <span ng-show="(output.ISROUNDTRIP === 'N') ? false : true" >Round Trip
+                          </span>
                         </td>
                         <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">{{griddata.BANAME}}</td>
                         <td ng-class="{ 'statusavailable': griddata.ORIGIN.toUpperCase() === output.filterOption.FROMLOCATIONNAME.toUpperCase() && griddata.DESTINATION.toUpperCase() === output.TOLOCATIONNAME.toUpperCase()}">{{griddata.CUSTOMERNAME}}</td>
@@ -830,16 +830,16 @@
             <br>
             <i ng-show="output.$error.maxSize">File too large
             {{output.file.size / 1000000|number:1}}MB: max 2M</i>
+            <!-- <div class="alert alert-danger" role="alert">{{output.errmsg}}</div> -->
+            <span ng-show="output.file.result">Upload Successful</span>
+            <div ng-show="output.loader">Please wait, importing route details...</div>
           </div>
-          <div class="alert alert-danger" role="alert">{{output.errmsg}}</div>
-          <span ng-show="output.file.result">Upload Successful</span>
-          <div ng-show="output.loader">Please wait, importing route details...</div>
         </div>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="button" class="btn btn-primary"  ng-click="output.uploadBlobOrFile(output.file)">Import BA Quote</button>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"  ng-click="output.uploadBlobOrFile(output.file)">Import BA Quote</button>
+      </div>
     </div>
   </div>
 </div>

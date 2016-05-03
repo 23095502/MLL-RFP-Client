@@ -267,7 +267,6 @@ export class OutputController {
       inproxiparam: this.inproxiparam
     };
 
-
     if (this.outputdata[0].OPPRDOMAIN == 'Inbound') {
       this.TOLOCATIONNAME = table.FROMLOCATIONNAME;
     } else {
