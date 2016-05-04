@@ -103,9 +103,7 @@ export class MarketRateController {
   uploadBlobOrFile(blobOrFile) {
 
     var client = new XMLHttpRequest();
-    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/marketrate/mrate/1`, false);
-    //client.open('POST', `http://localhost:64760/RFPROUTE/RFPImportRoute.svc/marketrate/mrate/1`, false);
-    //client.setRequestHeader('Content-length', blobOrFile.length);
+    client.open('POST', `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/marketrate/mrate/1`, false);
     client.setRequestHeader("Content-Type", "multipart/form-data");
 
     /* Check the response status */

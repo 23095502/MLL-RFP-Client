@@ -269,7 +269,7 @@ export class LanesController {
   uploadBlobOrFile(blobOrFile) {
 
     var client = new XMLHttpRequest();
-    client.open('POST', `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
+    client.open('POST', `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/rfprouteupload/${this.$stateParams.rfpid}/Routeupload/1`, false);
     client.setRequestHeader("Content-Type", "multipart/form-data");
 
     /* Check the response status */

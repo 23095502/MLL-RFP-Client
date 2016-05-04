@@ -469,7 +469,7 @@ export class OutputController {
     var client = new XMLHttpRequest();
     client.open(
       'POST',
-      `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1`,
+      `http://59.160.18.222/RFPRoute/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1`,
       false);
     client.setRequestHeader("Content-Type", "multipart/form-data");
     client.onreadystatechange =
