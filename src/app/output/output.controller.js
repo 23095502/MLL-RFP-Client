@@ -257,7 +257,7 @@ export class OutputController {
     }
 
     this.inproxiparam.DISTANCE = table.PROXIDISTANCE;
-    //this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;
+    //this.inproxiparam.NOOFTRIPS = table.NOOFTRIPS;s
     this.inproxiparam.NOOFTRIPS = table.PROXIDISTANCE;
 
 
@@ -266,6 +266,7 @@ export class OutputController {
     var newfilterRoutes = {
       inproxiparam: this.inproxiparam
     };
+
 
     if (this.outputdata[0].OPPRDOMAIN == 'Inbound') {
       this.TOLOCATIONNAME = table.FROMLOCATIONNAME;
