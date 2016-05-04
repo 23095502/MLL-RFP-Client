@@ -18,13 +18,11 @@ export class LocationController {
   uploadLoc(fileloc) {
     this.loading = false;
 
-    console.log('I called you');
-
-    /*this.uploadProgress(fileloc, fileloc.size);
+    this.uploadProgress(fileloc, fileloc.size);
     var client = new XMLHttpRequest();
     client.open(
       'POST',
-      `http://115.113.135.239/RFPRoute/RFPImportRoute.svc/baquote/${this.$stateParams.rfpId}/baquote/1`,
+      `http://localhost:59406/RFPImport/RFPImportRoute.svc/locupload/locupload/1`,
       false);
     client.setRequestHeader("Content-Type", "multipart/form-data");
     client.onreadystatechange =
@@ -34,6 +32,7 @@ export class LocationController {
           client.status + " Text: " + client.statusText);
         if (client.readyState == 4 && client.status == 200) {
           var response = angular.fromJson(client.responseText);
+          console.log(response);
           if (response.ErrorMessage != '') {
             this.er = response.ErrorMessage;
             alert(`${response.ErrorMessage}`);
@@ -41,12 +40,15 @@ export class LocationController {
             this.suc = response.SuccessMessage;
             alert(`${response.SuccessMessage}`);
           }
-          this.getTransactionData(0, null, null);
           this.loading = true;
         }
       }
 
-    client.send(fileloc);*/
+    client.send(fileloc);
+  }
+
+  uploadProgress(fName, fSize) {
+    this.progressPercentage = Math.min(100, parseInt(100.0 * 677964 / fSize));
   }
 
 }
