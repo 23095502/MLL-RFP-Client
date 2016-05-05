@@ -105,8 +105,8 @@
             <th colspan="2" class="table-colspan-header">Contract Rate</th>
             <th rowspan="2">Backhaul
             <br> Available</th>
-            <th rowspan="2">One way /
-            <br> Round trip</th>
+            <!-- <th rowspan="2">One way /
+            <br> Round trip</th> -->
             <th colspan="5" class="table-colspan-header">BA Rate</th>
             <th rowspan="2" class="table-colspan-header-sm whitecol">Proposed</th>
             <th rowspan="2" class="table-colspan-header-sm whitecol"></th>
@@ -154,12 +154,12 @@
               <i ng-show="(route.ISBACKHAULPROXIMITY === 'N') ? false : true" class="label-sticky">Px
               </i>
             </td>
-            <td class="text-center fixed-width-col">
+            <!-- <td class="text-center fixed-width-col">
               <span ng-show="(route.ISROUNDTRIP === 'Y') ? false : true"> One Way
               </span>
               <span ng-show="(route.ISROUNDTRIP === 'N') ? false : true" >Round Trip
               </span>
-            </td>
+            </td> -->
             <td class="text-center">
               <input type="number" class="form-control mll-table-input" id="l1rate" ng-model="route.L1RATE" />
               <hr/>
@@ -241,12 +241,12 @@
               <i ng-show="(route.ISBACKHAULPROXIMITY === 'N') ? false : true" class="label-sticky">Px
               </i>
             </td>
-            <td class="text-center fixed-width-col">
+            <!-- <td class="text-center fixed-width-col">
               <span ng-show="(route.ISROUNDTRIP === 'Y') ? false : true"> One Way
               </span>
               <span ng-show="(route.ISROUNDTRIP === 'N') ? false : true" >Round Trip
               </span>
-            </td>
+            </td> -->
             <td class="text-center">
               <input type="number" class="form-control mll-table-input" id="l1rate" ng-model="route.L1RATE" />
               <hr/>
