@@ -41,4 +41,8 @@ export class DashboardController {
     this.$state.go('overall');
   }
 
+  navigatetToLocationMaster(){
+   this.$state.go('location');
+  }
+
 }
