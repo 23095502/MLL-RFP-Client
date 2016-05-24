@@ -105,6 +105,7 @@
             <th colspan="2" class="table-colspan-header">Contract Rate</th>
             <th rowspan="2">Backhaul
             <br> Available</th>
+            <th rowspan="2" class="table-colspan-header">Service Type</th>
             <!-- <th rowspan="2">One way /
             <br> Round trip</th> -->
             <th colspan="5" class="table-colspan-header">BA Rate</th>
@@ -129,7 +130,9 @@
             <td class="whitecol">
               <strong ng-show="(output.outputdata[0].OPPRDOMAIN === 'Outbound') ? true : false">{{route.TOLOCATIONNAME}}</strong>
               <strong ng-show="(output.outputdata[0].OPPRDOMAIN === 'Inbound') ? true : false">{{route.FROMLOCATIONNAME}}</strong>
+              <span class="highlightRoundTrip" ng-class="{'Y' : 'glyphicon glyphicon-repeat' ,  'N' : ''}[route.ISROUNDTRIP]" title="{{route.ISROUNDTRIP}}"></span>
               <br>{{route.TOSTATECODE}}
+
             </td>
             <td ng-class="output.changecolor(route.CLEANSHEETRATE/1000,route.APPROVEDAMOUNT, false)" class="text-center fixed-width-col">
               <span>{{route.CLEANSHEETRATE/1000 | number : 2}}</span>
@@ -153,6 +156,9 @@
               <span ng-class="{'Y' : 'glyphicon glyphicon-ok' ,  'N' : ''}[route.BACKHAULAVL]" title="{{route.BACKHAULAVL}}"></span>
               <i ng-show="(route.ISBACKHAULPROXIMITY === 'N') ? false : true" class="label-sticky">Px
               </i>
+            </td>
+            <td class="text-center fixed-width-col">
+              {{route.SERVICETYPE}}
             </td>
             <!-- <td class="text-center fixed-width-col">
               <span ng-show="(route.ISROUNDTRIP === 'Y') ? false : true"> One Way
@@ -213,7 +219,9 @@
           <tr ng-show="(output.outputdata[0].OPPRDOMAIN === 'Inbound') ? true : false" ng-repeat="route in output.outputdata | filter: {TOLOCATIONNAME : output.filterOption.FROMLOCATIONNAME, VEHICLETYPENAME : output.filterOption.VEHICLETYPENAME}">
             <td class="whitecol">
               <strong>{{route.FROMLOCATIONNAME}}</strong>
+              <span class="highlightRoundTrip" ng-class="{'Y' : 'glyphicon glyphicon-repeat' ,  'N' : ''}[route.ISROUNDTRIP]" title="{{route.ISROUNDTRIP}}"></span>
               <br>{{route.FROMSTATECODE}}
+
             </td>
             <td ng-class="output.changecolor(route.CLEANSHEETRATE/1000,route.APPROVEDAMOUNT, false)" class="text-center fixed-width-col">
               <span>{{route.CLEANSHEETRATE/1000 | number : 2}}</span>
@@ -240,6 +248,9 @@
               <span ng-class="{'Y' : 'glyphicon glyphicon-ok' ,  'N' : ''}[route.BACKHAULAVL]" title="{{route.BACKHAULAVL}}"></span>
               <i ng-show="(route.ISBACKHAULPROXIMITY === 'N') ? false : true" class="label-sticky">Px
               </i>
+            </td>
+            <td class="text-center fixed-width-col">
+              {{route.SERVICETYPE}}
             </td>
             <!-- <td class="text-center fixed-width-col">
               <span ng-show="(route.ISROUNDTRIP === 'Y') ? false : true"> One Way
