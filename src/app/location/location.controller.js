@@ -16,6 +16,7 @@ export class LocationController {
   }
 
   uploadLoc(fileloc) {
+
     this.loading = false;
 
     this.uploadProgress(fileloc, fileloc.size);
